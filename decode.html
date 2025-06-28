@@ -2,14 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Decode a Message</title>
+  <title>Decode a Message | Seen & Red</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <h1>Decode a Message</h1>
-  <form>
-    <label>Email: <input type="email" name="email" required></label><br>
-    <label>Message: <textarea name="message" required></textarea></label><br>
-    <button type="submit">Decode</button>
+  <h1>Still thinking about <em>that</em> message?</h1>
+  <p>Choose your package and paste the message that’s been messing with your head. We’ll handle the rest — red flags, green flags, and all the emotional in-between.</p>
+  <form action="https://hooks.zapier.com/hooks/catch/your-custom-id" method="POST">
+    <label>Your Email: <input type="email" name="email" required></label><br>
+    <label>Your Message: <textarea name="message" required></textarea></label><br>
+    <label>Tier: 
+      <select name="tier">
+        <option value="3">3 Message Decode</option>
+        <option value="6">6 Message Decode</option>
+        <option value="Unlimited">Unlimited</option>
+      </select>
+    </label><br>
+    <button type="submit">Decode Now</button>
   </form>
 </body>
 </html>
