@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Decode a Message | SEEN & RED</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff5f5;
+      margin: 0;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    h1 {
+      font-size: 28px;
+      color: #cc0000;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      margin-top: 2rem;
+      background-color: #cc0000;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .note {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Decode a Message</h1>
+    <p>
+      Not sure if you’re overthinking — or being manipulated? Paste the message and we’ll decode it using AI: tone, red flags, gaslighting, manipulation, and what you should’ve said.
+    </p>
+
+    <form method="POST" action="/submit-decode">
+      <label for="email">Your Email</label>
+      <input type="email" id="email" name="email" required placeholder="Email used at checkout">
+      <div class="note">We'll match this to your decode credits.</div>
+
+      <label for="name">Your Name (optional)</label>
+      <input type="text" id="name" name="name" placeholder="Optional – for personalization">
+
+      <label for="message">Message to Decode</label>
+      <textarea id="message" name="message" rows="6" required placeholder="Paste the text message here..."></textarea>
+
+      <button type="submit">Submit for Decode</button>
+    </form>
+  </div>
+</body>
+</html>
