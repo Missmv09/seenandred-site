@@ -1,1 +1,1 @@
-# seenandred-site
+This is the Git + Netlify ready version of Seen & Red.
