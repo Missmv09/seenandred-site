@@ -1,1 +1,1 @@
-This is the Git + Netlify deploy version that matches https://seenandred.com exactly.
+This is the full Git + Netlify deployable version of Seen & Red.
