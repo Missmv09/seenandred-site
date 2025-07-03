@@ -8,10 +8,10 @@
   <link rel="stylesheet" href="styles.css" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-white text-gray-900">
-  <header class="text-center py-6 border-b">
-    <img src="assets/logo.png" alt="Seen & Red Logo" class="mx-auto mb-4" style="max-width:180px;">
-    <nav class="space-x-4 text-sm">
+<body class="bg-white text-gray-900 font-sans">
+  <header class="text-center py-4 border-b border-gray-300">
+    <img src="assets/logo.png" alt="Seen & Red Logo" class="mx-auto mb-2" style="max-width:160px;">
+    <nav class="space-x-4 text-sm text-gray-700 mt-2">
       <a href="#decode" class="hover:underline">Decode</a>
       <a href="#blog" class="hover:underline">Blog</a>
       <a href="#testimonials" class="hover:underline">Testimonials</a>
@@ -19,15 +19,15 @@
     </nav>
   </header>
 
-  <main class="p-6">
-    <section id="decode" class="text-center my-10">
-      <h2 class="text-3xl font-bold mb-2">Drop the Message. We'll Decode It.</h2>
-      <p class="mb-4 text-gray-700">Get clarity, not confusion. Submit your message below.</p>
+  <main class="max-w-5xl mx-auto p-6">
+    <section id="decode" class="my-10">
+      <h2 class="text-2xl font-bold text-center mb-2">Drop the Message. We'll Decode It.</h2>
+      <p class="text-center mb-4 text-gray-600">Bestie energy meets brutal clarity.</p>
       <form action="https://hooks.zapier.com/hooks/catch/YOUR-ZAP-ID-HERE/" method="POST"
-        class="max-w-xl mx-auto bg-gray-100 p-6 rounded space-y-4 shadow">
-        <input name="name" type="text" required placeholder="Your Name" class="w-full p-2 border rounded">
-        <input name="email" type="email" required placeholder="Your Email" class="w-full p-2 border rounded">
-        <textarea name="message" rows="5" required placeholder="Paste the message..." class="w-full p-2 border rounded"></textarea>
+        class="bg-gray-100 p-6 rounded shadow max-w-2xl mx-auto space-y-4">
+        <input name="name" type="text" required placeholder="Your Name" class="w-full p-3 border rounded">
+        <input name="email" type="email" required placeholder="Your Email" class="w-full p-3 border rounded">
+        <textarea name="message" rows="5" required placeholder="Paste the message..." class="w-full p-3 border rounded"></textarea>
         <button type="submit" class="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-900">Get My Decode</button>
       </form>
     </section>
@@ -38,12 +38,12 @@
         <article class="mb-4">
           <img src="assets/blog1.jpg" class="mb-2 rounded shadow" />
           <h3 class="text-lg font-semibold">Why You Missed the Green Flags</h3>
-          <p class="text-sm">Sometimes we’re so used to red flags, green ones feel suspicious...</p>
+          <p class="text-sm text-gray-700">Sometimes we’re so used to red flags, green ones feel suspicious...</p>
         </article>
         <article>
           <img src="assets/blog2.jpg" class="mb-2 rounded shadow" />
           <h3 class="text-lg font-semibold">Why Men Act Like That</h3>
-          <p class="text-sm">Oxytocin. Attachment. And why ghosting feels like betrayal...</p>
+          <p class="text-sm text-gray-700">Oxytocin. Attachment. And why ghosting feels like betrayal...</p>
         </article>
       </section>
 
@@ -57,9 +57,9 @@
       </section>
     </div>
 
-    <section id="faq" class="mt-10 pt-6 border-t">
+    <section id="faq" class="mt-10 pt-6 border-t border-gray-200">
       <h2 class="text-xl font-bold mb-2">FAQs</h2>
-      <p class="text-sm">We're not therapists. Just clarity-besties offering insights to help you navigate your situations. Messages stay private unless you give explicit permission for use. To share a testimonial, email: support@seenandred.com.</p>
+      <p class="text-sm text-gray-700">We're not therapists. Just clarity-besties offering insights to help you navigate your situations. Messages stay private unless you give explicit permission for use. To share a testimonial, email: support@seenandred.com.</p>
     </section>
   </main>
 </body>
