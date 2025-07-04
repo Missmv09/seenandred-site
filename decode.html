@@ -1,1 +1,160 @@
-<!-- decode.html from file-Qx2ERqHrpm479NStjpnuNQ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Message Decode – Seen & Red</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff8f8;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #c4002f;
+      font-size: 2em;
+      margin-bottom: 0.2em;
+    }
+    .subhead {
+      font-size: 1.1em;
+      margin-bottom: 1.5em;
+      color: #444;
+    }
+    label {
+      display: block;
+      margin-top: 1em;
+      font-weight: 600;
+    }
+    textarea, input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 0.4em;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      font-size: 1em;
+    }
+    button {
+      background: #c4002f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 20px;
+      margin-top: 1.5em;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    button:hover {
+      background: #a80028;
+    }
+    .tier-info {
+      font-size: 0.95em;
+      background: #fef0f2;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #f7c2cd;
+      color: #8c1c32;
+    }
+    .response {
+      margin-top: 20px;
+      font-weight: 500;
+      color: #8c1c32;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ready to decode?</h1>
+    <div class="subhead">Still thinking about <em>*that*</em> message? Don’t spiral, bestie. Let’s break it all the way down.</div>
+
+    <div class="tier-info" id="tier-message">Your plan allows 1 decode.</div>
+
+    <form id="decode-form">
+      <div id="message-fields">
+        <label for="message1">Message 1</label>
+        <textarea name="message1" placeholder="Paste message 1..." required></textarea>
+      </div>
+
+      <label for="email">Your email (used at checkout)</label>
+      <input type="email" name="email" placeholder="you@example.com" required />
+
+      <input type="hidden" name="tier" id="tier" value="flag" />
+
+      <button type="submit">🔍 Decode it</button>
+    </form>
+
+    <div class="response" id="response"></div>
+  </div>
+
+  <script>
+    const tierMap = {
+      flag: 3,
+      pattern: 6,
+      reality: 12
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const tierParam = params.get("tier") || "flag";
+    const emailParam = params.get("email") || "";
+
+    document.querySelector("input[name='email']").value = emailParam;
+    document.getElementById("tier").value = tierParam;
+
+    const allowed = tierMap[tierParam] || 1;
+    const tierText = {
+      flag: "💬 FLAG CHECK – up to 3 messages",
+      pattern: "📊 PATTERN CHECK – up to 6 messages",
+      reality: "♾️ REALITY CHECK – unlimited decodes (don't abuse it, babe)"
+    };
+
+    document.getElementById("tier-message").textContent = tierText[tierParam] || "Your plan allows 1 decode.";
+
+    const fieldContainer = document.getElementById("message-fields");
+    for (let i = 2; i <= allowed; i++) {
+      const label = document.createElement("label");
+      label.setAttribute("for", `message${i}`);
+      label.innerText = `Message ${i}`;
+
+      const textarea = document.createElement("textarea");
+      textarea.name = `message${i}`;
+      textarea.placeholder = `Paste message ${i}...`;
+
+      fieldContainer.appendChild(label);
+      fieldContainer.appendChild(textarea);
+    }
+
+    document.getElementById("decode-form").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const data = {};
+      formData.forEach((value, key) => {
+        if (value.trim()) data[key] = value.trim();
+      });
+
+      document.getElementById("response").textContent = "Submitting...";
+
+      try {
+        await fetch("https://hooks.zapier.com/hooks/catch/XXXXX", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(data)
+        });
+        document.getElementById("response").textContent = "✅ Your decode has been submitted. Check your inbox soon!";
+      } catch (error) {
+        document.getElementById("response").textContent = "⚠️ Something went wrong. Try again later.";
+      }
+    });
+  </script>
+</body>
+</html>
