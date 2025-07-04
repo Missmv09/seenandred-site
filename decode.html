@@ -8,72 +8,78 @@
   <style>
     body {
       font-family: system-ui, sans-serif;
-      background-color: #fff4f6;
-      color: #111;
       margin: 2rem;
+      background-color: #fff0f3;
+      color: #111;
     }
     .container {
       background: white;
       padding: 2rem;
-      border-radius: 16px;
+      border-radius: 12px;
       max-width: 600px;
       margin: auto;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     h1 {
-      color: #c4002f;
-      margin-bottom: 0.5em;
+      color: #d81159;
+      font-size: 1.8rem;
     }
     label {
       font-weight: 600;
+      margin-top: 1rem;
       display: block;
-      margin-top: 1.25em;
     }
     textarea, input {
       width: 100%;
-      padding: 0.8em;
-      margin-top: 0.4em;
+      margin-top: 0.5rem;
+      padding: 0.8rem;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 1rem;
     }
+    input[type="file"] {
+      border: none;
+      padding: 0;
+    }
     button {
-      margin-top: 2em;
-      background-color: #c4002f;
+      background: #d81159;
       color: white;
       border: none;
-      border-radius: 8px;
-      padding: 0.8em 1.2em;
+      padding: 0.8rem 1.2rem;
       font-size: 1rem;
+      border-radius: 8px;
+      margin-top: 1.5rem;
       cursor: pointer;
     }
-    .notice {
-      font-size: 0.9em;
-      color: #444;
-      margin-top: 1em;
+    .note {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 1rem;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Decode Your Message</h1>
-    <p id="tierNotice">Your plan allows [x] messages.</p>
-    <form id="decodeForm">
+    <h1>Message Decode</h1>
+    <p id="tierNotice">Enter your message(s) below. Your tier allows up to [x] decode(s).</p>
+    <form id="decodeForm" enctype="multipart/form-data">
       <div id="messageFields"></div>
-      <input type="email" id="email" name="email" placeholder="Your email (used at checkout)" required />
-      <input type="hidden" id="tier" name="tier" />
-      <button type="submit">Decode It</button>
+      <label for="screenshot">Upload a screenshot (optional):</label>
+      <input type="file" name="screenshot" accept="image/*" />
+      <label for="email">Your email (used at checkout)</label>
+      <input type="email" name="email" id="email" required />
+      <input type="hidden" name="tier" id="tier" />
+      <button type="submit">Decode it</button>
     </form>
-    <p class="notice">💌 We’ll send your Clarity Report straight to your inbox.</p>
+    <p class="note">✨ We’ll send your Clarity Report straight to your inbox.</p>
   </div>
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const tier = urlParams.get("tier") || "flag";
     const email = urlParams.get("email") || "";
-
-    const tierLimits = { flag: 3, pattern: 6, reality: 12 };
-    const tierLabels = {
+    const limits = { flag: 3, pattern: 6, reality: 12 };
+    const labels = {
       flag: "💬 FLAG CHECK – up to 3 messages",
       pattern: "📊 PATTERN CHECK – up to 6 messages",
       reality: "♾️ REALITY CHECK – unlimited decodes (within reason 😅)"
@@ -81,35 +87,35 @@
 
     document.getElementById("email").value = email;
     document.getElementById("tier").value = tier;
-    document.getElementById("tierNotice").innerText = tierLabels[tier] || "Your plan allows up to 1 message.";
+    document.getElementById("tierNotice").innerText = labels[tier] || "Enter your messages below.";
 
     const messageFields = document.getElementById("messageFields");
-    const max = tierLimits[tier] || 1;
+    const max = limits[tier] || 1;
 
     for (let i = 1; i <= max; i++) {
       const label = document.createElement("label");
       label.textContent = `Message ${i}`;
       const textarea = document.createElement("textarea");
       textarea.name = `message${i}`;
-      textarea.required = i === 1;
       messageFields.appendChild(label);
       messageFields.appendChild(textarea);
     }
 
     document.getElementById("decodeForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const formData = new FormData(e.target);
-      const data = {};
-      formData.forEach((v, k) => { if (v) data[k] = v; });
-
+      const form = e.target;
+      const formData = new FormData(form);
       try {
-        await fetch("https://hooks.zapier.com/hooks/catch/23371012/ubk8k9x/", {
+        const res = await fetch("https://hooks.zapier.com/hooks/catch/23371012/ubk8k9x/", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
+          body: formData,
         });
-        alert("✅ Your decode is on the way! Check your inbox.");
-        e.target.reset();
+        if (res.ok) {
+          alert("✅ Your decode is on the way! Check your inbox.");
+          form.reset();
+        } else {
+          alert("⚠️ Something went wrong. Try again later.");
+        }
       } catch (err) {
         alert("⚠️ Something went wrong. Try again later.");
       }
