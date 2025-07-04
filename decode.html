@@ -3,156 +3,112 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Message Decode – Seen & Red</title>
   <style>
     body {
-      font-family: 'Inter', sans-serif;
-      background: #fff8f8;
-      color: #333;
-      margin: 0;
-      padding: 0;
+      font-family: system-ui, sans-serif;
+      margin: 2rem;
+      background-color: #fff0f3;
+      color: #111;
     }
     .container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
       max-width: 600px;
-      margin: 40px auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+      margin: auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     h1 {
-      color: #c4002f;
-      font-size: 2em;
-      margin-bottom: 0.2em;
-    }
-    .subhead {
-      font-size: 1.1em;
-      margin-bottom: 1.5em;
-      color: #444;
+      color: #d81159;
+      font-size: 1.8rem;
     }
     label {
-      display: block;
-      margin-top: 1em;
       font-weight: 600;
+      margin-top: 1rem;
+      display: block;
     }
     textarea, input {
       width: 100%;
-      padding: 12px;
-      margin-top: 0.4em;
-      border-radius: 10px;
-      border: 1px solid #ddd;
-      font-size: 1em;
+      margin-top: 0.5rem;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
     }
     button {
-      background: #c4002f;
+      background: #d81159;
       color: white;
       border: none;
+      padding: 0.8rem 1.2rem;
+      font-size: 1rem;
       border-radius: 8px;
-      padding: 12px 20px;
-      margin-top: 1.5em;
+      margin-top: 1.5rem;
       cursor: pointer;
-      font-size: 1em;
     }
-    button:hover {
-      background: #a80028;
-    }
-    .tier-info {
-      font-size: 0.95em;
-      background: #fef0f2;
-      padding: 12px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      border: 1px solid #f7c2cd;
-      color: #8c1c32;
-    }
-    .response {
-      margin-top: 20px;
-      font-weight: 500;
-      color: #8c1c32;
+    .note {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 1rem;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Ready to decode?</h1>
-    <div class="subhead">Still thinking about <em>*that*</em> message? Don’t spiral, bestie. Let’s break it all the way down.</div>
-
-    <div class="tier-info" id="tier-message">Your plan allows 1 decode.</div>
-
-    <form id="decode-form">
-      <div id="message-fields">
-        <label for="message1">Message 1</label>
-        <textarea name="message1" placeholder="Paste message 1..." required></textarea>
-      </div>
-
-      <label for="email">Your email (used at checkout)</label>
-      <input type="email" name="email" placeholder="you@example.com" required />
-
-      <input type="hidden" name="tier" id="tier" value="flag" />
-
-      <button type="submit">🔍 Decode it</button>
+    <h1>Message Decode</h1>
+    <p id="tierNotice">Enter your message(s) below. Your tier allows up to [x] decode(s).</p>
+    <form id="decodeForm">
+      <div id="messageFields"></div>
+      <input type="email" id="email" placeholder="Your email (used at checkout)" required />
+      <button type="submit">Decode it</button>
     </form>
-
-    <div class="response" id="response"></div>
+    <p class="note">✨ Results will be sent to your email within a few minutes.</p>
   </div>
 
   <script>
-    const tierMap = {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tier = urlParams.get("tier");
+    const email = urlParams.get("email") || "";
+    const form = document.getElementById("decodeForm");
+    const msgBox = document.getElementById("messageFields");
+    const tierNotice = document.getElementById("tierNotice");
+
+    const tierLimits = {
       flag: 3,
       pattern: 6,
-      reality: 12
+      reality: 12,
     };
 
-    const params = new URLSearchParams(window.location.search);
-    const tierParam = params.get("tier") || "flag";
-    const emailParam = params.get("email") || "";
+    const max = tierLimits[tier] || 1;
+    tierNotice.innerText = `Enter your message(s) below. Your tier allows up to ${max} decode(s).`;
 
-    document.querySelector("input[name='email']").value = emailParam;
-    document.getElementById("tier").value = tierParam;
-
-    const allowed = tierMap[tierParam] || 1;
-    const tierText = {
-      flag: "💬 FLAG CHECK – up to 3 messages",
-      pattern: "📊 PATTERN CHECK – up to 6 messages",
-      reality: "♾️ REALITY CHECK – unlimited decodes (don't abuse it, babe)"
-    };
-
-    document.getElementById("tier-message").textContent = tierText[tierParam] || "Your plan allows 1 decode.";
-
-    const fieldContainer = document.getElementById("message-fields");
-    for (let i = 2; i <= allowed; i++) {
+    for (let i = 1; i <= max; i++) {
       const label = document.createElement("label");
-      label.setAttribute("for", `message${i}`);
       label.innerText = `Message ${i}`;
-
       const textarea = document.createElement("textarea");
       textarea.name = `message${i}`;
       textarea.placeholder = `Paste message ${i}...`;
-
-      fieldContainer.appendChild(label);
-      fieldContainer.appendChild(textarea);
+      msgBox.appendChild(label);
+      msgBox.appendChild(textarea);
     }
 
-    document.getElementById("decode-form").addEventListener("submit", async function(e) {
+    document.getElementById("email").value = email;
+
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const formData = new FormData(this);
-      const data = {};
-      formData.forEach((value, key) => {
-        if (value.trim()) data[key] = value.trim();
-      });
-
-      document.getElementById("response").textContent = "Submitting...";
-
+      const data = Object.fromEntries(new FormData(form));
+      data.tier = tier;
       try {
-        await fetch("https://hooks.zapier.com/hooks/catch/23371012/ub8k8q9x/", {
+        await fetch("https://hooks.zapier.com/hooks/catch/XXXXX", {
           method: "POST",
-          headers: {"Content-Type": "application/json"},
-          body: JSON.stringify(data)
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
         });
-        document.getElementById("response").textContent = "✅ Your decode has been submitted. Check your inbox soon!";
-      } catch (error) {
-        document.getElementById("response").textContent = "⚠️ Something went wrong. Try again later.";
+        alert("Submitted! Your decode will be delivered via email soon.");
+        form.reset();
+      } catch (err) {
+        alert("Something went wrong. Try again later.");
       }
     });
   </script>
