@@ -1,56 +1,27 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SEEN & RED</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .hero-wrapper {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-    }
-    .hero-wrapper img {
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 0;
-    }
-    .hero-text {
-      position: relative;
-      z-index: 10;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>SEEN & RED</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="text-gray-900 font-sans">
-  <header class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
-    <h1 class="text-xl font-bold text-red-800 tracking-wide">SEEN & RED</h1>
-    <nav class="space-x-6 text-sm font-medium text-gray-700">
-      <a href="decode.html" class="hover:text-red-700">Decode</a>
-      <a href="blog.html" class="hover:text-red-700">Blog</a>
-      <a href="#" class="hover:text-red-700">FAQ</a>
-      <a href="https://instagram.com/toxicgirlfunnies" class="hover:text-red-700" target="_blank">IG: @toxicgirlfunnies</a>
-    </nav>
-  </header>
-
-  <main class="hero-wrapper">
-    <img src="hero.jpg" alt="Woman on couch looking at phone" />
-    <div class="flex flex-col items-center justify-center h-full text-white text-center hero-text">
-      <div class="bg-black bg-opacity-60 p-6 rounded-xl max-w-md mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Still replaying that message?</h2>
-        <p class="text-lg mb-6">Let’s decode it. Start with your free red flag quiz.</p>
-        <a href="https://tally.so/r/me8pJE" class="bg-white text-red-700 font-semibold py-2 px-6 rounded-full hover:bg-red-100 transition">Take the Quiz</a>
-      </div>
-    </div>
-  </main>
-
-  <footer class="text-center text-sm text-gray-500 py-6">
-    &copy; 2025 SEEN & RED
-  </footer>
+<body>
+    <header>
+        <h1>SEEN & RED</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="decode.html">Decode</a>
+            <a href="blog.html">Blog</a>
+        </nav>
+    </header>
+    <main class="hero" style="background-image: url('hero.jpg');">
+        <div class="overlay">
+            <h2>Still replaying that message?</h2>
+            <p>Let’s decode it. Start with your free red flag quiz.</p>
+            <a class="cta-button" href="https://tally.so/r/me8pJE">Take the Quiz</a>
+        </div>
+    </main>
+    <footer>© 2025 SEEN & RED</footer>
 </body>
 </html>
