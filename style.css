@@ -2,6 +2,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background: #fff0f0;
 }
 header {
   background: #8b0000;
@@ -16,6 +17,37 @@ nav a {
 }
 main {
   padding: 2rem;
+}
+.hero {
+  text-align: center;
+  margin-top: 6rem;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.highlight {
+  color: #8b0000;
+}
+.cta-button {
+  display: inline-block;
+  background: #8b0000;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+footer.site-footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  color: #444;
+  background-color: #fff;
 }
 form {
   display: flex;
@@ -35,22 +67,6 @@ button {
 }
 .blog-index li {
   margin-bottom: 1rem;
-}
-.hero {
-  text-align: center;
-  margin-top: 4rem;
-}
-.cta-button {
-  display: inline-block;
-  background: #8b0000;
-  color: #fff;
-  padding: 0.75rem 1.5rem;
-  text-decoration: none;
-  border-radius: 4px;
-  margin-top: 1rem;
-}
-.highlight {
-  color: #8b0000;
 }
 .disclaimer, .upgrade-note {
   text-align: center;
