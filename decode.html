@@ -2,64 +2,75 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Decode a Message | SEEN & RED</title>
-  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <header>
-    <h1>Message Decode</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="decode.html">Decode</a>
-      <a href="blog.html">Blog</a>
-    </nav>
+<body class="bg-rose-50 text-gray-900 font-sans">
+  <header class="bg-red-800 text-white py-4">
+    <div class="container mx-auto flex justify-between items-center px-4">
+      <h1 class="text-xl font-bold tracking-wide">SEEN & RED</h1>
+      <nav class="space-x-4">
+        <a href="index.html" class="hover:underline">Home</a>
+        <a href="decode.html" class="underline">Decode</a>
+        <a href="blog.html" class="hover:underline">Blog</a>
+      </nav>
+    </div>
   </header>
-  <main>
-    <section class="hero">
-      <h2 class="highlight">Ready to decode?</h2>
-      <p>Still thinking about <em>that</em> message? Don’t spiral, bestie. Let’s break it all the way down.</p>
-    </section>
 
-    <section class="form-section">
-      <form action="https://your-zapier-webhook-or-backend-url.com" method="POST" enctype="multipart/form-data">
-        <label for="name">Your Name:</label>
-        <input type="text" name="name" id="name" required />
+  <main class="max-w-xl mx-auto mt-10 bg-white p-8 rounded-xl shadow-md">
+    <h2 class="text-2xl font-bold text-red-800 mb-2">Ready to decode?</h2>
+    <p class="mb-6 text-sm text-gray-600">Still thinking about <em>that</em> message? Don’t spiral, bestie. Let’s break it all the way down.</p>
 
-        <label for="email">Your Email:</label>
-        <input type="email" name="email" id="email" required />
+    <form action="https://your-zapier-webhook-or-backend-url.com" method="POST" enctype="multipart/form-data" class="space-y-4">
+      <div>
+        <label for="name" class="block font-medium mb-1">Your Name</label>
+        <input type="text" name="name" id="name" required class="w-full border rounded p-2" />
+      </div>
 
-        <label for="message1">Paste your message or convo here:</label>
-        <textarea name="message1" id="message1" required></textarea>
+      <div>
+        <label for="email" class="block font-medium mb-1">Your Email</label>
+        <input type="email" name="email" id="email" required class="w-full border rounded p-2" />
+      </div>
 
-        <label for="message2">Another message (optional):</label>
-        <textarea name="message2" id="message2"></textarea>
+      <div>
+        <label for="message1" class="block font-medium mb-1">Paste Your Message</label>
+        <textarea name="message1" id="message1" required rows="4" class="w-full border rounded p-2"></textarea>
+      </div>
 
-        <label for="screenshot">Or Upload a screenshot here:</label>
-        <input type="file" name="screenshot" accept="image/*" />
+      <div>
+        <label for="message2" class="block font-medium mb-1">Another Message (optional)</label>
+        <textarea name="message2" id="message2" rows="3" class="w-full border rounded p-2"></textarea>
+      </div>
 
-        <input type="hidden" name="tier" id="tier">
-        <input type="hidden" name="gender" id="gender">
+      <div>
+        <label for="screenshot" class="block font-medium mb-1">Upload a Screenshot (optional)</label>
+        <input type="file" name="screenshot" id="screenshot" accept="image/*" class="block" />
+      </div>
 
-        <button type="submit">Submit for Decode</button>
-      </form>
+      <input type="hidden" name="tier" id="tier" />
+      <input type="hidden" name="gender" id="gender" />
 
-      <p class="disclaimer">
-        Disclaimer: Our AI decoder gives you emotional insight — not therapy or legal advice. Always trust your gut and seek professional help if needed.
-      </p>
+      <button type="submit" class="bg-red-800 text-white py-2 px-6 rounded hover:bg-red-700 transition">Submit for Decode</button>
+    </form>
 
-      <p class="upgrade-note">
-        Want a deeper breakdown or more messages decoded? <a href="https://seenandred.com/decode.html">Upgrade your tier here</a>.
-      </p>
-    </section>
+    <p class="text-xs text-gray-500 mt-6">
+      🔒 Disclaimer: Our AI decoder gives you emotional insight — not therapy or legal advice. Always trust your gut and seek professional help if needed.
+    </p>
+
+    <p class="text-sm text-center mt-4">
+      🔗 Want a deeper breakdown or more messages decoded? <a href="https://seenandred.com/decode.html" class="text-red-700 underline">Upgrade your tier here</a>.
+    </p>
   </main>
-  <footer>
-    <p>&copy; 2025 SEEN & RED</p>
+
+  <footer class="text-center text-sm text-gray-500 py-6 mt-12">
+    &copy; 2025 SEEN & RED
   </footer>
+
   <script>
     const urlParams = new URLSearchParams(window.location.search);
-    document.getElementById("tier").value = urlParams.get("tier") || "";
-    document.getElementById("gender").value = urlParams.get("gender") || "";
+    document.getElementById('tier').value = urlParams.get('tier') || '';
+    document.getElementById('gender').value = urlParams.get('gender') || '';
   </script>
 </body>
 </html>
