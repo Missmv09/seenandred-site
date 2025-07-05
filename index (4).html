@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SEEN & RED</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    header {
+      background-color: #800000;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header nav a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .hero {
+      background-color: #f5f5f5;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+    .hero a.button {
+      background-color: white;
+      border: 2px solid #800000;
+      color: #800000;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .quiz-section {
+      padding: 2rem;
+      text-align: center;
+    }
+    iframe {
+      width: 100%;
+      max-width: 700px;
+      height: 800px;
+      border: none;
+    }
+    footer {
+      background-color: #800000;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div><strong>SEEN & RED</strong></div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="decode.html">Decode</a>
+    <a href="blog.html">Blog</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Still replaying that message?</h1>
+  <p>Let’s decode it. Start with your free red flag quiz.</p>
+  <a href="#quiz" class="button">Take the Quiz</a>
+</section>
+
+<section id="quiz" class="quiz-section">
+  <iframe src="https://tally.so/r/me8pJE" loading="lazy"></iframe>
+</section>
+
+<footer>
+  &copy; 2025 SEEN & RED
+</footer>
+
+</body>
+</html>
