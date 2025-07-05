@@ -1,116 +1,65 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Message Decode – Seen & Red</title>
-  <style>
-    body {
-      font-family: system-ui, sans-serif;
-      margin: 2rem;
-      background-color: #fff0f3;
-      color: #111;
-    }
-    .container {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      max-width: 600px;
-      margin: auto;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    h1 {
-      color: #d81159;
-      font-size: 1.8rem;
-    }
-    label {
-      font-weight: 600;
-      margin-top: 1rem;
-      display: block;
-    }
-    textarea, input {
-      width: 100%;
-      margin-top: 0.5rem;
-      padding: 0.8rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-    }
-    button {
-      background: #d81159;
-      color: white;
-      border: none;
-      padding: 0.8rem 1.2rem;
-      font-size: 1rem;
-      border-radius: 8px;
-      margin-top: 1.5rem;
-      cursor: pointer;
-    }
-    .note {
-      font-size: 0.9rem;
-      color: #555;
-      margin-top: 1rem;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Decode a Message | SEEN & RED</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <div class="container">
+  <header>
     <h1>Message Decode</h1>
-    <p id="tierNotice">Enter your message(s) below. Your tier allows up to [x] decode(s).</p>
-    <form id="decodeForm">
-      <div id="messageFields"></div>
-      <input type="email" id="email" placeholder="Your email (used at checkout)" required />
-      <button type="submit">Decode it</button>
-    </form>
-    <p class="note">✨ Results will be sent to your email within a few minutes.</p>
-  </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="decode.html">Decode</a>
+      <a href="blog.html">Blog</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <h2 class="highlight">Ready to decode?</h2>
+      <p>Still thinking about <em>that</em> message? Don’t spiral, bestie. Let’s break it all the way down.</p>
+    </section>
 
+    <section class="form-section">
+      <form action="https://your-zapier-webhook-or-backend-url.com" method="POST" enctype="multipart/form-data">
+        <label for="name">Your Name:</label>
+        <input type="text" name="name" id="name" required />
+
+        <label for="email">Your Email:</label>
+        <input type="email" name="email" id="email" required />
+
+        <label for="message1">Paste your message or convo here:</label>
+        <textarea name="message1" id="message1" required></textarea>
+
+        <label for="message2">Another message (optional):</label>
+        <textarea name="message2" id="message2"></textarea>
+
+        <label for="screenshot">Or Upload a screenshot here:</label>
+        <input type="file" name="screenshot" accept="image/*" />
+
+        <input type="hidden" name="tier" id="tier">
+        <input type="hidden" name="gender" id="gender">
+
+        <button type="submit">Submit for Decode</button>
+      </form>
+
+      <p class="disclaimer">
+        Disclaimer: Our AI decoder gives you emotional insight — not therapy or legal advice. Always trust your gut and seek professional help if needed.
+      </p>
+
+      <p class="upgrade-note">
+        Want a deeper breakdown or more messages decoded? <a href="https://seenandred.com/decode.html">Upgrade your tier here</a>.
+      </p>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 SEEN & RED</p>
+  </footer>
   <script>
     const urlParams = new URLSearchParams(window.location.search);
-    const tier = urlParams.get("tier");
-    const email = urlParams.get("email") || "";
-    const form = document.getElementById("decodeForm");
-    const msgBox = document.getElementById("messageFields");
-    const tierNotice = document.getElementById("tierNotice");
-
-    const tierLimits = {
-      flag: 3,
-      pattern: 6,
-      reality: 12,
-    };
-
-    const max = tierLimits[tier] || 1;
-    tierNotice.innerText = `Enter your message(s) below. Your tier allows up to ${max} decode(s).`;
-
-    for (let i = 1; i <= max; i++) {
-      const label = document.createElement("label");
-      label.innerText = `Message ${i}`;
-      const textarea = document.createElement("textarea");
-      textarea.name = `message${i}`;
-      textarea.placeholder = `Paste message ${i}...`;
-      msgBox.appendChild(label);
-      msgBox.appendChild(textarea);
-    }
-
-    document.getElementById("email").value = email;
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(form));
-      data.tier = tier;
-      try {
-        await fetch("https://hooks.zapier.com/hooks/catch/XXXXX", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        });
-        alert("Submitted! Your decode will be delivered via email soon.");
-        form.reset();
-      } catch (err) {
-        alert("Something went wrong. Try again later.");
-      }
-    });
+    document.getElementById("tier").value = urlParams.get("tier") || "";
+    document.getElementById("gender").value = urlParams.get("gender") || "";
   </script>
 </body>
 </html>
