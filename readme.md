@@ -1,0 +1,1 @@
+This is the final Git + Netlify deployable version of Seen & Red. All files included.
