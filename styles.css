@@ -1,37 +1,22 @@
+
 body {
   font-family: sans-serif;
+  background-color: #f9f9f9;
   margin: 0;
   padding: 0;
-  background: #fff;
+  color: #111;
 }
-.site-header {
-  background: #fde7ee;
+header {
+  background-color: #ffe4ec;
+  text-align: center;
   padding: 1rem;
-  text-align: center;
 }
-.logo {
-  max-height: 60px;
-}
-.hero {
-  text-align: center;
+main {
+  background: #f1f1f1;
   padding: 2rem;
 }
-.hero-img {
-  max-width: 100%;
-  height: auto;
-}
-.title {
-  font-size: 2rem;
-  margin-top: 1rem;
-}
-.description {
-  margin: 1rem 0;
-}
-.button {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background: red;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
+footer {
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 1rem;
 }
