@@ -1,34 +1,37 @@
-
 body {
+  font-family: sans-serif;
   margin: 0;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color: #fff;
-  color: #333;
+  padding: 0;
+  background: #fff;
 }
-header {
-  background-color: #fce4ec;
-  padding: 2rem 1rem;
+.site-header {
+  background: #fde7ee;
+  padding: 1rem;
   text-align: center;
 }
-header img {
+.logo {
+  max-height: 60px;
+}
+.hero {
+  text-align: center;
+  padding: 2rem;
+}
+.hero-img {
   max-width: 100%;
   height: auto;
-  border-radius: 10px;
 }
-main {
-  padding: 2rem 1rem;
+.title {
+  font-size: 2rem;
+  margin-top: 1rem;
 }
-section {
-  margin-bottom: 3rem;
+.description {
+  margin: 1rem 0;
 }
-iframe {
-  width: 100%;
-  height: 700px;
-  border: none;
-}
-footer {
-  background-color: #f8f8f8;
-  text-align: center;
-  padding: 1rem;
-  font-size: 0.9rem;
+.button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: red;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
 }
