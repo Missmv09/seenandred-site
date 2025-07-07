@@ -1,2 +1,1 @@
-/blog /blog.html
-/decode /decode.html
+/blog    /blog.html    200
