@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Message Decode Tool</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff5fa;
+      padding: 40px;
+      color: #1e1e1e;
+      line-height: 1.5;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #d10041;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    input, textarea, select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #d10041;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      margin-top: 30px;
+    }
+    button:hover {
+      background-color: #a30032;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Message Decode Tool</h1>
+  <p>Drop your message (or upload a screenshot) and we’ll break it all the way down.</p>
+
+  <label for="userType">Have you already purchased a decode tier?</label>
+  <select id="userType" onchange="togglePayment()">
+    <option value="new">No, I’m new</option>
+    <option value="returning">Yes, I already purchased</option>
+  </select>
+
+  <div id="paymentOptions">
+    <label for="tier">Choose your Decode Tier</label>
+    <select id="tier" name="tier">
+      <option value="flag">⚠️ Flag Check — $3 (1 message)</option>
+      <option value="pattern">🔁 Pattern Check — $9 (3 messages)</option>
+      <option value="reality">👁 Reality Check — $29 (unlimited for 30 days)</option>
+    </select>
+    <p style="margin-top: 5px;"><a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" target="_blank">Go to Stripe to purchase</a></p>
+  </div>
+
+  <label for="message">Drop the message here:</label>
+  <textarea id="message" placeholder="Paste the message you want decoded..." rows="6"></textarea>
+
+  <label for="screenshot">Upload a screenshot (optional):</label>
+  <input type="file" id="screenshot" accept="image/*"/>
+
+  <label for="email">Your email (to receive the decode):</label>
+  <input type="email" id="email" placeholder="your@email.com"/>
+
+  <button type="submit">Submit for Decode</button>
+
+  <script>
+    function togglePayment() {
+      const userType = document.getElementById('userType').value;
+      const paymentOptions = document.getElementById('paymentOptions');
+      paymentOptions.style.display = userType === 'new' ? 'block' : 'none';
+    }
+    togglePayment();
+  </script>
+</body>
+</html>
