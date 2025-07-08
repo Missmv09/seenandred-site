@@ -1,1 +1,2 @@
 /blog    /blog.html    200
+/decode.html  /404.html  404
