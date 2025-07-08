@@ -3,43 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Seen & Red - Message Decode</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <title>Seen & Red</title>
 </head>
-<body class="bg-pink-50 text-gray-900">
-  <main class="max-w-3xl mx-auto py-10 px-6">
-    <h1 class="text-3xl font-bold text-red-700 mb-4">Message Decode Tool</h1>
-    <p class="mb-6">Drop your message (or upload a screenshot) and we’ll break it all the way down.</p>
-
-    <form action="https://formspree.io/f/mwkgbgep" method="POST" enctype="multipart/form-data" class="space-y-4">
-      <label class="block font-semibold">Have you already purchased a decode tier?</label>
-      <select name="purchased" class="w-full border rounded px-3 py-2">
-        <option>No, I'm new</option>
-        <option>Yes, already purchased</option>
-      </select>
-
-      <label class="block font-semibold">Choose your Decode Tier</label>
-      <select name="tier" class="w-full border rounded px-3 py-2">
-        <option>⚠️ Flag Check — $3 (1 message)</option>
-        <option>🚩 Pattern Check — $9 (3 messages)</option>
-        <option>🚨 Reality Check — $19 (6 messages)</option>
-        <option>🔥 Unlimited Monthly — $29</option>
-      </select>
-      <a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" class="text-sm text-purple-600 underline">Go to Stripe to purchase</a>
-
-      <label class="block font-semibold mt-4">Drop the message here:</label>
-      <textarea name="message" rows="6" placeholder="Paste the message you want decoded..." class="w-full border rounded px-3 py-2"></textarea>
-
-      <label class="block font-semibold mt-4">Upload a screenshot (optional):</label>
-      <input type="file" name="screenshot" accept="image/*" class="w-full" />
-
-      <label class="block font-semibold mt-4">Your email (to receive the decode):</label>
-      <input type="email" name="email" placeholder="your@email.com" class="w-full border rounded px-3 py-2" required />
-
-      <button type="submit" class="w-full bg-red-700 text-white font-semibold py-3 rounded hover:bg-red-800">
-        Submit for Decode
-      </button>
-    </form>
-  </main>
+<body style="font-family: Arial, sans-serif; background-color: #fff0f6;">
+  <h1>Welcome to SEEN & RED</h1>
+  <p>Take the Red Flag Quiz or upload a message for decoding.</p>
+  <ul>
+    <li><a href="decode.html">Message Decode Tool</a></li>
+    <li><a href="blog.html">Read the Blog</a></li>
+  </ul>
 </body>
 </html>
