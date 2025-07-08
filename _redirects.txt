@@ -1,2 +1,2 @@
-/blog    /blog.html    200
-/decode.html  /404.html  404
+/blog  /blog.html  200
+/decode  /decode.html  200
