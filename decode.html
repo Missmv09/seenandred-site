@@ -1,1 +1,48 @@
-<!DOCTYPE html><html><head><title>Decode</title></head><body><h1>Message Decode Tool</h1><p>Coming soon: drop your message and we’ll break it down!</p></body></html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Message Decode</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #fff0f6; padding: 2rem; max-width: 700px; margin: auto;">
+  <h1 style="color:#cc0044;">Submit Your Message for Decode</h1>
+  <p>Choose your decode package and submit your message(s) below. You’ll receive a personalized analysis by email.</p>
+
+  <h3>Step 1: Purchase a Decode Tier</h3>
+  <ul>
+    <li><a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" target="_blank">⚠️ Flag Check — $3 (1 message)</a></li>
+    <li><a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a" target="_blank">🔍 Pattern Check — $9 (3 messages)</a></li>
+    <li><a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03" target="_blank">👀 Reality Check — $19 (6 messages)</a></li>
+  </ul>
+  <p><strong>Important:</strong> After purchase, return here to submit your messages. Don’t forget to use the same email at checkout and here.</p>
+
+  <h3>Step 2: Submit Your Messages</h3>
+  <form action="YOUR_ZAPIER_WEBHOOK_URL" method="POST" enctype="multipart/form-data">
+    <label for="email">Your email (same used for Stripe):</label><br/>
+    <input type="email" name="email" required style="width:100%; padding:8px; margin-top:5px;"><br/><br/>
+
+    <label for="tier">Which tier did you purchase?</label><br/>
+    <select name="tier" required style="width:100%; padding:8px; margin-top:5px;">
+      <option value="">Select one</option>
+      <option value="flag">Flag Check (1 message)</option>
+      <option value="pattern">Pattern Check (3 messages)</option>
+      <option value="reality">Reality Check (6 messages)</option>
+    </select><br/><br/>
+
+    <label>Paste your message(s):</label><br/>
+    <textarea name="message1" placeholder="Message 1" style="width:100%; height:100px; margin-top:5px;"></textarea><br/>
+    <textarea name="message2" placeholder="Message 2 (if applicable)" style="width:100%; height:100px; margin-top:10px;"></textarea><br/>
+    <textarea name="message3" placeholder="Message 3 (if applicable)" style="width:100%; height:100px; margin-top:10px;"></textarea><br/>
+    <textarea name="message4" placeholder="Message 4 (if applicable)" style="width:100%; height:100px; margin-top:10px;"></textarea><br/>
+    <textarea name="message5" placeholder="Message 5 (if applicable)" style="width:100%; height:100px; margin-top:10px;"></textarea><br/>
+    <textarea name="message6" placeholder="Message 6 (if applicable)" style="width:100%; height:100px; margin-top:10px;"></textarea><br/><br/>
+
+    <label>Upload a screenshot (optional):</label><br/>
+    <input type="file" name="screenshot"><br/><br/>
+
+    <button type="submit" style="width:100%; background:#cc0044; color:white; padding:1rem; font-size:1rem;">Submit for Decode</button>
+  </form>
+</body>
+</html>
