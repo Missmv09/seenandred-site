@@ -1,28 +1,35 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SEEN & RED</title>
+  <title>Seen & Red</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #fff0f6;
       margin: 0;
+      font-family: 'Playfair Display', serif;
+      background: #fff0f6;
       color: #333;
     }
     header {
-      background-color: #cc0044;
+      background: #cc0044;
       color: white;
+      text-align: center;
       padding: 1.5rem 2rem;
+    }
+    header p {
+      font-size: 1.25rem;
+      margin: 0.5rem 0 0;
+    }
+    .hero {
+      position: relative;
       text-align: center;
     }
     .hero img {
       width: 100%;
-      max-height: 500px;
+      max-height: 600px;
       object-fit: cover;
-      display: block;
     }
     .cta-row {
       display: flex;
@@ -37,56 +44,28 @@
       border-radius: 1rem;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       padding: 2rem;
-      max-width: 400px;
       flex: 1 1 300px;
+      max-width: 400px;
       text-align: center;
     }
     .cta-box h2 {
       color: #cc0044;
-      margin-bottom: 0.8rem;
-    }
-    .cta-box p {
-      font-size: 1rem;
-      line-height: 1.4;
-      margin-bottom: 1rem;
     }
     .cta-box a {
-      display: inline-block;
       background: #cc0044;
       color: white;
       padding: 0.75rem 1.5rem;
       border-radius: 1.5rem;
       text-decoration: none;
       font-weight: bold;
+      display: inline-block;
+      margin-top: 1rem;
     }
-    .blog-preview {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.5rem;
-      padding: 3rem 2rem;
-    }
-    .blog-card {
-      background: white;
-      border-radius: 1rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      max-width: 300px;
-      flex: 1 1 300px;
-      padding: 1rem;
-    }
-    .blog-card img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 0.8rem;
-    }
-    .blog-card h3 {
-      color: #cc0044;
-      margin: 0.8rem 0 0.5rem;
-    }
-    .blog-card p {
-      font-size: 0.95rem;
-      line-height: 1.4;
+    @media (max-width: 768px) {
+      .cta-row {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
@@ -95,39 +74,19 @@
     <h1>SEEN & RED</h1>
     <p>Emotional clarity for the modern dater.</p>
   </header>
-
   <div class="hero">
-    <img src="https://images.unsplash.com/photo-1603201667565-4be8612b45d5?auto=format&fit=crop&w=1600&q=80" alt="Woman on couch with phone">
+    <img src="assets/hero.jpg" alt="Girl on couch with phone" />
   </div>
-
   <div class="cta-row">
     <div class="cta-box">
       <h2>Take the Free Clarity Quiz</h2>
-      <p>Not sure what’s up but something feels off? Take our quiz to get a personalized Clarity Report.</p>
-      <a href="https://seenandred.com/#form">Start Quiz</a>
+      <p>Feeling off? Take our quiz and get a personalized Clarity Report to help you see the signs.</p>
+      <a href="/quiz">Start Quiz</a>
     </div>
     <div class="cta-box">
       <h2>Try the Message Decode</h2>
-      <p>We’ll break down their message for tone, red flags, and intent. Submit a text and get the clarity you deserve.</p>
+      <p>Upload their message and get a vibe check from our AI bestie. It's receipts — but smarter.</p>
       <a href="/decode">Try Decode Tool</a>
-    </div>
-  </div>
-
-  <div class="blog-preview">
-    <div class="blog-card">
-      <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f" alt="Notebook">
-      <h3>Why We Miss Green Flags</h3>
-      <p>When you're on red flag alert, you might miss the quiet signs of real safety. Here's why green flags matter just as much.</p>
-    </div>
-    <div class="blog-card">
-      <img src="https://images.unsplash.com/photo-1535051823243-d8cf5d1e3c84" alt="Heart notebook">
-      <h3>Am I Being Love Bombed?</h3>
-      <p>They came on fast, made you feel amazing... and now you’re unsure. Learn the real signs of love bombing and what to do next.</p>
-    </div>
-    <div class="blog-card">
-      <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c" alt="Writing pad">
-      <h3>Your Gut vs. Gaslighting</h3>
-      <p>If you're doubting yourself in a relationship, this one’s for you. Learn how to tell instinct from emotional manipulation.</p>
     </div>
   </div>
 </body>
