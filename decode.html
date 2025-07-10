@@ -1,66 +1,42 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Message Decode</title>
-  <script>
-    function updateMessageFields() {
-      const tier = document.getElementById('tier').value;
-      const sections = {
-        flag: 1,
-        pattern: 3,
-        reality: 6
-      };
-      const count = sections[tier] || 0;
-      for (let i = 1; i <= 6; i++) {
-        const field = document.getElementById('message' + i);
-        field.style.display = i <= count ? 'block' : 'none';
-      }
-    }
-  </script>
-</head>
-<body style="font-family: Arial, sans-serif; background-color: #fff0f6; padding: 2rem; max-width: 700px; margin: auto;">
-  <h1 style="color:#cc0044;">Submit Your Message for Decode</h1>
-  <p>Choose your decode package and submit your message(s) below. You’ll receive a personalized analysis by email.</p>
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Message Decode</title>
+<script>
+function updateMessageFields() {
+  const tier = document.getElementById('tier').value;
+  const count = { flag: 1, pattern: 3, reality: 6 }[tier] || 0;
+  for (let i = 1; i <= 6; i++) {
+    document.getElementById('message' + i).style.display = i <= count ? 'block' : 'none';
+  }
+}
+</script></head>
+<body style="font-family: Arial; background:#fff0f6; padding:2rem; max-width:700px; margin:auto;">
+<h1 style="color:#cc0044;">Submit Your Message for Decode</h1>
+<ul>
+  <li><a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b">⚠️ Flag Check — $3</a></li>
+  <li><a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a">🔍 Pattern Check — $9</a></li>
+  <li><a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03">👀 Reality Check — $19</a></li>
+</ul>
+<p><strong>Already paid?</strong> <a href="#form">Skip to the message form ↓</a></p>
+<h3 id="form">Submit Form</h3>
+<form action="YOUR_ZAPIER_WEBHOOK_URL" method="POST" enctype="multipart/form-data">
+  <input type="email" name="email" required placeholder="Email used for Stripe" style="width:100%; padding:8px;"><br/><br/>
+  <select name="tier" id="tier" onchange="updateMessageFields()" required style="width:100%; padding:8px;">
+    <option value="">Select Tier</option>
+    <option value="flag">Flag Check</option>
+    <option value="pattern">Pattern Check</option>
+    <option value="reality">Reality Check</option>
+  </select><br/><br/>
+  <div id="messageFields">
+    <textarea id="message1" name="message1" placeholder="Message 1" style="width:100%; height:100px; display:none; margin-top:10px;"></textarea>
+<textarea id="message2" name="message2" placeholder="Message 2" style="width:100%; height:100px; display:none; margin-top:10px;"></textarea>
+<textarea id="message3" name="message3" placeholder="Message 3" style="width:100%; height:100px; display:none; margin-top:10px;"></textarea>
+<textarea id="message4" name="message4" placeholder="Message 4" style="width:100%; height:100px; display:none; margin-top:10px;"></textarea>
+<textarea id="message5" name="message5" placeholder="Message 5" style="width:100%; height:100px; display:none; margin-top:10px;"></textarea>
+<textarea id="message6" name="message6" placeholder="Message 6" style="width:100%; height:100px; display:none; margin-top:10px;"></textarea>
 
-  <h3>Step 1: Purchase a Decode Tier</h3>
-  <ul>
-    <li><a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" target="_blank">⚠️ Flag Check — $3 (1 message)</a></li>
-    <li><a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a" target="_blank">🔍 Pattern Check — $9 (3 messages)</a></li>
-    <li><a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03" target="_blank">👀 Reality Check — $19 (6 messages)</a></li>
-  </ul>
-
-  <p><strong>Already paid?</strong> <a href="#form">Skip to the message form ↓</a></p>
-  <p><strong>Important:</strong> After purchase, return here to submit your messages using the same email you used at checkout.</p>
-
-  <h3 id="form">Step 2: Submit Your Messages</h3>
-  <form action="YOUR_ZAPIER_WEBHOOK_URL" method="POST" enctype="multipart/form-data">
-    <label for="email">Your email (used for Stripe):</label><br/>
-    <input type="email" name="email" required style="width:100%; padding:8px; margin-top:5px;"><br/><br/>
-
-    <label for="tier">Which tier did you purchase?</label><br/>
-    <select name="tier" id="tier" onchange="updateMessageFields()" required style="width:100%; padding:8px; margin-top:5px;">
-      <option value="">Select one</option>
-      <option value="flag">Flag Check (1 message)</option>
-      <option value="pattern">Pattern Check (3 messages)</option>
-      <option value="reality">Reality Check (6 messages)</option>
-    </select><br/><br/>
-
-    <div id="messageFields">
-      <textarea id="message1" name="message1" placeholder="Message 1" style="width:100%; height:100px; display:none; margin-top:10px;"></textarea>
-      <textarea id="message2" name="message2" placeholder="Message 2" style="width:100%; height:100px; display:none; margin-top:10px;"></textarea>
-      <textarea id="message3" name="message3" placeholder="Message 3" style="width:100%; height:100px; display:none; margin-top:10px;"></textarea>
-      <textarea id="message4" name="message4" placeholder="Message 4" style="width:100%; height:100px; display:none; margin-top:10px;"></textarea>
-      <textarea id="message5" name="message5" placeholder="Message 5" style="width:100%; height:100px; display:none; margin-top:10px;"></textarea>
-      <textarea id="message6" name="message6" placeholder="Message 6" style="width:100%; height:100px; display:none; margin-top:10px;"></textarea>
-    </div><br/>
-
-    <label>Upload a screenshot (optional):</label><br/>
-    <input type="file" name="screenshot"><br/><br/>
-
-    <button type="submit" style="width:100%; background:#cc0044; color:white; padding:1rem; font-size:1rem;">Submit for Decode</button>
-  </form>
-</body>
-</html>
+  </div><br/>
+  <input type="file" name="screenshot"><br/><br/>
+  <button type="submit" style="width:100%; background:#cc0044; color:white; padding:1rem;">Submit</button>
+</form>
+</body></html>
