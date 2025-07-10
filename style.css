@@ -1,14 +1,43 @@
-
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   background-color: #fff0f3;
+  color: #330011;
 }
 
-.hero-image {
+.hero {
+  position: relative;
+  height: 70vh;
+  overflow: hidden;
+}
+
+.hero img {
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-text {
+  position: absolute;
+  top: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: white;
+  background: rgba(194, 0, 69, 0.7);
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+}
+
+.hero-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.hero-text p {
+  font-size: 1rem;
+  margin: 0.5rem 0 0;
 }
 
 .cta-section {
@@ -21,38 +50,70 @@ body {
 
 .cta-card {
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 320px;
   text-align: center;
-  max-width: 320px;
-  flex: 1 1 300px;
 }
 
 .cta-card h2 {
   font-family: 'Playfair Display', serif;
-  color: #b4003b;
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+  color: #990033;
 }
 
 .cta-card p {
-  color: #333;
   font-size: 1rem;
-  margin-bottom: 1.5rem;
 }
 
 .cta-button {
+  margin-top: 1rem;
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  font-weight: bold;
-  background-color: #b4003b;
+  background-color: #c20045;
   color: white;
   text-decoration: none;
-  border-radius: 999px;
-  font-size: 1rem;
+  border-radius: 30px;
+  font-weight: bold;
 }
 
-.cta-button:hover {
-  background-color: #8f0030;
+.blog-section {
+  padding: 2rem 1rem;
+  background-color: #fff;
+  text-align: center;
+}
+
+.blog-header {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: #b4003b;
+  margin-bottom: 2rem;
+}
+
+.blog-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.blog-card {
+  background-color: #ffeef3;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  width: 300px;
+  text-align: left;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+.blog-card h3 {
+  color: #990033;
+}
+
+.read-more {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #c20045;
+  text-decoration: underline;
+  font-weight: bold;
 }
