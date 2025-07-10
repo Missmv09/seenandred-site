@@ -6,37 +6,94 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SEEN & RED</title>
   <style>
-    body { font-family: Arial, sans-serif; background-color: #fff0f6; margin: 0; color: #333; }
-    header { background-color: #cc0044; color: white; padding: 1.5rem 2rem; text-align: center; }
-    .hero { position: relative; text-align: center; }
-    .hero img { width: 100%; max-height: 400px; object-fit: cover; border-bottom-left-radius: 2rem; border-bottom-right-radius: 2rem; }
-    .hero-text {
-      position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);
-      background: rgba(204, 0, 68, 0.85); padding: 1rem 2rem;
-      border-radius: 1rem; color: white; font-size: 1.5rem;
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff0f6;
+      margin: 0;
+      color: #333;
     }
-    .hero-text a {
-      display: inline-block; margin-top: 1rem; background: white; color: #cc0044;
-      padding: 0.5rem 1.2rem; border-radius: 1rem; text-decoration: none; font-weight: bold;
+    header {
+      background-color: #cc0044;
+      color: white;
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+    .hero {
+      text-align: center;
+    }
+    .hero img {
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+      border-bottom-left-radius: 2rem;
+      border-bottom-right-radius: 2rem;
+    }
+    .quiz-section {
+      padding: 2rem;
+      text-align: center;
+    }
+    .quiz-section h2 {
+      color: #cc0044;
+    }
+    .quiz-section p {
+      max-width: 600px;
+      margin: 0 auto 1rem;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    .quiz-section a {
+      display: inline-block;
+      background: #cc0044;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 1rem;
+      text-decoration: none;
+      font-weight: bold;
     }
     .blog-preview {
-      display: flex; flex-wrap: wrap; justify-content: center;
-      gap: 1rem; padding: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem;
     }
     .blog-card {
-      background: white; border-radius: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      max-width: 300px; flex: 1 1 300px; padding: 1rem;
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 300px;
+      flex: 1 1 300px;
+      padding: 1rem;
     }
     .blog-card img {
-      width: 100%; height: 160px; object-fit: cover; border-radius: 0.8rem;
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 0.8rem;
     }
-    .blog-card h3 { color: #cc0044; margin: 0.8rem 0 0.5rem; }
-    .blog-card p { font-size: 0.95rem; line-height: 1.4; }
-    .decode-section { text-align: center; padding: 3rem 2rem; }
-    .decode-section h2 { color: #cc0044; }
+    .blog-card h3 {
+      color: #cc0044;
+      margin: 0.8rem 0 0.5rem;
+    }
+    .blog-card p {
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+    .decode-section {
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+    .decode-section h2 {
+      color: #cc0044;
+    }
     .decode-section a {
-      background: #cc0044; color: white; padding: 0.8rem 1.5rem;
-      border-radius: 1rem; text-decoration: none; display: inline-block; margin-top: 1rem;
+      background: #cc0044;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 1rem;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 1rem;
     }
   </style>
 </head>
@@ -47,13 +104,14 @@
   </header>
 
   <div class="hero">
-    <img src="istockphoto-889461152-612x612.jpg" alt="Phone Girl">
-    <div class="hero-text">
-      Still analyzing that text?
-      <br/>
-      <a href="/decode">Decode it</a>
-    </div>
+    <img src="https://images.unsplash.com/photo-1587049352843-cd1c9bd3bb2b?auto=format&fit=crop&w=1600&q=80" alt="Woman on couch with phone">
   </div>
+
+  <section class="quiz-section">
+    <h2>Take the Free Clarity Quiz</h2>
+    <p>Not sure what's up but something feels off? Take our quiz to get a personalized Clarity Report. Start the quiz now.</p>
+    <a href="https://seenandred.com/#form">Next →</a>
+  </section>
 
   <div class="blog-preview">
     <div class="blog-card">
