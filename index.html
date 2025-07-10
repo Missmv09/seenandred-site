@@ -1,31 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Seen & Red</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <title>Seen & Red</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #fff0f4;
+            color: #333;
+        }
+        header {
+            background-color: #c20041;
+            color: white;
+            padding: 30px 20px 60px;
+            text-align: center;
+        }
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            margin: 0;
+        }
+        header p {
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+        .hero {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            display: block;
+        }
+        .cta-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding: 40px 20px;
+        }
+        .cta-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            max-width: 300px;
+            flex: 1;
+            text-align: center;
+        }
+        .cta-box h2 {
+            font-family: 'Playfair Display', serif;
+            color: #c20041;
+            margin-bottom: 15px;
+        }
+        .cta-box p {
+            font-size: 0.95em;
+            margin-bottom: 20px;
+        }
+        .cta-button {
+            background-color: #c20041;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 0.95em;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="overlay">
-      <h1>SEEN & RED</h1>
-      <p>Emotional clarity for the modern dater.</p>
+    <header>
+        <h1>SEEN & RED</h1>
+        <p>Emotional clarity for the modern dater.</p>
+    </header>
+    <img class="hero" src="hero-girl-on-couch.png" alt="Girl on couch with phone">
+    <div class="cta-container">
+        <div class="cta-box">
+            <h2>Take the Free Clarity Quiz</h2>
+            <p>Feeling off? Take our quiz and get a personalized Clarity Report to help you see the signs.</p>
+            <button class="cta-button">Start Quiz</button>
+        </div>
+        <div class="cta-box">
+            <h2>Try the Message Decode</h2>
+            <p>Upload their message and get a vibe check from our AI bestie. It’s receipts — but smarter.</p>
+            <button class="cta-button">Try Decode Tool</button>
+        </div>
     </div>
-    <img src="assets/hero.jpg" alt="Girl on couch with phone" />
-  </header>
-
-  <main class="cta-grid">
-    <div class="cta-box">
-      <h2>Take the Free Clarity Quiz</h2>
-      <p>Feeling off? Take our quiz and get a personalized Clarity Report to help you see the signs.</p>
-      <a href="/decode" class="btn">Start Quiz</a>
-    </div>
-    <div class="cta-box">
-      <h2>Try the Message Decode</h2>
-      <p>Upload their message and get a vibe check from our AI bestie. It’s receipts — but smarter.</p>
-      <a href="/decode" class="btn">Try Decode Tool</a>
-    </div>
-  </main>
 </body>
 </html>
