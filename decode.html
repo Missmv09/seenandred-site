@@ -1,1 +1,157 @@
-<html><body><h1>Decode Tool</h1></body></html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Decode Their Message</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fff0f6;
+      margin: 0;
+      padding: 2rem 1rem;
+      color: #2e2e2e;
+    }
+
+    h1 {
+      text-align: center;
+      color: #cc0044;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p.subtext {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .tiers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .tier {
+      flex: 1 1 220px;
+      max-width: 250px;
+      padding: 1rem;
+      background: white;
+      border-radius: 1rem;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.07);
+      transition: transform 0.2s ease;
+      border: 2px solid #fff0f6;
+    }
+
+    .tier:hover {
+      transform: translateY(-4px);
+      border-color: #cc0044;
+    }
+
+    .tier a {
+      display: inline-block;
+      margin-top: 0.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      color: #cc0044;
+    }
+
+    form {
+      max-width: 500px;
+      margin: 2rem auto 3rem;
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    select,
+    input[type="file"] {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #ddd;
+      border-radius: 0.5rem;
+    }
+
+    button {
+      background: #cc0044;
+      color: white;
+      border: none;
+      padding: 0.9rem 2rem;
+      font-size: 1rem;
+      border-radius: 2rem;
+      width: 100%;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background: #a80036;
+    }
+
+    .note {
+      font-size: 0.9rem;
+      color: #444;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Upload Their Message to Get the Clarity You Deserve</h1>
+  <p class="subtext">Just pick your Decode level, upload a screenshot or paste a message, and we’ll handle the rest — receipts included.</p>
+
+  <div class="tiers">
+    <div class="tier">
+      <div>⚠️</div>
+      <strong>Flag Check — $3</strong>
+      <a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b">Buy Now</a>
+    </div>
+    <div class="tier">
+      <div>🧠</div>
+      <strong>Pattern Check — $9</strong>
+      <a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a">Buy Now</a>
+    </div>
+    <div class="tier">
+      <div>👀</div>
+      <strong>Reality Check — $19</strong>
+      <a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03">Buy Now</a>
+    </div>
+  </div>
+
+  <form id="form">
+    <label for="email">Email used for Stripe</label>
+    <input type="text" id="email" name="email" placeholder="you@example.com" />
+
+    <label for="tier">Select Tier</label>
+    <select id="tier" name="tier">
+      <option value="">-- Choose --</option>
+      <option value="flag">Flag Check</option>
+      <option value="pattern">Pattern Check</option>
+      <option value="reality">Reality Check</option>
+    </select>
+
+    <label for="file">Upload Screenshot or Paste Message</label>
+    <input type="file" id="file" name="file" />
+
+    <button type="submit">Submit for Decode</button>
+  </form>
+
+  <p class="note">Already paid? Just complete the form above. We'll match it by email.</p>
+</body>
+</html>
