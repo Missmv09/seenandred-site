@@ -1,103 +1,28 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seen & Red</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: #ffeeef;
-            color: #460019;
-        }
-        .hero {
-            position: relative;
-            width: 100%;
-            height: auto;
-        }
-        .hero img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .header {
-            position: absolute;
-            top: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            background-color: rgba(206, 0, 58, 0.9);
-            padding: 1rem 2rem;
-            border-radius: 12px;
-        }
-        .header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: white;
-            margin: 0;
-        }
-        .header p {
-            color: white;
-            font-size: 1rem;
-            margin: 0;
-        }
-        .cta-section {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem auto;
-            max-width: 1000px;
-            padding: 0 1rem;
-        }
-        .cta {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            width: 300px;
-            text-align: center;
-        }
-        .cta h2 {
-            font-family: 'Playfair Display', serif;
-            color: #990033;
-            margin-bottom: 0.5rem;
-        }
-        .cta p {
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-        .cta a {
-            background-color: #c20045;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Seen & Red</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="hero">
-        <img src="assets/hero-girl-on-couch.png" alt="Girl on couch with phone">
-        <div class="header">
-            <h1>SEEN & RED</h1>
-            <p>Emotional clarity for the modern dater.</p>
-        </div>
+  <header>
+    <img src="hero-girl-on-couch.png" alt="Girl on couch with phone" class="hero-image"/>
+  </header>
+  <main class="cta-section">
+    <div class="cta-card">
+      <h2>Take the Free Clarity Quiz</h2>
+      <p>Feeling off? Take our quiz and get a personalized Clarity Report to help you see the signs.</p>
+      <a href="#" class="cta-button">Start Quiz</a>
     </div>
-    <div class="cta-section">
-        <div class="cta">
-            <h2>Take the Free Clarity Quiz</h2>
-            <p>Feeling off? Take our quiz and get a personalized Clarity Report to help you see the signs.</p>
-            <a href="#">Start Quiz</a>
-        </div>
-        <div class="cta">
-            <h2>Try the Message Decode</h2>
-            <p>Upload their message and get a vibe check from our AI bestie. It’s receipts — but smarter.</p>
-            <a href="#">Try Decode Tool</a>
-        </div>
+    <div class="cta-card">
+      <h2>Try the Message Decode</h2>
+      <p>Upload their message and get a vibe check from our AI bestie. It’s receipts — but smarter.</p>
+      <a href="#" class="cta-button">Try Decode Tool</a>
     </div>
+  </main>
 </body>
 </html>
