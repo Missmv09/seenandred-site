@@ -1,25 +1,82 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>SEEN & RED</title>
-<style>
-body { font-family: Arial, sans-serif; background-color: #fff0f6; color: #333; margin: 0; }
-header { text-align: center; padding: 2rem; background-color: #cc0044; color: white; }
-.hero { display: flex; flex-direction: column; align-items: center; padding: 2rem; text-align: center; }
-.hero img { max-width: 300px; border-radius: 2rem; margin-bottom: 1rem; }
-.cta { font-size: 1.2rem; margin: 1rem 0; }
-iframe { width: 100%; max-width: 600px; height: 600px; border: none; }
-</style>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SEEN & RED</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #fff0f6; margin: 0; color: #333; }
+    header { background-color: #cc0044; color: white; padding: 1.5rem 2rem; text-align: center; }
+    .hero { position: relative; text-align: center; }
+    .hero img { width: 100%; max-height: 400px; object-fit: cover; border-bottom-left-radius: 2rem; border-bottom-right-radius: 2rem; }
+    .hero-text {
+      position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);
+      background: rgba(204, 0, 68, 0.85); padding: 1rem 2rem;
+      border-radius: 1rem; color: white; font-size: 1.5rem;
+    }
+    .hero-text a {
+      display: inline-block; margin-top: 1rem; background: white; color: #cc0044;
+      padding: 0.5rem 1.2rem; border-radius: 1rem; text-decoration: none; font-weight: bold;
+    }
+    .blog-preview {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 1rem; padding: 2rem;
+    }
+    .blog-card {
+      background: white; border-radius: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 300px; flex: 1 1 300px; padding: 1rem;
+    }
+    .blog-card img {
+      width: 100%; height: 160px; object-fit: cover; border-radius: 0.8rem;
+    }
+    .blog-card h3 { color: #cc0044; margin: 0.8rem 0 0.5rem; }
+    .blog-card p { font-size: 0.95rem; line-height: 1.4; }
+    .decode-section { text-align: center; padding: 3rem 2rem; }
+    .decode-section h2 { color: #cc0044; }
+    .decode-section a {
+      background: #cc0044; color: white; padding: 0.8rem 1.5rem;
+      border-radius: 1rem; text-decoration: none; display: inline-block; margin-top: 1rem;
+    }
+  </style>
 </head>
 <body>
-<header><h1>SEEN & RED</h1><p>Red flag checker for your love life 💋</p></header>
-<section class="hero">
-  <img src="istockphoto-889461152-612x612.jpg" alt="Phone Girl">
-  <div class="cta">Take the Red Flag Quiz to get your Clarity Report</div>
-  <iframe data-tally-src="https://tally.so/embed/me8pJE?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="525" frameborder="0"></iframe>
-  <script>
-    var d=document,w="https://tally.so/widgets/embed.js",v=function(){if("undefined"!==typeof Tally)Tally.loadEmbeds();else d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((e)=>{e.src=e.dataset.tallySrc;});};
-    if("undefined"!==typeof Tally)Tally.loadEmbeds();else if(d.querySelector('script[src="'+w+'"]'))d.querySelector('script[src="'+w+'"]').addEventListener("load",v,!1);
-    else{var s=d.createElement("script");s.src=w;s.onload=v;s.setAttribute("data-tally-script","true");d.body.appendChild(s);}
-  </script>
-</section>
-</body></html>
+  <header>
+    <h1>SEEN & RED</h1>
+    <p>Red flag checker for your love life 💋</p>
+  </header>
+
+  <div class="hero">
+    <img src="istockphoto-889461152-612x612.jpg" alt="Phone Girl">
+    <div class="hero-text">
+      Still analyzing that text?
+      <br/>
+      <a href="/decode">Decode it</a>
+    </div>
+  </div>
+
+  <div class="blog-preview">
+    <div class="blog-card">
+      <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f" alt="Notebook">
+      <h3>Why We Miss Green Flags</h3>
+      <p>When you're on red flag alert, you might miss the quiet signs of real safety. Here's why green flags matter just as much.</p>
+    </div>
+    <div class="blog-card">
+      <img src="https://images.unsplash.com/photo-1535051823243-d8cf5d1e3c84" alt="Heart notebook">
+      <h3>Am I Being Love Bombed?</h3>
+      <p>They came on fast, made you feel amazing... and now you’re unsure. Learn the real signs of love bombing and what to do next.</p>
+    </div>
+    <div class="blog-card">
+      <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c" alt="Writing pad">
+      <h3>Your Gut vs. Gaslighting</h3>
+      <p>If you're doubting yourself in a relationship, this one’s for you. Learn how to tell instinct from emotional manipulation.</p>
+    </div>
+  </div>
+
+  <div class="decode-section">
+    <h2>💬 Want it decoded?</h2>
+    <p>We’ll break down their message for tone, red flags, and intent. Submit a text and get the clarity you deserve.</p>
+    <a href="/decode">Try the Decode Tool</a>
+  </div>
+</body>
+</html>
