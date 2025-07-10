@@ -22,39 +22,49 @@
       width: 100%;
       max-height: 500px;
       object-fit: cover;
-      border-bottom-left-radius: 2rem;
-      border-bottom-right-radius: 2rem;
       display: block;
     }
-    .section {
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 3rem 2rem;
+      background: #fff5fa;
+    }
+    .cta-box {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 2rem;
+      max-width: 400px;
+      flex: 1 1 300px;
       text-align: center;
-      padding: 2.5rem 2rem;
     }
-    .section h2 {
+    .cta-box h2 {
       color: #cc0044;
+      margin-bottom: 0.8rem;
     }
-    .section p {
-      max-width: 600px;
-      margin: 0 auto 1rem;
+    .cta-box p {
       font-size: 1rem;
-      line-height: 1.5;
+      line-height: 1.4;
+      margin-bottom: 1rem;
     }
-    .section a {
+    .cta-box a {
       display: inline-block;
       background: #cc0044;
       color: white;
       padding: 0.75rem 1.5rem;
-      border-radius: 1rem;
+      border-radius: 1.5rem;
       text-decoration: none;
       font-weight: bold;
-      margin-top: 1rem;
     }
     .blog-preview {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1rem;
-      padding: 3rem 2rem 4rem;
+      gap: 1.5rem;
+      padding: 3rem 2rem;
     }
     .blog-card {
       background: white;
@@ -83,24 +93,25 @@
 <body>
   <header>
     <h1>SEEN & RED</h1>
-    <p>Red flag checker for your love life 💋</p>
+    <p>Emotional clarity for the modern dater.</p>
   </header>
 
   <div class="hero">
     <img src="https://images.unsplash.com/photo-1603201667565-4be8612b45d5?auto=format&fit=crop&w=1600&q=80" alt="Woman on couch with phone">
   </div>
 
-  <section class="section">
-    <h2>Take the Free Clarity Quiz</h2>
-    <p>Not sure what's up but something feels off? Take our quiz to get a personalized Clarity Report. Start the quiz now.</p>
-    <a href="https://seenandred.com/#form">Next →</a>
-  </section>
-
-  <section class="section" style="background: #ffe3ef;">
-    <h2>💬 Want it decoded?</h2>
-    <p>We’ll break down their message for tone, red flags, and intent. Submit a text and get the clarity you deserve.</p>
-    <a href="/decode">Try the Decode Tool</a>
-  </section>
+  <div class="cta-row">
+    <div class="cta-box">
+      <h2>Take the Free Clarity Quiz</h2>
+      <p>Not sure what’s up but something feels off? Take our quiz to get a personalized Clarity Report.</p>
+      <a href="https://seenandred.com/#form">Start Quiz</a>
+    </div>
+    <div class="cta-box">
+      <h2>Try the Message Decode</h2>
+      <p>We’ll break down their message for tone, red flags, and intent. Submit a text and get the clarity you deserve.</p>
+      <a href="/decode">Try Decode Tool</a>
+    </div>
+  </div>
 
   <div class="blog-preview">
     <div class="blog-card">
