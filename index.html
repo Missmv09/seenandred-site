@@ -1,45 +1,80 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Message Decode Tool</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SEEN & RED</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Cinzel:wght@500&display=swap" rel="stylesheet">
   <style>
-    body { background: #fff0f6; font-family: Arial, sans-serif; padding: 2rem; color: #333; }
-    h1 { color: #cc0044; }
-    .option { margin-bottom: 1rem; }
-    a { color: #cc0044; font-weight: bold; text-decoration: none; }
-    form { margin-top: 2rem; }
-    label { display: block; margin-bottom: 1rem; }
-    input, textarea, button {
-      width: 100%;
-      max-width: 500px;
-      padding: 0.5rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+    body {
+      font-family: 'Playfair Display', serif;
+      background-color: #fff0f6;
+      margin: 0;
+      padding: 0;
     }
-    button {
+    header {
       background-color: #cc0044;
       color: white;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
+      text-align: center;
+      padding: 1.5rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    .hero img {
+      width: 100%;
+      max-height: 600px;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 2rem;
+      gap: 2rem;
+    }
+    .cta-box {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 2rem;
+      text-align: center;
+      max-width: 400px;
+      flex: 1 1 300px;
+    }
+    .cta-box a {
+      display: inline-block;
+      background: #cc0044;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 2rem;
       margin-top: 1rem;
     }
   </style>
 </head>
 <body>
-  <h1>Message Decode Tool</h1>
-  <p>Already paid? Head straight to the bottom and fill out the fields. We'll match your email to your tier automatically and decode whether it’s red, green, or blended.</p>
-
-  <div class="option"><strong>Flag Check — $9</strong><br>Get red flag analysis on up to 3 messages.<br><a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b">Buy Now</a></div>
-  <div class="option"><strong>Pattern Check — $19</strong><br>Decode tone, patterns, and red flags (up to 6 messages).<br><a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a">Buy Now</a></div>
-  <div class="option"><strong>Reality Check — $29</strong><br>Unlimited messages, deeper context, and full vibe read.<br><a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03">Buy Now</a></div>
-
-  <form>
-    <label>Email used at checkout:<br><input type="email" name="email" required></label>
-    <label>Paste a message:<br><textarea name="message" rows="4" required></textarea></label>
-    <label>Upload screenshot (optional):<br><input type="file" name="screenshot"></label>
-    <button type="submit">Submit</button>
-  </form>
+  <header>
+    <h1>SEEN & RED</h1>
+    <p>Emotional clarity for the modern dater.</p>
+  </header>
+  <div class="hero">
+    <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1600&q=80" alt="Hero Image"/>
+  </div>
+  <div class="cta-row">
+    <div class="cta-box">
+      <h2>Take the Free Clarity Quiz</h2>
+      <p>Something feels off? Take our quiz and get your personalized Clarity Report.</p>
+      <a href="/clarity/">Start the Quiz</a>
+    </div>
+    <div class="cta-box">
+      <h2>Try the Decode Tool</h2>
+      <p>Upload their message and we’ll tell you if it’s red, green, or a messy blend.</p>
+      <a href="/decode/">Decode Now</a>
+    </div>
+  </div>
 </body>
 </html>
