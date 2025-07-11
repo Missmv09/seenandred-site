@@ -2,45 +2,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Message Decode</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Decode Tool</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <section class="decode-hero">
-        <h1>Upload Their Message to Get the Clarity You Deserve</h1>
-        <p>Just pick your Decode level, upload a screenshot or paste a message, and we’ll handle the rest — receipts included.</p>
-        <div class="tiers">
-            <div class="tier-card">
-                <h2>Flag Check — $9 <a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b">Buy Now</a></h2>
-                <small>Get red flag analysis on up to 3 messages.</small>
-            </div>
-            <div class="tier-card">
-                <h2>Pattern Check — $19 <a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a">Buy Now</a></h2>
-                <small>Check for tone, patterns, and red flags (6 messages).</small>
-            </div>
-            <div class="tier-card">
-                <h2>Reality Check — $29 <a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03">Buy Now</a></h2>
-                <small>Unlimited messages, deeper context, and full vibe read.</small>
-            </div>
-        </div>
-        <form>
-            <label>Email used for Stripe</label>
-            <input type="email" placeholder="you@example.com">
-            <label>Select Tier</label>
-            <select>
-                <option value="">-- Choose --</option>
-                <option value="flag">Flag Check</option>
-                <option value="pattern">Pattern Check</option>
-                <option value="reality">Reality Check</option>
-            </select>
-            <label>Paste a message instead (optional)</label>
-            <textarea placeholder="Paste a message here..."></textarea>
-            <label>Upload Screenshot</label>
-            <input type="file">
-            <button type="submit">Submit for Decode</button>
-        </form>
-        <p><strong>Already paid?</strong> Just complete the form above. We'll match it by email.</p>
-    </section>
+  <header><h1>Message Decode Tool</h1></header>
+  <p class="note">Already paid? No worries — just complete the form below. We’ll match your email.</p>
+
+  <section class="decode-options">
+    <div class="tier">
+      <h2>Flag Check — $9</h2>
+      <p><small>Get red flag analysis on up to 3 messages.</small></p>
+      <a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b">Buy Now</a>
+    </div>
+    <div class="tier">
+      <h2>Pattern Check — $19</h2>
+      <p><small>Decode tone, patterns, and red flags (up to 6 messages).</small></p>
+      <a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a">Buy Now</a>
+    </div>
+    <div class="tier">
+      <h2>Reality Check — $29</h2>
+      <p><small>Unlimited messages, deeper context, and full vibe read.</small></p>
+      <a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03">Buy Now</a>
+    </div>
+  </section>
+
+  <form class="decode-form">
+    <label>Email used at checkout:</label>
+    <input type="email" name="email" required />
+
+    <label>Paste a message (optional):</label>
+    <textarea name="message" rows="5" placeholder="Paste a message here..."></textarea>
+
+    <label>Upload screenshot (optional):</label>
+    <input type="file" name="screenshot" accept="image/*" />
+
+    <button type="submit">Submit</button>
+  </form>
 </body>
 </html>
