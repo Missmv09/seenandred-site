@@ -3,10 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Message Decode</title>
+  <title>Message Decode Tool</title>
 </head>
-<body style="background-color: #fff4f5; font-family: Arial, sans-serif; color: #1c1c1c;">
-  <h1>Message Decode Page</h1>
-  <p>This is where the Decode Tool will go.</p>
+<body style="font-family: Arial, sans-serif; background-color: #fff0f6; padding: 2rem;">
+  <h1 style="color:#cc0044;">Message Decode Tool</h1>
+  <p>Drop your message (or upload a screenshot) and we’ll break it all the way down.</p>
+
+  <label>Have you already purchased a decode tier?</label>
+  <select style="width:100%;">
+    <option>No, I’m new</option>
+    <option>Yes, I already purchased</option>
+  </select>
+
+  <br/><br/>
+  <label>Choose your Decode Tier</label>
+  <select style="width:100%;">
+    <option>⚠️ Flag Check — $3 (1 message)</option>
+    <option>🔍 Pattern Check — $9 (3 messages)</option>
+    <option>👀 Reality Check — $19 (6 messages)</option>
+  </select>
+  <a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b">Go to Stripe to purchase</a>
+
+  <br/><br/>
+  <label>Drop the message here:</label><br/>
+  <textarea placeholder="Paste the message you want decoded..." style="width:100%; height:200px;"></textarea>
+
+  <br/><br/>
+  <label>Upload a screenshot (optional):</label><br/>
+  <input type="file" />
+
+  <br/><br/>
+  <label>Your email (to receive the decode):</label><br/>
+  <input type="email" placeholder="your@email.com" style="width:100%;" />
+
+  <br/><br/>
+  <button style="width:100%; background:#cc0044; color:white; padding:1rem;">Submit for Decode</button>
 </body>
 </html>
