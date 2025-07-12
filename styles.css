@@ -1,3 +1,15 @@
-body { font-family: Arial, sans-serif; padding: 40px; background-color: #fff3f5; color: #2d2d2d; }
-a { color: #c62828; text-decoration: none; font-weight: bold; }
-a:hover { text-decoration: underline; }
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fceef1;
+  color: #1a1a1a;
+  padding: 20px;
+}
+a {
+  color: #c0392b;
+  font-weight: bold;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
