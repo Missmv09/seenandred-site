@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - Seen and Red</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-red: #dc2626;
+            --dark-red: #991b1b;
+            --light-red: #fee2e2;
+            --dark-gray: #1f2937;
+            --medium-gray: #6b7280;
+            --light-gray: #f9fafb;
+            --white: #ffffff;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background: var(--white);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-red);
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--primary-red);
+        }
+        
+        /* Main Content */
+        main {
+            padding: 8rem 0 4rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-gray);
+            text-align: center;
+        }
+        
+        .last-updated {
+            text-align: center;
+            color: var(--medium-gray);
+            margin-bottom: 3rem;
+        }
+        
+        .content {
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        .content h2 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            color: var(--primary-red);
+        }
+        
+        .content h3 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 0.5rem;
+            color: var(--dark-gray);
+        }
+        
+        .content p {
+            margin-bottom: 1rem;
+        }
+        
+        .content ul {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+        
+        .content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .important-notice {
+            background: var(--light-red);
+            border-left: 4px solid var(--primary-red);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .contact-info {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        .contact-info h3 {
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--light-gray);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-links a {
+            color: var(--medium-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-red);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">Seen and Red</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#decode">DECODE</a></li>
+                    <li><a href="gifts.html">Gifts</a></li>
+                    <li><a href="index.html#newsletter">Newsletter</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Terms of Service</h1>
+            <p class="last-updated">Last Updated: January 2025</p>
+
+            <div class="content">
+                <p>Welcome to Seen and Red. These Terms of Service ("Terms") govern your use of our website and services. By using our services, you agree to these Terms.</p>
+
+                <div class="important-notice">
+                    <strong>Important:</strong> Our services are for educational and entertainment purposes only. We are not licensed therapists or medical professionals. Always seek professional help for serious relationship or mental health concerns.
+                </div>
+
+                <h2>1. Services Description</h2>
+                <p>Seen and Red provides AI-powered message analysis services to help users identify communication patterns in their relationships. Our services include:</p>
+                <ul>
+                    <li>Message screenshot analysis for red and green flags</li>
+                    <li>Communication pattern identification</li>
+                    <li>Educational content about healthy relationships</li>
+                    <li>Newsletter with relationship insights</li>
+                </ul>
+
+                <h2>2. Acceptance of Terms</h2>
+                <p>By accessing or using our services, you:</p>
+                <ul>
+                    <li>Agree to be bound by these Terms</li>
+                    <li>Confirm you are at least 18 years old</li>
+                    <li>Have the authority to enter into this agreement</li>
+                    <li>Will comply with all applicable laws</li>
+                </ul>
+
+                <h2>3. User Obligations</h2>
+                <p>When using our services, you agree to:</p>
+                <ul>
+                    <li>Provide accurate information</li>
+                    <li>Use services only for lawful purposes</li>
+                    <li>Respect others' privacy and consent</li>
+                    <li>Not submit content that violates laws or rights</li>
+                    <li>Not attempt to hack or disrupt our services</li>
+                </ul>
+
+                <h2>4. Content Submission</h2>
+                <p>When you submit messages or screenshots:</p>
+                <ul>
+                    <li>You confirm you have the right to share this content</li>
+                    <li>You understand we may use it to provide our services</li>
+                    <li>You retain ownership of your content</li>
+                    <li>We may retain content for service improvement</li>
+                    <li>We will not share your content with third parties</li>
+                </ul>
+
+                <h2>5. Payment Terms</h2>
+                <p>For paid services:</p>
+                <ul>
+                    <li>All payments are processed securely through Stripe</li>
+                    <li>Prices are listed in USD and subject to change</li>
+                    <li>Payment is due immediately upon purchase</li>
+                    <li>Subscription services auto-renew unless cancelled</li>
+                    <li>You can cancel subscriptions at any time</li>
+                </ul>
+
+                <h2>6. Refund Policy</h2>
+                <p>We offer refunds under the following conditions:</p>
+                <ul>
+                    <li>Technical issues preventing service delivery</li>
+                    <li>Duplicate charges or billing errors</li>
+                    <li>Service not delivered within 48 hours</li>
+                    <li>Refund requests must be made within 7 days</li>
+                    <li>Refunds are processed through original payment method</li>
+                </ul>
+
+                <h2>7. Disclaimers and Limitations</h2>
+                
+                <h3>Service Disclaimers</h3>
+                <ul>
+                    <li>Our analysis is based on AI interpretation and may not be accurate</li>
+                    <li>Results are for educational purposes only</li>
+                    <li>We do not provide medical, legal, or professional advice</li>
+                    <li>Individual results may vary</li>
+                </ul>
+
+                <h3>Limitation of Liability</h3>
+                <p>To the maximum extent permitted by law:</p>
+                <ul>
+                    <li>Our liability is limited to the amount you paid for services</li>
+                    <li>We are not liable for indirect or consequential damages</li>
+                    <li>We do not guarantee specific outcomes</li>
+                    <li>You use our services at your own risk</li>
+                </ul>
+
+                <h2>8. Intellectual Property</h2>
+                <p>Our services contain proprietary content:</p>
+                <ul>
+                    <li>All website content is our intellectual property</li>
+                    <li>You may not copy, distribute, or modify our content</li>
+                    <li>Our trademarks and logos are protected</li>
+                    <li>You grant us license to use submitted content for service delivery</li>
+                </ul>
+
+                <h2>9. Privacy and Data</h2>
+                <p>Your privacy is important to us:</p>
+                <ul>
+                    <li>See our Privacy Policy for detailed information</li>
+                    <li>We implement security measures to protect your data</li>
+                    <li>We may use anonymized data for service improvement</li>
+                    <li>You can request deletion of your data</li>
+                </ul>
+
+                <h2>10. Prohibited Activities</h2>
+                <p>You may not:</p>
+                <ul>
+                    <li>Use our services for illegal activities</li>
+                    <li>Submit content without proper consent</li>
+                    <li>Attempt to reverse engineer our technology</li>
+                    <li>Create fake accounts or misrepresent identity</li>
+                    <li>Spam or harass other users</li>
+                    <li>Violate any applicable laws or regulations</li>
+                </ul>
+
+                <h2>11. Termination</h2>
+                <p>We may terminate or suspend your access:</p>
+                <ul>
+                    <li>For violation of these Terms</li>
+                    <li>For fraudulent or illegal activity</li>
+                    <li>For abusive behavior</li>
+                    <li>At our discretion with notice</li>
+                </ul>
+
+                <h2>12. California Law</h2>
+                <p>These Terms are governed by California law:</p>
+                <ul>
+                    <li>Disputes will be resolved in California courts</li>
+                    <li>California consumer protection laws apply</li>
+                    <li>You have rights under California privacy laws</li>
+                </ul>
+
+                <h2>13. Changes to Terms</h2>
+                <p>We may update these Terms:</p>
+                <ul>
+                    <li>Changes will be posted on this page</li>
+                    <li>We will notify users of significant changes</li>
+                    <li>Continued use constitutes acceptance</li>
+                    <li>You should review Terms periodically</li>
+                </ul>
+
+                <h2>14. Severability</h2>
+                <p>If any provision of these Terms is found invalid, the remaining provisions will continue in effect.</p>
+
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p>Questions about these Terms? Contact us:</p>
+                    <ul>
+                        <li><strong>Email:</strong> support@seenandred.com</li>
+                        <li><strong>Address:</strong> Seen and Red, San Francisco, CA</li>
+                    </ul>
+                    <p>For all inquiries: support@seenandred.com</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p>&copy; 2025 Seen and Red. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
