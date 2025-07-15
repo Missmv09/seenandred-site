@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gifts - Seen and Red</title>
+    <meta name="description" content="Give the gift of clarity. Help someone you care about decode confusing messages and recognize relationship patterns.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-red: #dc2626;
+            --dark-red: #991b1b;
+            --light-red: #fee2e2;
+            --dark-gray: #1f2937;
+            --medium-gray: #6b7280;
+            --light-gray: #f9fafb;
+            --white: #ffffff;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background: var(--white);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-red);
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--primary-red);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--light-red) 0%, var(--white) 100%);
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--dark-gray);
+        }
+        
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--medium-gray);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Gift Section */
+        .gifts-section {
+            padding: 4rem 0;
+            background: var(--light-gray);
+        }
+        
+        .gifts-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-gray);
+        }
+        
+        .gifts-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--medium-gray);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid #fbbf24;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+        
+        .pricing-card.featured {
+            border: 2px solid var(--primary-red);
+            transform: scale(1.05);
+        }
+        
+        .gift-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fbbf24;
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .pricing-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-gray);
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+        }
+        
+        .price-period {
+            color: var(--medium-gray);
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .pricing-features li:before {
+            content: "🎁";
+            position: absolute;
+            left: 0;
+        }
+        
+        .gift-button {
+            width: 100%;
+            padding: 1rem;
+            background: #fbbf24;
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .gift-button:hover {
+            background: #f59e0b;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--light-gray);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-links a {
+            color: var(--medium-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-red);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">Seen and Red</a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#decode">DECODE</a></li>
+                        <li><a href="gifts.html">Gifts</a></li>
+                        <li><a href="index.html#newsletter">Newsletter</a></li>
+                        <li><a href="about.html">About</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Give the Gift of Clarity 🎁</h1>
+                <p class="subtitle">Help someone you care about break free from confusing relationships. Perfect for friends who keep asking "What do you think this text means?"</p>
+            </div>
+        </section>
+
+        <section class="gifts-section">
+            <div class="container">
+                <h2>Gift Packages for Your Bestie</h2>
+                <p class="gifts-subtitle">Each gift comes with instructions for your recipient to upload their messages and get instant AI-powered analysis. No awkward conversations required!</p>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="gift-badge">Perfect Gift 🎁</div>
+                        <div class="pricing-header">
+                            <h3>Flag Check for Bestie</h3>
+                            <div class="price">$9</div>
+                            <p class="price-period">Gift Package</p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>3 Message Screenshot Analyses</li>
+                            <li>Instant AI-Powered Results</li>
+                            <li>Red & Green Flag Identification</li>
+                            <li>Gift Message Included</li>
+                            <li>Easy Instructions for Recipient</li>
+                            <li>Anonymous if Preferred</li>
+                        </ul>
+                        <button class="gift-button">Give Flag Check</button>
+                    </div>
+                    
+                    <div class="pricing-card featured">
+                        <div class="featured-badge">Most Popular Gift</div>
+                        <div class="pricing-header">
+                            <h3>Pattern Break for Bestie</h3>
+                            <div class="price">$19</div>
+                            <p class="price-period">Gift Package</p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>6 Message Screenshot Analyses</li>
+                            <li>Deep Pattern Recognition</li>
+                            <li>Inner Child Trauma Insights</li>
+                            <li>Relationship Dynamic Analysis</li>
+                            <li>Custom Response Suggestions</li>
+                            <li>Gift Message & Instructions</li>
+                        </ul>
+                        <button class="gift-button">Give Pattern Break</button>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <div class="gift-badge">Ultimate Gift 🎁</div>
+                        <div class="pricing-header">
+                            <h3>Reality Check for Bestie</h3>
+                            <div class="price">$29</div>
+                            <p class="price-period">30-Day Gift</p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>30 Days of Unlimited Analysis</li>
+                            <li>24/7 Instant Message Insights</li>
+                            <li>Voice Message Analysis Too</li>
+                            <li>Weekly Pattern Summaries</li>
+                            <li>Complete Relationship Clarity</li>
+                            <li>Perfect for Serial Daters</li>
+                        </ul>
+                        <button class="gift-button">Give Reality Check</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <p>&copy; 2025 Seen and Red. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Stripe JavaScript -->
+    <script src="https://js.stripe.com/v3/"></script>
+    
+    <script>
+        // Initialize Stripe with your live publishable key
+        const stripe = Stripe('pk_live_51RZivyBswfKYIWydMXftAVBhmu8t9pYMkSEhO16LrE27k24Bxav8jfw6HJ7CamOa9XGgzoJA7myreDKTGnBtEeuF00C7Kvuao7');
+        
+        // Gift product configurations with your actual Stripe Price IDs
+        const giftProducts = {
+            'flag-check-gift': {
+                priceId: 'price_1RcET3BswfKYIWydo6MDf7Ig',
+                name: 'Flag Check for Bestie',
+                amount: 900 // $9.00 in cents
+            },
+            'pattern-break-gift': {
+                priceId: 'price_1RcETeBswfKYIWydECUruy6S', 
+                name: 'Pattern Break for Bestie',
+                amount: 1900 // $19.00 in cents
+            },
+            'reality-check-gift': {
+                priceId: 'price_1RcEUfBswfKYIWyd3rgmjWmk',
+                name: 'Reality Check for Bestie',
+                amount: 2900 // $29.00 in cents
+            }
+        };
+
+        // Function to redirect to Stripe Checkout for gifts
+        async function redirectToGiftCheckout(productKey) {
+            const product = giftProducts[productKey];
+            
+            if (!product) {
+                console.error('Gift product not found:', productKey);
+                return;
+            }
+
+            try {
+                const { error } = await stripe.redirectToCheckout({
+                    lineItems: [{
+                        price: product.priceId,
+                        quantity: 1,
+                    }],
+                    mode: productKey === 'reality-check-gift' ? 'subscription' : 'payment',
+                    successUrl: 'https://seenandred.com/success.html?product=' + productKey + '&gift=true',
+                    cancelUrl: 'https://seenandred.com/cancel.html',
+                    allow_promotion_codes: true,
+                });
+
+                if (error) {
+                    console.error('Stripe error:', error);
+                    alert('There was an error processing your payment. Please try again.');
+                }
+            } catch (err) {
+                console.error('Checkout error:', err);
+                alert('There was an error processing your payment. Please try again.');
+            }
+        }
+
+        // Add click handlers to all gift buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const giftButtons = document.querySelectorAll('.gift-button');
+            giftButtons.forEach((button, index) => {
+                const productKeys = ['flag-check-gift', 'pattern-break-gift', 'reality-check-gift'];
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Add loading state
+                    button.textContent = 'Processing Gift...';
+                    button.disabled = true;
+                    
+                    redirectToGiftCheckout(productKeys[index]).finally(() => {
+                        // Reset button state
+                        button.disabled = false;
+                        const originalTexts = ['Give Flag Check', 'Give Pattern Break', 'Give Reality Check'];
+                        button.textContent = originalTexts[index];
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
