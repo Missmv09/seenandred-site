@@ -586,23 +586,23 @@
     <script src="https://js.stripe.com/v3/"></script>
     
     <script>
-        // Initialize Stripe (you'll replace 'pk_test_...' with your actual publishable key)
-        const stripe = Stripe('pk_test_YOUR_PUBLISHABLE_KEY_HERE');
+        // Initialize Stripe with your live publishable key
+        const stripe = Stripe('pk_live_51RZivyBswfKYIWydMXftAVBhmu8t9pYMkSEhO16LrE27k24Bxav8jfw6HJ7CamOa9XGgzoJA7myreDKTGnBtEeuF00C7Kvuao7');
         
-        // Product configurations with Stripe Price IDs
+        // Product configurations with your actual Stripe Price IDs
         const products = {
             'decode-3-messages': {
-                priceId: 'price_YOUR_3_MESSAGE_PRICE_ID',
+                priceId: 'price_1RcE7WBswfKYIWydbbdngw7s',
                 name: '3 Message Decode',
                 amount: 900 // $9.00 in cents
             },
             'decode-6-messages': {
-                priceId: 'price_YOUR_6_MESSAGE_PRICE_ID', 
+                priceId: 'price_1RcEAHBswfKYIWydIFclAfcO', 
                 name: '6 Message Decode',
                 amount: 1900 // $19.00 in cents
             },
             'decode-unlimited': {
-                priceId: 'price_YOUR_UNLIMITED_PRICE_ID',
+                priceId: 'price_1RcDwABswfKYIWydovKfkgv5',
                 name: 'Unlimited Decode',
                 amount: 2900 // $29.00 in cents
             }
