@@ -699,9 +699,9 @@
                 <h2>Weekly Bestie Wisdom</h2>
                 <p>No spam. No therapy speak. Just weekly bestie wisdom for dodging red flags, healing your patterns, and finally seeing sh*t for what it is. 💌 Delivered straight to your inbox — because receipts don't lie.</p>
                 
-                <!-- Newsletter Form with Success Message -->
+                <!-- Newsletter Form with Hidden Iframe -->
                 <div class="newsletter-form-container">
-                    <form class="newsletter-form" id="newsletter-form" action="https://assets.mailerlite.com/jsonp/1594871/forms/160002022910723398/subscribe" method="post">
+                    <form class="newsletter-form" id="newsletter-form" action="https://assets.mailerlite.com/jsonp/1594871/forms/160002022910723398/subscribe" method="post" target="hidden-iframe">
                         <input type="email" name="fields[email]" placeholder="Your email address" required>
                         <input type="hidden" name="ml-submit" value="1">
                         <input type="hidden" name="anticsrf" value="true">
@@ -713,6 +713,9 @@
                         <p style="color: #1f2937; margin: 0;">Thanks for subscribing! Check your inbox for weekly bestie wisdom.</p>
                     </div>
                 </div>
+                
+                <!-- Hidden iframe to capture form submission -->
+                <iframe name="hidden-iframe" id="hidden-iframe" style="display: none;"></iframe>
             </div>
         </section>
 
@@ -749,44 +752,29 @@
                 });
             });
 
-            // Newsletter form submission with AJAX
+            // Newsletter form submission with hidden iframe
             const newsletterForm = document.getElementById('newsletter-form');
             if (newsletterForm) {
                 newsletterForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
                     const email = this.querySelector('input[type="email"]').value;
                     const button = this.querySelector('button[type="submit"]');
                     
-                    if (!email) return;
+                    if (!email) {
+                        e.preventDefault();
+                        return;
+                    }
                     
                     // Show loading state
                     button.textContent = 'Subscribing...';
                     button.disabled = true;
                     
-                    // Submit to MailerLite
-                    const formData = new FormData(this);
+                    // Show success message after a short delay
+                    setTimeout(() => {
+                        document.getElementById('newsletter-success').style.display = 'block';
+                        this.style.display = 'none';
+                    }, 1000);
                     
-                    fetch(this.action, {
-                        method: 'POST',
-                        body: formData,
-                        mode: 'no-cors'
-                    })
-                    .then(() => {
-                        // Show success message
-                        document.getElementById('newsletter-success').style.display = 'block';
-                        this.style.display = 'none';
-                    })
-                    .catch(() => {
-                        // Fallback: show success anyway since we can't read the response
-                        document.getElementById('newsletter-success').style.display = 'block';
-                        this.style.display = 'none';
-                    })
-                    .finally(() => {
-                        // Reset button
-                        button.textContent = 'Subscribe';
-                        button.disabled = false;
-                    });
+                    // Form will submit to hidden iframe automatically
                 });
             }
         });
