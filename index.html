@@ -113,6 +113,123 @@
             background: var(--dark-red);
         }
         
+        .secondary-cta {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+        }
+        
+        .secondary-cta a:hover {
+            color: var(--primary-red);
+        }
+        
+        /* DECODE Section */
+        .decode-section {
+            padding: 4rem 0;
+            background: var(--light-gray);
+        }
+        
+        .decode-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark-gray);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+        
+        .pricing-card.featured {
+            border: 2px solid var(--primary-red);
+            transform: scale(1.05);
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .pricing-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-gray);
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+        }
+        
+        .price-period {
+            color: var(--medium-gray);
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .pricing-features li:before {
+            content: "✓";
+            color: var(--primary-red);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .pricing-button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary-red);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .pricing-button:hover {
+            background: var(--dark-red);
+        }
+        
         /* Feature Cards */
         .features {
             padding: 4rem 0;
@@ -209,6 +326,60 @@
             background: var(--dark-red);
         }
         
+        /* About Section */
+        .about-section {
+            padding: 4rem 0;
+            background: var(--light-gray);
+        }
+        
+        .about-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--dark-gray);
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .about-content p {
+            margin-bottom: 1.5rem;
+            color: var(--dark-gray);
+            font-size: 1.1rem;
+        }
+        
+        .disclaimer {
+            background: var(--white);
+            border: 2px solid var(--primary-red);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .disclaimer h3 {
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        .disclaimer p {
+            margin-bottom: 1rem;
+            color: var(--dark-gray);
+        }
+        
+        .disclaimer ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            color: var(--dark-gray);
+        }
+        
+        .disclaimer li {
+            margin-bottom: 0.5rem;
+        }
+        
         /* Footer */
         footer {
             background: var(--light-gray);
@@ -278,7 +449,7 @@
                 <nav>
                     <ul>
                         <li><a href="#home">Home</a></li>
-                        <li><a href="#features">Learn</a></li>
+                        <li><a href="#decode">DECODE</a></li>
                         <li><a href="#newsletter">Newsletter</a></li>
                         <li><a href="#about">About</a></li>
                     </ul>
@@ -290,31 +461,95 @@
     <main>
         <section id="home" class="hero">
             <div class="container">
-                <h1>Why We Miss Green Flags</h1>
-                <p class="subtitle">Sometimes your nervous system is wired for chaos, not clarity. Here's how to rewire your pattern recognition—and stop confusing adrenaline for affection.</p>
-                <a href="#quiz" class="cta-button">Take Your Free Red Flag Quiz</a>
+                <h1>Can't Tell if It's Love or Manipulation?</h1>
+                <p class="subtitle">Your inner child wounds might be making you miss green flags... or ignore red ones. Get instant clarity on what those messages really mean and break the pattern of confusion.</p>
+                <a href="#decode" class="cta-button">Get Clear on My Messages</a>
+                <p class="secondary-cta">or <a href="#quiz" style="color: var(--medium-gray); text-decoration: underline; font-weight: normal;">take our free clarity quiz</a></p>
+            </div>
+        </section>
+
+        <section id="decode" class="decode-section">
+            <div class="container">
+                <h2>Choose Your DECODE Package</h2>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>3 Message Decode</h3>
+                            <div class="price">$9</div>
+                            <p class="price-period">One-time</p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>Upload 3 Message Screenshots</li>
+                            <li>Add Context & Background Info</li>
+                            <li>Instant AI-Powered Analysis</li>
+                            <li>Red & Green Flag Identification</li>
+                            <li>Pattern Recognition Insights</li>
+                            <li>Clear Action Recommendations</li>
+                        </ul>
+                        <button class="pricing-button">Upload & Analyze Now</button>
+                    </div>
+                    
+                    <div class="pricing-card featured">
+                        <div class="featured-badge">Most Popular</div>
+                        <div class="pricing-header">
+                            <h3>6 Message Decode</h3>
+                            <div class="price">$19</div>
+                            <p class="price-period">One-time</p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>Upload 6 Message Screenshots</li>
+                            <li>Detailed Context Form</li>
+                            <li>Instant Pattern Recognition</li>
+                            <li>Red & Green Flag Analysis</li>
+                            <li>Inner Child Trauma Patterns</li>
+                            <li>Relationship Dynamic Insights</li>
+                            <li>Custom Response Suggestions</li>
+                        </ul>
+                        <button class="pricing-button">Upload & Get Insights</button>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Unlimited Decode</h3>
+                            <div class="price">$29</div>
+                            <p class="price-period">Monthly</p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>Upload Unlimited Screenshots</li>
+                            <li>Voice Messages & Texts</li>
+                            <li>24/7 Instant Analysis Portal</li>
+                            <li>Complete Pattern Tracking</li>
+                            <li>Inner Child Healing Insights</li>
+                            <li>Green & Red Flag Recognition</li>
+                            <li>Weekly Pattern Summary</li>
+                            <li>Cancel Anytime</li>
+                        </ul>
+                        <button class="pricing-button">Get Unlimited Access</button>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="features" class="features">
             <div class="container">
-                <h2>Decode the Patterns</h2>
+                <h2>Break the Pattern</h2>
                 <div class="feature-grid">
                     <div class="feature-card">
-                        <h3>Nice vs. Respectful</h3>
-                        <p>He's nice, but is he respectful? Learn how to spot the difference between passive politeness and genuine emotional maturity.</p>
+                        <h3>Missing Green Flags</h3>
+                        <p>Your trauma response might be making you reject genuine love. Learn to recognize when someone is actually showing up for you, even if it feels unfamiliar.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>Too Good to Be True</h3>
-                        <p>If it feels too good to be true, it might be. Learn the difference between genuine excitement and manipulation masked as intensity.</p>
+                        <h3>Ignoring Red Flags</h3>
+                        <p>Past wounds can make manipulation feel like love. Discover how your inner child wounds make you vulnerable to toxic patterns and how to heal them.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>Trust Your Gut</h3>
-                        <p>That pit in your stomach? It's not paranoia. Here's how to tell when your intuition is right — and what to do when it's being dismissed.</p>
+                        <h3>Trust Your Intuition</h3>
+                        <p>That gut feeling isn't paranoia—it's wisdom. Learn to distinguish between trauma responses and genuine intuition about people's intentions.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>Hot and Cold Behavior</h3>
-                        <p>Stop decoding inconsistency. We explain why hot-and-cold behavior is a tactic, not a personality trait.</p>
+                        <h3>Healing Your Patterns</h3>
+                        <p>Understanding why you repeat the same relationship cycles is the first step to breaking them. Get insights into your attachment style and triggers.</p>
                     </div>
                 </div>
             </div>
@@ -328,6 +563,31 @@
                     <input type="email" placeholder="Your email address" required>
                     <button type="submit">Subscribe</button>
                 </form>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>About Seen and Red</h2>
+                <div class="about-content">
+                    <p>We're your AI-powered bestie with a PhD in pattern recognition. Our mission is to help you decode confusing messages, recognize relationship patterns, and trust your intuition.</p>
+                    
+                    <p>Using advanced AI technology, we analyze your conversations to identify red flags, green flags, and the patterns that might be keeping you stuck in confusion.</p>
+                    
+                    <div class="disclaimer">
+                        <h3>Important Disclaimer</h3>
+                        <p><strong>We are not mental health therapists, counselors, or medical professionals.</strong> Our AI-powered analysis is for educational and informational purposes only. The insights provided should not replace professional therapy, medical advice, or crisis intervention.</p>
+                        
+                        <p>If you're experiencing domestic violence, mental health crisis, or need professional therapeutic support, please contact:</p>
+                        <ul>
+                            <li><strong>National Domestic Violence Hotline:</strong> 1-800-799-7233</li>
+                            <li><strong>Crisis Text Line:</strong> Text HOME to 741741</li>
+                            <li><strong>National Suicide Prevention Lifeline:</strong> 988</li>
+                        </ul>
+                        
+                        <p>Our service is designed to complement, not replace, professional mental health care. For serious relationship concerns, trauma processing, or ongoing mental health support, please consult with licensed professionals.</p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -345,7 +605,87 @@
         </div>
     </footer>
 
+    <!-- Stripe JavaScript -->
+    <script src="https://js.stripe.com/v3/"></script>
+    
     <script>
+        // Initialize Stripe (you'll replace 'pk_test_...' with your actual publishable key)
+        const stripe = Stripe('pk_test_YOUR_PUBLISHABLE_KEY_HERE');
+        
+        // Product configurations with Stripe Price IDs
+        const products = {
+            'decode-3-messages': {
+                priceId: 'price_YOUR_3_MESSAGE_PRICE_ID',
+                name: '3 Message Decode',
+                amount: 900 // $9.00 in cents
+            },
+            'decode-6-messages': {
+                priceId: 'price_YOUR_6_MESSAGE_PRICE_ID', 
+                name: '6 Message Decode',
+                amount: 1900 // $19.00 in cents
+            },
+            'decode-unlimited': {
+                priceId: 'price_YOUR_UNLIMITED_PRICE_ID',
+                name: 'Unlimited Decode',
+                amount: 2900 // $29.00 in cents
+            }
+        };
+
+        // Function to redirect to Stripe Checkout
+        async function redirectToCheckout(productKey) {
+            const product = products[productKey];
+            
+            if (!product) {
+                console.error('Product not found:', productKey);
+                return;
+            }
+
+            try {
+                const { error } = await stripe.redirectToCheckout({
+                    lineItems: [{
+                        price: product.priceId,
+                        quantity: 1,
+                    }],
+                    mode: productKey === 'decode-unlimited' ? 'subscription' : 'payment',
+                    successUrl: window.location.origin + '/success.html?product=' + productKey,
+                    cancelUrl: window.location.origin + '/cancel.html',
+                    customerEmail: document.querySelector('.newsletter-form input[type="email"]')?.value || undefined,
+                    allowPromotionCodes: true,
+                });
+
+                if (error) {
+                    console.error('Stripe error:', error);
+                    alert('There was an error processing your payment. Please try again.');
+                }
+            } catch (err) {
+                console.error('Checkout error:', err);
+                alert('There was an error processing your payment. Please try again.');
+            }
+        }
+
+        // Add click handlers to all pricing buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            // DECODE pricing buttons
+            const decodeButtons = document.querySelectorAll('.pricing-button');
+            decodeButtons.forEach((button, index) => {
+                const productKeys = ['decode-3-messages', 'decode-6-messages', 'decode-unlimited'];
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Add loading state
+                    button.textContent = 'Loading...';
+                    button.disabled = true;
+                    
+                    redirectToCheckout(productKeys[index]).finally(() => {
+                        // Reset button state
+                        button.disabled = false;
+                        const originalTexts = ['Upload & Analyze Now', 'Upload & Get Insights', 'Get Unlimited Access'];
+                        button.textContent = originalTexts[index];
+                    });
+                });
+            });
+        });
+
         // Simple smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -369,6 +709,21 @@
                 this.reset();
             }
         });
+
+        // Enhanced form validation
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Add customer email to checkout if newsletter signup exists
+        function getCustomerEmail() {
+            const emailInput = document.querySelector('.newsletter-form input[type="email"]');
+            if (emailInput && emailInput.value && validateEmail(emailInput.value)) {
+                return emailInput.value;
+            }
+            return undefined;
+        }
     </script>
 </body>
 </html>
