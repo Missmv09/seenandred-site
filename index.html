@@ -627,7 +627,6 @@
                     mode: productKey === 'reality-check' ? 'subscription' : 'payment',
                     successUrl: 'https://seenandred.com/success.html?product=' + productKey,
                     cancelUrl: 'https://seenandred.com/cancel.html',
-                    customerEmail: document.querySelector('.newsletter-form input[type="email"]')?.value || undefined,
                 });
 
                 if (error) {
