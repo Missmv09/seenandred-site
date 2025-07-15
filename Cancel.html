@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Cancelled - Seen and Red</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-red: #dc2626;
+            --dark-red: #991b1b;
+            --light-red: #fee2e2;
+            --dark-gray: #1f2937;
+            --medium-gray: #6b7280;
+            --light-gray: #f9fafb;
+            --white: #ffffff;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background: var(--light-gray);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cancel-container {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 2rem;
+        }
+        
+        .cancel-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--medium-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 2rem;
+            color: var(--white);
+        }
+        
+        .cancel-container h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--dark-gray);
+        }
+        
+        .cancel-container p {
+            font-size: 1.1rem;
+            color: var(--medium-gray);
+            margin-bottom: 2rem;
+        }
+        
+        .still-interested {
+            background: var(--light-red);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .still-interested h3 {
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+        }
+        
+        .still-interested p {
+            margin-bottom: 1rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .button {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .button-primary {
+            background: var(--primary-red);
+            color: var(--white);
+        }
+        
+        .button-primary:hover {
+            background: var(--dark-red);
+        }
+        
+        .button-secondary {
+            background: var(--white);
+            color: var(--primary-red);
+            border: 2px solid var(--primary-red);
+        }
+        
+        .button-secondary:hover {
+            background: var(--primary-red);
+            color: var(--white);
+        }
+        
+        .support-note {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+        }
+        
+        @media (max-width: 768px) {
+            .cancel-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cancel-container">
+        <div class="cancel-icon">×</div>
+        <h1>Payment Cancelled</h1>
+        <p>No worries! Your payment was cancelled and no charges were made to your account.</p>
+        
+        <div class="still-interested">
+            <h3>Still interested in leveling up?</h3>
+            <p>We get it – sometimes you need a moment to think it through. Your patterns didn't form overnight, and changing them is a big step.</p>
+            <p>Ready to stop missing red flags and start trusting your gut? We'll be here when you are.</p>
+        </div>
+        
+        <div class="cta-buttons">
+            <a href="index.html#decode" class="button button-primary">Try Again</a>
+            <a href="index.html" class="button button-secondary">Back to Home</a>
+        </div>
+        
+        <div class="support-note">
+            <p>Questions about our programs? <a href="mailto:support@seenandred.com" style="color: var(--primary-red);">Get in touch</a> – we're here to help.</p>
+        </div>
+    </div>
+</body>
+</html>
