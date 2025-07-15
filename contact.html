@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Seen and Red</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-red: #dc2626;
+            --dark-red: #991b1b;
+            --light-red: #fee2e2;
+            --dark-gray: #1f2937;
+            --medium-gray: #6b7280;
+            --light-gray: #f9fafb;
+            --white: #ffffff;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background: var(--white);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-red);
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--primary-red);
+        }
+        
+        /* Main Content */
+        main {
+            padding: 8rem 0 4rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-gray);
+            text-align: center;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: var(--medium-gray);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .contact-card {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+        }
+        
+        .contact-card h3 {
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        .contact-card p {
+            color: var(--medium-gray);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-card a {
+            color: var(--primary-red);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+        
+        .contact-form {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-form h2 {
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .submit-button {
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+        
+        .submit-button:hover {
+            background: var(--dark-red);
+        }
+        
+        .faq-section {
+            margin-top: 3rem;
+        }
+        
+        .faq-section h2 {
+            color: var(--primary-red);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .faq-item {
+            background: var(--white);
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            background: var(--light-gray);
+            padding: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .faq-answer {
+            padding: 1rem;
+            display: none;
+        }
+        
+        .faq-answer.active {
+            display: block;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--light-gray);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-links a {
+            color: var(--medium-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-red);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">Seen and Red</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#decode">DECODE</a></li>
+                    <li><a href="gifts.html">Gifts</a></li>
+                    <li><a href="index.html#newsletter">Newsletter</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p class="subtitle">We're here to help! Reach out with questions, feedback, or support needs.</p>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>💬 General Support</h3>
+                    <p>Questions about our services or need help with your analysis?</p>
+                    <a href="mailto:support@seenandred.com">support@seenandred.com</a>
+                </div>
+
+                <div class="contact-card">
+                    <h3>🔒 Privacy & Legal</h3>
+                    <p>Privacy concerns, data requests, or legal inquiries?</p>
+                    <a href="mailto:support@seenandred.com">support@seenandred.com</a>
+                </div>
+
+                <div class="contact-card">
+                    <h3>💡 Feedback & Ideas</h3>
+                    <p>Love our service? Have suggestions? We want to hear from you!</p>
+                    <a href="mailto:support@seenandred.com">support@seenandred.com</a>
+                </div>
+
+                <div class="contact-card">
+                    <h3>🎁 Partnerships</h3>
+                    <p>Interested in collaborating or partnerships?</p>
+                    <a href="mailto:support@seenandred.com">support@seenandred.com</a>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h2>Send Us a Message</h2>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Please select...</option>
+                            <option value="support">General Support</option>
+                            <option value="technical">Technical Issue</option>
+                            <option value="billing">Billing Question</option>
+                            <option value="feedback">Feedback</option>
+                            <option value="partnership">Partnership Inquiry</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" placeholder="Tell us how we can help..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-button">Send Message</button>
+                </form>
+            </div>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">How quickly will I receive my analysis?</div>
+                    <div class="faq-answer">Most analyses are delivered within 24 hours. During peak times, it may take up to 48 hours.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Is my information private and secure?</div>
+                    <div class="faq-answer">Absolutely. We never share your messages or personal information. All data is encrypted and stored securely.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Can I get a refund if I'm not satisfied?</div>
+                    <div class="faq-answer">Yes! We offer refunds within 7 days if there are technical issues or the service wasn't delivered as promised.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">How do I submit messages for analysis?</div>
+                    <div class="faq-answer">After purchasing, you'll receive instructions with a link to upload your message screenshots securely.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">What types of messages can you analyze?</div>
+                    <div class="faq-answer">We can analyze text messages, dating app conversations, emails, and social media messages. Screenshots work best.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Do you provide professional therapy or counseling?</div>
+                    <div class="faq-answer">No, we provide educational analysis only. For serious mental health or relationship issues, please consult a licensed professional.</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p>&copy; 2025 Seen and Red. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const isActive = answer.classList.contains('active');
+                    
+                    // Close all other FAQs
+                    document.querySelectorAll('.faq-answer').forEach(ans => {
+                        ans.classList.remove('active');
+                    });
+                    
+                    // Toggle current FAQ
+                    if (!isActive) {
+                        answer.classList.add('active');
+                    }
+                });
+            });
+
+            // Contact form submission
+            const contactForm = document.getElementById('contact-form');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const name = formData.get('name');
+                const email = formData.get('email');
+                const subject = formData.get('subject');
+                const message = formData.get('message');
+                
+                // Create mailto link with form data
+                const mailtoLink = `mailto:support@seenandred.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+                
+                // Open email client
+                window.location.href = mailtoLink;
+                
+                // Show success message
+                alert('Thank you for your message! Your email client should open with the message ready to send.');
+                
+                // Reset form
+                this.reset();
+            });
+        });
+    </script>
+</body>
+</html>
