@@ -450,6 +450,7 @@
                     <ul>
                         <li><a href="#home">Home</a></li>
                         <li><a href="#decode">DECODE</a></li>
+                        <li><a href="gifts.html">Gifts</a></li>
                         <li><a href="#newsletter">Newsletter</a></li>
                         <li><a href="about.html">About</a></li>
                     </ul>
@@ -464,7 +465,7 @@
                 <h1>Can't Tell if It's Love or Manipulation?</h1>
                 <p class="subtitle">Your inner child wounds might be making you miss green flags... or ignore red ones. Get instant clarity on what those messages really mean and break the pattern of confusion.</p>
                 <a href="#decode" class="cta-button">Get Clear on My Messages</a>
-                <p class="secondary-cta">or <a href="#quiz" style="color: var(--medium-gray); text-decoration: underline; font-weight: normal;">take our free clarity quiz</a></p>
+                <p class="secondary-cta">or <a href="https://tally.so/r/me8pJE" target="_blank" style="color: var(--medium-gray); text-decoration: underline; font-weight: normal;">take our free clarity quiz</a></p>
             </div>
         </section>
 
@@ -475,7 +476,7 @@
                 <div class="pricing-grid">
                     <div class="pricing-card">
                         <div class="pricing-header">
-                            <h3>3 Message Decode</h3>
+                            <h3>Flag Check</h3>
                             <div class="price">$9</div>
                             <p class="price-period">One-time</p>
                         </div>
@@ -493,7 +494,7 @@
                     <div class="pricing-card featured">
                         <div class="featured-badge">Most Popular</div>
                         <div class="pricing-header">
-                            <h3>6 Message Decode</h3>
+                            <h3>Pattern Check</h3>
                             <div class="price">$19</div>
                             <p class="price-period">One-time</p>
                         </div>
@@ -511,7 +512,7 @@
                     
                     <div class="pricing-card">
                         <div class="pricing-header">
-                            <h3>Unlimited Decode</h3>
+                            <h3>Reality Check</h3>
                             <div class="price">$29</div>
                             <p class="price-period">Monthly</p>
                         </div>
@@ -591,19 +592,19 @@
         
         // Product configurations with your actual Stripe Price IDs
         const products = {
-            'decode-3-messages': {
+            'flag-check': {
                 priceId: 'price_1RcE7WBswfKYIWydbbdngw7s',
-                name: '3 Message Decode',
+                name: 'Flag Check',
                 amount: 900 // $9.00 in cents
             },
-            'decode-6-messages': {
+            'pattern-check': {
                 priceId: 'price_1RcEAHBswfKYIWydIFclAfcO', 
-                name: '6 Message Decode',
+                name: 'Pattern Check',
                 amount: 1900 // $19.00 in cents
             },
-            'decode-unlimited': {
+            'reality-check': {
                 priceId: 'price_1RcDwABswfKYIWydovKfkgv5',
-                name: 'Unlimited Decode',
+                name: 'Reality Check',
                 amount: 2900 // $29.00 in cents
             }
         };
@@ -623,11 +624,11 @@
                         price: product.priceId,
                         quantity: 1,
                     }],
-                    mode: productKey === 'decode-unlimited' ? 'subscription' : 'payment',
-                    successUrl: window.location.origin + '/success.html?product=' + productKey,
-                    cancelUrl: window.location.origin + '/cancel.html',
+                    mode: productKey === 'reality-check' ? 'subscription' : 'payment',
+                    successUrl: 'https://seenandred.com/success.html?product=' + productKey,
+                    cancelUrl: 'https://seenandred.com/cancel.html',
                     customerEmail: document.querySelector('.newsletter-form input[type="email"]')?.value || undefined,
-                    allowPromotionCodes: true,
+                    allow_promotion_codes: true,
                 });
 
                 if (error) {
@@ -642,10 +643,10 @@
 
         // Add click handlers to all pricing buttons
         document.addEventListener('DOMContentLoaded', function() {
-            // DECODE pricing buttons
+            // Pricing buttons
             const decodeButtons = document.querySelectorAll('.pricing-button');
             decodeButtons.forEach((button, index) => {
-                const productKeys = ['decode-3-messages', 'decode-6-messages', 'decode-unlimited'];
+                const productKeys = ['flag-check', 'pattern-check', 'reality-check'];
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
                     
