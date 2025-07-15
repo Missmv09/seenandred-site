@@ -214,6 +214,7 @@
         }
         
         .pricing-button {
+            display: block;
             width: 100%;
             padding: 1rem;
             background: var(--primary-red);
@@ -224,6 +225,8 @@
             font-weight: 600;
             cursor: pointer;
             transition: background 0.3s;
+            text-decoration: none;
+            text-align: center;
         }
         
         .pricing-button:hover {
@@ -488,7 +491,7 @@
                             <li>Pattern Recognition Insights</li>
                             <li>Clear Action Recommendations</li>
                         </ul>
-                        <button class="pricing-button">Upload & Analyze Now</button>
+                        <a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" class="pricing-button">Upload & Analyze Now</a>
                     </div>
                     
                     <div class="pricing-card featured">
@@ -507,7 +510,7 @@
                             <li>Relationship Dynamic Insights</li>
                             <li>Custom Response Suggestions</li>
                         </ul>
-                        <button class="pricing-button">Upload & Get Insights</button>
+                        <a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a" class="pricing-button">Upload & Get Insights</a>
                     </div>
                     
                     <div class="pricing-card">
@@ -526,7 +529,7 @@
                             <li>Weekly Pattern Summary</li>
                             <li>Cancel Anytime</li>
                         </ul>
-                        <button class="pricing-button">Get Unlimited Access</button>
+                        <a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03" class="pricing-button">Get Unlimited Access</a>
                     </div>
                 </div>
             </div>
@@ -583,86 +586,8 @@
         </div>
     </footer>
 
-    <!-- Stripe JavaScript -->
-    <script src="https://js.stripe.com/v3/"></script>
-    
+    <!-- Simple smooth scrolling for navigation links -->
     <script>
-        // Initialize Stripe with your live publishable key
-        const stripe = Stripe('pk_live_51RZivyBswfKYIWydMXftAVBhmu8t9pYMkSEhO16LrE27k24Bxav8jfw6HJ7CamOa9XGgzoJA7myreDKTGnBtEeuF00C7Kvuao7');
-        
-        // Product configurations with your actual Stripe Price IDs
-        const products = {
-            'flag-check': {
-                priceId: 'price_1RcE7WBswfKYIWydbbdngw7s',
-                name: 'Flag Check',
-                amount: 900 // $9.00 in cents
-            },
-            'pattern-check': {
-                priceId: 'price_1RcEAHBswfKYIWydIFclAfcO', 
-                name: 'Pattern Check',
-                amount: 1900 // $19.00 in cents
-            },
-            'reality-check': {
-                priceId: 'price_1RcDwABswfKYIWydovKfkgv5',
-                name: 'Reality Check',
-                amount: 2900 // $29.00 in cents
-            }
-        };
-
-        // Function to redirect to Stripe Checkout
-        async function redirectToCheckout(productKey) {
-            const product = products[productKey];
-            
-            if (!product) {
-                console.error('Product not found:', productKey);
-                return;
-            }
-
-            try {
-                const { error } = await stripe.redirectToCheckout({
-                    lineItems: [{
-                        price: product.priceId,
-                        quantity: 1,
-                    }],
-                    mode: productKey === 'reality-check' ? 'subscription' : 'payment',
-                    successUrl: 'https://seenandred.com/success.html?product=' + productKey,
-                    cancelUrl: 'https://seenandred.com/cancel.html',
-                });
-
-                if (error) {
-                    console.error('Stripe error:', error);
-                    alert('There was an error processing your payment. Please try again.');
-                }
-            } catch (err) {
-                console.error('Checkout error:', err);
-                alert('There was an error processing your payment. Please try again.');
-            }
-        }
-
-        // Add click handlers to all pricing buttons
-        document.addEventListener('DOMContentLoaded', function() {
-            // Pricing buttons
-            const decodeButtons = document.querySelectorAll('.pricing-button');
-            decodeButtons.forEach((button, index) => {
-                const productKeys = ['flag-check', 'pattern-check', 'reality-check'];
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Add loading state
-                    button.textContent = 'Loading...';
-                    button.disabled = true;
-                    
-                    redirectToCheckout(productKeys[index]).finally(() => {
-                        // Reset button state
-                        button.disabled = false;
-                        const originalTexts = ['Upload & Analyze Now', 'Upload & Get Insights', 'Get Unlimited Access'];
-                        button.textContent = originalTexts[index];
-                    });
-                });
-            });
-        });
-
-        // Simple smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -685,21 +610,6 @@
                 this.reset();
             }
         });
-
-        // Enhanced form validation
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-
-        // Add customer email to checkout if newsletter signup exists
-        function getCustomerEmail() {
-            const emailInput = document.querySelector('.newsletter-form input[type="email"]');
-            if (emailInput && emailInput.value && validateEmail(emailInput.value)) {
-                return emailInput.value;
-            }
-            return undefined;
-        }
     </script>
 </body>
 </html>
