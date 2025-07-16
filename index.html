@@ -5,18 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seen and Red - Your AI Bestie with a PhD</title>
     <meta name="description" content="AI-powered message analysis to help you spot red flags, decode mixed signals, and finally see relationships for what they really are.">
-    <!-- Tally Widget Script with error handling -->
-    <script>
-        (function() {
-            var script = document.createElement('script');
-            script.src = 'https://tally.so/widgets/embed.js';
-            script.async = true;
-            script.onerror = function() {
-                console.warn('Failed to load Tally script from CDN');
-            };
-            document.head.appendChild(script);
-        })();
-    </script>
     <style>
         * {
             margin: 0;
@@ -551,8 +539,8 @@
             <div class="container">
                 <h1>Your AI Bestie with a PhD</h1>
                 <p class="subtitle">Stop wondering "what does this mean?" Upload your confusing messages and get instant AI-powered analysis to spot red flags, decode mixed signals, and finally see relationships for what they really are.</p>
-                <a href="#" class="cta-button" onclick="openQuizPopup()">Take Free Clarity Quiz</a>
-                <p class="secondary-cta">or <a href="#" onclick="openAnalysisPopup()" style="color: var(--medium-gray); text-decoration: underline; font-weight: normal;">already purchased? submit your messages</a></p>
+                <a href="https://tally.so/r/me8pJE" class="cta-button" target="_blank">Take Free Clarity Quiz</a>
+                <p class="secondary-cta">or <a href="https://tally.so/r/mJbgaz" target="_blank" style="color: var(--medium-gray); text-decoration: underline; font-weight: normal;">already purchased? submit your messages</a></p>
             </div>
         </section>
 
@@ -723,57 +711,6 @@
                     // Form will submit to hidden iframe automatically
                 });
             }
-        });
-
-        // Tally popup functions with error handling
-        function openQuizPopup() {
-            if (typeof Tally !== 'undefined') {
-                Tally.openPopup('me8pJE', {
-                    layout: 'modal',
-                    width: 600,
-                    hideTitle: true,
-                    onSubmit: (payload) => {
-                        console.log('Quiz submitted:', payload);
-                    }
-                });
-            } else {
-                // Fallback to direct link if Tally isn't loaded
-                window.open('https://tally.so/r/me8pJE', '_blank');
-            }
-        }
-
-        function openAnalysisPopup() {
-            if (typeof Tally !== 'undefined') {
-                Tally.openPopup('mJbgaz', {
-                    layout: 'modal',
-                    width: 700,
-                    hideTitle: true,
-                    onSubmit: (payload) => {
-                        console.log('Analysis form submitted:', payload);
-                    }
-                });
-            } else {
-                // Fallback to direct link if Tally isn't loaded
-                window.open('https://tally.so/r/mJbgaz', '_blank');
-            }
-        }
-
-        // Ensure Tally is loaded before using
-        document.addEventListener('DOMContentLoaded', function() {
-            // Wait for Tally to load
-            let tallyCheckCount = 0;
-            const checkTally = setInterval(() => {
-                if (typeof Tally !== 'undefined') {
-                    console.log('Tally loaded successfully');
-                    clearInterval(checkTally);
-                } else {
-                    tallyCheckCount++;
-                    if (tallyCheckCount > 50) { // Stop checking after 5 seconds
-                        console.warn('Tally failed to load, using fallback links');
-                        clearInterval(checkTally);
-                    }
-                }
-            }, 100);
         });
     </script>
 
