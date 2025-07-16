@@ -539,8 +539,22 @@
             <div class="container">
                 <h1>Your AI Bestie with a PhD</h1>
                 <p class="subtitle">Stop wondering "what does this mean?" Upload your confusing messages and get instant AI-powered analysis to spot red flags, decode mixed signals, and finally see relationships for what they really are.</p>
-                <a href="#decode" class="cta-button">Get Clear on My Messages</a>
-                <p class="secondary-cta">or <a href="https://tally.so/r/me8pJE" target="_blank" style="color: var(--medium-gray); text-decoration: underline; font-weight: normal;">take our free clarity quiz</a></p>
+                <a href="#quick-analysis" class="cta-button">Get Clear on My Messages</a>
+                <p class="secondary-cta">or <a href="#clarity-quiz" style="color: var(--medium-gray); text-decoration: underline; font-weight: normal;">take our free clarity quiz</a></p>
+            </div>
+        </section>
+
+        <section id="clarity-quiz" class="features">
+            <div class="container">
+                <h2>Free Clarity Quiz</h2>
+                <p style="text-align: center; color: var(--medium-gray); font-size: 1.1rem; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Not sure if you need a message analysis? Take our free 2-minute quiz to get instant clarity on your situation and personalized next steps.
+                </p>
+                
+                <!-- Embedded Clarity Quiz -->
+                <div style="max-width: 800px; margin: 0 auto; background: var(--white); border-radius: 16px; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <iframe data-tally-src="https://tally.so/embed/me8pJE?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0" title="Free Clarity Quiz"></iframe>
+                </div>
             </div>
         </section>
 
@@ -598,6 +612,20 @@
                         </ul>
                         <a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03" class="pricing-button">Get Unlimited Access</a>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quick-analysis" class="features">
+            <div class="container">
+                <h2>Quick Message Analysis</h2>
+                <p style="text-align: center; color: var(--medium-gray); font-size: 1.1rem; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Already purchased? Get your messages decoded instantly. Upload screenshots or paste text and get AI-powered insights in minutes.
+                </p>
+                
+                <!-- Embedded Tally Form -->
+                <div style="max-width: 800px; margin: 0 auto; background: var(--white); border-radius: 16px; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <iframe data-tally-src="https://tally.so/embed/mJbgaz?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" title="Message Analysis Submission"></iframe>
                 </div>
             </div>
         </section>
@@ -712,6 +740,11 @@
                 });
             }
         });
+    </script>
+
+    <!-- Tally Embed Script -->
+    <script>
+        var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}
     </script>
 </body>
 </html>
