@@ -32,48 +32,69 @@
         }
         
         .container {
-            max-width: 800px;
+            max-width: 700px;
             margin: 0 auto;
             padding: 2rem 20px;
         }
         
         .header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
         
         .header h1 {
             font-size: 2.5rem;
             color: var(--dark-gray);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
         
         .header p {
             font-size: 1.1rem;
             color: var(--medium-gray);
-            max-width: 600px;
-            margin: 0 auto;
         }
         
-        /* Usage Display */
-        .usage-display {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 1.5rem;
+        /* Plan Status */
+        .plan-status {
+            background: linear-gradient(135deg, var(--light-red) 0%, var(--white) 100%);
+            border-radius: 16px;
+            padding: 2rem;
             margin-bottom: 2rem;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         
-        .usage-display h3 {
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: bold;
             color: var(--primary-red);
             margin-bottom: 0.5rem;
         }
         
         .usage-count {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--medium-gray);
+            margin-bottom: 1rem;
+        }
+        
+        .plan-features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+        
+        .feature-item::before {
+            content: "✓";
+            color: var(--primary-red);
+            font-weight: bold;
         }
         
         /* Submission Form */
@@ -97,8 +118,7 @@
         }
         
         .form-group input,
-        .form-group textarea,
-        .form-group select {
+        .form-group textarea {
             width: 100%;
             padding: 1rem;
             border: 2px solid #e5e7eb;
@@ -108,8 +128,7 @@
         }
         
         .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
+        .form-group textarea:focus {
             outline: none;
             border-color: var(--primary-red);
         }
@@ -120,6 +139,7 @@
             padding: 2rem;
             text-align: center;
             transition: border-color 0.3s;
+            cursor: pointer;
         }
         
         .file-upload:hover {
@@ -130,10 +150,23 @@
             display: none;
         }
         
-        .file-upload-label {
-            cursor: pointer;
-            color: var(--primary-red);
+        .file-upload-content {
+            color: var(--medium-gray);
+        }
+        
+        .file-upload-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .file-upload-text {
             font-weight: 600;
+            color: var(--primary-red);
+            margin-bottom: 0.25rem;
+        }
+        
+        .file-upload-hint {
+            font-size: 0.9rem;
         }
         
         .submit-button {
@@ -264,8 +297,12 @@
                 font-size: 2rem;
             }
             
-            .submission-form {
+            .submission-form, .plan-status {
                 padding: 1.5rem;
+            }
+            
+            .plan-features {
+                gap: 1rem;
             }
         }
     </style>
@@ -277,10 +314,13 @@
             <p>Upload your message screenshots for AI-powered relationship analysis</p>
         </div>
 
-        <!-- Usage Display -->
-        <div class="usage-display" id="usage-display">
-            <h3>Your Current Plan</h3>
-            <div class="usage-count" id="usage-count">Loading...</div>
+        <!-- Plan Status -->
+        <div class="plan-status" id="plan-status">
+            <div class="plan-name" id="plan-name">Loading...</div>
+            <div class="usage-count" id="usage-count">Checking your plan...</div>
+            <div class="plan-features" id="plan-features">
+                <!-- Features will be populated by JavaScript -->
+            </div>
         </div>
 
         <!-- Submission Form -->
@@ -292,28 +332,19 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="analysis-type">Analysis Type</label>
-                    <select id="analysis-type" name="analysis_type" required>
-                        <option value="">Select your analysis type</option>
-                        <option value="flag_check">Flag Check - $9 (3 messages)</option>
-                        <option value="pattern_check">Pattern Check - $19 (6 messages)</option>
-                        <option value="reality_check">Reality Check - $29 (unlimited)</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label for="context">Relationship Context</label>
-                    <textarea id="context" name="context" rows="4" placeholder="Brief context about your situation (optional but helpful)"></textarea>
+                    <textarea id="context" name="context" rows="4" placeholder="Brief context about your situation (optional but helpful for better analysis)"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label>Upload Message Screenshots</label>
-                    <div class="file-upload">
+                    <div class="file-upload" onclick="document.getElementById('file-upload').click()">
                         <input type="file" id="file-upload" name="screenshots" multiple accept="image/*">
-                        <label for="file-upload" class="file-upload-label">
-                            📱 Click to upload screenshots<br>
-                            <small>Support for multiple images (PNG, JPG)</small>
-                        </label>
+                        <div class="file-upload-content" id="file-upload-content">
+                            <div class="file-upload-icon">📱</div>
+                            <div class="file-upload-text">Click to upload screenshots</div>
+                            <div class="file-upload-hint">Support for multiple images (PNG, JPG)</div>
+                        </div>
                     </div>
                 </div>
 
@@ -326,10 +357,34 @@
 
     <script>
         // Tier configuration
-        const TIER_LIMITS = {
-            'flag_check': { limit: 3, price: 9, name: 'Flag Check' },
-            'pattern_check': { limit: 6, price: 19, name: 'Pattern Check' },
-            'reality_check': { limit: -1, price: 29, name: 'Reality Check' }
+        const TIER_CONFIGS = {
+            'flag_check': { 
+                limit: 3, 
+                price: 9, 
+                name: 'Flag Check',
+                features: ['3 message analyses', 'Red & green flag ID', 'Pattern analysis', 'Action recommendations']
+            },
+            'pattern_check': { 
+                limit: 6, 
+                price: 19, 
+                name: 'Pattern Check',
+                features: ['6 message analyses', 'Deep pattern recognition', 'Trauma insights', 'Response suggestions']
+            },
+            'reality_check': { 
+                limit: -1, 
+                price: 29, 
+                name: 'Reality Check',
+                features: ['Unlimited analyses', '24/7 access', 'Voice messages', 'Priority support']
+            }
+        };
+
+        // Subscription status types
+        const SUBSCRIPTION_STATUS = {
+            ACTIVE: 'active',
+            CANCELLED: 'cancelled',
+            PAST_DUE: 'past_due',
+            UNPAID: 'unpaid',
+            EXPIRED: 'expired'
         };
 
         class TierEnforcement {
@@ -356,8 +411,8 @@
 
                 try {
                     // In a real implementation, this would be an API call to your backend
-                    // For now, we'll simulate with local storage
-                    const userData = this.getUserDataFromStorage(email);
+                    // For now, we'll simulate with local storage or URL parameters
+                    const userData = this.getUserDataFromStorage(email) || this.detectTierFromStripe();
                     
                     if (!userData) {
                         this.showNoSubscriptionModal();
@@ -373,9 +428,35 @@
                 }
             }
 
+            detectTierFromStripe() {
+                // Detect tier from Stripe success redirect
+                const urlParams = new URLSearchParams(window.location.search);
+                const email = urlParams.get('email');
+                
+                if (email) {
+                    // Auto-detect tier based on the Stripe checkout they came from
+                    // You can enhance this by passing tier info in the URL
+                    const tier = urlParams.get('tier') || this.detectTierFromPrice() || 'flag_check';
+                    
+                    return {
+                        email: email,
+                        tier: tier,
+                        subscriptionDate: new Date().toISOString(),
+                        monthlyUsage: {}
+                    };
+                }
+                
+                return null;
+            }
+
+            detectTierFromPrice() {
+                // If you modify your Stripe success URLs to include tier info:
+                // https://seenandred.com/submit-analysis.html?email={CHECKOUT_SESSION_EMAIL}&tier=flag_check
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get('tier');
+            }
+
             getUserDataFromStorage(email) {
-                // This simulates your user database
-                // In reality, this would be an API call to check Stripe subscription status
                 const users = JSON.parse(localStorage.getItem('seenandred_users') || '{}');
                 return users[email] || null;
             }
@@ -413,8 +494,18 @@
                     };
                 }
 
+                // Check subscription status
+                const subscriptionStatus = this.checkSubscriptionStatus();
+                if (!subscriptionStatus.active) {
+                    return {
+                        allowed: false,
+                        reason: subscriptionStatus.reason,
+                        message: subscriptionStatus.message
+                    };
+                }
+
                 const userTier = this.currentUser.tier;
-                const tierConfig = TIER_LIMITS[userTier];
+                const tierConfig = TIER_CONFIGS[userTier];
                 
                 if (!tierConfig) {
                     return { 
@@ -446,7 +537,56 @@
                 };
             }
 
-            getCurrentMonthUsage() {
+            checkSubscriptionStatus() {
+                if (!this.currentUser.subscriptionStatus) {
+                    // Default to active for existing users
+                    return { active: true };
+                }
+
+                const status = this.currentUser.subscriptionStatus;
+                const now = new Date();
+                
+                switch(status.status) {
+                    case SUBSCRIPTION_STATUS.ACTIVE:
+                        return { active: true };
+                        
+                    case SUBSCRIPTION_STATUS.CANCELLED:
+                        // Check if still in grace period
+                        if (status.periodEndDate && new Date(status.periodEndDate) > now) {
+                            return { 
+                                active: true, 
+                                warning: `Subscription cancels on ${new Date(status.periodEndDate).toLocaleDateString()}`
+                            };
+                        } else {
+                            return {
+                                active: false,
+                                reason: 'subscription_cancelled',
+                                message: 'Your subscription has been cancelled. Resubscribe to continue accessing analyses.'
+                            };
+                        }
+                        
+                    case SUBSCRIPTION_STATUS.PAST_DUE:
+                        return {
+                            active: false,
+                            reason: 'payment_failed',
+                            message: 'Your payment failed. Please update your payment method to continue.'
+                        };
+                        
+                    case SUBSCRIPTION_STATUS.EXPIRED:
+                        return {
+                            active: false,
+                            reason: 'subscription_expired',
+                            message: 'Your subscription has expired. Resubscribe to continue accessing analyses.'
+                        };
+                        
+                    default:
+                        return {
+                            active: false,
+                            reason: 'subscription_inactive',
+                            message: 'Your subscription is not active. Please resubscribe to continue.'
+                        };
+                }
+            }
                 if (!this.currentUser) return 0;
                 
                 const currentMonth = new Date().toISOString().slice(0, 7); // YYYY-MM
@@ -473,11 +613,35 @@
                         upgradeOptions = this.getSubscriptionOptions();
                         break;
                         
+                    case 'subscription_cancelled':
+                        modalContent = `
+                            <h3>Subscription Cancelled</h3>
+                            <p>Your subscription has been cancelled. To continue getting relationship analyses, please resubscribe.</p>
+                        `;
+                        upgradeOptions = this.getResubscribeOptions();
+                        break;
+                        
+                    case 'payment_failed':
+                        modalContent = `
+                            <h3>Payment Failed</h3>
+                            <p>We couldn't process your payment. Please update your payment method to continue.</p>
+                        `;
+                        upgradeOptions = this.getPaymentUpdateOptions();
+                        break;
+                        
+                    case 'subscription_expired':
+                        modalContent = `
+                            <h3>Subscription Expired</h3>
+                            <p>Your subscription has expired. Resubscribe to continue accessing analyses.</p>
+                        `;
+                        upgradeOptions = this.getResubscribeOptions();
+                        break;
+                        
                     case 'monthly_limit_reached':
                         modalContent = `
                             <h3>Monthly Limit Reached</h3>
                             <p>You've used all ${limitInfo.limit} analyses for this month.</p>
-                            <p>Your usage resets on the 1st of next month, or you can upgrade now.</p>
+                            <p>Your usage resets on the 1st of next month, or you can upgrade now for more analyses.</p>
                         `;
                         upgradeOptions = this.getUpgradeButtons(this.currentUser.tier);
                         break;
@@ -546,7 +710,7 @@
                 
                 for (let i = currentIndex + 1; i < tiers.length; i++) {
                     const tier = tiers[i];
-                    const config = TIER_LIMITS[tier];
+                    const config = TIER_CONFIGS[tier];
                     const limitText = config.limit === -1 ? 'Unlimited' : `${config.limit} analyses`;
                     
                     const upgradeUrls = {
@@ -568,15 +732,11 @@
             async proceedWithAnalysis(form) {
                 this.showLoadingState();
                 
-                const formData = new FormData(form);
-                const email = formData.get('email');
-                
                 try {
                     // Update usage count
                     this.incrementUsage();
                     
-                    // In a real implementation, you'd send to your backend here
-                    // For now, we'll redirect to Tally form
+                    // Redirect to Tally form
                     const tallyUrl = 'https://tally.so/r/mJbgaz';
                     window.location.href = tallyUrl;
                     
@@ -602,30 +762,75 @@
                 this.updateUI();
             }
 
-            updateUI() {
-                const usageDisplay = document.getElementById('usage-count');
+            getResubscribeOptions() {
+                return `
+                    <div class="upgrade-options">
+                        <p><strong>Resubscribe to continue:</strong></p>
+                        <a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" class="subscribe-btn">
+                            Flag Check - $9
+                            <br><small>3 analyses per month</small>
+                        </a>
+                        <a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a" class="subscribe-btn">
+                            Pattern Check - $19
+                            <br><small>6 analyses per month</small>
+                        </a>
+                        <a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03" class="subscribe-btn">
+                            Reality Check - $29/month
+                            <br><small>Unlimited analyses</small>
+                        </a>
+                    </div>
+                `;
+            }
+
+            getPaymentUpdateOptions() {
+                return `
+                    <div class="upgrade-options">
+                        <p><strong>Update your payment method:</strong></p>
+                        <a href="https://billing.stripe.com/p/login/your-portal-link" class="subscribe-btn">
+                            Update Payment Method
+                            <br><small>Fix your subscription</small>
+                        </a>
+                        <p style="margin-top: 1rem;"><small>Or resubscribe with a new payment method:</small></p>
+                        <a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" class="subscribe-btn">
+                            Resubscribe - $9/month
+                        </a>
+                    </div>
+                `;
+            }
+                const planName = document.getElementById('plan-name');
+                const usageCount = document.getElementById('usage-count');
+                const planFeatures = document.getElementById('plan-features');
                 const submitBtn = document.getElementById('submit-btn');
                 
                 if (!this.currentUser) {
-                    usageDisplay.textContent = 'No subscription';
+                    planName.textContent = 'No Subscription';
+                    usageCount.textContent = 'Please purchase a plan to continue';
                     submitBtn.disabled = true;
-                    submitBtn.textContent = 'Subscribe Required';
+                    submitBtn.textContent = 'Subscription Required';
                     return;
                 }
 
-                const tierConfig = TIER_LIMITS[this.currentUser.tier];
+                const tierConfig = TIER_CONFIGS[this.currentUser.tier];
                 const currentUsage = this.getCurrentMonthUsage();
                 
+                // Update plan display
+                planName.textContent = tierConfig.name;
+                
                 if (tierConfig.limit === -1) {
-                    usageDisplay.textContent = `${tierConfig.name} - Unlimited`;
+                    usageCount.textContent = 'Unlimited analyses';
                 } else {
-                    usageDisplay.textContent = `${currentUsage}/${tierConfig.limit} analyses used this month`;
+                    usageCount.textContent = `${currentUsage}/${tierConfig.limit} analyses used this month`;
                     
                     if (currentUsage >= tierConfig.limit) {
                         submitBtn.disabled = true;
                         submitBtn.textContent = 'Monthly Limit Reached';
                     }
                 }
+                
+                // Update features
+                planFeatures.innerHTML = tierConfig.features
+                    .map(feature => `<div class="feature-item">${feature}</div>`)
+                    .join('');
             }
 
             showLoadingState() {
@@ -658,17 +863,21 @@
             
             // Handle file upload display
             const fileInput = document.getElementById('file-upload');
-            const fileLabel = document.querySelector('.file-upload-label');
+            const fileContent = document.getElementById('file-upload-content');
             
             fileInput.addEventListener('change', function() {
                 const fileCount = this.files.length;
                 if (fileCount > 0) {
-                    fileLabel.innerHTML = `📱 ${fileCount} file(s) selected<br><small>Click to change</small>`;
+                    fileContent.innerHTML = `
+                        <div class="file-upload-icon">📁</div>
+                        <div class="file-upload-text">${fileCount} file(s) selected</div>
+                        <div class="file-upload-hint">Click to change selection</div>
+                    `;
                 }
             });
         });
 
-        // Test function to simulate user subscription (for testing)
+        // Test function for development
         function simulateSubscription(email, tier) {
             const userData = {
                 email: email,
@@ -681,14 +890,8 @@
             users[email] = userData;
             localStorage.setItem('seenandred_users', JSON.stringify(users));
             
-            // Reload page with email parameter
             window.location.href = `?email=${encodeURIComponent(email)}`;
         }
-
-        // For testing - uncomment one of these lines:
-        // simulateSubscription('test@example.com', 'flag_check');
-        // simulateSubscription('test@example.com', 'pattern_check');
-        // simulateSubscription('test@example.com', 'reality_check');
     </script>
 </body>
 </html>
