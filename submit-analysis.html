@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Your Messages - Seen and Red</title>
-    <meta name="description" content="Upload your message screenshots for AI-powered relationship analysis.">
+    <meta name="description" content="Access your relationship analysis portal.">
     <style>
         * {
             margin: 0;
@@ -32,7 +32,7 @@
         }
         
         .container {
-            max-width: 700px;
+            max-width: 600px;
             margin: 0 auto;
             padding: 2rem 20px;
         }
@@ -97,96 +97,53 @@
             font-weight: bold;
         }
         
-        /* Submission Form */
-        .submission-form {
+        /* Access Portal */
+        .access-portal {
             background: var(--white);
             border-radius: 16px;
             padding: 2rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--dark-gray);
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary-red);
-        }
-        
-        .file-upload {
-            border: 2px dashed #d1d5db;
-            border-radius: 8px;
-            padding: 2rem;
             text-align: center;
-            transition: border-color 0.3s;
-            cursor: pointer;
         }
         
-        .file-upload:hover {
-            border-color: var(--primary-red);
+        .portal-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
         }
         
-        .file-upload input[type="file"] {
-            display: none;
+        .portal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
         }
         
-        .file-upload-content {
+        .portal-description {
             color: var(--medium-gray);
+            margin-bottom: 2rem;
+            line-height: 1.6;
         }
         
-        .file-upload-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .file-upload-text {
-            font-weight: 600;
-            color: var(--primary-red);
-            margin-bottom: 0.25rem;
-        }
-        
-        .file-upload-hint {
-            font-size: 0.9rem;
-        }
-        
-        .submit-button {
-            width: 100%;
+        .access-button {
+            display: inline-block;
             background: var(--primary-red);
             color: var(--white);
+            padding: 1.25rem 2rem;
             border: none;
-            padding: 1.25rem;
             border-radius: 8px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
+            text-decoration: none;
             transition: background 0.3s;
+            min-width: 200px;
         }
         
-        .submit-button:hover:not(:disabled) {
+        .access-button:hover:not(:disabled) {
             background: var(--dark-red);
         }
         
-        .submit-button:disabled {
+        .access-button:disabled {
             background: #9ca3af;
             cursor: not-allowed;
         }
@@ -265,12 +222,7 @@
         }
         
         /* Loading State */
-        .loading {
-            opacity: 0.6;
-            pointer-events: none;
-        }
-        
-        .loading .submit-button::after {
+        .loading .access-button::after {
             content: '';
             display: inline-block;
             width: 16px;
@@ -297,7 +249,7 @@
                 font-size: 2rem;
             }
             
-            .submission-form, .plan-status {
+            .access-portal, .plan-status {
                 padding: 1.5rem;
             }
             
@@ -310,8 +262,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Submit Your Messages</h1>
-            <p>Upload your message screenshots for AI-powered relationship analysis</p>
+            <h1>Your Analysis Portal</h1>
+            <p>Ready to decode your messages? Click below to access your analysis form.</p>
         </div>
 
         <div class="plan-status" id="plan-status">
@@ -320,34 +272,16 @@
             <div class="plan-features" id="plan-features"></div>
         </div>
 
-        <div class="submission-form">
-            <form id="message-analysis-form">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required placeholder="your@email.com">
-                </div>
-
-                <div class="form-group">
-                    <label for="context">Relationship Context</label>
-                    <textarea id="context" name="context" rows="4" placeholder="Brief context about your situation (optional but helpful for better analysis)"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label>Upload Message Screenshots</label>
-                    <div class="file-upload" onclick="document.getElementById('file-upload').click()">
-                        <input type="file" id="file-upload" name="screenshots" multiple accept="image/*">
-                        <div class="file-upload-content" id="file-upload-content">
-                            <div class="file-upload-icon">📱</div>
-                            <div class="file-upload-text">Click to upload screenshots</div>
-                            <div class="file-upload-hint">Support for multiple images (PNG, JPG)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" class="submit-button" id="submit-btn">
-                    Submit for Analysis
-                </button>
-            </form>
+        <div class="access-portal">
+            <div class="portal-icon">🔍</div>
+            <div class="portal-title">Message Analysis Portal</div>
+            <div class="portal-description">
+                Click the button below to access your analysis form. You'll be able to upload screenshots, 
+                provide context, and get AI-powered insights about your relationship communications.
+            </div>
+            <button class="access-button" id="access-btn" onclick="accessAnalysisForm()">
+                Access Analysis Form
+            </button>
         </div>
     </div>
 
@@ -389,7 +323,6 @@
 
             async init() {
                 await this.loadUserData();
-                this.setupFormValidation();
                 this.updateUI();
             }
 
@@ -451,24 +384,6 @@
                 const users = JSON.parse(localStorage.getItem('seenandred_users') || '{}');
                 users[email] = userData;
                 localStorage.setItem('seenandred_users', JSON.stringify(users));
-            }
-
-            setupFormValidation() {
-                const form = document.getElementById('message-analysis-form');
-                form.addEventListener('submit', (e) => this.validateSubmission(e));
-            }
-
-            async validateSubmission(event) {
-                event.preventDefault();
-                
-                const canProceed = await this.checkTierLimits();
-                
-                if (!canProceed.allowed) {
-                    this.showLimitReachedModal(canProceed);
-                    return false;
-                }
-                
-                this.proceedWithAnalysis(event.target);
             }
 
             async checkTierLimits() {
@@ -663,22 +578,6 @@
                 return '<div class="upgrade-options"><p><strong>Update your payment method:</strong></p><a href="https://billing.stripe.com/p/login/your-portal-link" class="subscribe-btn">Update Payment Method<br><small>Fix your subscription</small></a><p style="margin-top: 1rem;"><small>Or resubscribe with a new payment method:</small></p><a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" class="subscribe-btn">Resubscribe - $9/month</a></div>';
             }
 
-            async proceedWithAnalysis(form) {
-                this.showLoadingState();
-                
-                try {
-                    this.incrementUsage();
-                    
-                    const tallyUrl = 'https://tally.so/r/mJbgaz';
-                    window.location.href = tallyUrl;
-                    
-                } catch (error) {
-                    console.error('Analysis submission failed:', error);
-                    alert('Failed to submit analysis. Please try again.');
-                    this.hideLoadingState();
-                }
-            }
-
             incrementUsage() {
                 if (!this.currentUser) return;
                 
@@ -697,13 +596,13 @@
                 const planName = document.getElementById('plan-name');
                 const usageCount = document.getElementById('usage-count');
                 const planFeatures = document.getElementById('plan-features');
-                const submitBtn = document.getElementById('submit-btn');
+                const accessBtn = document.getElementById('access-btn');
                 
                 if (!this.currentUser) {
                     planName.textContent = 'No Subscription';
                     usageCount.textContent = 'Please purchase a plan to continue';
-                    submitBtn.disabled = true;
-                    submitBtn.textContent = 'Subscription Required';
+                    accessBtn.disabled = true;
+                    accessBtn.textContent = 'Subscription Required';
                     return;
                 }
 
@@ -721,35 +620,17 @@
                     usageCount.textContent = currentUsage + '/' + tierConfig.limit + ' analyses used this month';
                     
                     if (currentUsage >= tierConfig.limit) {
-                        submitBtn.disabled = true;
-                        submitBtn.textContent = 'Monthly Limit Reached';
+                        accessBtn.disabled = true;
+                        accessBtn.textContent = 'Monthly Limit Reached';
                     }
                 }
                 
                 if (!subscriptionStatus.active) {
-                    submitBtn.disabled = true;
-                    submitBtn.textContent = 'Subscription Required';
+                    accessBtn.disabled = true;
+                    accessBtn.textContent = 'Subscription Required';
                 }
                 
                 planFeatures.innerHTML = tierConfig.features.map(feature => '<div class="feature-item">' + feature + '</div>').join('');
-            }
-
-            showLoadingState() {
-                const form = document.getElementById('message-analysis-form');
-                const submitBtn = document.getElementById('submit-btn');
-                
-                form.classList.add('loading');
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Processing...';
-            }
-
-            hideLoadingState() {
-                const form = document.getElementById('message-analysis-form');
-                const submitBtn = document.getElementById('submit-btn');
-                
-                form.classList.remove('loading');
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Submit for Analysis';
             }
 
             removeExistingModal() {
@@ -758,19 +639,34 @@
             }
         }
 
+        let tierEnforcement;
+
         document.addEventListener('DOMContentLoaded', function() {
-            window.tierEnforcement = new TierEnforcement();
-            
-            const fileInput = document.getElementById('file-upload');
-            const fileContent = document.getElementById('file-upload-content');
-            
-            fileInput.addEventListener('change', function() {
-                const fileCount = this.files.length;
-                if (fileCount > 0) {
-                    fileContent.innerHTML = '<div class="file-upload-icon">📁</div><div class="file-upload-text">' + fileCount + ' file(s) selected</div><div class="file-upload-hint">Click to change selection</div>';
-                }
-            });
+            tierEnforcement = new TierEnforcement();
         });
+
+        async function accessAnalysisForm() {
+            const accessBtn = document.getElementById('access-btn');
+            
+            // Check tier limits before allowing access
+            const canProceed = await tierEnforcement.checkTierLimits();
+            
+            if (!canProceed.allowed) {
+                tierEnforcement.showLimitReachedModal(canProceed);
+                return false;
+            }
+            
+            // Show loading state
+            accessBtn.disabled = true;
+            accessBtn.textContent = 'Processing...';
+            accessBtn.classList.add('loading');
+            
+            // Increment usage count
+            tierEnforcement.incrementUsage();
+            
+            // Redirect to Tally form
+            window.location.href = 'https://tally.so/r/mJbgaz';
+        }
 
         function simulateSubscription(email, tier) {
             const userData = {
@@ -789,4 +685,3 @@
     </script>
 </body>
 </html>
-         
