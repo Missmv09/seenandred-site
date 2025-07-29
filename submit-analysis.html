@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Your Messages - Seen and Red</title>
+    <meta name="description" content="Upload your message screenshots for AI-powered relationship analysis.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-red: #dc2626;
+            --dark-red: #991b1b;
+            --light-red: #fee2e2;
+            --dark-gray: #1f2937;
+            --medium-gray: #6b7280;
+            --light-gray: #f9fafb;
+            --white: #ffffff;
+            --success-green: #22c55e;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background: var(--light-gray);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            color: var(--medium-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Usage Display */
+        .usage-display {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .usage-display h3 {
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+        }
+        
+        .usage-count {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--dark-gray);
+        }
+        
+        /* Submission Form */
+        .submission-form {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-red);
+        }
+        
+        .file-upload {
+            border: 2px dashed #d1d5db;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        
+        .file-upload:hover {
+            border-color: var(--primary-red);
+        }
+        
+        .file-upload input[type="file"] {
+            display: none;
+        }
+        
+        .file-upload-label {
+            cursor: pointer;
+            color: var(--primary-red);
+            font-weight: 600;
+        }
+        
+        .submit-button {
+            width: 100%;
+            background: var(--primary-red);
+            color: var(--white);
+            border: none;
+            padding: 1.25rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .submit-button:hover:not(:disabled) {
+            background: var(--dark-red);
+        }
+        
+        .submit-button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        
+        /* Tier Limit Modal */
+        .tier-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .tier-modal-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            max-width: 500px;
+            margin: 0 1rem;
+            text-align: center;
+            box-shadow: 0 20px 25px rgba(0,0,0,0.1);
+        }
+        
+        .tier-modal-content h3 {
+            color: var(--primary-red);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tier-modal-content p {
+            color: var(--medium-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .upgrade-options {
+            margin: 1.5rem 0;
+        }
+        
+        .upgrade-btn, .subscribe-btn {
+            display: block;
+            width: 100%;
+            margin: 0.75rem 0;
+            padding: 1rem;
+            background: var(--primary-red);
+            color: var(--white);
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .upgrade-btn:hover, .subscribe-btn:hover {
+            background: var(--dark-red);
+        }
+        
+        .modal-close-btn {
+            background: #6b7280;
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        
+        .modal-close-btn:hover {
+            background: #4b5563;
+        }
+        
+        /* Loading State */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        
+        .loading .submit-button::after {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-left: 8px;
+            border: 2px solid transparent;
+            border-top: 2px solid var(--white);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .submission-form {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Submit Your Messages</h1>
+            <p>Upload your message screenshots for AI-powered relationship analysis</p>
+        </div>
+
+        <!-- Usage Display -->
+        <div class="usage-display" id="usage-display">
+            <h3>Your Current Plan</h3>
+            <div class="usage-count" id="usage-count">Loading...</div>
+        </div>
+
+        <!-- Submission Form -->
+        <div class="submission-form">
+            <form id="message-analysis-form">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="analysis-type">Analysis Type</label>
+                    <select id="analysis-type" name="analysis_type" required>
+                        <option value="">Select your analysis type</option>
+                        <option value="flag_check">Flag Check - $9 (3 messages)</option>
+                        <option value="pattern_check">Pattern Check - $19 (6 messages)</option>
+                        <option value="reality_check">Reality Check - $29 (unlimited)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="context">Relationship Context</label>
+                    <textarea id="context" name="context" rows="4" placeholder="Brief context about your situation (optional but helpful)"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Message Screenshots</label>
+                    <div class="file-upload">
+                        <input type="file" id="file-upload" name="screenshots" multiple accept="image/*">
+                        <label for="file-upload" class="file-upload-label">
+                            📱 Click to upload screenshots<br>
+                            <small>Support for multiple images (PNG, JPG)</small>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-button" id="submit-btn">
+                    Submit for Analysis
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Tier configuration
+        const TIER_LIMITS = {
+            'flag_check': { limit: 3, price: 9, name: 'Flag Check' },
+            'pattern_check': { limit: 6, price: 19, name: 'Pattern Check' },
+            'reality_check': { limit: -1, price: 29, name: 'Reality Check' }
+        };
+
+        class TierEnforcement {
+            constructor() {
+                this.currentUser = null;
+                this.init();
+            }
+
+            async init() {
+                await this.loadUserData();
+                this.setupFormValidation();
+                this.updateUI();
+            }
+
+            async loadUserData() {
+                // Get user email from URL parameter or local storage
+                const urlParams = new URLSearchParams(window.location.search);
+                const email = urlParams.get('email') || localStorage.getItem('user_email');
+                
+                if (!email) {
+                    this.showNoSubscriptionModal();
+                    return;
+                }
+
+                try {
+                    // In a real implementation, this would be an API call to your backend
+                    // For now, we'll simulate with local storage
+                    const userData = this.getUserDataFromStorage(email);
+                    
+                    if (!userData) {
+                        this.showNoSubscriptionModal();
+                        return;
+                    }
+                    
+                    this.currentUser = userData;
+                    localStorage.setItem('user_email', email);
+                    
+                } catch (error) {
+                    console.error('Failed to load user data:', error);
+                    this.showNoSubscriptionModal();
+                }
+            }
+
+            getUserDataFromStorage(email) {
+                // This simulates your user database
+                // In reality, this would be an API call to check Stripe subscription status
+                const users = JSON.parse(localStorage.getItem('seenandred_users') || '{}');
+                return users[email] || null;
+            }
+
+            saveUserData(email, userData) {
+                const users = JSON.parse(localStorage.getItem('seenandred_users') || '{}');
+                users[email] = userData;
+                localStorage.setItem('seenandred_users', JSON.stringify(users));
+            }
+
+            setupFormValidation() {
+                const form = document.getElementById('message-analysis-form');
+                form.addEventListener('submit', (e) => this.validateSubmission(e));
+            }
+
+            async validateSubmission(event) {
+                event.preventDefault();
+                
+                const canProceed = await this.checkTierLimits();
+                
+                if (!canProceed.allowed) {
+                    this.showLimitReachedModal(canProceed);
+                    return false;
+                }
+                
+                this.proceedWithAnalysis(event.target);
+            }
+
+            async checkTierLimits() {
+                if (!this.currentUser) {
+                    return { 
+                        allowed: false, 
+                        reason: 'no_subscription',
+                        message: 'You need a subscription to access relationship analyses.'
+                    };
+                }
+
+                const userTier = this.currentUser.tier;
+                const tierConfig = TIER_LIMITS[userTier];
+                
+                if (!tierConfig) {
+                    return { 
+                        allowed: false, 
+                        reason: 'no_subscription',
+                        message: 'You need a valid subscription to access analyses.'
+                    };
+                }
+                
+                if (tierConfig.limit === -1) {
+                    return { allowed: true, reason: 'unlimited' };
+                }
+                
+                const currentUsage = this.getCurrentMonthUsage();
+                
+                if (currentUsage >= tierConfig.limit) {
+                    return {
+                        allowed: false,
+                        reason: 'monthly_limit_reached',
+                        used: currentUsage,
+                        limit: tierConfig.limit,
+                        message: `You've used all ${tierConfig.limit} analyses for this month.`
+                    };
+                }
+                
+                return {
+                    allowed: true,
+                    remaining: tierConfig.limit - currentUsage
+                };
+            }
+
+            getCurrentMonthUsage() {
+                if (!this.currentUser) return 0;
+                
+                const currentMonth = new Date().toISOString().slice(0, 7); // YYYY-MM
+                return this.currentUser.monthlyUsage?.[currentMonth] || 0;
+            }
+
+            showLimitReachedModal(limitInfo) {
+                this.removeExistingModal();
+                
+                const modal = document.createElement('div');
+                modal.id = 'tier-limit-modal';
+                modal.className = 'tier-modal-overlay';
+                
+                let modalContent = '';
+                let upgradeOptions = '';
+                
+                switch(limitInfo.reason) {
+                    case 'no_subscription':
+                        modalContent = `
+                            <h3>Subscription Required</h3>
+                            <p>Relationship analyses are available to subscribers only.</p>
+                            <p><strong>New here?</strong> Start with our <a href="https://tally.so/r/me8pJE" target="_blank" style="color: var(--primary-red);">Free Clarity Quiz</a> first!</p>
+                        `;
+                        upgradeOptions = this.getSubscriptionOptions();
+                        break;
+                        
+                    case 'monthly_limit_reached':
+                        modalContent = `
+                            <h3>Monthly Limit Reached</h3>
+                            <p>You've used all ${limitInfo.limit} analyses for this month.</p>
+                            <p>Your usage resets on the 1st of next month, or you can upgrade now.</p>
+                        `;
+                        upgradeOptions = this.getUpgradeButtons(this.currentUser.tier);
+                        break;
+                        
+                    default:
+                        modalContent = `
+                            <h3>Access Restricted</h3>
+                            <p>Unable to process your analysis request at this time.</p>
+                        `;
+                }
+                
+                modal.innerHTML = `
+                    <div class="tier-modal-content">
+                        ${modalContent}
+                        ${upgradeOptions}
+                        <button onclick="this.closest('.tier-modal-overlay').remove()" class="modal-close-btn">
+                            Close
+                        </button>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+            }
+
+            showNoSubscriptionModal() {
+                const modal = document.createElement('div');
+                modal.className = 'tier-modal-overlay';
+                modal.innerHTML = `
+                    <div class="tier-modal-content">
+                        <h3>Welcome to Seen and Red!</h3>
+                        <p>To submit messages for analysis, you'll need to purchase a plan first.</p>
+                        <p><strong>New here?</strong> Try our <a href="https://tally.so/r/me8pJE" target="_blank" style="color: var(--primary-red);">Free Clarity Quiz</a> first!</p>
+                        ${this.getSubscriptionOptions()}
+                        <button onclick="window.location.href='/'" class="modal-close-btn">
+                            Go Back to Home
+                        </button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            }
+
+            getSubscriptionOptions() {
+                return `
+                    <div class="upgrade-options">
+                        <p><strong>Choose your plan:</strong></p>
+                        <a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" class="subscribe-btn">
+                            Flag Check - $9
+                            <br><small>3 analyses per month</small>
+                        </a>
+                        <a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a" class="subscribe-btn">
+                            Pattern Check - $19
+                            <br><small>6 analyses per month</small>
+                        </a>
+                        <a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03" class="subscribe-btn">
+                            Reality Check - $29/month
+                            <br><small>Unlimited analyses</small>
+                        </a>
+                    </div>
+                `;
+            }
+
+            getUpgradeButtons(currentTier) {
+                const tiers = ['flag_check', 'pattern_check', 'reality_check'];
+                const currentIndex = tiers.indexOf(currentTier);
+                let buttons = '';
+                
+                for (let i = currentIndex + 1; i < tiers.length; i++) {
+                    const tier = tiers[i];
+                    const config = TIER_LIMITS[tier];
+                    const limitText = config.limit === -1 ? 'Unlimited' : `${config.limit} analyses`;
+                    
+                    const upgradeUrls = {
+                        'pattern_check': 'https://buy.stripe.com/28E3cueA58qa4023GF9EI0a',
+                        'reality_check': 'https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03'
+                    };
+                    
+                    buttons += `
+                        <a href="${upgradeUrls[tier]}" class="upgrade-btn">
+                            Upgrade to ${config.name} - $${config.price}/month
+                            <br><small>${limitText} per month</small>
+                        </a>
+                    `;
+                }
+                
+                return `<div class="upgrade-options">${buttons}</div>`;
+            }
+
+            async proceedWithAnalysis(form) {
+                this.showLoadingState();
+                
+                const formData = new FormData(form);
+                const email = formData.get('email');
+                
+                try {
+                    // Update usage count
+                    this.incrementUsage();
+                    
+                    // In a real implementation, you'd send to your backend here
+                    // For now, we'll redirect to Tally form
+                    const tallyUrl = 'https://tally.so/r/mJbgaz';
+                    window.location.href = tallyUrl;
+                    
+                } catch (error) {
+                    console.error('Analysis submission failed:', error);
+                    alert('Failed to submit analysis. Please try again.');
+                    this.hideLoadingState();
+                }
+            }
+
+            incrementUsage() {
+                if (!this.currentUser) return;
+                
+                const currentMonth = new Date().toISOString().slice(0, 7);
+                if (!this.currentUser.monthlyUsage) {
+                    this.currentUser.monthlyUsage = {};
+                }
+                
+                this.currentUser.monthlyUsage[currentMonth] = 
+                    (this.currentUser.monthlyUsage[currentMonth] || 0) + 1;
+                
+                this.saveUserData(this.currentUser.email, this.currentUser);
+                this.updateUI();
+            }
+
+            updateUI() {
+                const usageDisplay = document.getElementById('usage-count');
+                const submitBtn = document.getElementById('submit-btn');
+                
+                if (!this.currentUser) {
+                    usageDisplay.textContent = 'No subscription';
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Subscribe Required';
+                    return;
+                }
+
+                const tierConfig = TIER_LIMITS[this.currentUser.tier];
+                const currentUsage = this.getCurrentMonthUsage();
+                
+                if (tierConfig.limit === -1) {
+                    usageDisplay.textContent = `${tierConfig.name} - Unlimited`;
+                } else {
+                    usageDisplay.textContent = `${currentUsage}/${tierConfig.limit} analyses used this month`;
+                    
+                    if (currentUsage >= tierConfig.limit) {
+                        submitBtn.disabled = true;
+                        submitBtn.textContent = 'Monthly Limit Reached';
+                    }
+                }
+            }
+
+            showLoadingState() {
+                const form = document.getElementById('message-analysis-form');
+                const submitBtn = document.getElementById('submit-btn');
+                
+                form.classList.add('loading');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Processing...';
+            }
+
+            hideLoadingState() {
+                const form = document.getElementById('message-analysis-form');
+                const submitBtn = document.getElementById('submit-btn');
+                
+                form.classList.remove('loading');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit for Analysis';
+            }
+
+            removeExistingModal() {
+                const existingModal = document.getElementById('tier-limit-modal');
+                if (existingModal) existingModal.remove();
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            window.tierEnforcement = new TierEnforcement();
+            
+            // Handle file upload display
+            const fileInput = document.getElementById('file-upload');
+            const fileLabel = document.querySelector('.file-upload-label');
+            
+            fileInput.addEventListener('change', function() {
+                const fileCount = this.files.length;
+                if (fileCount > 0) {
+                    fileLabel.innerHTML = `📱 ${fileCount} file(s) selected<br><small>Click to change</small>`;
+                }
+            });
+        });
+
+        // Test function to simulate user subscription (for testing)
+        function simulateSubscription(email, tier) {
+            const userData = {
+                email: email,
+                tier: tier,
+                subscriptionDate: new Date().toISOString(),
+                monthlyUsage: {}
+            };
+            
+            const users = JSON.parse(localStorage.getItem('seenandred_users') || '{}');
+            users[email] = userData;
+            localStorage.setItem('seenandred_users', JSON.stringify(users));
+            
+            // Reload page with email parameter
+            window.location.href = `?email=${encodeURIComponent(email)}`;
+        }
+
+        // For testing - uncomment one of these lines:
+        // simulateSubscription('test@example.com', 'flag_check');
+        // simulateSubscription('test@example.com', 'pattern_check');
+        // simulateSubscription('test@example.com', 'reality_check');
+    </script>
+</body>
+</html>
