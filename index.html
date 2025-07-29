@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seen and Red - Your AI Bestie with a PhD</title>
-    <meta name="description" content="AI-powered message analysis to help you spot red flags, decode mixed signals, and finally see relationships for what they really are.">
+    <title>Submit Your Messages - Seen and Red</title>
+    <meta name="description" content="Upload your message screenshots for AI-powered relationship analysis.">
     <style>
         * {
             margin: 0;
@@ -20,729 +20,772 @@
             --medium-gray: #6b7280;
             --light-gray: #f9fafb;
             --white: #ffffff;
+            --success-green: #22c55e;
         }
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: var(--dark-gray);
-            background: var(--white);
+            background: var(--light-gray);
+            min-height: 100vh;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 700px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 2rem 20px;
         }
         
-        /* Header */
-        header {
-            background: var(--white);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-red);
-            text-decoration: none;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        
-        nav a {
-            text-decoration: none;
-            color: var(--dark-gray);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        nav a:hover {
-            color: var(--primary-red);
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--light-red) 0%, var(--white) 100%);
-            padding: 8rem 0 4rem;
+        .header {
             text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark-gray);
-        }
-        
-        .hero .subtitle {
-            font-size: 1.25rem;
-            color: var(--medium-gray);
             margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
         }
         
-        .cta-button {
-            display: inline-block;
-            background: var(--primary-red);
-            color: var(--white);
-            padding: 1.25rem 2.5rem;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: background 0.3s;
-            margin-bottom: 1rem;
-        }
-        
-        .cta-button:hover {
-            background: var(--dark-red);
-        }
-        
-        .secondary-cta {
-            display: block;
-            margin-top: 1rem;
-            color: var(--medium-gray);
-        }
-        
-        /* DECODE Section */
-        .decode-section {
-            padding: 4rem 0;
-            background: var(--light-gray);
-        }
-        
-        .decode-section h2 {
-            text-align: center;
+        .header h1 {
             font-size: 2.5rem;
-            margin-bottom: 3rem;
             color: var(--dark-gray);
+            margin-bottom: 0.5rem;
         }
         
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+        .header p {
+            font-size: 1.1rem;
+            color: var(--medium-gray);
         }
         
-        .pricing-card {
-            background: var(--white);
+        /* Plan Status */
+        .plan-status {
+            background: linear-gradient(135deg, var(--light-red) 0%, var(--white) 100%);
             border-radius: 16px;
             padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: relative;
-            transition: transform 0.3s, box-shadow 0.3s;
         }
         
-        .pricing-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-        }
-        
-        .pricing-card.featured {
-            border: 2px solid var(--primary-red);
-            transform: scale(1.05);
-        }
-        
-        .featured-badge {
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary-red);
-            color: var(--white);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-        
-        .pricing-header h3 {
+        .plan-name {
             font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark-gray);
-        }
-        
-        .price {
-            font-size: 3rem;
             font-weight: bold;
             color: var(--primary-red);
             margin-bottom: 0.5rem;
         }
         
-        .price-period {
+        .usage-count {
+            font-size: 1.2rem;
             color: var(--medium-gray);
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
         
-        .pricing-features {
-            list-style: none;
-            margin-bottom: 2rem;
+        .plan-features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
         
-        .pricing-features li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #eee;
-            position: relative;
-            padding-left: 1.5rem;
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
         }
         
-        .pricing-features li:before {
+        .feature-item::before {
             content: "✓";
-            position: absolute;
-            left: 0;
             color: var(--primary-red);
             font-weight: bold;
         }
         
-        .pricing-button {
-            display: block;
-            width: 100%;
-            padding: 1rem;
-            background: var(--primary-red);
-            color: var(--white);
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-            text-decoration: none;
-            text-align: center;
-        }
-        
-        .pricing-button:hover {
-            background: var(--dark-red);
-        }
-        
-        /* Features Section */
-        .features {
-            padding: 4rem 0;
-        }
-        
-        .features h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--dark-gray);
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .feature-card {
+        /* Submission Form */
+        .submission-form {
             background: var(--white);
             border-radius: 16px;
             padding: 2rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-red);
+        }
+        
+        .file-upload {
+            border: 2px dashed #d1d5db;
+            border-radius: 8px;
+            padding: 2rem;
             text-align: center;
-            transition: transform 0.3s;
+            transition: border-color 0.3s;
+            cursor: pointer;
         }
         
-        .feature-card:hover {
-            transform: translateY(-4px);
+        .file-upload:hover {
+            border-color: var(--primary-red);
         }
         
-        .feature-card h3 {
-            color: var(--primary-red);
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
+        .file-upload input[type="file"] {
+            display: none;
         }
         
-        .feature-card p {
+        .file-upload-content {
             color: var(--medium-gray);
+        }
+        
+        .file-upload-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .file-upload-text {
+            font-weight: 600;
+            color: var(--primary-red);
+            margin-bottom: 0.25rem;
+        }
+        
+        .file-upload-hint {
+            font-size: 0.9rem;
+        }
+        
+        .submit-button {
+            width: 100%;
+            background: var(--primary-red);
+            color: var(--white);
+            border: none;
+            padding: 1.25rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .submit-button:hover:not(:disabled) {
+            background: var(--dark-red);
+        }
+        
+        .submit-button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        
+        /* Tier Limit Modal */
+        .tier-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .tier-modal-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            max-width: 500px;
+            margin: 0 1rem;
+            text-align: center;
+            box-shadow: 0 20px 25px rgba(0,0,0,0.1);
+        }
+        
+        .tier-modal-content h3 {
+            color: var(--primary-red);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tier-modal-content p {
+            color: var(--medium-gray);
+            margin-bottom: 1.5rem;
             line-height: 1.6;
         }
         
-        /* Newsletter Section */
-        .newsletter {
+        .upgrade-options {
+            margin: 1.5rem 0;
+        }
+        
+        .upgrade-btn, .subscribe-btn {
+            display: block;
+            width: 100%;
+            margin: 0.75rem 0;
+            padding: 1rem;
             background: var(--primary-red);
             color: var(--white);
-            padding: 4rem 0;
-            text-align: center;
-        }
-        
-        .newsletter h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .newsletter p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .newsletter-form {
-            display: flex;
-            max-width: 400px;
-            margin: 0 auto;
-            gap: 1rem;
-        }
-        
-        .newsletter-form input {
-            flex: 1;
-            padding: 1rem;
+            text-decoration: none;
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-        
-        .newsletter-form button {
-            background: var(--white);
-            color: var(--primary-red);
-            border: none;
-            padding: 1rem 2rem;
             border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
             transition: background 0.3s;
         }
         
-        .newsletter-form button:hover {
-            background: var(--light-gray);
+        .upgrade-btn:hover, .subscribe-btn:hover {
+            background: var(--dark-red);
         }
         
-        /* Footer */
-        footer {
-            background: var(--light-gray);
-            padding: 2rem 0;
-            text-align: center;
+        .modal-close-btn {
+            background: #6b7280;
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 1rem;
         }
         
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
+        .modal-close-btn:hover {
+            background: #4b5563;
         }
         
-        .footer-links {
-            display: flex;
-            gap: 2rem;
+        /* Loading State */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
         }
         
-        .footer-links a {
-            color: var(--medium-gray);
-            text-decoration: none;
-            transition: color 0.3s;
+        .loading .submit-button::after {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-left: 8px;
+            border: 2px solid transparent;
+            border-top: 2px solid var(--white);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
         
-        .footer-links a:hover {
-            color: var(--primary-red);
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
-        /* Mobile Responsive - ENHANCED */
+        /* Responsive */
         @media (max-width: 768px) {
             .container {
-                padding: 0 15px;
+                padding: 1rem 15px;
             }
             
-            .header-content {
-                flex-direction: column;
-                gap: 0.75rem;
-                padding: 0.5rem 0;
-            }
-            
-            .logo {
-                font-size: 1.35rem;
-                margin-bottom: 0.25rem;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1.25rem;
-                margin: 0;
-            }
-            
-            nav a {
-                font-size: 0.85rem;
-                padding: 0.5rem 0.75rem;
-                white-space: nowrap;
-            }
-            
-            .hero {
-                padding: 5.5rem 0 3rem;
-                text-align: center;
-            }
-            
-            .hero h1 {
-                font-size: 2.25rem;
-                line-height: 1.2;
-                margin-bottom: 1.5rem;
-            }
-            
-            .hero .subtitle {
-                font-size: 1.1rem;
-                line-height: 1.5;
-                margin-bottom: 2rem;
-                padding: 0 10px;
-            }
-            
-            .cta-button {
-                padding: 1.25rem 1.5rem;
-                font-size: 1.1rem;
-                margin: 0 15px;
-            }
-            
-            .secondary-cta {
-                margin-top: 1.5rem;
-                padding: 0 15px;
-            }
-            
-            .decode-section, .features {
-                padding: 3rem 0;
-            }
-            
-            .decode-section h2, .features h2 {
+            .header h1 {
                 font-size: 2rem;
-                margin-bottom: 2rem;
             }
             
-            .pricing-grid, .feature-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-                margin-bottom: 2rem;
-            }
-            
-            .pricing-card {
+            .submission-form, .plan-status {
                 padding: 1.5rem;
-                margin: 0 10px;
             }
             
-            .pricing-card.featured {
-                transform: none;
-                margin: 0 10px;
-            }
-            
-            .price {
-                font-size: 2.5rem;
-            }
-            
-            .pricing-features li {
-                font-size: 0.95rem;
-                padding: 0.6rem 0;
-            }
-            
-            .pricing-button {
-                padding: 1.25rem 1rem;
-                font-size: 1.1rem;
-            }
-            
-            .feature-card {
-                padding: 1.5rem;
-                margin: 0 10px;
-            }
-            
-            .newsletter {
-                padding: 3rem 0;
-            }
-            
-            .newsletter h2 {
-                font-size: 1.75rem;
-            }
-            
-            .newsletter p {
-                font-size: 1rem;
-                padding: 0 15px;
-            }
-            
-            .newsletter-form {
-                flex-direction: column;
-                max-width: 300px;
+            .plan-features {
                 gap: 1rem;
-            }
-            
-            .newsletter-form input,
-            .newsletter-form button {
-                padding: 1.25rem;
-                font-size: 1rem;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 1.5rem;
-            }
-            
-            .footer-links {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1.5rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .header-content {
-                padding: 0.4rem 0;
-                gap: 0.5rem;
-            }
-            
-            .logo {
-                font-size: 1.25rem;
-            }
-            
-            nav ul {
-                gap: 1rem;
-            }
-            
-            nav a {
-                font-size: 0.8rem;
-                padding: 0.4rem 0.6rem;
-            }
-            
-            .hero {
-                padding: 5rem 0 2.5rem;
-            }
-            
-            .hero h1 {
-                font-size: 1.9rem;
-            }
-            
-            .hero .subtitle {
-                font-size: 1rem;
-            }
-            
-            .decode-section h2, .features h2 {
-                font-size: 1.75rem;
-            }
-            
-            .pricing-card, .feature-card {
-                margin: 0 5px;
-                padding: 1.25rem;
-            }
-            
-            .price {
-                font-size: 2.25rem;
-            }
-            
-            .cta-button {
-                margin: 0 10px;
-                padding: 1rem 1.25rem;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="#home" class="logo">Seen and Red</a>
-                <nav>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#decode">DECODE</a></li>
-                        <li><a href="gifts.html">Gifts</a></li>
-                        <li><a href="#newsletter">Newsletter</a></li>
-                        <li><a href="about.html">About</a></li>
-                    </ul>
-                </nav>
-            </div>
+    <div class="container">
+        <div class="header">
+            <h1>Submit Your Messages</h1>
+            <p>Upload your message screenshots for AI-powered relationship analysis</p>
         </div>
-    </header>
 
-    <main>
-        <section id="home" class="hero">
-            <div class="container">
-                <h1>Your AI Bestie with a PhD</h1>
-                <p class="subtitle">Stop wondering "what does this mean?" Upload your confusing messages and get instant AI-powered analysis to spot red flags, decode mixed signals, and finally see relationships for what they really are.</p>
-                <a href="https://tally.so/r/me8pJE" class="cta-button" target="_blank">Take Free Clarity Quiz</a>
-                <p class="secondary-cta">or <a href="submit-analysis.html" style="color: var(--medium-gray); text-decoration: underline; font-weight: normal;">already purchased? submit your messages</a></p>
-            </div>
-        </section>
-
-        <section id="decode" class="decode-section">
-            <div class="container">
-                <h2>DECODE Your Messages</h2>
-                <div class="pricing-grid">
-                    <div class="pricing-card">
-                        <div class="pricing-header">
-                            <h3>Flag Check</h3>
-                            <div class="price">$9</div>
-                            <p class="price-period">One-time analysis</p>
-                        </div>
-                        <ul class="pricing-features">
-                            <li>3 Message Screenshot Analysis</li>
-                            <li>Red & Green Flag Identification</li>
-                            <li>Communication Pattern Analysis</li>
-                            <li>Instant AI-Powered Results</li>
-                            <li>Clear Action Recommendations</li>
-                        </ul>
-                        <a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" class="pricing-button">Upload & Analyze Now</a>
-                    </div>
-                    
-                    <div class="pricing-card featured">
-                        <div class="featured-badge">Most Popular</div>
-                        <div class="pricing-header">
-                            <h3>Pattern Check</h3>
-                            <div class="price">$19</div>
-                            <p class="price-period">Comprehensive analysis</p>
-                        </div>
-                        <ul class="pricing-features">
-                            <li>6 Message Screenshot Analysis</li>
-                            <li>Deep Pattern Recognition</li>
-                            <li>Inner Child Trauma Insights</li>
-                            <li>Attachment Style Analysis</li>
-                            <li>Custom Response Suggestions</li>
-                            <li>Relationship Dynamic Breakdown</li>
-                        </ul>
-                        <a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a" class="pricing-button">Upload & Get Insights</a>
-                    </div>
-                    
-                    <div class="pricing-card">
-                        <div class="pricing-header">
-                            <h3>Reality Check</h3>
-                            <div class="price">$29</div>
-                            <p class="price-period">Per month</p>
-                        </div>
-                        <ul class="pricing-features">
-                            <li>Unlimited Message Analysis</li>
-                            <li>24/7 Instant AI Insights</li>
-                            <li>Voice Message Analysis</li>
-                            <li>Weekly Pattern Reports</li>
-                            <li>Priority Support</li>
-                            <li>Cancel Anytime</li>
-                        </ul>
-                        <a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03" class="pricing-button">Get Unlimited Access</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="features">
-            <div class="container">
-                <h2>Learn the Patterns</h2>
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <h3>Missing Green Flags</h3>
-                        <p>Your trauma response might be making you reject genuine love. Learn to recognize when someone is actually showing up for you, even if it feels unfamiliar.</p>
-                        <a href="missing-green-flags.html" style="color: var(--primary-red); text-decoration: none; font-weight: 600;">Read More →</a>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Ignoring Red Flags</h3>
-                        <p>Past wounds can make manipulation feel like love. Discover how your inner child wounds make you vulnerable to toxic patterns and how to heal them.</p>
-                        <a href="ignoring-red-flags.html" style="color: var(--primary-red); text-decoration: none; font-weight: 600;">Read More →</a>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Trust Your Intuition</h3>
-                        <p>That gut feeling isn't paranoia—it's wisdom. Learn to distinguish between trauma responses and genuine intuition about people's intentions.</p>
-                        <a href="trust-your-intuition.html" style="color: var(--primary-red); text-decoration: none; font-weight: 600;">Read More →</a>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Healing Your Patterns</h3>
-                        <p>Understanding why you repeat the same relationship cycles is the first step to breaking them. Get insights into your attachment style and triggers.</p>
-                        <a href="healing-your-patterns.html" style="color: var(--primary-red); text-decoration: none; font-weight: 600;">Read More →</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="newsletter" class="newsletter">
-            <div class="container">
-                <h2>Weekly Bestie Wisdom</h2>
-                <p>No spam. No therapy speak. Just weekly bestie wisdom for dodging red flags, healing your patterns, and finally seeing sh*t for what it is. 💌 Delivered straight to your inbox — because receipts don't lie.</p>
-                
-                <!-- Newsletter Form with Hidden Iframe -->
-                <div class="newsletter-form-container">
-                    <form class="newsletter-form" id="newsletter-form" action="https://assets.mailerlite.com/jsonp/1594871/forms/160002022910723398/subscribe" method="post" target="hidden-iframe">
-                        <input type="email" name="fields[email]" placeholder="Your email address" required>
-                        <input type="hidden" name="ml-submit" value="1">
-                        <input type="hidden" name="anticsrf" value="true">
-                        <button type="submit">Subscribe</button>
-                    </form>
-                    
-                    <div class="newsletter-success" id="newsletter-success" style="display: none; text-align: center; background: rgba(34, 197, 94, 0.1); border: 2px solid #22c55e; border-radius: 8px; padding: 1.5rem; margin-top: 1rem;">
-                        <h3 style="color: #22c55e; margin-bottom: 0.5rem;">🎉 You're In!</h3>
-                        <p style="color: #1f2937; margin: 0;">Thanks for subscribing! Check your inbox for weekly bestie wisdom.</p>
-                    </div>
-                </div>
-                
-                <!-- Hidden iframe to capture form submission -->
-                <iframe name="hidden-iframe" id="hidden-iframe" style="display: none;"></iframe>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-links">
-                    <a href="https://seenandred.com/privacy.html">Privacy Policy</a>
-                    <a href="https://seenandred.com/terms.html">Terms of Service</a>
-                    <a href="https://seenandred.com/contact.html">Contact</a>
-                </div>
-                <p>&copy; 2025 Seen and Red. All rights reserved.</p>
-            </div>
+        <div class="plan-status" id="plan-status">
+            <div class="plan-name" id="plan-name">Loading...</div>
+            <div class="usage-count" id="usage-count">Checking your plan...</div>
+            <div class="plan-features" id="plan-features"></div>
         </div>
-    </footer>
 
-    <!-- Simple smooth scrolling for navigation links -->
+        <div class="submission-form">
+            <form id="message-analysis-form">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="context">Relationship Context</label>
+                    <textarea id="context" name="context" rows="4" placeholder="Brief context about your situation (optional but helpful for better analysis)"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Message Screenshots</label>
+                    <div class="file-upload" onclick="document.getElementById('file-upload').click()">
+                        <input type="file" id="file-upload" name="screenshots" multiple accept="image/*">
+                        <div class="file-upload-content" id="file-upload-content">
+                            <div class="file-upload-icon">📱</div>
+                            <div class="file-upload-text">Click to upload screenshots</div>
+                            <div class="file-upload-hint">Support for multiple images (PNG, JPG)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-button" id="submit-btn">
+                    Submit for Analysis
+                </button>
+            </form>
+        </div>
+    </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
+        const TIER_CONFIGS = {
+            'flag_check': { 
+                limit: 3, 
+                price: 9, 
+                name: 'Flag Check',
+                features: ['3 message analyses', 'Red & green flag ID', 'Pattern analysis', 'Action recommendations']
+            },
+            'pattern_check': { 
+                limit: 6, 
+                price: 19, 
+                name: 'Pattern Check',
+                features: ['6 message analyses', 'Deep pattern recognition', 'Trauma insights', 'Response suggestions']
+            },
+            'reality_check': { 
+                limit: -1, 
+                price: 29, 
+                name: 'Reality Check',
+                features: ['Unlimited analyses', '24/7 access', 'Voice messages', 'Priority support']
+            }
+        };
 
-            // Newsletter form submission with hidden iframe
-            const newsletterForm = document.getElementById('newsletter-form');
-            if (newsletterForm) {
-                newsletterForm.addEventListener('submit', function(e) {
-                    const email = this.querySelector('input[type="email"]').value;
-                    const button = this.querySelector('button[type="submit"]');
+        const SUBSCRIPTION_STATUS = {
+            ACTIVE: 'active',
+            CANCELLED: 'cancelled',
+            PAST_DUE: 'past_due',
+            UNPAID: 'unpaid',
+            EXPIRED: 'expired'
+        };
+
+        class TierEnforcement {
+            constructor() {
+                this.currentUser = null;
+                this.init();
+            }
+
+            async init() {
+                await this.loadUserData();
+                this.setupFormValidation();
+                this.updateUI();
+            }
+
+            async loadUserData() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const email = urlParams.get('email') || localStorage.getItem('user_email');
+                
+                if (!email) {
+                    this.showNoSubscriptionModal();
+                    return;
+                }
+
+                try {
+                    const userData = this.getUserDataFromStorage(email) || this.detectTierFromStripe();
                     
-                    if (!email) {
-                        e.preventDefault();
+                    if (!userData) {
+                        this.showNoSubscriptionModal();
                         return;
                     }
                     
-                    // Show loading state
-                    button.textContent = 'Subscribing...';
-                    button.disabled = true;
+                    this.currentUser = userData;
+                    localStorage.setItem('user_email', email);
                     
-                    // Show success message after a short delay
-                    setTimeout(() => {
-                        document.getElementById('newsletter-success').style.display = 'block';
-                        this.style.display = 'none';
-                    }, 1000);
-                    
-                    // Form will submit to hidden iframe automatically
-                });
+                } catch (error) {
+                    console.error('Failed to load user data:', error);
+                    this.showNoSubscriptionModal();
+                }
             }
+
+            detectTierFromStripe() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const email = urlParams.get('email');
+                
+                if (email) {
+                    const tier = urlParams.get('tier') || this.detectTierFromPrice() || 'flag_check';
+                    
+                    return {
+                        email: email,
+                        tier: tier,
+                        subscriptionDate: new Date().toISOString(),
+                        monthlyUsage: {}
+                    };
+                }
+                
+                return null;
+            }
+
+            detectTierFromPrice() {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get('tier');
+            }
+
+            getUserDataFromStorage(email) {
+                const users = JSON.parse(localStorage.getItem('seenandred_users') || '{}');
+                return users[email] || null;
+            }
+
+            saveUserData(email, userData) {
+                const users = JSON.parse(localStorage.getItem('seenandred_users') || '{}');
+                users[email] = userData;
+                localStorage.setItem('seenandred_users', JSON.stringify(users));
+            }
+
+            setupFormValidation() {
+                const form = document.getElementById('message-analysis-form');
+                form.addEventListener('submit', (e) => this.validateSubmission(e));
+            }
+
+            async validateSubmission(event) {
+                event.preventDefault();
+                
+                const canProceed = await this.checkTierLimits();
+                
+                if (!canProceed.allowed) {
+                    this.showLimitReachedModal(canProceed);
+                    return false;
+                }
+                
+                this.proceedWithAnalysis(event.target);
+            }
+
+            async checkTierLimits() {
+                if (!this.currentUser) {
+                    return { 
+                        allowed: false, 
+                        reason: 'no_subscription',
+                        message: 'You need a subscription to access relationship analyses.'
+                    };
+                }
+
+                const subscriptionStatus = this.checkSubscriptionStatus();
+                if (!subscriptionStatus.active) {
+                    return {
+                        allowed: false,
+                        reason: subscriptionStatus.reason,
+                        message: subscriptionStatus.message
+                    };
+                }
+
+                const userTier = this.currentUser.tier;
+                const tierConfig = TIER_CONFIGS[userTier];
+                
+                if (!tierConfig) {
+                    return { 
+                        allowed: false, 
+                        reason: 'no_subscription',
+                        message: 'You need a valid subscription to access analyses.'
+                    };
+                }
+                
+                if (tierConfig.limit === -1) {
+                    return { allowed: true, reason: 'unlimited' };
+                }
+                
+                const currentUsage = this.getCurrentMonthUsage();
+                
+                if (currentUsage >= tierConfig.limit) {
+                    return {
+                        allowed: false,
+                        reason: 'monthly_limit_reached',
+                        used: currentUsage,
+                        limit: tierConfig.limit,
+                        message: 'You have used all ' + tierConfig.limit + ' analyses for this month.'
+                    };
+                }
+                
+                return {
+                    allowed: true,
+                    remaining: tierConfig.limit - currentUsage
+                };
+            }
+
+            checkSubscriptionStatus() {
+                if (!this.currentUser.subscriptionStatus) {
+                    return { active: true };
+                }
+
+                const status = this.currentUser.subscriptionStatus;
+                const now = new Date();
+                
+                switch(status.status) {
+                    case SUBSCRIPTION_STATUS.ACTIVE:
+                        return { active: true };
+                        
+                    case SUBSCRIPTION_STATUS.CANCELLED:
+                        if (status.periodEndDate && new Date(status.periodEndDate) > now) {
+                            return { 
+                                active: true, 
+                                warning: 'Subscription cancels on ' + new Date(status.periodEndDate).toLocaleDateString()
+                            };
+                        } else {
+                            return {
+                                active: false,
+                                reason: 'subscription_cancelled',
+                                message: 'Your subscription has been cancelled. Resubscribe to continue accessing analyses.'
+                            };
+                        }
+                        
+                    case SUBSCRIPTION_STATUS.PAST_DUE:
+                        return {
+                            active: false,
+                            reason: 'payment_failed',
+                            message: 'Your payment failed. Please update your payment method to continue.'
+                        };
+                        
+                    case SUBSCRIPTION_STATUS.EXPIRED:
+                        return {
+                            active: false,
+                            reason: 'subscription_expired',
+                            message: 'Your subscription has expired. Resubscribe to continue accessing analyses.'
+                        };
+                        
+                    default:
+                        return {
+                            active: false,
+                            reason: 'subscription_inactive',
+                            message: 'Your subscription is not active. Please resubscribe to continue.'
+                        };
+                }
+            }
+
+            getCurrentMonthUsage() {
+                if (!this.currentUser) return 0;
+                
+                const currentMonth = new Date().toISOString().slice(0, 7);
+                return this.currentUser.monthlyUsage && this.currentUser.monthlyUsage[currentMonth] ? this.currentUser.monthlyUsage[currentMonth] : 0;
+            }
+
+            showLimitReachedModal(limitInfo) {
+                this.removeExistingModal();
+                
+                const modal = document.createElement('div');
+                modal.id = 'tier-limit-modal';
+                modal.className = 'tier-modal-overlay';
+                
+                let modalContent = '';
+                let upgradeOptions = '';
+                
+                switch(limitInfo.reason) {
+                    case 'no_subscription':
+                        modalContent = '<h3>Subscription Required</h3><p>Relationship analyses are available to subscribers only.</p><p><strong>New here?</strong> Start with our <a href="https://tally.so/r/me8pJE" target="_blank" style="color: var(--primary-red);">Free Clarity Quiz</a> first!</p>';
+                        upgradeOptions = this.getSubscriptionOptions();
+                        break;
+                        
+                    case 'subscription_cancelled':
+                        modalContent = '<h3>Subscription Cancelled</h3><p>Your subscription has been cancelled. To continue getting relationship analyses, please resubscribe.</p>';
+                        upgradeOptions = this.getResubscribeOptions();
+                        break;
+                        
+                    case 'payment_failed':
+                        modalContent = '<h3>Payment Failed</h3><p>We could not process your payment. Please update your payment method to continue.</p>';
+                        upgradeOptions = this.getPaymentUpdateOptions();
+                        break;
+                        
+                    case 'subscription_expired':
+                        modalContent = '<h3>Subscription Expired</h3><p>Your subscription has expired. Resubscribe to continue accessing analyses.</p>';
+                        upgradeOptions = this.getResubscribeOptions();
+                        break;
+                        
+                    case 'monthly_limit_reached':
+                        modalContent = '<h3>Monthly Limit Reached</h3><p>You have used all ' + limitInfo.limit + ' analyses for this month.</p><p>Your usage resets on the 1st of next month, or you can upgrade now for more analyses.</p>';
+                        upgradeOptions = this.getUpgradeButtons(this.currentUser.tier);
+                        break;
+                        
+                    default:
+                        modalContent = '<h3>Access Restricted</h3><p>Unable to process your analysis request at this time.</p>';
+                }
+                
+                modal.innerHTML = '<div class="tier-modal-content">' + modalContent + upgradeOptions + '<button onclick="this.closest(\'.tier-modal-overlay\').remove()" class="modal-close-btn">Close</button></div>';
+                
+                document.body.appendChild(modal);
+            }
+
+            showNoSubscriptionModal() {
+                const modal = document.createElement('div');
+                modal.className = 'tier-modal-overlay';
+                modal.innerHTML = '<div class="tier-modal-content"><h3>Welcome to Seen and Red!</h3><p>To submit messages for analysis, you will need to purchase a plan first.</p><p><strong>New here?</strong> Try our <a href="https://tally.so/r/me8pJE" target="_blank" style="color: var(--primary-red);">Free Clarity Quiz</a> first!</p>' + this.getSubscriptionOptions() + '<button onclick="window.location.href=\'/\'" class="modal-close-btn">Go Back to Home</button></div>';
+                document.body.appendChild(modal);
+            }
+
+            getSubscriptionOptions() {
+                return '<div class="upgrade-options"><p><strong>Choose your plan:</strong></p><a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" class="subscribe-btn">Flag Check - $9<br><small>3 analyses per month</small></a><a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a" class="subscribe-btn">Pattern Check - $19<br><small>6 analyses per month</small></a><a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03" class="subscribe-btn">Reality Check - $29/month<br><small>Unlimited analyses</small></a></div>';
+            }
+
+            getUpgradeButtons(currentTier) {
+                const tiers = ['flag_check', 'pattern_check', 'reality_check'];
+                const currentIndex = tiers.indexOf(currentTier);
+                let buttons = '';
+                
+                for (let i = currentIndex + 1; i < tiers.length; i++) {
+                    const tier = tiers[i];
+                    const config = TIER_CONFIGS[tier];
+                    const limitText = config.limit === -1 ? 'Unlimited' : config.limit + ' analyses';
+                    
+                    const upgradeUrls = {
+                        'pattern_check': 'https://buy.stripe.com/28E3cueA58qa4023GF9EI0a',
+                        'reality_check': 'https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03'
+                    };
+                    
+                    buttons += '<a href="' + upgradeUrls[tier] + '" class="upgrade-btn">Upgrade to ' + config.name + ' - $' + config.price + '/month<br><small>' + limitText + ' per month</small></a>';
+                }
+                
+                return '<div class="upgrade-options">' + buttons + '</div>';
+            }
+
+            getResubscribeOptions() {
+                return '<div class="upgrade-options"><p><strong>Resubscribe to continue:</strong></p><a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" class="subscribe-btn">Flag Check - $9<br><small>3 analyses per month</small></a><a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a" class="subscribe-btn">Pattern Check - $19<br><small>6 analyses per month</small></a><a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03" class="subscribe-btn">Reality Check - $29/month<br><small>Unlimited analyses</small></a></div>';
+            }
+
+            getPaymentUpdateOptions() {
+                return '<div class="upgrade-options"><p><strong>Update your payment method:</strong></p><a href="https://billing.stripe.com/p/login/your-portal-link" class="subscribe-btn">Update Payment Method<br><small>Fix your subscription</small></a><p style="margin-top: 1rem;"><small>Or resubscribe with a new payment method:</small></p><a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" class="subscribe-btn">Resubscribe - $9/month</a></div>';
+            }
+
+            async proceedWithAnalysis(form) {
+                this.showLoadingState();
+                
+                try {
+                    this.incrementUsage();
+                    
+                    const tallyUrl = 'https://tally.so/r/mJbgaz';
+                    window.location.href = tallyUrl;
+                    
+                } catch (error) {
+                    console.error('Analysis submission failed:', error);
+                    alert('Failed to submit analysis. Please try again.');
+                    this.hideLoadingState();
+                }
+            }
+
+            incrementUsage() {
+                if (!this.currentUser) return;
+                
+                const currentMonth = new Date().toISOString().slice(0, 7);
+                if (!this.currentUser.monthlyUsage) {
+                    this.currentUser.monthlyUsage = {};
+                }
+                
+                this.currentUser.monthlyUsage[currentMonth] = (this.currentUser.monthlyUsage[currentMonth] || 0) + 1;
+                
+                this.saveUserData(this.currentUser.email, this.currentUser);
+                this.updateUI();
+            }
+
+            updateUI() {
+                const planName = document.getElementById('plan-name');
+                const usageCount = document.getElementById('usage-count');
+                const planFeatures = document.getElementById('plan-features');
+                const submitBtn = document.getElementById('submit-btn');
+                
+                if (!this.currentUser) {
+                    planName.textContent = 'No Subscription';
+                    usageCount.textContent = 'Please purchase a plan to continue';
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Subscription Required';
+                    return;
+                }
+
+                const tierConfig = TIER_CONFIGS[this.currentUser.tier];
+                const currentUsage = this.getCurrentMonthUsage();
+                const subscriptionStatus = this.checkSubscriptionStatus();
+                
+                planName.textContent = tierConfig.name;
+                
+                if (subscriptionStatus.warning) {
+                    usageCount.innerHTML = '<div style="color: #f59e0b; margin-bottom: 0.5rem;">⚠️ ' + subscriptionStatus.warning + '</div><div>' + (tierConfig.limit === -1 ? 'Unlimited analyses' : currentUsage + '/' + tierConfig.limit + ' analyses used this month') + '</div>';
+                } else if (tierConfig.limit === -1) {
+                    usageCount.textContent = 'Unlimited analyses';
+                } else {
+                    usageCount.textContent = currentUsage + '/' + tierConfig.limit + ' analyses used this month';
+                    
+                    if (currentUsage >= tierConfig.limit) {
+                        submitBtn.disabled = true;
+                        submitBtn.textContent = 'Monthly Limit Reached';
+                    }
+                }
+                
+                if (!subscriptionStatus.active) {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Subscription Required';
+                }
+                
+                planFeatures.innerHTML = tierConfig.features.map(feature => '<div class="feature-item">' + feature + '</div>').join('');
+            }
+
+            showLoadingState() {
+                const form = document.getElementById('message-analysis-form');
+                const submitBtn = document.getElementById('submit-btn');
+                
+                form.classList.add('loading');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Processing...';
+            }
+
+            hideLoadingState() {
+                const form = document.getElementById('message-analysis-form');
+                const submitBtn = document.getElementById('submit-btn');
+                
+                form.classList.remove('loading');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit for Analysis';
+            }
+
+            removeExistingModal() {
+                const existingModal = document.getElementById('tier-limit-modal');
+                if (existingModal) existingModal.remove();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            window.tierEnforcement = new TierEnforcement();
+            
+            const fileInput = document.getElementById('file-upload');
+            const fileContent = document.getElementById('file-upload-content');
+            
+            fileInput.addEventListener('change', function() {
+                const fileCount = this.files.length;
+                if (fileCount > 0) {
+                    fileContent.innerHTML = '<div class="file-upload-icon">📁</div><div class="file-upload-text">' + fileCount + ' file(s) selected</div><div class="file-upload-hint">Click to change selection</div>';
+                }
+            });
         });
+
+        function simulateSubscription(email, tier) {
+            const userData = {
+                email: email,
+                tier: tier,
+                subscriptionDate: new Date().toISOString(),
+                monthlyUsage: {}
+            };
+            
+            const users = JSON.parse(localStorage.getItem('seenandred_users') || '{}');
+            users[email] = userData;
+            localStorage.setItem('seenandred_users', JSON.stringify(users));
+            
+            window.location.href = '?email=' + encodeURIComponent(email);
+        }
     </script>
-    
 </body>
 </html>
