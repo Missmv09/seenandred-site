@@ -664,8 +664,17 @@
             // Increment usage count
             tierEnforcement.incrementUsage();
             
-            // Redirect to Tally form
-            window.location.href = 'https://tally.so/r/mJbgaz';
+            // Redirect to tier-specific Tally form
+            const tallyUrls = {
+                'flag_check': 'https://tally.so/r/mJbgaz',      // $9 - Flag Check
+                'pattern_check': 'https://tally.so/r/m6E2VJ',   // $19 - Pattern Check  
+                'reality_check': 'https://tally.so/r/waqYzb'    // $29 - Reality Check
+            };
+            
+            const userTier = tierEnforcement.currentUser.tier;
+            const tallyUrl = tallyUrls[userTier] || tallyUrls['flag_check']; // Default fallback
+            
+            window.location.href = tallyUrl;
         }
 
         function simulateSubscription(email, tier) {
