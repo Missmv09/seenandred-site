@@ -314,16 +314,12 @@
             <p>Upload your message screenshots for AI-powered relationship analysis</p>
         </div>
 
-        <!-- Plan Status -->
         <div class="plan-status" id="plan-status">
             <div class="plan-name" id="plan-name">Loading...</div>
             <div class="usage-count" id="usage-count">Checking your plan...</div>
-            <div class="plan-features" id="plan-features">
-                <!-- Features will be populated by JavaScript -->
-            </div>
+            <div class="plan-features" id="plan-features"></div>
         </div>
 
-        <!-- Submission Form -->
         <div class="submission-form">
             <form id="message-analysis-form">
                 <div class="form-group">
@@ -356,7 +352,6 @@
     </div>
 
     <script>
-        // Tier configuration
         const TIER_CONFIGS = {
             'flag_check': { 
                 limit: 3, 
@@ -378,7 +373,6 @@
             }
         };
 
-        // Subscription status types
         const SUBSCRIPTION_STATUS = {
             ACTIVE: 'active',
             CANCELLED: 'cancelled',
@@ -400,7 +394,6 @@
             }
 
             async loadUserData() {
-                // Get user email from URL parameter or local storage
                 const urlParams = new URLSearchParams(window.location.search);
                 const email = urlParams.get('email') || localStorage.getItem('user_email');
                 
@@ -410,8 +403,6 @@
                 }
 
                 try {
-                    // In a real implementation, this would be an API call to your backend
-                    // For now, we'll simulate with local storage or URL parameters
                     const userData = this.getUserDataFromStorage(email) || this.detectTierFromStripe();
                     
                     if (!userData) {
@@ -429,13 +420,10 @@
             }
 
             detectTierFromStripe() {
-                // Detect tier from Stripe success redirect
                 const urlParams = new URLSearchParams(window.location.search);
                 const email = urlParams.get('email');
                 
                 if (email) {
-                    // Auto-detect tier based on the Stripe checkout they came from
-                    // You can enhance this by passing tier info in the URL
                     const tier = urlParams.get('tier') || this.detectTierFromPrice() || 'flag_check';
                     
                     return {
@@ -450,8 +438,6 @@
             }
 
             detectTierFromPrice() {
-                // If you modify your Stripe success URLs to include tier info:
-                // https://seenandred.com/submit-analysis.html?email={CHECKOUT_SESSION_EMAIL}&tier=flag_check
                 const urlParams = new URLSearchParams(window.location.search);
                 return urlParams.get('tier');
             }
@@ -494,7 +480,6 @@
                     };
                 }
 
-                // Check subscription status
                 const subscriptionStatus = this.checkSubscriptionStatus();
                 if (!subscriptionStatus.active) {
                     return {
@@ -527,7 +512,7 @@
                         reason: 'monthly_limit_reached',
                         used: currentUsage,
                         limit: tierConfig.limit,
-                        message: `You've used all ${tierConfig.limit} analyses for this month.`
+                        message: 'You have used all ' + tierConfig.limit + ' analyses for this month.'
                     };
                 }
                 
@@ -539,7 +524,6 @@
 
             checkSubscriptionStatus() {
                 if (!this.currentUser.subscriptionStatus) {
-                    // Default to active for existing users
                     return { active: true };
                 }
 
@@ -551,11 +535,10 @@
                         return { active: true };
                         
                     case SUBSCRIPTION_STATUS.CANCELLED:
-                        // Check if still in grace period
                         if (status.periodEndDate && new Date(status.periodEndDate) > now) {
                             return { 
                                 active: true, 
-                                warning: `Subscription cancels on ${new Date(status.periodEndDate).toLocaleDateString()}`
+                                warning: 'Subscription cancels on ' + new Date(status.periodEndDate).toLocaleDateString()
                             };
                         } else {
                             return {
@@ -587,10 +570,12 @@
                         };
                 }
             }
+
+            getCurrentMonthUsage() {
                 if (!this.currentUser) return 0;
                 
-                const currentMonth = new Date().toISOString().slice(0, 7); // YYYY-MM
-                return this.currentUser.monthlyUsage?.[currentMonth] || 0;
+                const currentMonth = new Date().toISOString().slice(0, 7);
+                return this.currentUser.monthlyUsage && this.currentUser.monthlyUsage[currentMonth] ? this.currentUser.monthlyUsage[currentMonth] : 0;
             }
 
             showLimitReachedModal(limitInfo) {
@@ -605,63 +590,35 @@
                 
                 switch(limitInfo.reason) {
                     case 'no_subscription':
-                        modalContent = `
-                            <h3>Subscription Required</h3>
-                            <p>Relationship analyses are available to subscribers only.</p>
-                            <p><strong>New here?</strong> Start with our <a href="https://tally.so/r/me8pJE" target="_blank" style="color: var(--primary-red);">Free Clarity Quiz</a> first!</p>
-                        `;
+                        modalContent = '<h3>Subscription Required</h3><p>Relationship analyses are available to subscribers only.</p><p><strong>New here?</strong> Start with our <a href="https://tally.so/r/me8pJE" target="_blank" style="color: var(--primary-red);">Free Clarity Quiz</a> first!</p>';
                         upgradeOptions = this.getSubscriptionOptions();
                         break;
                         
                     case 'subscription_cancelled':
-                        modalContent = `
-                            <h3>Subscription Cancelled</h3>
-                            <p>Your subscription has been cancelled. To continue getting relationship analyses, please resubscribe.</p>
-                        `;
+                        modalContent = '<h3>Subscription Cancelled</h3><p>Your subscription has been cancelled. To continue getting relationship analyses, please resubscribe.</p>';
                         upgradeOptions = this.getResubscribeOptions();
                         break;
                         
                     case 'payment_failed':
-                        modalContent = `
-                            <h3>Payment Failed</h3>
-                            <p>We couldn't process your payment. Please update your payment method to continue.</p>
-                        `;
+                        modalContent = '<h3>Payment Failed</h3><p>We could not process your payment. Please update your payment method to continue.</p>';
                         upgradeOptions = this.getPaymentUpdateOptions();
                         break;
                         
                     case 'subscription_expired':
-                        modalContent = `
-                            <h3>Subscription Expired</h3>
-                            <p>Your subscription has expired. Resubscribe to continue accessing analyses.</p>
-                        `;
+                        modalContent = '<h3>Subscription Expired</h3><p>Your subscription has expired. Resubscribe to continue accessing analyses.</p>';
                         upgradeOptions = this.getResubscribeOptions();
                         break;
                         
                     case 'monthly_limit_reached':
-                        modalContent = `
-                            <h3>Monthly Limit Reached</h3>
-                            <p>You've used all ${limitInfo.limit} analyses for this month.</p>
-                            <p>Your usage resets on the 1st of next month, or you can upgrade now for more analyses.</p>
-                        `;
+                        modalContent = '<h3>Monthly Limit Reached</h3><p>You have used all ' + limitInfo.limit + ' analyses for this month.</p><p>Your usage resets on the 1st of next month, or you can upgrade now for more analyses.</p>';
                         upgradeOptions = this.getUpgradeButtons(this.currentUser.tier);
                         break;
                         
                     default:
-                        modalContent = `
-                            <h3>Access Restricted</h3>
-                            <p>Unable to process your analysis request at this time.</p>
-                        `;
+                        modalContent = '<h3>Access Restricted</h3><p>Unable to process your analysis request at this time.</p>';
                 }
                 
-                modal.innerHTML = `
-                    <div class="tier-modal-content">
-                        ${modalContent}
-                        ${upgradeOptions}
-                        <button onclick="this.closest('.tier-modal-overlay').remove()" class="modal-close-btn">
-                            Close
-                        </button>
-                    </div>
-                `;
+                modal.innerHTML = '<div class="tier-modal-content">' + modalContent + upgradeOptions + '<button onclick="this.closest(\'.tier-modal-overlay\').remove()" class="modal-close-btn">Close</button></div>';
                 
                 document.body.appendChild(modal);
             }
@@ -669,38 +626,12 @@
             showNoSubscriptionModal() {
                 const modal = document.createElement('div');
                 modal.className = 'tier-modal-overlay';
-                modal.innerHTML = `
-                    <div class="tier-modal-content">
-                        <h3>Welcome to Seen and Red!</h3>
-                        <p>To submit messages for analysis, you'll need to purchase a plan first.</p>
-                        <p><strong>New here?</strong> Try our <a href="https://tally.so/r/me8pJE" target="_blank" style="color: var(--primary-red);">Free Clarity Quiz</a> first!</p>
-                        ${this.getSubscriptionOptions()}
-                        <button onclick="window.location.href='/'" class="modal-close-btn">
-                            Go Back to Home
-                        </button>
-                    </div>
-                `;
+                modal.innerHTML = '<div class="tier-modal-content"><h3>Welcome to Seen and Red!</h3><p>To submit messages for analysis, you will need to purchase a plan first.</p><p><strong>New here?</strong> Try our <a href="https://tally.so/r/me8pJE" target="_blank" style="color: var(--primary-red);">Free Clarity Quiz</a> first!</p>' + this.getSubscriptionOptions() + '<button onclick="window.location.href=\'/\'" class="modal-close-btn">Go Back to Home</button></div>';
                 document.body.appendChild(modal);
             }
 
             getSubscriptionOptions() {
-                return `
-                    <div class="upgrade-options">
-                        <p><strong>Choose your plan:</strong></p>
-                        <a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" class="subscribe-btn">
-                            Flag Check - $9
-                            <br><small>3 analyses per month</small>
-                        </a>
-                        <a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a" class="subscribe-btn">
-                            Pattern Check - $19
-                            <br><small>6 analyses per month</small>
-                        </a>
-                        <a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03" class="subscribe-btn">
-                            Reality Check - $29/month
-                            <br><small>Unlimited analyses</small>
-                        </a>
-                    </div>
-                `;
+                return '<div class="upgrade-options"><p><strong>Choose your plan:</strong></p><a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" class="subscribe-btn">Flag Check - $9<br><small>3 analyses per month</small></a><a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a" class="subscribe-btn">Pattern Check - $19<br><small>6 analyses per month</small></a><a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03" class="subscribe-btn">Reality Check - $29/month<br><small>Unlimited analyses</small></a></div>';
             }
 
             getUpgradeButtons(currentTier) {
@@ -711,32 +642,33 @@
                 for (let i = currentIndex + 1; i < tiers.length; i++) {
                     const tier = tiers[i];
                     const config = TIER_CONFIGS[tier];
-                    const limitText = config.limit === -1 ? 'Unlimited' : `${config.limit} analyses`;
+                    const limitText = config.limit === -1 ? 'Unlimited' : config.limit + ' analyses';
                     
                     const upgradeUrls = {
                         'pattern_check': 'https://buy.stripe.com/28E3cueA58qa4023GF9EI0a',
                         'reality_check': 'https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03'
                     };
                     
-                    buttons += `
-                        <a href="${upgradeUrls[tier]}" class="upgrade-btn">
-                            Upgrade to ${config.name} - $${config.price}/month
-                            <br><small>${limitText} per month</small>
-                        </a>
-                    `;
+                    buttons += '<a href="' + upgradeUrls[tier] + '" class="upgrade-btn">Upgrade to ' + config.name + ' - $' + config.price + '/month<br><small>' + limitText + ' per month</small></a>';
                 }
                 
-                return `<div class="upgrade-options">${buttons}</div>`;
+                return '<div class="upgrade-options">' + buttons + '</div>';
+            }
+
+            getResubscribeOptions() {
+                return '<div class="upgrade-options"><p><strong>Resubscribe to continue:</strong></p><a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" class="subscribe-btn">Flag Check - $9<br><small>3 analyses per month</small></a><a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a" class="subscribe-btn">Pattern Check - $19<br><small>6 analyses per month</small></a><a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03" class="subscribe-btn">Reality Check - $29/month<br><small>Unlimited analyses</small></a></div>';
+            }
+
+            getPaymentUpdateOptions() {
+                return '<div class="upgrade-options"><p><strong>Update your payment method:</strong></p><a href="https://billing.stripe.com/p/login/your-portal-link" class="subscribe-btn">Update Payment Method<br><small>Fix your subscription</small></a><p style="margin-top: 1rem;"><small>Or resubscribe with a new payment method:</small></p><a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" class="subscribe-btn">Resubscribe - $9/month</a></div>';
             }
 
             async proceedWithAnalysis(form) {
                 this.showLoadingState();
                 
                 try {
-                    // Update usage count
                     this.incrementUsage();
                     
-                    // Redirect to Tally form
                     const tallyUrl = 'https://tally.so/r/mJbgaz';
                     window.location.href = tallyUrl;
                     
@@ -755,48 +687,13 @@
                     this.currentUser.monthlyUsage = {};
                 }
                 
-                this.currentUser.monthlyUsage[currentMonth] = 
-                    (this.currentUser.monthlyUsage[currentMonth] || 0) + 1;
+                this.currentUser.monthlyUsage[currentMonth] = (this.currentUser.monthlyUsage[currentMonth] || 0) + 1;
                 
                 this.saveUserData(this.currentUser.email, this.currentUser);
                 this.updateUI();
             }
 
-            getResubscribeOptions() {
-                return `
-                    <div class="upgrade-options">
-                        <p><strong>Resubscribe to continue:</strong></p>
-                        <a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" class="subscribe-btn">
-                            Flag Check - $9
-                            <br><small>3 analyses per month</small>
-                        </a>
-                        <a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a" class="subscribe-btn">
-                            Pattern Check - $19
-                            <br><small>6 analyses per month</small>
-                        </a>
-                        <a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03" class="subscribe-btn">
-                            Reality Check - $29/month
-                            <br><small>Unlimited analyses</small>
-                        </a>
-                    </div>
-                `;
-            }
-
-            getPaymentUpdateOptions() {
-                return `
-                    <div class="upgrade-options">
-                        <p><strong>Update your payment method:</strong></p>
-                        <a href="https://billing.stripe.com/p/login/your-portal-link" class="subscribe-btn">
-                            Update Payment Method
-                            <br><small>Fix your subscription</small>
-                        </a>
-                        <p style="margin-top: 1rem;"><small>Or resubscribe with a new payment method:</small></p>
-                        <a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" class="subscribe-btn">
-                            Resubscribe - $9/month
-                        </a>
-                    </div>
-                `;
-            }
+            updateUI() {
                 const planName = document.getElementById('plan-name');
                 const usageCount = document.getElementById('usage-count');
                 const planFeatures = document.getElementById('plan-features');
@@ -812,14 +709,16 @@
 
                 const tierConfig = TIER_CONFIGS[this.currentUser.tier];
                 const currentUsage = this.getCurrentMonthUsage();
+                const subscriptionStatus = this.checkSubscriptionStatus();
                 
-                // Update plan display
                 planName.textContent = tierConfig.name;
                 
-                if (tierConfig.limit === -1) {
+                if (subscriptionStatus.warning) {
+                    usageCount.innerHTML = '<div style="color: #f59e0b; margin-bottom: 0.5rem;">⚠️ ' + subscriptionStatus.warning + '</div><div>' + (tierConfig.limit === -1 ? 'Unlimited analyses' : currentUsage + '/' + tierConfig.limit + ' analyses used this month') + '</div>';
+                } else if (tierConfig.limit === -1) {
                     usageCount.textContent = 'Unlimited analyses';
                 } else {
-                    usageCount.textContent = `${currentUsage}/${tierConfig.limit} analyses used this month`;
+                    usageCount.textContent = currentUsage + '/' + tierConfig.limit + ' analyses used this month';
                     
                     if (currentUsage >= tierConfig.limit) {
                         submitBtn.disabled = true;
@@ -827,10 +726,12 @@
                     }
                 }
                 
-                // Update features
-                planFeatures.innerHTML = tierConfig.features
-                    .map(feature => `<div class="feature-item">${feature}</div>`)
-                    .join('');
+                if (!subscriptionStatus.active) {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Subscription Required';
+                }
+                
+                planFeatures.innerHTML = tierConfig.features.map(feature => '<div class="feature-item">' + feature + '</div>').join('');
             }
 
             showLoadingState() {
@@ -857,27 +758,20 @@
             }
         }
 
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', function() {
             window.tierEnforcement = new TierEnforcement();
             
-            // Handle file upload display
             const fileInput = document.getElementById('file-upload');
             const fileContent = document.getElementById('file-upload-content');
             
             fileInput.addEventListener('change', function() {
                 const fileCount = this.files.length;
                 if (fileCount > 0) {
-                    fileContent.innerHTML = `
-                        <div class="file-upload-icon">📁</div>
-                        <div class="file-upload-text">${fileCount} file(s) selected</div>
-                        <div class="file-upload-hint">Click to change selection</div>
-                    `;
+                    fileContent.innerHTML = '<div class="file-upload-icon">📁</div><div class="file-upload-text">' + fileCount + ' file(s) selected</div><div class="file-upload-hint">Click to change selection</div>';
                 }
             });
         });
 
-        // Test function for development
         function simulateSubscription(email, tier) {
             const userData = {
                 email: email,
@@ -890,8 +784,9 @@
             users[email] = userData;
             localStorage.setItem('seenandred_users', JSON.stringify(users));
             
-            window.location.href = `?email=${encodeURIComponent(email)}`;
+            window.location.href = '?email=' + encodeURIComponent(email);
         }
     </script>
 </body>
 </html>
+         
