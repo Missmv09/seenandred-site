@@ -332,6 +332,24 @@
             async loadUserData() {
                 const urlParams = new URLSearchParams(window.location.search);
                 const email = urlParams.get('email') || localStorage.getItem('user_email');
+                const tier = urlParams.get('tier');
+                
+                // If we have a tier but no email, ask for email
+                if (tier && !email) {
+                    const userEmail = prompt('Please enter the email address you used for your purchase:');
+                    if (userEmail && userEmail.includes('@')) {
+                        // Redirect with email included
+                        window.location.href = '?email=' + encodeURIComponent(userEmail) + '&tier=' + tier;
+                        return;
+                    } else if (userEmail) {
+                        alert('Please enter a valid email address.');
+                        this.showNoSubscriptionModal();
+                        return;
+                    } else {
+                        this.showNoSubscriptionModal();
+                        return;
+                    }
+                }
                 
                 if (!email) {
                     this.showNoSubscriptionModal();
