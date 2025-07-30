@@ -171,7 +171,7 @@
                 var urlParams = new URLSearchParams(window.location.search);
                 var urlTier = urlParams.get('tier');
                 
-                if (userData && urlTier) {
+              if (userData && urlTier && urlParams.get('submitted') === 'true') {
                     var tierOrder = { 'flag_check': 1, 'pattern_check': 2, 'reality_check': 3 };
                     var currentTierLevel = tierOrder[userData.tier] || 0;
                     var urlTierLevel = tierOrder[urlTier] || 0;
