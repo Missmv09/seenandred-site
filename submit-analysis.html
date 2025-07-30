@@ -151,7 +151,7 @@
                 var email = urlParams.get('email');
                 var tier = urlParams.get('tier') || 'flag_check';
                 
-                if (email) {
+               if (email && urlParams.get('submitted') === 'true') {
                     return {
                         email: email,
                         tier: tier,
