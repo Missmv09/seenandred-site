@@ -551,7 +551,142 @@
             this.updateUI();
         };
 
-        TierEnforcement.prototype.updateUI = function() {
+        TierEnforcement.prototype.showLimitReachedModal = function(limitInfo) {
+            var modal = document.createElement('div');
+            modal.className = 'tier-modal-overlay';
+            
+            var modalContent = '<div class="tier-modal-content">';
+            modalContent += '<h3>All Analyses Used</h3>';
+            modalContent += '<p>You have used all ' + limitInfo.limit + ' analyses from your ' + TIER_CONFIGS[this.currentUser.tier].name + ' purchase.</p>';
+            modalContent += '<p>You can buy more analyses or upgrade to a higher tier.</p>';
+            
+            // Repurchase same tier option
+            var repurchaseUrls = {
+                'flag_check': 'https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b',
+                'pattern_check': 'https://buy.stripe.com/28E3cueA58qa4023GF9EI0a',
+                'reality_check': 'https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03'
+            };
+            
+            var tierConfig = TIER_CONFIGS[this.currentUser.tier];
+            
+            modalContent += '<div class="upgrade-options">';
+            modalContent += '<p><strong>Get More ' + tierConfig.name + ' Analyses:</strong></p>';
+            modalContent += '<a href="' + repurchaseUrls[this.currentUser.tier] + '" class="subscribe-btn" style="background: #059669;">Buy Another ' + tierConfig.name + ' - 
+            var planName = document.getElementById('plan-name');
+            var usageCount = document.getElementById('usage-count');
+            var planFeatures = document.getElementById('plan-features');
+            var accessBtn = document.getElementById('access-btn');
+            
+            if (!this.currentUser) {
+                planName.textContent = 'No Subscription';
+                usageCount.textContent = 'Please purchase a plan to continue';
+                accessBtn.disabled = true;
+                accessBtn.textContent = 'Subscription Required';
+                return;
+            }
+
+            var tierConfig = TIER_CONFIGS[this.currentUser.tier];
+            var currentUsage = this.getCurrentUsage();
+            
+            planName.textContent = tierConfig.name;
+            
+            if (tierConfig.limit === -1) {
+                usageCount.textContent = 'Unlimited analyses';
+            } else {
+                usageCount.textContent = currentUsage + '/' + tierConfig.limit + ' analyses used';
+                
+                if (currentUsage >= tierConfig.limit) {
+                    accessBtn.disabled = true;
+                    accessBtn.textContent = 'All Analyses Used';
+                }
+            }
+            
+            var featuresHtml = '';
+            for (var i = 0; i < tierConfig.features.length; i++) {
+                featuresHtml += '<div class="feature-item">' + tierConfig.features[i] + '</div>';
+            }
+            planFeatures.innerHTML = featuresHtml;
+        };
+
+        TierEnforcement.prototype.showNoSubscriptionModal = function() {
+            var modal = document.createElement('div');
+            modal.className = 'tier-modal-overlay';
+            modal.innerHTML = '<div class="tier-modal-content"><h3>Welcome to Seen and Red!</h3><p>To submit messages for analysis, you will need to purchase a plan first.</p><p><strong>New here?</strong> Try our <a href="https://tally.so/r/me8pJE" target="_blank" style="color: var(--primary-red);">Free Clarity Quiz</a> first!</p><div class="upgrade-options"><p><strong>Choose your plan:</strong></p><a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" class="subscribe-btn">Flag Check - $9<br><small>3 analyses per month</small></a><a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a" class="subscribe-btn">Pattern Check - $19<br><small>6 analyses per month</small></a><a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03" class="subscribe-btn">Reality Check - $29/month<br><small>Unlimited analyses</small></a></div><button onclick="window.location.href=\'/\'" class="modal-close-btn">Go Back to Home</button></div>';
+            document.body.appendChild(modal);
+        };
+
+        var tierEnforcement;
+
+        function accessAnalysisForm() {
+            var accessBtn = document.getElementById('access-btn');
+            
+            tierEnforcement.checkTierLimits().then(function(canProceed) {
+                if (!canProceed.allowed) {
+                    tierEnforcement.showLimitReachedModal(canProceed);
+                    return;
+                }
+                
+                accessBtn.disabled = true;
+                accessBtn.textContent = 'Processing...';
+                
+                tierEnforcement.incrementUsage();
+                
+                var tallyUrls = {
+                    'flag_check': 'https://tally.so/r/mJbgaz',
+                    'pattern_check': 'https://tally.so/r/m6E2VJ',
+                    'reality_check': 'https://tally.so/r/waqYzb'
+                };
+                
+                var userTier = tierEnforcement.currentUser.tier;
+                var tallyUrl = tallyUrls[userTier] || tallyUrls['flag_check'];
+                
+                window.location.href = tallyUrl;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            tierEnforcement = new TierEnforcement();
+        });
+
+        function simulateSubscription(email, tier) {
+            var userData = {
+                email: email,
+                tier: tier,
+                subscriptionDate: new Date().toISOString(),
+                totalUsage: 0,
+                monthlyUsage: {}
+            };
+            
+            var users = JSON.parse(localStorage.getItem('seenandred_users') || '{}');
+            users[email] = userData;
+            localStorage.setItem('seenandred_users', JSON.stringify(users));
+            
+            window.location.href = '?email=' + encodeURIComponent(email);
+        }
+    </script>
+</body>
+</html> + tierConfig.price + '<br><small>+' + limitInfo.limit + ' more analyses</small></a>';
+            
+            // Add upgrade options if not unlimited tier
+            if (this.currentUser.tier !== 'reality_check') {
+                modalContent += '<p style="margin-top: 1.5rem;"><strong>Or Upgrade for Better Value:</strong></p>';
+                
+                if (this.currentUser.tier === 'flag_check') {
+                    modalContent += '<a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a" class="upgrade-btn">Upgrade to Pattern Check - $19<br><small>6 analyses</small></a>';
+                    modalContent += '<a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03" class="upgrade-btn">Upgrade to Reality Check - $29/month<br><small>Unlimited analyses</small></a>';
+                } else if (this.currentUser.tier === 'pattern_check') {
+                    modalContent += '<a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03" class="upgrade-btn">Upgrade to Reality Check - $29/month<br><small>Unlimited analyses</small></a>';
+                }
+            }
+            
+            modalContent += '</div>';
+            modalContent += '<button onclick="window.location.href=\'https://seenandred.com/\'" class="modal-close-btn" style="background: var(--primary-red); margin-right: 10px;">Return to Home</button>';
+            modalContent += '<button onclick="this.closest(\'.tier-modal-overlay\').remove()" class="modal-close-btn">Close</button>';
+            modalContent += '</div>';
+            
+            modal.innerHTML = modalContent;
+            document.body.appendChild(modal);
+        };
             var planName = document.getElementById('plan-name');
             var usageCount = document.getElementById('usage-count');
             var planFeatures = document.getElementById('plan-features');
