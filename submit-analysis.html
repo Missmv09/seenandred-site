@@ -167,13 +167,32 @@
                 var users = JSON.parse(localStorage.getItem('seenandred_users') || '{}');
                 var userData = users[email];
                 
-                // If URL has tier parameter, update stored tier (for upgrades)
+                // If URL has tier parameter, it means a new purchase was made
                 var urlParams = new URLSearchParams(window.location.search);
                 var urlTier = urlParams.get('tier');
-                if (userData && urlTier && userData.tier !== urlTier) {
-                    userData.tier = urlTier;
-                    userData.totalUsage = 0; // Reset usage for new tier
-                    this.saveUserData(email, userData);
+                
+                if (userData && urlTier) {
+                    var tierOrder = { 'flag_check': 1, 'pattern_check': 2, 'reality_check': 3 };
+                    var currentTierLevel = tierOrder[userData.tier] || 0;
+                    var urlTierLevel = tierOrder[urlTier] || 0;
+                    
+                    if (urlTierLevel >= currentTierLevel) {
+                        // Same tier: Add more analyses to existing count
+                        if (urlTier === userData.tier) {
+                            var tierConfig = TIER_CONFIGS[urlTier];
+                            if (tierConfig && tierConfig.limit !== -1) {
+                                // Add more analyses (don't reset usage)
+                                userData.purchasedAnalyses = (userData.purchasedAnalyses || tierConfig.limit) + tierConfig.limit;
+                            }
+                        } else {
+                            // Higher tier: Upgrade and reset
+                            userData.tier = urlTier;
+                            userData.totalUsage = 0;
+                            var newTierConfig = TIER_CONFIGS[urlTier];
+                            userData.purchasedAnalyses = newTierConfig.limit;
+                        }
+                        this.saveUserData(email, userData);
+                    }
                 }
                 
                 return userData;
@@ -205,12 +224,14 @@
                     }
                     
                     var currentUsage = self.getCurrentUsage();
-                    if (currentUsage >= tierConfig.limit) {
-                        resolve({ allowed: false, reason: 'tier_limit_reached', used: currentUsage, limit: tierConfig.limit, message: 'You have used all ' + tierConfig.limit + ' analyses from your ' + tierConfig.name + ' purchase.' });
+                    var totalPurchased = self.currentUser.purchasedAnalyses || tierConfig.limit;
+                    
+                    if (currentUsage >= totalPurchased) {
+                        resolve({ allowed: false, reason: 'tier_limit_reached', used: currentUsage, limit: totalPurchased, message: 'You have used all ' + totalPurchased + ' analyses from your purchases.' });
                         return;
                     }
                     
-                    resolve({ allowed: true, remaining: tierConfig.limit - currentUsage });
+                    resolve({ allowed: true, remaining: totalPurchased - currentUsage });
                 });
             },
             
@@ -254,14 +275,15 @@
 
                 var tierConfig = TIER_CONFIGS[this.currentUser.tier];
                 var currentUsage = this.getCurrentUsage();
+                var totalPurchased = this.currentUser.purchasedAnalyses || tierConfig.limit;
                 
                 planName.textContent = tierConfig.name;
                 
                 if (tierConfig.limit === -1) {
                     usageCount.textContent = 'Unlimited analyses';
                 } else {
-                    usageCount.textContent = currentUsage + '/' + tierConfig.limit + ' analyses used';
-                    if (currentUsage >= tierConfig.limit) {
+                    usageCount.textContent = currentUsage + '/' + totalPurchased + ' analyses used';
+                    if (currentUsage >= totalPurchased) {
                         accessBtn.disabled = true;
                         accessBtn.textContent = 'All Analyses Used - Buy More';
                         accessBtn.onclick = function() { window.location.href = 'https://seenandred.com/'; };
