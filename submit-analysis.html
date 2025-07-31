@@ -120,25 +120,13 @@
                         var urlParams = new URLSearchParams(window.location.search);
                         var email = urlParams.get('email') || localStorage.getItem('user_email');
                         
-                        // Check for new purchase first, before requiring email
-var urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get('submitted') === 'true') {
-    var userData = self.detectTierFromStripe();
-    if (userData) {
-        self.currentUser = userData;
-        localStorage.setItem('user_email', userData.email);
-        resolve();
-        return;
-    }
-}
+                        if (!email) {
+                            self.showNoSubscriptionModal();
+                            resolve();
+                            return;
+                        }
 
-if (!email) {
-    self.showNoSubscriptionModal();
-    resolve();
-    return;
-}
-
-var userData = self.getUserDataFromStorage(email);
+                        var userData = self.getUserDataFromStorage(email) || self.detectTierFromStripe();
                         
                         if (!userData) {
                             self.showNoSubscriptionModal();
@@ -158,25 +146,27 @@ var userData = self.getUserDataFromStorage(email);
                 });
             },
             
-             detectTierFromStripe: function() {
-    console.log('detectTierFromStripe called');
-    var urlParams = new URLSearchParams(window.location.search);
-    var tier = urlParams.get('tier') || 'flag_check';
-    var isNewPurchase = urlParams.get('submitted') === 'true';
-    
-    console.log('tier:', tier);
-    console.log('isNewPurchase:', isNewPurchase);
-    console.log('submitted param:', urlParams.get('submitted'));
-    
-    if (isNewPurchase) {
-        console.log('New purchase detected, showing alert');
-        alert('Purchase successful! Please click "already purchased? submit your messages" on the homepage and enter your email to access your analyses.');
-        window.location.href = 'https://seenandred.com/';
-        return null;
-    }
-    console.log('No new purchase detected');
-    return null;
-},
+            detectTierFromStripe: function() {
+                var urlParams = new URLSearchParams(window.location.search);
+                var email = urlParams.get('email');
+                var tier = urlParams.get('tier') || 'flag_check';
+                
+                // Only create user if it's a confirmed purchase from Stripe
+                if (email && urlParams.get('submitted') === 'true') {
+                    var tierConfig = TIER_CONFIGS[tier];
+                    var userData = {
+                        email: email,
+                        tier: tier,
+                        subscriptionDate: new Date().toISOString(),
+                        totalUsage: 0,
+                        monthlyUsage: {},
+                        purchasedAnalyses: tierConfig.limit
+                    };
+                    this.saveUserData(email, userData);
+                    return userData;
+                }
+                return null;
+            },
             
             getUserDataFromStorage: function(email) {
                 var users = JSON.parse(localStorage.getItem('seenandred_users') || '{}');
@@ -186,7 +176,8 @@ var userData = self.getUserDataFromStorage(email);
                 var urlParams = new URLSearchParams(window.location.search);
                 var urlTier = urlParams.get('tier');
                 
-              if (userData && urlTier && urlParams.get('submitted') === 'true') {
+                // FIXED: Only process if it's actually a new purchase (has submitted=true from Stripe)
+                if (userData && urlTier && urlParams.get('submitted') === 'true') {
                     var tierOrder = { 'flag_check': 1, 'pattern_check': 2, 'reality_check': 3 };
                     var currentTierLevel = tierOrder[userData.tier] || 0;
                     var urlTierLevel = tierOrder[urlTier] || 0;
@@ -313,10 +304,8 @@ var userData = self.getUserDataFromStorage(email);
             },
             
             showNoSubscriptionModal: function() {
-                var modal = document.createElement('div');
-                modal.className = 'tier-modal-overlay';
-                modal.innerHTML = '<div class="tier-modal-content"><h3>Welcome to Seen and Red!</h3><p>To submit messages for analysis, you will need to purchase a plan first.</p><p><strong>New here?</strong> Try our <a href="https://tally.so/r/me8pJE" target="_blank" style="color: var(--primary-red);">Free Clarity Quiz</a> first!</p><div class="upgrade-options"><p><strong>Choose your plan:</strong></p><a href="https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b" class="subscribe-btn">Flag Check - $9<br><small>3 analyses</small></a><a href="https://buy.stripe.com/28E3cueA58qa4023GF9EI0a" class="subscribe-btn">Pattern Check - $19<br><small>6 analyses</small></a><a href="https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03" class="subscribe-btn">Reality Check - $29/month<br><small>Unlimited analyses</small></a></div><button onclick="window.location.href=\'/\'" class="modal-close-btn">Go Back to Home</button></div>';
-                document.body.appendChild(modal);
+                // Redirect to homepage if no subscription
+                window.location.href = 'https://seenandred.com/';
             }
         };
 
@@ -331,7 +320,6 @@ var userData = self.getUserDataFromStorage(email);
                 accessBtn.disabled = true;
                 accessBtn.textContent = 'Processing...';
                 tierEnforcement.incrementUsage();
-               
                 
                 var tallyUrls = {
                     flag_check: 'https://tally.so/r/mJbgaz',
