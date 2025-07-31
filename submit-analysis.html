@@ -147,21 +147,25 @@
             },
             
             detectTierFromStripe: function() {
-                var urlParams = new URLSearchParams(window.location.search);
-                var email = urlParams.get('email');
-                var tier = urlParams.get('tier') || 'flag_check';
-                
-               if (email && urlParams.get('submitted') === 'true') {
-                    return {
-                        email: email,
-                        tier: tier,
-                        subscriptionDate: new Date().toISOString(),
-                        totalUsage: 0,
-                        monthlyUsage: {}
-                    };
-                }
-                return null;
-            },
+    var urlParams = new URLSearchParams(window.location.search);
+    var tier = urlParams.get('tier') || 'flag_check';
+    var isNewPurchase = urlParams.get('submitted') === 'true';
+    
+    if (isNewPurchase) {
+        // This is a new purchase, prompt for email
+        var email = prompt('Please enter your email address to complete your purchase setup:');
+        if (email && email.includes('@')) {
+            return {
+                email: email,
+                tier: tier,
+                subscriptionDate: new Date().toISOString(),
+                totalUsage: 0,
+                monthlyUsage: {}
+            };
+        }
+    }
+    return null;
+}
             
             getUserDataFromStorage: function(email) {
                 var users = JSON.parse(localStorage.getItem('seenandred_users') || '{}');
