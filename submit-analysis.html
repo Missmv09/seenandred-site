@@ -120,13 +120,25 @@
                         var urlParams = new URLSearchParams(window.location.search);
                         var email = urlParams.get('email') || localStorage.getItem('user_email');
                         
-                        if (!email) {
-                            self.showNoSubscriptionModal();
-                            resolve();
-                            return;
-                        }
+                        // Check for new purchase first, before requiring email
+var urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('submitted') === 'true') {
+    var userData = self.detectTierFromStripe();
+    if (userData) {
+        self.currentUser = userData;
+        localStorage.setItem('user_email', userData.email);
+        resolve();
+        return;
+    }
+}
 
-                        var userData = self.getUserDataFromStorage(email) || self.detectTierFromStripe();
+if (!email) {
+    self.showNoSubscriptionModal();
+    resolve();
+    return;
+}
+
+var userData = self.getUserDataFromStorage(email);
                         
                         if (!userData) {
                             self.showNoSubscriptionModal();
