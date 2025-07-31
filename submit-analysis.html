@@ -120,13 +120,24 @@
                         var urlParams = new URLSearchParams(window.location.search);
                         var email = urlParams.get('email') || localStorage.getItem('user_email');
                         
+                        // Check for new Stripe purchase first
+                        if (urlParams.get('submitted') === 'true') {
+                            var newUserData = self.detectTierFromStripe();
+                            if (newUserData) {
+                                self.currentUser = newUserData;
+                                localStorage.setItem('user_email', newUserData.email);
+                                resolve();
+                                return;
+                            }
+                        }
+                        
                         if (!email) {
                             self.showNoSubscriptionModal();
                             resolve();
                             return;
                         }
 
-                        var userData = self.getUserDataFromStorage(email) || self.detectTierFromStripe();
+                        var userData = self.getUserDataFromStorage(email);
                         
                         if (!userData) {
                             self.showNoSubscriptionModal();
@@ -148,22 +159,24 @@
             
             detectTierFromStripe: function() {
                 var urlParams = new URLSearchParams(window.location.search);
-                var email = urlParams.get('email');
                 var tier = urlParams.get('tier') || 'flag_check';
                 
                 // Only create user if it's a confirmed purchase from Stripe
-                if (email && urlParams.get('submitted') === 'true') {
-                    var tierConfig = TIER_CONFIGS[tier];
-                    var userData = {
-                        email: email,
-                        tier: tier,
-                        subscriptionDate: new Date().toISOString(),
-                        totalUsage: 0,
-                        monthlyUsage: {},
-                        purchasedAnalyses: tierConfig.limit
-                    };
-                    this.saveUserData(email, userData);
-                    return userData;
+                if (urlParams.get('submitted') === 'true') {
+                    var email = prompt('Please enter your email address to complete setup:');
+                    if (email && email.includes('@')) {
+                        var tierConfig = TIER_CONFIGS[tier];
+                        var userData = {
+                            email: email,
+                            tier: tier,
+                            subscriptionDate: new Date().toISOString(),
+                            totalUsage: 0,
+                            monthlyUsage: {},
+                            purchasedAnalyses: tierConfig.limit
+                        };
+                        this.saveUserData(email, userData);
+                        return userData;
+                    }
                 }
                 return null;
             },
