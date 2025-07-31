@@ -175,6 +175,11 @@
                             purchasedAnalyses: tierConfig.limit
                         };
                         this.saveUserData(email, userData);
+                        
+                        // Clean URL to prevent repeat prompts
+                        var cleanUrl = window.location.pathname + '?email=' + encodeURIComponent(email);
+                        window.history.replaceState({}, '', cleanUrl);
+                        
                         return userData;
                     }
                 }
