@@ -146,23 +146,16 @@
                 });
             },
             
-            detectTierFromStripe: function() {
+           detectTierFromStripe: function() {
     var urlParams = new URLSearchParams(window.location.search);
     var tier = urlParams.get('tier') || 'flag_check';
     var isNewPurchase = urlParams.get('submitted') === 'true';
     
     if (isNewPurchase) {
-        // This is a new purchase, prompt for email
-        var email = prompt('Please enter your email address to complete your purchase setup:');
-        if (email && email.includes('@')) {
-            return {
-                email: email,
-                tier: tier,
-                subscriptionDate: new Date().toISOString(),
-                totalUsage: 0,
-                monthlyUsage: {}
-            };
-        }
+        // Redirect to homepage with success message
+        alert('Purchase successful! Please click "already purchased? submit your messages" on the homepage and enter your email to access your analyses.');
+        window.location.href = 'https://seenandred.com/';
+        return null;
     }
     return null;
 },
