@@ -335,31 +335,39 @@
         }
 
         function accessTier(tier) {
-            const purchase = userState.purchases[tier];
-            const tierConfig = TIER_CONFIGS[tier];
-            
-            if (!purchase || purchase.count === 0) {
-                // Redirect to purchase
-                window.location.href = tierConfig.stripeUrl;
-                return;
-            }
-            
-            if (tierConfig.limit !== -1) {
-                const remaining = purchase.count - purchase.used;
-                if (remaining <= 0) {
-                    showLimitModal(tier);
-                    return;
-                }
-                
-                // Increment usage
-                userState.purchases[tier].used++;
-                saveUserData();
-            }
-            
-            // Redirect to Tally form
-            window.location.href = tierConfig.tallyUrl;
+    console.log('accessTier called with:', tier);
+    console.log('Current purchases:', userState.purchases);
+    
+    const purchase = userState.purchases[tier];
+    const tierConfig = TIER_CONFIGS[tier];
+    
+    console.log('Purchase for tier:', purchase);
+    console.log('Tier config:', tierConfig);
+    
+    if (!purchase || purchase.count === 0) {
+        console.log('No purchase found, redirecting to Stripe');
+        window.location.href = tierConfig.stripeUrl;
+        return;
+    }
+    
+    if (tierConfig.limit !== -1) {
+        const remaining = purchase.count - purchase.used;
+        console.log('Remaining analyses:', remaining);
+        
+        if (remaining <= 0) {
+            showLimitModal(tier);
+            return;
         }
-
+        
+        // Increment usage
+        userState.purchases[tier].used++;
+        saveUserData();
+    }
+    
+    console.log('Redirecting to Tally:', tierConfig.tallyUrl);
+    // Redirect to Tally form
+    window.location.href = tierConfig.tallyUrl;
+}
         function showLimitModal(tier) {
             const modal = document.getElementById('limit-modal');
             const message = document.getElementById('limit-message');
