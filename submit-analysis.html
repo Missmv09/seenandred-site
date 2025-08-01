@@ -191,15 +191,29 @@
 
         let userState = {
             email: null,
-            purchases: {} // tier -> { count: number, used: number, lastPurchase: date }
+            purchases: {}, // tier -> { count: number, used: number, lastPurchase: date }
+            processedPurchases: new Set() // Track processed purchase URLs to prevent duplicates
         };
 
         function initializeUser() {
             // Check URL parameters for email (from Stripe success or existing user)
             const urlParams = new URLSearchParams(window.location.search);
-            const email = urlParams.get('email');
+            let email = urlParams.get('email');
             const tier = urlParams.get('tier');
             const isNewPurchase = urlParams.get('submitted') === 'true';
+
+            // If this is a new purchase but no email provided, prompt for it
+            if (isNewPurchase && tier && !email) {
+                email = prompt('Please enter your email address to complete your purchase setup:');
+                if (!email || !email.includes('@')) {
+                    alert('Valid email required to access your analysis.');
+                    window.location.href = 'index.html';
+                    return;
+                }
+                // Update URL to include email for future reference
+                const newUrl = `${window.location.pathname}?tier=${tier}&submitted=true&email=${encodeURIComponent(email)}`;
+                window.history.replaceState({}, '', newUrl);
+            }
 
             if (email) {
                 userState.email = email;
@@ -222,11 +236,15 @@
             // Load user data from localStorage (in real app, this would be from your backend)
             const userData = JSON.parse(localStorage.getItem(`user_${email}`) || '{}');
             userState.purchases = userData.purchases || {};
+            userState.processedPurchases = new Set(userData.processedPurchases || []);
         }
 
         function saveUserData() {
             if (!userState.email) return;
-            const userData = { purchases: userState.purchases };
+            const userData = { 
+                purchases: userState.purchases,
+                processedPurchases: Array.from(userState.processedPurchases)
+            };
             localStorage.setItem(`user_${userState.email}`, JSON.stringify(userData));
         }
 
