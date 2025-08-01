@@ -224,10 +224,16 @@
                     addPurchaseToUser(tier);
                 }
             } else {
-                // No email provided - show purchase required message
-                showNoPurchaseState();
-                return;
-            }
+    // No email provided - prompt for it
+    email = prompt('Please enter your email address to access your analyses:');
+    if (!email || !email.includes('@')) {
+        alert('Valid email required.');
+        window.location.href = 'index.html';
+        return;
+    }
+    userState.email = email;
+    loadUserData(email);
+}
 
             updateTierCards();
         }
@@ -249,17 +255,25 @@
         }
 
         function addPurchaseToUser(tier) {
-            const tierConfig = TIER_CONFIGS[tier];
-            if (!userState.purchases[tier]) {
-                userState.purchases[tier] = { count: 0, used: 0, lastPurchase: new Date().toISOString() };
-            }
-            
-            // Add the analyses from this purchase
-            userState.purchases[tier].count += tierConfig.limit === -1 ? 1 : tierConfig.limit;
-            userState.purchases[tier].lastPurchase = new Date().toISOString();
-            
-            saveUserData();
-        }
+    const tierConfig = TIER_CONFIGS[tier];
+    if (!userState.purchases[tier]) {
+        userState.purchases[tier] = { count: 0, used: 0, lastPurchase: new Date().toISOString() };
+    }
+    
+    // ANTI-INCREMENT FIX: Check if purchase was processed recently (within 30 seconds)
+    const lastPurchaseTime = new Date(userState.purchases[tier].lastPurchase);
+    const timeDiff = (new Date() - lastPurchaseTime) / 1000;
+    if (timeDiff < 30) {
+        console.log('Duplicate purchase prevented');
+        return;
+    }
+    
+    // Add the analyses from this purchase
+    userState.purchases[tier].count += tierConfig.limit === -1 ? 1 : tierConfig.limit;
+    userState.purchases[tier].lastPurchase = new Date().toISOString();
+    
+    saveUserData();
+}
 
         function updateTierCards() {
             Object.keys(TIER_CONFIGS).forEach(tier => {
