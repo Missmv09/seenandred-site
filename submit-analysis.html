@@ -254,25 +254,30 @@
             localStorage.setItem(`user_${userState.email}`, JSON.stringify(userData));
         }
 
-        function addPurchaseToUser(tier) {
+     function addPurchaseToUser(tier) {
     const tierConfig = TIER_CONFIGS[tier];
-    if (!userState.purchases[tier]) {
-        userState.purchases[tier] = { count: 0, used: 0, lastPurchase: new Date().toISOString() };
-    }
+    const purchaseId = new URLSearchParams(window.location.search).get('session_id') || Date.now();
     
-    // ANTI-INCREMENT FIX: Check if purchase was processed recently (within 30 seconds)
-    const lastPurchaseTime = new Date(userState.purchases[tier].lastPurchase);
-    const timeDiff = (new Date() - lastPurchaseTime) / 1000;
-    if (timeDiff < 30) {
-        console.log('Duplicate purchase prevented');
+    // Check if this exact purchase was already processed
+    const processedPurchases = JSON.parse(localStorage.getItem('processed_purchases') || '[]');
+    if (processedPurchases.includes(purchaseId.toString())) {
+        console.log('Purchase already processed');
         return;
     }
     
-    // Add the analyses from this purchase
+    // Add to processed list
+    processedPurchases.push(purchaseId.toString());
+    localStorage.setItem('processed_purchases', JSON.stringify(processedPurchases));
+    
+    // Add the analyses
+    if (!userState.purchases[tier]) {
+        userState.purchases[tier] = { count: 0, used: 0, lastPurchase: new Date().toISOString() };
+    }
     userState.purchases[tier].count += tierConfig.limit === -1 ? 1 : tierConfig.limit;
     userState.purchases[tier].lastPurchase = new Date().toISOString();
     
     saveUserData();
+}
 }
 
         function updateTierCards() {
