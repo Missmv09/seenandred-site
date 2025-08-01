@@ -570,7 +570,7 @@
                 <h1>Your AI Bestie with a PhD</h1>
                 <p class="subtitle">Stop wondering "what does this mean?" Upload your confusing messages and get instant AI-powered analysis to spot red flags, decode mixed signals, and finally see relationships for what they really are.</p>
                 <a href="https://tally.so/r/me8pJE" class="cta-button" target="_blank">Take Free Clarity Quiz</a>
-                <p class="secondary-cta">or <a href="#" onclick="checkExistingUser()" style="color: var(--medium-gray); text-decoration: underline; font-weight: normal;">already purchased? submit your messages</a></p>
+                <p class="secondary-cta">or <a href="select-analysis.html" style="color: var(--medium-gray); text-decoration: underline; font-weight: normal;">already purchased? submit your messages</a></p>
             </div>
         </section>
 
@@ -743,23 +743,7 @@
             }
         });
 
-        function checkExistingUser() {
-            // Check if user has stored email from previous purchase
-            const storedEmail = localStorage.getItem('user_email');
-            
-            if (storedEmail) {
-                // Redirect to submit page with stored email
-                window.location.href = 'submit-analysis.html?email=' + encodeURIComponent(storedEmail);
-            } else {
-                // Ask for email
-                const email = prompt('Please enter the email address you used for your purchase:');
-                if (email && email.includes('@')) {
-                    window.location.href = 'submit-analysis.html?email=' + encodeURIComponent(email);
-                } else if (email) {
-                    alert('Please enter a valid email address.');
-                }
-            }
-        }
+       
     </script>
     
 </body>
