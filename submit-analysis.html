@@ -208,27 +208,37 @@
         }
 
         function addPurchase(tier) {
-            const config = TIERS[tier];
-            const now = Date.now();
-            
-            // Initialize if doesn't exist
-            if (!userData.purchases[tier]) {
-                userData.purchases[tier] = { count: 0, used: 0, lastPurchase: 0 };
-            }
+    const config = TIERS[tier];
+    
+    // Check if we've already processed this exact URL
+    const currentUrl = window.location.href;
+    const processedUrls = JSON.parse(localStorage.getItem('processed_urls') || '[]');
+    
+    if (processedUrls.includes(currentUrl)) {
+        console.log('URL already processed, skipping purchase');
+        return;
+    }
+    
+    // Initialize if doesn't exist
+    if (!userData.purchases[tier]) {
+        userData.purchases[tier] = { count: 0, used: 0, lastPurchase: 0 };
+    }
 
-            // Prevent duplicate purchases within 30 seconds
-            if (now - userData.purchases[tier].lastPurchase < 30000) {
-                console.log('Duplicate purchase prevented');
-                return;
-            }
-
-            // Add analyses
-            userData.purchases[tier].count += config.limit === -1 ? 1 : config.limit;
-            userData.purchases[tier].lastPurchase = now;
-            
-            console.log(`Added ${config.limit} analyses to ${tier}`);
-            saveUserData();
-        }
+    // Add analyses
+    userData.purchases[tier].count += config.limit === -1 ? 1 : config.limit;
+    userData.purchases[tier].lastPurchase = Date.now();
+    
+    // Mark this URL as processed
+    processedUrls.push(currentUrl);
+    localStorage.setItem('processed_urls', JSON.stringify(processedUrls));
+    
+    console.log(`Added ${config.limit} analyses to ${tier}`);
+    saveUserData();
+    
+    // Clean the URL to prevent reprocessing
+    const cleanUrl = `${window.location.pathname}?email=${encodeURIComponent(userData.email)}`;
+    window.history.replaceState({}, '', cleanUrl);
+}
 
         function updateDisplay() {
             Object.keys(TIERS).forEach(tier => {
