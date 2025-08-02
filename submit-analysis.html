@@ -210,12 +210,16 @@
         function addPurchase(tier) {
     const config = TIERS[tier];
     
-    // Check if we've already processed this exact URL
-    const currentUrl = window.location.href;
-    const processedUrls = JSON.parse(localStorage.getItem('processed_urls') || '[]');
+    // Get a unique session ID from URL or create one
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get('session_id') || urlParams.get('checkout_session_id') || `manual_${Date.now()}_${Math.random()}`;
     
-    if (processedUrls.includes(currentUrl)) {
-        console.log('URL already processed, skipping purchase');
+    console.log('Processing purchase with session ID:', sessionId);
+    
+    // Check if this session was already processed
+    const processedSessions = JSON.parse(localStorage.getItem('processed_sessions') || '[]');
+    if (processedSessions.includes(sessionId)) {
+        console.log('Session already processed, skipping');
         return;
     }
     
@@ -228,16 +232,12 @@
     userData.purchases[tier].count += config.limit === -1 ? 1 : config.limit;
     userData.purchases[tier].lastPurchase = Date.now();
     
-    // Mark this URL as processed
-    processedUrls.push(currentUrl);
-    localStorage.setItem('processed_urls', JSON.stringify(processedUrls));
+    // Mark this session as processed
+    processedSessions.push(sessionId);
+    localStorage.setItem('processed_sessions', JSON.stringify(processedSessions));
     
-    console.log(`Added ${config.limit} analyses to ${tier}`);
+    console.log(`Added ${config.limit} analyses to ${tier} for session ${sessionId}`);
     saveUserData();
-    
-    // Clean the URL to prevent reprocessing
-    const cleanUrl = `${window.location.pathname}?email=${encodeURIComponent(userData.email)}`;
-    window.history.replaceState({}, '', cleanUrl);
 }
 
         function updateDisplay() {
