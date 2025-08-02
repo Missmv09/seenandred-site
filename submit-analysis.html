@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Your Messages - Seen and Red</title>
+    <title>Your Analysis Portal - Seen and Red</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -26,7 +26,7 @@
             transition: all 0.3s ease; border: 2px solid transparent;
         }
         .tier-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); border-color: var(--primary-red); }
-        .tier-card.purchased { border-color: #10b981; background: linear-gradient(135deg, #ecfdf5 0%, var(--white) 100%); }
+        .tier-card.active { border-color: #10b981; background: linear-gradient(135deg, #ecfdf5 0%, var(--white) 100%); }
         
         .tier-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
         .tier-title { font-size: 1.3rem; font-weight: bold; color: var(--dark-gray); }
@@ -42,24 +42,24 @@
         .tier-btn.primary:hover { background: var(--dark-red); }
         .tier-btn.success { background: #10b981; color: var(--white); }
         .tier-btn.success:hover { background: #059669; }
-        .tier-btn.secondary { background: #e5e7eb; color: var(--dark-gray); }
-        .tier-btn.secondary:hover { background: #d1d5db; }
-        .tier-btn:disabled { background: #9ca3af; color: #6b7280; cursor: not-allowed; }
+        .tier-btn.expired { background: #f59e0b; color: var(--white); }
+        .tier-btn.expired:hover { background: #d97706; }
         
-        .upgrade-options { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
-        .upgrade-btn { flex: 1; padding: 0.5rem; font-size: 0.9rem; }
-        
-        .purchase-badge {
+        .active-badge {
             position: absolute; top: 1rem; right: 1rem; 
             background: #10b981; color: white; padding: 0.25rem 0.75rem;
             border-radius: 12px; font-size: 0.8rem; font-weight: 600;
+        }
+        
+        .expires-info {
+            background: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px;
+            padding: 0.75rem; margin-top: 1rem; font-size: 0.9rem;
         }
         
         @media (max-width: 768px) {
             .container { padding: 1rem 15px; }
             .header h1 { font-size: 2rem; }
             .tier-card { padding: 1.5rem; }
-            .upgrade-options { flex-direction: column; }
         }
     </style>
 </head>
@@ -67,83 +67,78 @@
     <div class="container">
         <div class="header">
             <h1>Your Analysis Portal</h1>
-            <p>Choose your tier to access message analysis</p>
+            <p>Access unlimited AI-powered message analysis</p>
         </div>
 
         <div class="tier-cards">
-            <div class="tier-card" id="flag-check-card">
-                <div class="purchase-badge" id="flag-check-badge" style="display: none;">Purchased</div>
+            <div class="tier-card" id="basic-card">
+                <div class="active-badge" id="basic-badge" style="display: none;">Active</div>
                 <div class="tier-header">
-                    <div class="tier-title">Flag Check</div>
-                    <div class="tier-price">$9</div>
+                    <div class="tier-title">Basic Analysis</div>
+                    <div class="tier-price">$9/month</div>
                 </div>
-                <div class="tier-description">3 message analyses with red & green flag identification</div>
-                <div class="tier-limits" id="flag-check-limits">3 analyses included</div>
-                <button class="tier-btn primary" id="flag-check-btn">Purchase Flag Check ($9)</button>
-                <div class="upgrade-options" id="flag-check-upgrade" style="display: none;">
-                    <button class="tier-btn secondary upgrade-btn" onclick="buyMore('flag_check')">Buy 3 More ($9)</button>
-                    <button class="tier-btn secondary upgrade-btn" onclick="upgrade('pattern_check')">Upgrade to Pattern Check</button>
+                <div class="tier-description">Unlimited basic flag detection and pattern recognition</div>
+                <div class="tier-limits" id="basic-limits">Unlimited monthly analyses</div>
+                <button class="tier-btn primary" id="basic-btn">Subscribe to Basic ($9/mo)</button>
+                <div class="expires-info" id="basic-expires" style="display: none;">
+                    <strong>Expires:</strong> <span id="basic-expire-date"></span>
                 </div>
             </div>
 
-            <div class="tier-card" id="pattern-check-card">
-                <div class="purchase-badge" id="pattern-check-badge" style="display: none;">Purchased</div>
+            <div class="tier-card" id="advanced-card">
+                <div class="active-badge" id="advanced-badge" style="display: none;">Active</div>
                 <div class="tier-header">
-                    <div class="tier-title">Pattern Check</div>
-                    <div class="tier-price">$19</div>
+                    <div class="tier-title">Advanced Analysis</div>
+                    <div class="tier-price">$19/month</div>
                 </div>
-                <div class="tier-description">6 message analyses with deep pattern recognition & trauma insights</div>
-                <div class="tier-limits" id="pattern-check-limits">6 analyses included</div>
-                <button class="tier-btn primary" id="pattern-check-btn">Purchase Pattern Check ($19)</button>
-                <div class="upgrade-options" id="pattern-check-upgrade" style="display: none;">
-                    <button class="tier-btn secondary upgrade-btn" onclick="buyMore('pattern_check')">Buy 6 More ($19)</button>
-                    <button class="tier-btn secondary upgrade-btn" onclick="upgrade('reality_check')">Upgrade to Reality Check</button>
+                <div class="tier-description">Unlimited deep pattern recognition, trauma insights & communication analysis</div>
+                <div class="tier-limits" id="advanced-limits">Unlimited monthly analyses</div>
+                <button class="tier-btn primary" id="advanced-btn">Subscribe to Advanced ($19/mo)</button>
+                <div class="expires-info" id="advanced-expires" style="display: none;">
+                    <strong>Expires:</strong> <span id="advanced-expire-date"></span>
                 </div>
             </div>
 
-            <div class="tier-card" id="reality-check-card">
-                <div class="purchase-badge" id="reality-check-badge" style="display: none;">Purchased</div>
+            <div class="tier-card" id="premium-card">
+                <div class="active-badge" id="premium-badge" style="display: none;">Active</div>
                 <div class="tier-header">
-                    <div class="tier-title">Reality Check</div>
-                    <div class="tier-price">$29/mo</div>
+                    <div class="tier-title">Premium Analysis</div>
+                    <div class="tier-price">$29/month</div>
                 </div>
-                <div class="tier-description">Unlimited analyses with 24/7 access & voice message support</div>
-                <div class="tier-limits" id="reality-check-limits">Unlimited monthly analyses</div>
-                <button class="tier-btn primary" id="reality-check-btn">Purchase Reality Check ($29/mo)</button>
-                <div class="upgrade-options" id="reality-check-upgrade" style="display: none;">
-                    <button class="tier-btn secondary upgrade-btn" onclick="buyMore('reality_check')">Renew Subscription ($29)</button>
+                <div class="tier-description">Unlimited comprehensive analysis with voice messages, priority support & advanced insights</div>
+                <div class="tier-limits" id="premium-limits">Unlimited monthly analyses + priority support</div>
+                <button class="tier-btn primary" id="premium-btn">Subscribe to Premium ($29/mo)</button>
+                <div class="expires-info" id="premium-expires" style="display: none;">
+                    <strong>Expires:</strong> <span id="premium-expire-date"></span>
                 </div>
             </div>
         </div>
 
         <div style="text-align: center; margin-top: 2rem;">
             <p style="color: var(--medium-gray); font-size: 0.9rem;">
-                Need help? <a href="index.html" style="color: var(--primary-red);">← Back to homepage</a>
+                Questions? <a href="index.html" style="color: var(--primary-red);">← Back to homepage</a>
             </p>
         </div>
     </div>
 
     <script>
-        // Tier configuration
+        // Subscription tier configuration
         const TIERS = {
-            flag_check: {
-                name: 'Flag Check',
+            basic: {
+                name: 'Basic Analysis',
                 price: 9,
-                limit: 3,
                 stripeUrl: 'https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b',
                 tallyUrl: 'https://tally.so/r/mJbgaz'
             },
-            pattern_check: {
-                name: 'Pattern Check', 
+            advanced: {
+                name: 'Advanced Analysis', 
                 price: 19,
-                limit: 6,
                 stripeUrl: 'https://buy.stripe.com/28E3cueA58qa4023GF9EI0a',
                 tallyUrl: 'https://tally.so/r/m6E2VJ'
             },
-            reality_check: {
-                name: 'Reality Check',
+            premium: {
+                name: 'Premium Analysis',
                 price: 29,
-                limit: -1,
                 stripeUrl: 'https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03',
                 tallyUrl: 'https://tally.so/r/waqYzb'
             }
@@ -151,22 +146,22 @@
 
         let userData = {
             email: null,
-            purchases: {}
+            subscriptions: {}
         };
 
         function init() {
-            console.log('Page initialized');
-            
             const params = new URLSearchParams(window.location.search);
             const tier = params.get('tier');
             const submitted = params.get('submitted') === 'true';
             let email = params.get('email') || params.get('customer_email');
             
-            console.log('URL params:', { tier, submitted, email });
-
             // Get email if not provided
             if (!email || email === '{CHECKOUT_SESSION_CUSTOMER_EMAIL}') {
-                email = prompt('Please enter your email to access your analysis:');
+                if (submitted && tier) {
+                    email = prompt('Please enter your email to activate your subscription:');
+                } else {
+                    email = prompt('Please enter your email to check your subscriptions:');
+                }
                 if (!email || !email.includes('@')) {
                     alert('Valid email required');
                     window.location.href = 'index.html';
@@ -177,152 +172,120 @@
             userData.email = email;
             loadUserData();
 
-            // Handle new purchase
+            // Handle new subscription activation
             if (submitted && tier && TIERS[tier]) {
-                console.log('Processing new purchase:', tier);
-                addPurchase(tier);
+                activateSubscription(tier);
             }
 
             updateDisplay();
         }
 
         function loadUserData() {
-            const saved = localStorage.getItem(`user_${userData.email}`);
+            const saved = localStorage.getItem(`subs_${userData.email}`);
             if (saved) {
                 try {
                     const parsed = JSON.parse(saved);
-                    userData.purchases = parsed.purchases || {};
-                    console.log('Loaded user data:', userData.purchases);
+                    userData.subscriptions = parsed.subscriptions || {};
                 } catch (e) {
-                    console.log('Error loading user data:', e);
-                    userData.purchases = {};
+                    userData.subscriptions = {};
                 }
             }
         }
 
         function saveUserData() {
-            localStorage.setItem(`user_${userData.email}`, JSON.stringify({
-                purchases: userData.purchases
+            localStorage.setItem(`subs_${userData.email}`, JSON.stringify({
+                subscriptions: userData.subscriptions
             }));
-            console.log('Saved user data:', userData.purchases);
         }
 
-        function addPurchase(tier) {
-    const config = TIERS[tier];
-    
-    // Get a unique session ID from URL or create one
-    const urlParams = new URLSearchParams(window.location.search);
-    const sessionId = urlParams.get('session_id') || urlParams.get('checkout_session_id') || `manual_${Date.now()}_${Math.random()}`;
-    
-    console.log('Processing purchase with session ID:', sessionId);
-    
-    // Check if this session was already processed
-    const processedSessions = JSON.parse(localStorage.getItem('processed_sessions') || '[]');
-    if (processedSessions.includes(sessionId)) {
-        console.log('Session already processed, skipping');
-        return;
-    }
-    
-    // Initialize if doesn't exist
-    if (!userData.purchases[tier]) {
-        userData.purchases[tier] = { count: 0, used: 0, lastPurchase: 0 };
-    }
-
-    // Add analyses
-    userData.purchases[tier].count += config.limit === -1 ? 1 : config.limit;
-    userData.purchases[tier].lastPurchase = Date.now();
-    
-    // Mark this session as processed
-    processedSessions.push(sessionId);
-    localStorage.setItem('processed_sessions', JSON.stringify(processedSessions));
-    
-    console.log(`Added ${config.limit} analyses to ${tier} for session ${sessionId}`);
-    saveUserData();
-}
+        function activateSubscription(tier) {
+            const now = new Date();
+            const expiryDate = new Date(now.getTime() + (30 * 24 * 60 * 60 * 1000)); // 30 days from now
+            
+            userData.subscriptions[tier] = {
+                active: true,
+                startDate: now.toISOString(),
+                expiryDate: expiryDate.toISOString(),
+                lastActivated: now.toISOString()
+            };
+            
+            saveUserData();
+            
+            // Clean URL after processing
+            const cleanUrl = `${window.location.pathname}?email=${encodeURIComponent(userData.email)}`;
+            window.history.replaceState({}, '', cleanUrl);
+        }
 
         function updateDisplay() {
             Object.keys(TIERS).forEach(tier => {
                 const config = TIERS[tier];
-                const purchase = userData.purchases[tier];
+                const subscription = userData.subscriptions[tier];
                 
-                const card = document.getElementById(`${tier.replace('_', '-')}-card`);
-                const btn = document.getElementById(`${tier.replace('_', '-')}-btn`);
-                const limits = document.getElementById(`${tier.replace('_', '-')}-limits`);
-                const badge = document.getElementById(`${tier.replace('_', '-')}-badge`);
-                const upgrade = document.getElementById(`${tier.replace('_', '-')}-upgrade`);
+                const card = document.getElementById(`${tier}-card`);
+                const btn = document.getElementById(`${tier}-btn`);
+                const limits = document.getElementById(`${tier}-limits`);
+                const badge = document.getElementById(`${tier}-badge`);
+                const expires = document.getElementById(`${tier}-expires`);
+                const expireDate = document.getElementById(`${tier}-expire-date`);
 
-                if (purchase && purchase.count > 0) {
-                    // User has purchased this tier
-                    card.classList.add('purchased');
-                    badge.style.display = 'block';
-
-                    if (config.limit === -1) {
-                        // Unlimited tier
-                        limits.textContent = 'Unlimited analyses available';
-                        btn.textContent = `Access ${config.name} Analysis`;
+                if (subscription && subscription.active) {
+                    const expiryDate = new Date(subscription.expiryDate);
+                    const now = new Date();
+                    
+                    if (expiryDate > now) {
+                        // Active subscription
+                        card.classList.add('active');
+                        badge.style.display = 'block';
+                        limits.textContent = 'Unlimited analyses until ' + expiryDate.toLocaleDateString();
+                        btn.textContent = `Access ${config.name}`;
                         btn.className = 'tier-btn success';
                         btn.onclick = () => accessAnalysis(tier);
-                    } else {
-                        // Limited tier
-                        const remaining = purchase.count - purchase.used;
-                        limits.textContent = `${purchase.used}/${purchase.count} analyses used (${remaining} remaining)`;
                         
-                        if (remaining > 0) {
-                            btn.textContent = `Access ${config.name} Analysis (${remaining} left)`;
-                            btn.className = 'tier-btn success';
-                            btn.onclick = () => accessAnalysis(tier);
-                        } else {
-                            btn.textContent = 'All Analyses Used - Buy More';
-                            btn.className = 'tier-btn secondary';
-                            btn.onclick = () => buyMore(tier);
-                            upgrade.style.display = 'flex';
-                        }
+                        expires.style.display = 'block';
+                        expireDate.textContent = expiryDate.toLocaleDateString();
+                    } else {
+                        // Expired subscription
+                        card.classList.remove('active');
+                        badge.style.display = 'none';
+                        limits.textContent = 'Subscription expired';
+                        btn.textContent = `Renew ${config.name} ($${config.price}/mo)`;
+                        btn.className = 'tier-btn expired';
+                        btn.onclick = () => subscribe(tier);
+                        
+                        expires.style.display = 'none';
                     }
                 } else {
-                    // User hasn't purchased this tier
-                    limits.textContent = `${config.limit === -1 ? 'Unlimited' : config.limit} analyses included`;
-                    btn.textContent = `Purchase ${config.name} ($${config.price}${config.limit === -1 ? '/mo' : ''})`;
+                    // No subscription
+                    limits.textContent = 'Unlimited monthly analyses';
+                    btn.textContent = `Subscribe to ${config.name} ($${config.price}/mo)`;
                     btn.className = 'tier-btn primary';
-                    btn.onclick = () => purchase(tier);
+                    btn.onclick = () => subscribe(tier);
+                    
+                    expires.style.display = 'none';
                 }
             });
         }
 
-        function purchase(tier) {
-            console.log('Purchasing tier:', tier);
+        function subscribe(tier) {
             window.location.href = TIERS[tier].stripeUrl;
         }
 
         function accessAnalysis(tier) {
-            console.log('Accessing analysis for tier:', tier);
-            const config = TIERS[tier];
-            const purchase = userData.purchases[tier];
-
-            // For limited tiers, decrement usage
-            if (config.limit !== -1) {
-                const remaining = purchase.count - purchase.used;
-                if (remaining <= 0) {
-                    alert('No analyses remaining. Please purchase more.');
-                    return;
-                }
-                
-                userData.purchases[tier].used++;
-                saveUserData();
+            const subscription = userData.subscriptions[tier];
+            if (!subscription || !subscription.active) {
+                alert('No active subscription. Please subscribe first.');
+                return;
+            }
+            
+            const expiryDate = new Date(subscription.expiryDate);
+            if (new Date() > expiryDate) {
+                alert('Your subscription has expired. Please renew to continue.');
                 updateDisplay();
+                return;
             }
 
             // Redirect to Tally form
-            window.location.href = config.tallyUrl;
-        }
-
-        function buyMore(tier) {
-            console.log('Buying more of tier:', tier);
-            window.location.href = TIERS[tier].stripeUrl;
-        }
-
-        function upgrade(tier) {
-            console.log('Upgrading to tier:', tier);
-            window.location.href = TIERS[tier].stripeUrl;
+            window.location.href = TIERS[tier].tallyUrl;
         }
 
         // Initialize when page loads
