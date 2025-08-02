@@ -19,47 +19,61 @@
         .header h1 { font-size: 2.5rem; color: var(--dark-gray); margin-bottom: 0.5rem; }
         .header p { font-size: 1.1rem; color: var(--medium-gray); }
         
-        .tier-cards { display: grid; gap: 1.5rem; margin-bottom: 2rem; }
-        .tier-card {
-            background: var(--white); border-radius: 16px; padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: relative; overflow: hidden;
-            transition: all 0.3s ease; border: 2px solid transparent;
+        .access-card {
+            background: var(--white); border-radius: 16px; padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center;
+            margin-bottom: 2rem; position: relative; overflow: hidden;
         }
-        .tier-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); border-color: var(--primary-red); }
-        .tier-card.active { border-color: #10b981; background: linear-gradient(135deg, #ecfdf5 0%, var(--white) 100%); }
+        .access-card.premium { border: 2px solid #10b981; background: linear-gradient(135deg, #ecfdf5 0%, var(--white) 100%); }
+        .access-card.free { border: 2px solid var(--primary-red); }
         
-        .tier-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        .tier-title { font-size: 1.3rem; font-weight: bold; color: var(--dark-gray); }
-        .tier-price { font-size: 1.1rem; color: var(--primary-red); font-weight: 600; }
-        .tier-description { color: var(--medium-gray); margin-bottom: 1rem; line-height: 1.5; }
-        .tier-limits { font-size: 0.9rem; color: var(--medium-gray); margin-bottom: 1rem; font-weight: 500; }
-        
-        .tier-btn {
-            width: 100%; padding: 1rem; border: none; border-radius: 8px;
-            font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;
-        }
-        .tier-btn.primary { background: var(--primary-red); color: var(--white); }
-        .tier-btn.primary:hover { background: var(--dark-red); }
-        .tier-btn.success { background: #10b981; color: var(--white); }
-        .tier-btn.success:hover { background: #059669; }
-        .tier-btn.expired { background: #f59e0b; color: var(--white); }
-        .tier-btn.expired:hover { background: #d97706; }
-        
-        .active-badge {
+        .status-badge {
             position: absolute; top: 1rem; right: 1rem; 
-            background: #10b981; color: white; padding: 0.25rem 0.75rem;
-            border-radius: 12px; font-size: 0.8rem; font-weight: 600;
+            padding: 0.5rem 1rem; border-radius: 12px; font-size: 0.8rem; font-weight: 600;
+        }
+        .status-badge.premium { background: #10b981; color: white; }
+        .status-badge.free { background: var(--primary-red); color: white; }
+        
+        .plan-title { font-size: 1.8rem; font-weight: bold; color: var(--dark-gray); margin-bottom: 1rem; }
+        .plan-description { color: var(--medium-gray); margin-bottom: 2rem; line-height: 1.5; }
+        .usage-info { 
+            background: var(--light-gray); border-radius: 12px; padding: 1.5rem; 
+            margin-bottom: 2rem; font-size: 1.1rem; color: var(--dark-gray);
         }
         
-        .expires-info {
-            background: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px;
-            padding: 0.75rem; margin-top: 1rem; font-size: 0.9rem;
+        .access-btn {
+            width: 100%; padding: 1.25rem; border: none; border-radius: 12px;
+            font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+        .access-btn.primary { background: var(--primary-red); color: var(--white); }
+        .access-btn.primary:hover { background: var(--dark-red); }
+        .access-btn.success { background: #10b981; color: var(--white); }
+        .access-btn.success:hover { background: #059669; }
+        .access-btn.disabled { background: #9ca3af; color: #6b7280; cursor: not-allowed; }
+        
+        .upgrade-section {
+            background: linear-gradient(135deg, var(--light-red) 0%, var(--white) 100%);
+            border-radius: 12px; padding: 2rem; text-align: center; margin-top: 1rem;
+        }
+        .upgrade-section h3 { color: var(--primary-red); margin-bottom: 1rem; }
+        .upgrade-section p { color: var(--medium-gray); margin-bottom: 1.5rem; }
+        
+        .feature-list { text-align: left; margin: 1.5rem 0; }
+        .feature-list ul { list-style: none; }
+        .feature-list li {
+            padding: 0.5rem 0; color: var(--dark-gray);
+            position: relative; padding-left: 2rem;
+        }
+        .feature-list li:before {
+            content: "✓"; position: absolute; left: 0; top: 0.5rem;
+            color: var(--primary-red); font-weight: bold; font-size: 1.1rem;
         }
         
         @media (max-width: 768px) {
             .container { padding: 1rem 15px; }
             .header h1 { font-size: 2rem; }
-            .tier-card { padding: 1.5rem; }
+            .access-card { padding: 2rem 1.5rem; }
         }
     </style>
 </head>
@@ -67,100 +81,75 @@
     <div class="container">
         <div class="header">
             <h1>Your Analysis Portal</h1>
-            <p>Access unlimited AI-powered message analysis</p>
+            <p>Ready to decode your messages, bestie?</p>
         </div>
 
-        <div class="tier-cards">
-            <div class="tier-card" id="basic-card">
-                <div class="active-badge" id="basic-badge" style="display: none;">Active</div>
-                <div class="tier-header">
-                    <div class="tier-title">Basic Analysis</div>
-                    <div class="tier-price">$9/month</div>
+        <div class="access-card" id="access-card">
+            <div class="status-badge" id="status-badge">Loading...</div>
+            <div class="plan-title" id="plan-title">Checking Your Access...</div>
+            <div class="plan-description" id="plan-description">Please wait while we load your account</div>
+            <div class="usage-info" id="usage-info">Loading your usage information...</div>
+            <button class="access-btn primary" id="access-btn" disabled>Loading...</button>
+            
+            <div class="upgrade-section" id="upgrade-section" style="display: none;">
+                <h3>Want Unlimited Analysis?</h3>
+                <p>Get unlimited message analysis, voice message support, and priority insights for just $12/month.</p>
+                <div class="feature-list">
+                    <ul>
+                        <li>Unlimited message analysis</li>
+                        <li>Deep trauma insights</li>
+                        <li>Voice message analysis</li>
+                        <li>24/7 access</li>
+                        <li>Priority support</li>
+                    </ul>
                 </div>
-                <div class="tier-description">Unlimited basic flag detection and pattern recognition</div>
-                <div class="tier-limits" id="basic-limits">Unlimited monthly analyses</div>
-                <button class="tier-btn primary" id="basic-btn">Subscribe to Basic ($9/mo)</button>
-                <div class="expires-info" id="basic-expires" style="display: none;">
-                    <strong>Expires:</strong> <span id="basic-expire-date"></span>
-                </div>
-            </div>
-
-            <div class="tier-card" id="advanced-card">
-                <div class="active-badge" id="advanced-badge" style="display: none;">Active</div>
-                <div class="tier-header">
-                    <div class="tier-title">Advanced Analysis</div>
-                    <div class="tier-price">$19/month</div>
-                </div>
-                <div class="tier-description">Unlimited deep pattern recognition, trauma insights & communication analysis</div>
-                <div class="tier-limits" id="advanced-limits">Unlimited monthly analyses</div>
-                <button class="tier-btn primary" id="advanced-btn">Subscribe to Advanced ($19/mo)</button>
-                <div class="expires-info" id="advanced-expires" style="display: none;">
-                    <strong>Expires:</strong> <span id="advanced-expire-date"></span>
-                </div>
-            </div>
-
-            <div class="tier-card" id="premium-card">
-                <div class="active-badge" id="premium-badge" style="display: none;">Active</div>
-                <div class="tier-header">
-                    <div class="tier-title">Premium Analysis</div>
-                    <div class="tier-price">$29/month</div>
-                </div>
-                <div class="tier-description">Unlimited comprehensive analysis with voice messages, priority support & advanced insights</div>
-                <div class="tier-limits" id="premium-limits">Unlimited monthly analyses + priority support</div>
-                <button class="tier-btn primary" id="premium-btn">Subscribe to Premium ($29/mo)</button>
-                <div class="expires-info" id="premium-expires" style="display: none;">
-                    <strong>Expires:</strong> <span id="premium-expire-date"></span>
-                </div>
+                <button class="access-btn primary" onclick="upgrade()">Upgrade to Unlimited ($12/mo)</button>
             </div>
         </div>
 
         <div style="text-align: center; margin-top: 2rem;">
             <p style="color: var(--medium-gray); font-size: 0.9rem;">
-                Questions? <a href="index.html" style="color: var(--primary-red);">← Back to homepage</a>
+                Need help? <a href="index.html" style="color: var(--primary-red);">← Back to homepage</a>
             </p>
         </div>
     </div>
 
     <script>
-        // Subscription tier configuration
-        const TIERS = {
-            basic: {
-                name: 'Basic Analysis',
-                price: 9,
-                stripeUrl: 'https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b',
-                tallyUrl: 'https://tally.so/r/mJbgaz'
+        const PLANS = {
+            free: {
+                name: 'Free Reality Check',
+                description: 'Get 1 honest analysis per month to see what this AI bestie is all about.',
+                tallyUrl: 'https://tally.so/r/mJbgaz',
+                limit: 1
             },
-            advanced: {
-                name: 'Advanced Analysis', 
-                price: 19,
-                stripeUrl: 'https://buy.stripe.com/28E3cueA58qa4023GF9EI0a',
-                tallyUrl: 'https://tally.so/r/m6E2VJ'
-            },
-            premium: {
-                name: 'Premium Analysis',
-                price: 29,
-                stripeUrl: 'https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03',
-                tallyUrl: 'https://tally.so/r/waqYzb'
+            unlimited: {
+                name: 'Unlimited Analysis',
+                description: 'Unlimited access to brutally honest AI analysis whenever you need it.',
+                tallyUrl: 'https://tally.so/r/m6E2VJ',
+                limit: -1,
+                stripeUrl: 'https://buy.stripe.com/28E3cueA58qa4023GF9EI0a'
             }
         };
 
-        let userData = {
+        let userState = {
             email: null,
-            subscriptions: {}
+            plan: 'free',
+            usedThisMonth: 0,
+            subscriptionActive: false,
+            lastUsed: null
         };
 
         function init() {
             const params = new URLSearchParams(window.location.search);
-            const tier = params.get('tier');
             const submitted = params.get('submitted') === 'true';
             let email = params.get('email') || params.get('customer_email');
             
             // Get email if not provided
             if (!email || email === '{CHECKOUT_SESSION_CUSTOMER_EMAIL}') {
-                if (submitted && tier) {
+                if (submitted) {
                     email = prompt('Please enter your email to activate your subscription:');
                 } else {
-                    email = prompt('Please enter your email to check your subscriptions:');
+                    email = prompt('Please enter your email to access your analysis:');
                 }
                 if (!email || !email.includes('@')) {
                     alert('Valid email required');
@@ -169,123 +158,130 @@
                 }
             }
 
-            userData.email = email;
+            userState.email = email;
             loadUserData();
 
             // Handle new subscription activation
-            if (submitted && tier && TIERS[tier]) {
-                activateSubscription(tier);
+            if (submitted) {
+                activateSubscription();
             }
 
             updateDisplay();
         }
 
         function loadUserData() {
-            const saved = localStorage.getItem(`subs_${userData.email}`);
+            const saved = localStorage.getItem(`user_${userState.email}`);
             if (saved) {
                 try {
                     const parsed = JSON.parse(saved);
-                    userData.subscriptions = parsed.subscriptions || {};
+                    userState.plan = parsed.plan || 'free';
+                    userState.usedThisMonth = parsed.usedThisMonth || 0;
+                    userState.subscriptionActive = parsed.subscriptionActive || false;
+                    userState.lastUsed = parsed.lastUsed;
+                    
+                    // Reset monthly usage if it's a new month
+                    const lastUsedDate = userState.lastUsed ? new Date(userState.lastUsed) : null;
+                    const now = new Date();
+                    if (!lastUsedDate || lastUsedDate.getMonth() !== now.getMonth() || lastUsedDate.getFullYear() !== now.getFullYear()) {
+                        userState.usedThisMonth = 0;
+                    }
                 } catch (e) {
-                    userData.subscriptions = {};
+                    // Reset to defaults if corrupted
+                    userState = { email: userState.email, plan: 'free', usedThisMonth: 0, subscriptionActive: false, lastUsed: null };
                 }
             }
         }
 
         function saveUserData() {
-            localStorage.setItem(`subs_${userData.email}`, JSON.stringify({
-                subscriptions: userData.subscriptions
+            localStorage.setItem(`user_${userState.email}`, JSON.stringify({
+                plan: userState.plan,
+                usedThisMonth: userState.usedThisMonth,
+                subscriptionActive: userState.subscriptionActive,
+                lastUsed: userState.lastUsed
             }));
         }
 
-        function activateSubscription(tier) {
-            const now = new Date();
-            const expiryDate = new Date(now.getTime() + (30 * 24 * 60 * 60 * 1000)); // 30 days from now
-            
-            userData.subscriptions[tier] = {
-                active: true,
-                startDate: now.toISOString(),
-                expiryDate: expiryDate.toISOString(),
-                lastActivated: now.toISOString()
-            };
-            
+        function activateSubscription() {
+            userState.plan = 'unlimited';
+            userState.subscriptionActive = true;
             saveUserData();
             
             // Clean URL after processing
-            const cleanUrl = `${window.location.pathname}?email=${encodeURIComponent(userData.email)}`;
+            const cleanUrl = `${window.location.pathname}?email=${encodeURIComponent(userState.email)}`;
             window.history.replaceState({}, '', cleanUrl);
         }
 
         function updateDisplay() {
-            Object.keys(TIERS).forEach(tier => {
-                const config = TIERS[tier];
-                const subscription = userData.subscriptions[tier];
+            const card = document.getElementById('access-card');
+            const badge = document.getElementById('status-badge');
+            const title = document.getElementById('plan-title');
+            const description = document.getElementById('plan-description');
+            const usage = document.getElementById('usage-info');
+            const btn = document.getElementById('access-btn');
+            const upgradeSection = document.getElementById('upgrade-section');
+
+            const plan = PLANS[userState.plan];
+
+            if (userState.plan === 'unlimited' && userState.subscriptionActive) {
+                // Unlimited subscriber
+                card.className = 'access-card premium';
+                badge.className = 'status-badge premium';
+                badge.textContent = 'Unlimited';
+                title.textContent = plan.name;
+                description.textContent = plan.description;
+                usage.textContent = 'Unlimited analyses available - go wild, bestie! 🔥';
+                btn.textContent = 'Access Unlimited Analysis';
+                btn.className = 'access-btn success';
+                btn.disabled = false;
+                btn.onclick = () => accessAnalysis();
+                upgradeSection.style.display = 'none';
+            } else {
+                // Free user
+                card.className = 'access-card free';
+                badge.className = 'status-badge free';
+                badge.textContent = 'Free';
+                title.textContent = plan.name;
+                description.textContent = plan.description;
                 
-                const card = document.getElementById(`${tier}-card`);
-                const btn = document.getElementById(`${tier}-btn`);
-                const limits = document.getElementById(`${tier}-limits`);
-                const badge = document.getElementById(`${tier}-badge`);
-                const expires = document.getElementById(`${tier}-expires`);
-                const expireDate = document.getElementById(`${tier}-expire-date`);
-
-                if (subscription && subscription.active) {
-                    const expiryDate = new Date(subscription.expiryDate);
-                    const now = new Date();
-                    
-                    if (expiryDate > now) {
-                        // Active subscription
-                        card.classList.add('active');
-                        badge.style.display = 'block';
-                        limits.textContent = 'Unlimited analyses until ' + expiryDate.toLocaleDateString();
-                        btn.textContent = `Access ${config.name}`;
-                        btn.className = 'tier-btn success';
-                        btn.onclick = () => accessAnalysis(tier);
-                        
-                        expires.style.display = 'block';
-                        expireDate.textContent = expiryDate.toLocaleDateString();
-                    } else {
-                        // Expired subscription
-                        card.classList.remove('active');
-                        badge.style.display = 'none';
-                        limits.textContent = 'Subscription expired';
-                        btn.textContent = `Renew ${config.name} ($${config.price}/mo)`;
-                        btn.className = 'tier-btn expired';
-                        btn.onclick = () => subscribe(tier);
-                        
-                        expires.style.display = 'none';
-                    }
+                const remaining = plan.limit - userState.usedThisMonth;
+                if (remaining > 0) {
+                    usage.textContent = `${remaining} analysis remaining this month`;
+                    btn.textContent = `Get Your Free Analysis (${remaining} left)`;
+                    btn.className = 'access-btn primary';
+                    btn.disabled = false;
+                    btn.onclick = () => accessAnalysis();
+                    upgradeSection.style.display = 'none';
                 } else {
-                    // No subscription
-                    limits.textContent = 'Unlimited monthly analyses';
-                    btn.textContent = `Subscribe to ${config.name} ($${config.price}/mo)`;
-                    btn.className = 'tier-btn primary';
-                    btn.onclick = () => subscribe(tier);
-                    
-                    expires.style.display = 'none';
+                    usage.textContent = 'You\'ve used your free analysis this month';
+                    btn.textContent = 'Used This Month - Upgrade for More';
+                    btn.className = 'access-btn disabled';
+                    btn.disabled = true;
+                    upgradeSection.style.display = 'block';
                 }
-            });
-        }
-
-        function subscribe(tier) {
-            window.location.href = TIERS[tier].stripeUrl;
-        }
-
-        function accessAnalysis(tier) {
-            const subscription = userData.subscriptions[tier];
-            if (!subscription || !subscription.active) {
-                alert('No active subscription. Please subscribe first.');
-                return;
             }
+        }
+
+        function accessAnalysis() {
+            const plan = PLANS[userState.plan];
             
-            const expiryDate = new Date(subscription.expiryDate);
-            if (new Date() > expiryDate) {
-                alert('Your subscription has expired. Please renew to continue.');
+            // Check limits for free users
+            if (userState.plan === 'free') {
+                if (userState.usedThisMonth >= plan.limit) {
+                    alert('You\'ve used your free analysis this month. Upgrade for unlimited access!');
+                    return;
+                }
+                userState.usedThisMonth++;
+                userState.lastUsed = new Date().toISOString();
+                saveUserData();
                 updateDisplay();
-                return;
             }
 
-            // Redirect to Tally form
-            window.location.href = TIERS[tier].tallyUrl;
+            // Redirect to analysis form
+            window.location.href = plan.tallyUrl;
+        }
+
+        function upgrade() {
+            window.location.href = PLANS.unlimited.stripeUrl;
         }
 
         // Initialize when page loads
