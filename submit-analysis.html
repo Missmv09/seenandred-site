@@ -19,32 +19,20 @@
         .header h1 { font-size: 2.5rem; color: var(--dark-gray); margin-bottom: 0.5rem; }
         .header p { font-size: 1.1rem; color: var(--medium-gray); }
         
-        .plan-status {
-            background: linear-gradient(135deg, var(--light-red) 0%, var(--white) 100%);
-            border-radius: 16px; padding: 2rem; margin-bottom: 2rem; text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .plan-name { font-size: 1.5rem; font-weight: bold; color: var(--primary-red); margin-bottom: 0.5rem; }
-        .usage-count { font-size: 1.2rem; color: var(--medium-gray); margin-bottom: 1rem; }
-        .plan-features { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-        .feature-item { display: flex; align-items: center; gap: 0.5rem; color: var(--dark-gray); font-size: 0.9rem; }
-        .feature-item::before { content: "✓"; color: var(--primary-red); font-weight: bold; }
-        
         .tier-cards { display: grid; gap: 1.5rem; margin-bottom: 2rem; }
         .tier-card {
             background: var(--white); border-radius: 16px; padding: 2rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: relative; overflow: hidden;
-            transition: all 0.3s ease; cursor: pointer; border: 2px solid transparent;
+            transition: all 0.3s ease; border: 2px solid transparent;
         }
         .tier-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); border-color: var(--primary-red); }
-        .tier-card.disabled { opacity: 0.6; cursor: not-allowed; }
-        .tier-card.disabled:hover { transform: none; }
+        .tier-card.purchased { border-color: #10b981; background: linear-gradient(135deg, #ecfdf5 0%, var(--white) 100%); }
         
         .tier-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
         .tier-title { font-size: 1.3rem; font-weight: bold; color: var(--dark-gray); }
         .tier-price { font-size: 1.1rem; color: var(--primary-red); font-weight: 600; }
         .tier-description { color: var(--medium-gray); margin-bottom: 1rem; line-height: 1.5; }
-        .tier-limits { font-size: 0.9rem; color: var(--medium-gray); margin-bottom: 1rem; }
+        .tier-limits { font-size: 0.9rem; color: var(--medium-gray); margin-bottom: 1rem; font-weight: 500; }
         
         .tier-btn {
             width: 100%; padding: 1rem; border: none; border-radius: 8px;
@@ -52,6 +40,8 @@
         }
         .tier-btn.primary { background: var(--primary-red); color: var(--white); }
         .tier-btn.primary:hover { background: var(--dark-red); }
+        .tier-btn.success { background: #10b981; color: var(--white); }
+        .tier-btn.success:hover { background: #059669; }
         .tier-btn.secondary { background: #e5e7eb; color: var(--dark-gray); }
         .tier-btn.secondary:hover { background: #d1d5db; }
         .tier-btn:disabled { background: #9ca3af; color: #6b7280; cursor: not-allowed; }
@@ -59,27 +49,16 @@
         .upgrade-options { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
         .upgrade-btn { flex: 1; padding: 0.5rem; font-size: 0.9rem; }
         
-        /* Modal Styles */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.5); display: none; align-items: center; justify-content: center; z-index: 1000;
+        .purchase-badge {
+            position: absolute; top: 1rem; right: 1rem; 
+            background: #10b981; color: white; padding: 0.25rem 0.75rem;
+            border-radius: 12px; font-size: 0.8rem; font-weight: 600;
         }
-        .modal-content {
-            background: var(--white); padding: 2rem; border-radius: 16px; max-width: 500px;
-            margin: 0 1rem; text-align: center; box-shadow: 0 20px 25px rgba(0,0,0,0.1);
-        }
-        .modal-content h3 { color: var(--primary-red); font-size: 1.5rem; margin-bottom: 1rem; }
-        .modal-content p { color: var(--medium-gray); margin-bottom: 1.5rem; line-height: 1.6; }
-        .modal-close-btn {
-            background: #6b7280; color: var(--white); border: none;
-            padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; margin-top: 1rem;
-        }
-        .modal-close-btn:hover { background: #4b5563; }
         
         @media (max-width: 768px) {
             .container { padding: 1rem 15px; }
             .header h1 { font-size: 2rem; }
-            .plan-status, .tier-card { padding: 1.5rem; }
+            .tier-card { padding: 1.5rem; }
             .upgrade-options { flex-direction: column; }
         }
     </style>
@@ -88,313 +67,256 @@
     <div class="container">
         <div class="header">
             <h1>Your Analysis Portal</h1>
-            <p>Choose your tier based on your purchase to access analysis forms</p>
-        </div>
-
-        <div class="plan-status" id="plan-status" style="display: none;">
-            <div class="plan-name" id="plan-name">Loading...</div>
-            <div class="usage-count" id="usage-count">Checking your plan...</div>
-            <div class="plan-features" id="plan-features"></div>
+            <p>Choose your tier to access message analysis</p>
         </div>
 
         <div class="tier-cards">
             <div class="tier-card" id="flag-check-card">
+                <div class="purchase-badge" id="flag-check-badge" style="display: none;">Purchased</div>
                 <div class="tier-header">
                     <div class="tier-title">Flag Check</div>
                     <div class="tier-price">$9</div>
                 </div>
                 <div class="tier-description">3 message analyses with red & green flag identification</div>
                 <div class="tier-limits" id="flag-check-limits">3 analyses included</div>
-                <button class="tier-btn primary" id="flag-check-btn" onclick="accessTier('flag_check')">Access Flag Check Analysis</button>
+                <button class="tier-btn primary" id="flag-check-btn">Purchase Flag Check ($9)</button>
                 <div class="upgrade-options" id="flag-check-upgrade" style="display: none;">
-                    <button class="tier-btn secondary upgrade-btn" onclick="buyMoreTier('flag_check')">Buy 3 More ($9)</button>
-                    <button class="tier-btn secondary upgrade-btn" onclick="upgradeTier('pattern_check')">Upgrade to Pattern Check</button>
+                    <button class="tier-btn secondary upgrade-btn" onclick="buyMore('flag_check')">Buy 3 More ($9)</button>
+                    <button class="tier-btn secondary upgrade-btn" onclick="upgrade('pattern_check')">Upgrade to Pattern Check</button>
                 </div>
             </div>
 
             <div class="tier-card" id="pattern-check-card">
+                <div class="purchase-badge" id="pattern-check-badge" style="display: none;">Purchased</div>
                 <div class="tier-header">
                     <div class="tier-title">Pattern Check</div>
                     <div class="tier-price">$19</div>
                 </div>
                 <div class="tier-description">6 message analyses with deep pattern recognition & trauma insights</div>
                 <div class="tier-limits" id="pattern-check-limits">6 analyses included</div>
-                <button class="tier-btn primary" id="pattern-check-btn" onclick="accessTier('pattern_check')">Access Pattern Check Analysis</button>
+                <button class="tier-btn primary" id="pattern-check-btn">Purchase Pattern Check ($19)</button>
                 <div class="upgrade-options" id="pattern-check-upgrade" style="display: none;">
-                    <button class="tier-btn secondary upgrade-btn" onclick="buyMoreTier('pattern_check')">Buy 6 More ($19)</button>
-                    <button class="tier-btn secondary upgrade-btn" onclick="upgradeTier('reality_check')">Upgrade to Reality Check</button>
+                    <button class="tier-btn secondary upgrade-btn" onclick="buyMore('pattern_check')">Buy 6 More ($19)</button>
+                    <button class="tier-btn secondary upgrade-btn" onclick="upgrade('reality_check')">Upgrade to Reality Check</button>
                 </div>
             </div>
 
             <div class="tier-card" id="reality-check-card">
+                <div class="purchase-badge" id="reality-check-badge" style="display: none;">Purchased</div>
                 <div class="tier-header">
                     <div class="tier-title">Reality Check</div>
                     <div class="tier-price">$29/mo</div>
                 </div>
                 <div class="tier-description">Unlimited analyses with 24/7 access & voice message support</div>
                 <div class="tier-limits" id="reality-check-limits">Unlimited monthly analyses</div>
-                <button class="tier-btn primary" id="reality-check-btn" onclick="accessTier('reality_check')">Access Reality Check Analysis</button>
+                <button class="tier-btn primary" id="reality-check-btn">Purchase Reality Check ($29/mo)</button>
                 <div class="upgrade-options" id="reality-check-upgrade" style="display: none;">
-                    <button class="tier-btn secondary upgrade-btn" onclick="renewSubscription()">Renew Subscription ($29)</button>
+                    <button class="tier-btn secondary upgrade-btn" onclick="buyMore('reality_check')">Renew Subscription ($29)</button>
                 </div>
             </div>
         </div>
 
         <div style="text-align: center; margin-top: 2rem;">
             <p style="color: var(--medium-gray); font-size: 0.9rem;">
-                Need to purchase? <a href="index.html" style="color: var(--primary-red);">← Back to homepage</a>
+                Need help? <a href="index.html" style="color: var(--primary-red);">← Back to homepage</a>
             </p>
-        </div>
-    </div>
-
-    <!-- Limit Reached Modal -->
-    <div class="modal-overlay" id="limit-modal">
-        <div class="modal-content">
-            <h3>Analysis Limit Reached</h3>
-            <p id="limit-message">You've used all your analyses for this tier.</p>
-            <div class="upgrade-options">
-                <button class="tier-btn primary" id="modal-buy-more" onclick="closeModal()">Buy More of Same Tier</button>
-                <button class="tier-btn secondary" id="modal-upgrade" onclick="closeModal()">Upgrade to Higher Tier</button>
-            </div>
-            <button class="modal-close-btn" onclick="closeModal()">Close</button>
         </div>
     </div>
 
     <script>
-        // Tier configuration matching the backend system
-        const TIER_CONFIGS = {
-            flag_check: { 
-                limit: 3, 
-                price: 9, 
-                name: 'Flag Check', 
-                type: 'one_time',
-                tallyUrl: 'https://tally.so/r/mJbgaz',
-                stripeUrl: 'https://buy.stripe.com/flag-check'
+        // Tier configuration
+        const TIERS = {
+            flag_check: {
+                name: 'Flag Check',
+                price: 9,
+                limit: 3,
+                stripeUrl: 'https://buy.stripe.com/28E00i2RnfSC546gtr9EI0b',
+                tallyUrl: 'https://tally.so/r/mJbgaz'
             },
-            pattern_check: { 
-                limit: 6, 
-                price: 19, 
+            pattern_check: {
                 name: 'Pattern Check', 
-                type: 'one_time',
-                tallyUrl: 'https://tally.so/r/m6E2VJ',
-                stripeUrl: 'https://buy.stripe.com/pattern-check'
+                price: 19,
+                limit: 6,
+                stripeUrl: 'https://buy.stripe.com/28E3cueA58qa4023GF9EI0a',
+                tallyUrl: 'https://tally.so/r/m6E2VJ'
             },
-            reality_check: { 
-                limit: -1, 
-                price: 29, 
-                name: 'Reality Check', 
-                type: 'monthly_subscription',
-                tallyUrl: 'https://tally.so/r/waqYzb',
-                stripeUrl: 'https://buy.stripe.com/reality-check'
+            reality_check: {
+                name: 'Reality Check',
+                price: 29,
+                limit: -1,
+                stripeUrl: 'https://buy.stripe.com/3cI3cu1NjeOy68a6SR9EI03',
+                tallyUrl: 'https://tally.so/r/waqYzb'
             }
         };
 
-        let userState = {
+        let userData = {
             email: null,
-            purchases: {}, // tier -> { count: number, used: number, lastPurchase: date }
-            processedPurchases: new Set() // Track processed purchase URLs to prevent duplicates
+            purchases: {}
         };
 
-        function initializeUser() {
-            // Check URL parameters for email (from Stripe success or existing user)
-            const urlParams = new URLSearchParams(window.location.search);
-            let email = urlParams.get('email');
-            const tier = urlParams.get('tier');
-            const isNewPurchase = urlParams.get('submitted') === 'true';
+        function init() {
+            console.log('Page initialized');
+            
+            const params = new URLSearchParams(window.location.search);
+            const tier = params.get('tier');
+            const submitted = params.get('submitted') === 'true';
+            let email = params.get('email') || params.get('customer_email');
+            
+            console.log('URL params:', { tier, submitted, email });
 
-            // If this is a new purchase but no email provided, prompt for it
-            if (isNewPurchase && tier && !email) {
-                email = prompt('Please enter your email address to complete your purchase setup:');
+            // Get email if not provided
+            if (!email || email === '{CHECKOUT_SESSION_CUSTOMER_EMAIL}') {
+                email = prompt('Please enter your email to access your analysis:');
                 if (!email || !email.includes('@')) {
-                    alert('Valid email required to access your analysis.');
+                    alert('Valid email required');
                     window.location.href = 'index.html';
                     return;
                 }
-                // Update URL to include email for future reference
-                const newUrl = `${window.location.pathname}?tier=${tier}&submitted=true&email=${encodeURIComponent(email)}`;
-                window.history.replaceState({}, '', newUrl);
             }
 
-            if (email) {
-                userState.email = email;
-                loadUserData(email);
-                
-                // If this is a new purchase, add it to their account
-                if (isNewPurchase && tier && TIER_CONFIGS[tier]) {
-                    addPurchaseToUser(tier);
-                }
-            } else {
-    // No email provided - prompt for it
-    email = prompt('Please enter your email address to access your analyses:');
-    if (!email || !email.includes('@')) {
-        alert('Valid email required.');
-        window.location.href = 'index.html';
-        return;
-    }
-    userState.email = email;
-    loadUserData(email);
-}
+            userData.email = email;
+            loadUserData();
 
-            updateTierCards();
+            // Handle new purchase
+            if (submitted && tier && TIERS[tier]) {
+                console.log('Processing new purchase:', tier);
+                addPurchase(tier);
+            }
+
+            updateDisplay();
         }
 
-        function loadUserData(email) {
-            // Load user data from localStorage (in real app, this would be from your backend)
-            const userData = JSON.parse(localStorage.getItem(`user_${email}`) || '{}');
-            userState.purchases = userData.purchases || {};
-            userState.processedPurchases = new Set(userData.processedPurchases || []);
+        function loadUserData() {
+            const saved = localStorage.getItem(`user_${userData.email}`);
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    userData.purchases = parsed.purchases || {};
+                    console.log('Loaded user data:', userData.purchases);
+                } catch (e) {
+                    console.log('Error loading user data:', e);
+                    userData.purchases = {};
+                }
+            }
         }
 
         function saveUserData() {
-            if (!userState.email) return;
-            const userData = { 
-                purchases: userState.purchases,
-                processedPurchases: Array.from(userState.processedPurchases)
-            };
-            localStorage.setItem(`user_${userState.email}`, JSON.stringify(userData));
+            localStorage.setItem(`user_${userData.email}`, JSON.stringify({
+                purchases: userData.purchases
+            }));
+            console.log('Saved user data:', userData.purchases);
         }
 
-     function addPurchaseToUser(tier) {
-    console.log('=== addPurchaseToUser called with tier:', tier);
-    const tierConfig = TIER_CONFIGS[tier];
-    const purchaseId = new URLSearchParams(window.location.search).get('session_id') || Date.now();
-    
-    const processedPurchases = JSON.parse(localStorage.getItem('processed_purchases') || '[]');
-    if (processedPurchases.includes(purchaseId.toString())) {
-        console.log('Purchase already processed');
-        return;
-    }
-    
-    processedPurchases.push(purchaseId.toString());
-    localStorage.setItem('processed_purchases', JSON.stringify(processedPurchases));
-    
-    if (!userState.purchases[tier]) {
-        userState.purchases[tier] = { count: 0, used: 0, lastPurchase: new Date().toISOString() };
-    }
-    userState.purchases[tier].count += tierConfig.limit === -1 ? 1 : tierConfig.limit;
-    userState.purchases[tier].lastPurchase = new Date().toISOString();
-    
-    saveUserData();
-}
-
-function updateTierCards() {
-    Object.keys(TIER_CONFIGS).forEach(tier => {
-        const card = document.getElementById(`${tier.replace('_', '-')}-card`);
-        const btn = document.getElementById(`${tier.replace('_', '-')}-btn`);
-        const limits = document.getElementById(`${tier.replace('_', '-')}-limits`);
-        const upgradeDiv = document.getElementById(`${tier.replace('_', '-')}-upgrade`);
-        
-        const purchase = userState.purchases[tier];
-        const tierConfig = TIER_CONFIGS[tier];
-        
-        if (!purchase || purchase.count === 0) {
-            btn.textContent = `Purchase ${tierConfig.name} ($${tierConfig.price})`;
-            btn.onclick = () => window.location.href = tierConfig.stripeUrl;
-            limits.textContent = `${tierConfig.limit === -1 ? 'Unlimited' : tierConfig.limit} analyses - Purchase required`;
-            card.classList.add('disabled');
-        } else {
-            card.classList.remove('disabled');
+        function addPurchase(tier) {
+            const config = TIERS[tier];
+            const now = Date.now();
             
-            if (tierConfig.limit === -1) {
-                limits.textContent = 'Unlimited analyses';
-                btn.textContent = `Access ${tierConfig.name} Analysis`;
-                btn.onclick = () => accessTier(tier);
-            } else {
-                const remaining = purchase.count - purchase.used;
-                limits.textContent = `${purchase.used}/${purchase.count} analyses used (${remaining} remaining)`;
-                
-                if (remaining > 0) {
-                    btn.textContent = `Access ${tierConfig.name} Analysis (${remaining} left)`;
-                    btn.onclick = () => accessTier(tier);
-                } else {
-                    btn.textContent = 'All Analyses Used';
-                    btn.disabled = true;
-                    upgradeDiv.style.display = 'block';
-                }
+            // Initialize if doesn't exist
+            if (!userData.purchases[tier]) {
+                userData.purchases[tier] = { count: 0, used: 0, lastPurchase: 0 };
             }
+
+            // Prevent duplicate purchases within 30 seconds
+            if (now - userData.purchases[tier].lastPurchase < 30000) {
+                console.log('Duplicate purchase prevented');
+                return;
+            }
+
+            // Add analyses
+            userData.purchases[tier].count += config.limit === -1 ? 1 : config.limit;
+            userData.purchases[tier].lastPurchase = now;
+            
+            console.log(`Added ${config.limit} analyses to ${tier}`);
+            saveUserData();
         }
-    });
-}
 
-function accessTier(tier) {
-    console.log('accessTier called with:', tier);
-    const purchase = userState.purchases[tier];
-    const tierConfig = TIER_CONFIGS[tier];
-    
-    if (!purchase || purchase.count === 0) {
-        window.location.href = tierConfig.stripeUrl;
-        return;
-    }
-    
-    if (tierConfig.limit !== -1) {
-        const remaining = purchase.count - purchase.used;
-        if (remaining <= 0) {
-            showLimitModal(tier);
-            return;
+        function updateDisplay() {
+            Object.keys(TIERS).forEach(tier => {
+                const config = TIERS[tier];
+                const purchase = userData.purchases[tier];
+                
+                const card = document.getElementById(`${tier.replace('_', '-')}-card`);
+                const btn = document.getElementById(`${tier.replace('_', '-')}-btn`);
+                const limits = document.getElementById(`${tier.replace('_', '-')}-limits`);
+                const badge = document.getElementById(`${tier.replace('_', '-')}-badge`);
+                const upgrade = document.getElementById(`${tier.replace('_', '-')}-upgrade`);
+
+                if (purchase && purchase.count > 0) {
+                    // User has purchased this tier
+                    card.classList.add('purchased');
+                    badge.style.display = 'block';
+
+                    if (config.limit === -1) {
+                        // Unlimited tier
+                        limits.textContent = 'Unlimited analyses available';
+                        btn.textContent = `Access ${config.name} Analysis`;
+                        btn.className = 'tier-btn success';
+                        btn.onclick = () => accessAnalysis(tier);
+                    } else {
+                        // Limited tier
+                        const remaining = purchase.count - purchase.used;
+                        limits.textContent = `${purchase.used}/${purchase.count} analyses used (${remaining} remaining)`;
+                        
+                        if (remaining > 0) {
+                            btn.textContent = `Access ${config.name} Analysis (${remaining} left)`;
+                            btn.className = 'tier-btn success';
+                            btn.onclick = () => accessAnalysis(tier);
+                        } else {
+                            btn.textContent = 'All Analyses Used - Buy More';
+                            btn.className = 'tier-btn secondary';
+                            btn.onclick = () => buyMore(tier);
+                            upgrade.style.display = 'flex';
+                        }
+                    }
+                } else {
+                    // User hasn't purchased this tier
+                    limits.textContent = `${config.limit === -1 ? 'Unlimited' : config.limit} analyses included`;
+                    btn.textContent = `Purchase ${config.name} ($${config.price}${config.limit === -1 ? '/mo' : ''})`;
+                    btn.className = 'tier-btn primary';
+                    btn.onclick = () => purchase(tier);
+                }
+            });
         }
-        userState.purchases[tier].used++;
-        saveUserData();
-    }
-    
-    window.location.href = tierConfig.tallyUrl;
-}
 
-function showLimitModal(tier) {
-    const modal = document.getElementById('limit-modal');
-    const message = document.getElementById('limit-message');
-    const buyMoreBtn = document.getElementById('modal-buy-more');
-    const upgradeBtn = document.getElementById('modal-upgrade');
-    
-    const tierConfig = TIER_CONFIGS[tier];
-    message.textContent = `You've used all ${tierConfig.limit} analyses from your ${tierConfig.name} purchase.`;
-    
-    buyMoreBtn.onclick = () => buyMoreTier(tier);
-    
-    if (tier === 'flag_check') {
-        upgradeBtn.textContent = 'Upgrade to Pattern Check ($19)';
-        upgradeBtn.onclick = () => upgradeTier('pattern_check');
-    } else if (tier === 'pattern_check') {
-        upgradeBtn.textContent = 'Upgrade to Reality Check ($29/mo)';
-        upgradeBtn.onclick = () => upgradeTier('reality_check');
-    } else {
-        upgradeBtn.style.display = 'none';
-    }
-    
-    modal.style.display = 'flex';
-}
+        function purchase(tier) {
+            console.log('Purchasing tier:', tier);
+            window.location.href = TIERS[tier].stripeUrl;
+        }
 
-function buyMoreTier(tier) {
-    window.location.href = TIER_CONFIGS[tier].stripeUrl;
-}
+        function accessAnalysis(tier) {
+            console.log('Accessing analysis for tier:', tier);
+            const config = TIERS[tier];
+            const purchase = userData.purchases[tier];
 
-function upgradeTier(tier) {
-    window.location.href = TIER_CONFIGS[tier].stripeUrl;
-}
+            // For limited tiers, decrement usage
+            if (config.limit !== -1) {
+                const remaining = purchase.count - purchase.used;
+                if (remaining <= 0) {
+                    alert('No analyses remaining. Please purchase more.');
+                    return;
+                }
+                
+                userData.purchases[tier].used++;
+                saveUserData();
+                updateDisplay();
+            }
 
-function renewSubscription() {
-    window.location.href = TIER_CONFIGS.reality_check.stripeUrl;
-}
+            // Redirect to Tally form
+            window.location.href = config.tallyUrl;
+        }
 
-function closeModal() {
-    document.getElementById('limit-modal').style.display = 'none';
-}
+        function buyMore(tier) {
+            console.log('Buying more of tier:', tier);
+            window.location.href = TIERS[tier].stripeUrl;
+        }
 
-function showNoPurchaseState() {
-    const container = document.querySelector('.container');
-    container.innerHTML = `
-        <div class="header">
-            <h1>No Purchases Found</h1>
-            <p>We couldn't find any analysis purchases for your account</p>
-        </div>
-        <div style="text-align: center; margin: 2rem 0;">
-            <p style="color: var(--medium-gray); margin-bottom: 1.5rem;">
-                If you just made a purchase, make sure you're using the link from your Stripe confirmation email.
-            </p>
-            <a href="index.html" class="tier-btn primary" style="display: inline-block; text-decoration: none; max-width: 300px;">
-                ← Back to Homepage
-            </a>
-        </div>
-    `;
-}
+        function upgrade(tier) {
+            console.log('Upgrading to tier:', tier);
+            window.location.href = TIERS[tier].stripeUrl;
+        }
 
-document.addEventListener('DOMContentLoaded', initializeUser);
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
