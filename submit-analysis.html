@@ -118,7 +118,7 @@
             free: {
                 name: 'Free Reality Check',
                 description: 'Get 1 honest analysis per month to see what this AI bestie is all about.',
-                tallyUrl: 'https://tally.so/r/mJbgaz',
+                tallyUrl: 'https://tally.so/r/me8pJE',
                 limit: 1
             },
             unlimited: {
@@ -148,7 +148,7 @@
                 if (submitted) {
                     email = prompt('Please enter your email to activate your subscription:');
                 } else {
-                    email = prompt('Please enter your email to access your unlimited analysis:');
+                    email = prompt('Please enter your email to access your analysis portal:');
                 }
                 if (!email || !email.includes('@')) {
                     alert('Valid email required');
@@ -163,14 +163,6 @@
             // Handle new subscription activation
             if (submitted) {
                 activateSubscription();
-            } else {
-                // For existing users coming from "already subscribed" link, 
-                // assume they have unlimited unless proven otherwise
-                if (!userState.subscriptionActive && userState.plan === 'free') {
-                    userState.plan = 'unlimited';
-                    userState.subscriptionActive = true;
-                    saveUserData();
-                }
             }
 
             updateDisplay();
