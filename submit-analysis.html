@@ -25,14 +25,13 @@
             margin-bottom: 2rem; position: relative; overflow: hidden;
         }
         .access-card.premium { border: 2px solid #10b981; background: linear-gradient(135deg, #ecfdf5 0%, var(--white) 100%); }
-        .access-card.free { border: 2px solid var(--primary-red); }
         
         .status-badge {
             position: absolute; top: 1rem; right: 1rem; 
             padding: 0.5rem 1rem; border-radius: 12px; font-size: 0.8rem; font-weight: 600;
         }
         .status-badge.premium { background: #10b981; color: white; }
-        .status-badge.free { background: var(--primary-red); color: white; }
+        .status-badge.notice { background: var(--primary-red); color: white; }
         
         .plan-title { font-size: 1.8rem; font-weight: bold; color: var(--dark-gray); margin-bottom: 1rem; }
         .plan-description { color: var(--medium-gray); margin-bottom: 2rem; line-height: 1.5; }
@@ -52,23 +51,6 @@
         .access-btn.success:hover { background: #059669; }
         .access-btn.disabled { background: #9ca3af; color: #6b7280; cursor: not-allowed; }
         
-        .upgrade-section {
-            background: linear-gradient(135deg, var(--light-red) 0%, var(--white) 100%);
-            border-radius: 12px; padding: 2rem; text-align: center; margin-top: 1rem;
-        }
-        .upgrade-section h3 { color: var(--primary-red); margin-bottom: 1rem; }
-        .upgrade-section p { color: var(--medium-gray); margin-bottom: 1.5rem; }
-        
-        .feature-list { text-align: left; margin: 1.5rem 0; }
-        .feature-list ul { list-style: none; }
-        .feature-list li {
-            padding: 0.5rem 0; color: var(--dark-gray);
-            position: relative; padding-left: 2rem;
-        }
-        .feature-list li:before {
-            content: "✓"; position: absolute; left: 0; top: 0.5rem;
-            color: var(--primary-red); font-weight: bold; font-size: 1.1rem;
-        }
         
         @media (max-width: 768px) {
             .container { padding: 1rem 15px; }
@@ -81,7 +63,7 @@
     <div class="container">
         <div class="header">
             <h1>Your Analysis Portal</h1>
-            <p>Ready to decode your messages, bestie?</p>
+            <p>Ready to analyze your messages, bestie?</p>
         </div>
 
         <div class="access-card" id="access-card">
@@ -91,19 +73,6 @@
             <div class="usage-info" id="usage-info">Loading your usage information...</div>
             <button class="access-btn primary" id="access-btn" disabled>Loading...</button>
             
-            <div class="upgrade-section" id="upgrade-section" style="display: none;">
-                <h3>Want Unlimited Analysis?</h3>
-                <p>Get unlimited message analysis, voice message support, and priority insights for just $12/month.</p>
-                <div class="feature-list">
-                    <ul>
-                        <li>Unlimited message analysis</li>
-                        <li>Deep trauma insights</li>
-                        <li>24/7 access</li>
-                        <li>Priority support</li>
-                    </ul>
-                </div>
-                <button class="access-btn primary" onclick="upgrade()">Upgrade to Unlimited ($12/mo)</button>
-            </div>
         </div>
 
         <div style="text-align: center; margin-top: 2rem;">
@@ -115,27 +84,17 @@
 
     <script>
         const PLANS = {
-            free: {
-                name: 'Free Reality Check',
-                description: 'Get 1 honest analysis per month to see what this AI bestie is all about.',
-                tallyUrl: 'https://tally.so/r/me8pJE',
-                limit: 1
-            },
             unlimited: {
                 name: 'Unlimited Analysis',
                 description: 'Unlimited access to brutally honest AI analysis whenever you need it.',
                 tallyUrl: 'https://tally.so/r/m6E2VJ',
-                limit: -1,
                 stripeUrl: 'https://buy.stripe.com/9B64gyajP35Qaoq6SR9EI0d'
             }
         };
 
         let userState = {
             email: null,
-            plan: 'free',
-            usedThisMonth: 0,
-            subscriptionActive: false,
-            lastUsed: null
+            subscriptionActive: false
         };
 
         function init() {
@@ -173,38 +132,23 @@
             if (saved) {
                 try {
                     const parsed = JSON.parse(saved);
-                    userState.plan = parsed.plan || 'free';
-                    userState.usedThisMonth = parsed.usedThisMonth || 0;
                     userState.subscriptionActive = parsed.subscriptionActive || false;
-                    userState.lastUsed = parsed.lastUsed;
-                    
-                    // Reset monthly usage if it's a new month
-                    const lastUsedDate = userState.lastUsed ? new Date(userState.lastUsed) : null;
-                    const now = new Date();
-                    if (!lastUsedDate || lastUsedDate.getMonth() !== now.getMonth() || lastUsedDate.getFullYear() !== now.getFullYear()) {
-                        userState.usedThisMonth = 0;
-                    }
                 } catch (e) {
-                    // Reset to defaults if corrupted
-                    userState = { email: userState.email, plan: 'free', usedThisMonth: 0, subscriptionActive: false, lastUsed: null };
+                    userState = { email: userState.email, subscriptionActive: false };
                 }
             }
         }
 
         function saveUserData() {
             localStorage.setItem(`user_${userState.email}`, JSON.stringify({
-                plan: userState.plan,
-                usedThisMonth: userState.usedThisMonth,
-                subscriptionActive: userState.subscriptionActive,
-                lastUsed: userState.lastUsed
+                subscriptionActive: userState.subscriptionActive
             }));
         }
 
         function activateSubscription() {
-            userState.plan = 'unlimited';
             userState.subscriptionActive = true;
             saveUserData();
-            
+
             // Clean URL after processing
             const cleanUrl = `${window.location.pathname}?email=${encodeURIComponent(userState.email)}`;
             window.history.replaceState({}, '', cleanUrl);
@@ -217,11 +161,10 @@
             const description = document.getElementById('plan-description');
             const usage = document.getElementById('usage-info');
             const btn = document.getElementById('access-btn');
-            const upgradeSection = document.getElementById('upgrade-section');
 
-            const plan = PLANS[userState.plan];
+            const plan = PLANS.unlimited;
 
-            if (userState.plan === 'unlimited' && userState.subscriptionActive) {
+            if (userState.subscriptionActive) {
                 // Unlimited subscriber
                 card.className = 'access-card premium';
                 badge.className = 'status-badge premium';
@@ -233,50 +176,23 @@
                 btn.className = 'access-btn success';
                 btn.disabled = false;
                 btn.onclick = () => accessAnalysis();
-                upgradeSection.style.display = 'none';
             } else {
-                // Free user
-                card.className = 'access-card free';
-                badge.className = 'status-badge free';
-                badge.textContent = 'Free';
+                // Not subscribed
+                card.className = 'access-card';
+                badge.className = 'status-badge notice';
+                badge.textContent = 'Subscribe';
                 title.textContent = plan.name;
                 description.textContent = plan.description;
-                
-                const remaining = plan.limit - userState.usedThisMonth;
-                if (remaining > 0) {
-                    usage.textContent = `${remaining} analysis remaining this month`;
-                    btn.textContent = `Get Your Free Analysis (${remaining} left)`;
-                    btn.className = 'access-btn primary';
-                    btn.disabled = false;
-                    btn.onclick = () => accessAnalysis();
-                    upgradeSection.style.display = 'none';
-                } else {
-                    usage.textContent = 'You\'ve used your free analysis this month';
-                    btn.textContent = 'Used This Month - Upgrade for More';
-                    btn.className = 'access-btn disabled';
-                    btn.disabled = true;
-                    upgradeSection.style.display = 'block';
-                }
+                usage.textContent = 'Subscribe to unlock unlimited analyses.';
+                btn.textContent = 'Subscribe for $12/month';
+                btn.className = 'access-btn primary';
+                btn.disabled = false;
+                btn.onclick = upgrade;
             }
         }
 
         function accessAnalysis() {
-            const plan = PLANS[userState.plan];
-            
-            // Check limits for free users
-            if (userState.plan === 'free') {
-                if (userState.usedThisMonth >= plan.limit) {
-                    alert('You\'ve used your free analysis this month. Upgrade for unlimited access!');
-                    return;
-                }
-                userState.usedThisMonth++;
-                userState.lastUsed = new Date().toISOString();
-                saveUserData();
-                updateDisplay();
-            }
-
-            // Redirect to analysis form
-            window.location.href = plan.tallyUrl;
+            window.location.href = PLANS.unlimited.tallyUrl;
         }
 
         function upgrade() {
