@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Seen and Red</title>
+    <meta name="description" content="Explore articles on decoding relationship patterns and trusting your intuition.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-red: #dc2626;
+            --dark-red: #991b1b;
+            --light-red: #fee2e2;
+            --dark-gray: #1f2937;
+            --medium-gray: #6b7280;
+            --light-gray: #f9fafb;
+            --white: #ffffff;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--dark-gray);
+            background: var(--white);
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-red);
+            text-decoration: none;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: var(--primary-red); }
+        .blog-list { padding: 8rem 0 4rem; }
+        .blog-list h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark-gray);
+        }
+        .posts { display: flex; flex-direction: column; gap: 2rem; }
+        .post h2 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .post p { color: var(--medium-gray); }
+        .post a { color: var(--primary-red); text-decoration: none; }
+        .post a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">Seen and Red</a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#analysis">Analysis</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">About</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="blog-list">
+            <div class="container">
+                <h1>Blog</h1>
+                <div class="posts">
+                    <article class="post">
+                        <h2><a href="Healing-Your-Patterns.html">Healing Your Patterns: Breaking the Cycle</a></h2>
+                        <p>Understand why you repeat the same relationship patterns and how to break them.</p>
+                    </article>
+                    <article class="post">
+                        <h2><a href="Trust-Your-Intuition.html">Trust Your Intuition</a></h2>
+                        <p>Learn when to listen to your gut and when it's just anxiety talking.</p>
+                    </article>
+                    <article class="post">
+                        <h2><a href="missing-green-flags.html">Missing Green Flags</a></h2>
+                        <p>Spot when someone is actually showing up for you, even if it feels "too easy."</p>
+                    </article>
+                    <article class="post">
+                        <h2><a href="ignoring-red-flags.html">Ignoring Red Flags</a></h2>
+                        <p>See how past wounds make manipulation feel like love.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
