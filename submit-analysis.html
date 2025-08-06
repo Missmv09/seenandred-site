@@ -101,81 +101,127 @@
             const params = new URLSearchParams(window.location.search);
             const submitted = params.get('submitted') === 'true';
             let email = params.get('email') || params.get('customer_email');
-            
-            // Get email if not provided
-            if (!email || email === '{CHECKOUT_SESSION_CUSTOMER_EMAIL}') {
-                if (submitted) {
-                    email = prompt('Please enter your email to activate your subscription:');
-                } else {
-                    email = prompt('Please enter your email to access your analysis portal:');
-                }
-                if (!email || !email.includes('@')) {
-                    alert('Valid email required');
-                    window.location.href = 'index.html';
-                    return;
-                }
+
+            // Strict email validation
+            if (!email ||
+                email === '{CHECKOUT_SESSION_CUSTOMER_EMAIL}' ||
+                !email.includes('@')) {
+                alert('Invalid email. Please purchase a subscription.');
+                window.location.href = PLANS.unlimited.stripeUrl;
+                return;
             }
 
             email = email.trim().toLowerCase();
             userState.email = email;
+
+            // Load previous state, but always verify
             loadUserData();
 
             // Handle new subscription activation
             if (submitted) {
-                activateSubscription();
+                await activateSubscription();
             }
 
+            // Always check subscription, never trust local storage completely
             await checkSubscription();
-            if (userState.subscriptionActive) {
-                return;
-            }
-
-            updateDisplay();
         }
 
         function loadUserData() {
-            const saved = localStorage.getItem(`user_${userState.email.toLowerCase()}`);
-            if (saved) {
-                try {
+            try {
+                const saved = localStorage.getItem(`user_${userState.email.toLowerCase()}`);
+                if (saved) {
                     const parsed = JSON.parse(saved);
                     userState.subscriptionActive = parsed.subscriptionActive || false;
-                } catch (e) {
-                    userState = { email: userState.email, subscriptionActive: false };
                 }
+            } catch (e) {
+                console.error('Error loading user data', e);
+                userState.subscriptionActive = false;
             }
         }
 
         async function checkSubscription() {
             try {
-                const res = await fetch(`/.netlify/functions/check-subscription?email=${encodeURIComponent(userState.email)}`);
+                const res = await fetch(`/.netlify/functions/check-subscription?email=${encodeURIComponent(userState.email)}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                // If the response is not successful, throw an error
                 if (!res.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error('Subscription verification failed');
                 }
+
                 const data = await res.json();
-                userState.subscriptionActive = data.active;
-                saveUserData();
+
+                // Explicitly check for active subscription
                 if (data.active) {
-                    accessAnalysis();
+                    userState.subscriptionActive = true;
+                    saveUserData();
+                    accessAnalysis(); // Direct access for confirmed subscribers
+                } else {
+                    // Not an active subscriber
+                    userState.subscriptionActive = false;
+                    saveUserData();
+                    updateDisplay(); // Show subscription options
+
+                    // Prevent access and redirect
+                    alert('Access denied. Please purchase a subscription.');
+                    window.location.href = PLANS.unlimited.stripeUrl;
                 }
-            } catch (e) {
-                console.error('Subscription check failed', e);
-                alert('Unable to verify your subscription. Please try again or contact support if the issue persists.');
+            } catch (error) {
+                console.error('Subscription check error', error);
+
+                // Fallback to previous local state, but with extra caution
+                if (userState.subscriptionActive) {
+                    alert('Unable to verify subscription. Please contact support.');
+                    window.location.href = PLANS.unlimited.stripeUrl;
+                } else {
+                    alert('Access denied. Please purchase a subscription.');
+                    window.location.href = PLANS.unlimited.stripeUrl;
+                }
             }
         }
 
         function saveUserData() {
-            localStorage.setItem(`user_${userState.email.toLowerCase()}`, JSON.stringify({
-                subscriptionActive: userState.subscriptionActive
-            }));
+            try {
+                localStorage.setItem(`user_${userState.email.toLowerCase()}`, JSON.stringify({
+                    subscriptionActive: userState.subscriptionActive
+                }));
+            } catch (e) {
+                console.error('Error saving user data', e);
+            }
         }
 
-        function activateSubscription() {
-            userState.subscriptionActive = true;
-            saveUserData();
+        async function activateSubscription() {
+            try {
+                const res = await fetch('/.netlify/functions/activate-subscription', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: userState.email
+                    })
+                });
 
-            // Clean URL after processing
-            const cleanUrl = `${window.location.pathname}?email=${encodeURIComponent(userState.email)}`;
-            window.history.replaceState({}, '', cleanUrl);
+                if (!res.ok) {
+                    throw new Error('Subscription activation failed');
+                }
+
+                const data = await res.json();
+                userState.subscriptionActive = true;
+                saveUserData();
+
+                // Clean URL after processing
+                const cleanUrl = `${window.location.pathname}?email=${encodeURIComponent(userState.email)}`;
+                window.history.replaceState({}, '', cleanUrl);
+            } catch (error) {
+                console.error('Subscription activation error', error);
+                alert('Subscription activation failed. Please contact support.');
+                window.location.href = PLANS.unlimited.stripeUrl;
+            }
         }
 
         function updateDisplay() {
@@ -188,34 +234,28 @@
 
             const plan = PLANS.unlimited;
 
-            if (userState.subscriptionActive) {
-                // Unlimited subscriber
-                card.className = 'access-card premium';
-                badge.className = 'status-badge premium';
-                badge.textContent = 'Unlimited';
-                title.textContent = plan.name;
-                description.textContent = plan.description;
-                usage.textContent = 'Unlimited analyses available - go wild, bestie! 🔥';
-                btn.textContent = 'Access Unlimited Analysis';
-                btn.className = 'access-btn success';
-                btn.disabled = false;
-                btn.onclick = () => accessAnalysis();
-            } else {
-                // Not subscribed
-                card.className = 'access-card';
-                badge.className = 'status-badge notice';
-                badge.textContent = 'Subscribe';
-                title.textContent = plan.name;
-                description.textContent = plan.description;
-                usage.textContent = 'Subscribe to unlock unlimited analyses.';
-                btn.textContent = 'Subscribe for $12/month';
-                btn.className = 'access-btn primary';
-                btn.disabled = false;
-                btn.onclick = upgrade;
-            }
+            // If not subscribed, always show upgrade path
+            card.className = 'access-card';
+            badge.className = 'status-badge notice';
+            badge.textContent = 'Subscribe';
+            title.textContent = plan.name;
+            description.textContent = plan.description;
+            usage.textContent = 'Subscribe to unlock unlimited analyses.';
+            btn.textContent = 'Subscribe for $12/month';
+            btn.className = 'access-btn primary';
+            btn.disabled = false;
+            btn.onclick = upgrade;
         }
 
         function accessAnalysis() {
+            // Additional check before allowing access
+            if (!userState.subscriptionActive) {
+                alert('Access denied. Please purchase a subscription.');
+                window.location.href = PLANS.unlimited.stripeUrl;
+                return;
+            }
+
+            // Proceed to analysis if subscription is active
             window.location.href = PLANS.unlimited.tallyUrl;
         }
 
@@ -223,8 +263,16 @@
             window.location.href = PLANS.unlimited.stripeUrl;
         }
 
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', init);
+        // Secure initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                init();
+            } catch (error) {
+                console.error('Initialization error', error);
+                alert('An error occurred. Please purchase a subscription.');
+                window.location.href = PLANS.unlimited.stripeUrl;
+            }
+        });
     </script>
 </body>
 </html>
