@@ -97,15 +97,23 @@
             subscriptionActive: false
         };
 
+        function isValidEmail(email) {
+            if (!email) return false;
+            const normalized = String(email).trim().toLowerCase();
+            const invalidPlaceholders = ['{checkout_session_customer_email}', 'undefined', 'null'];
+            if (invalidPlaceholders.includes(normalized)) {
+                return false;
+            }
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(normalized);
+        }
+
         async function init() {
             const params = new URLSearchParams(window.location.search);
             const submitted = params.get('submitted') === 'true';
             let email = params.get('email') || params.get('customer_email');
 
-            // Strict email validation
-            if (!email ||
-                email === '{CHECKOUT_SESSION_CUSTOMER_EMAIL}' ||
-                !email.includes('@')) {
+            if (!isValidEmail(email)) {
                 alert('Invalid email. Please purchase a subscription.');
                 window.location.href = PLANS.unlimited.stripeUrl;
                 return;
