@@ -4,5 +4,8 @@
   "private": true,
   "scripts": {
     "test": "echo 'No tests specified'"
+  },
+  "dependencies": {
+    "stripe": "^12.17.0"
   }
 }
