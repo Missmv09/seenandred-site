@@ -148,7 +148,7 @@
 
         async function checkSubscription() {
             try {
-                const res = await fetch(`/api/check-subscription?email=${encodeURIComponent(userState.email)}`);
+                const res = await fetch(`/.netlify/functions/check-subscription?email=${encodeURIComponent(userState.email)}`);
                 if (!res.ok) return;
                 const data = await res.json();
                 userState.subscriptionActive = data.active;
