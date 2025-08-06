@@ -97,7 +97,7 @@
             subscriptionActive: false
         };
 
-        function init() {
+        async function init() {
             const params = new URLSearchParams(window.location.search);
             const submitted = params.get('submitted') === 'true';
             let email = params.get('email') || params.get('customer_email');
@@ -124,6 +124,13 @@
                 activateSubscription();
             }
 
+            if (!userState.subscriptionActive) {
+                await checkSubscription();
+                if (userState.subscriptionActive) {
+                    return;
+                }
+            }
+
             updateDisplay();
         }
 
@@ -136,6 +143,21 @@
                 } catch (e) {
                     userState = { email: userState.email, subscriptionActive: false };
                 }
+            }
+        }
+
+        async function checkSubscription() {
+            try {
+                const res = await fetch(`/api/check-subscription?email=${encodeURIComponent(userState.email)}`);
+                if (!res.ok) return;
+                const data = await res.json();
+                userState.subscriptionActive = data.active;
+                saveUserData();
+                if (data.active) {
+                    accessAnalysis();
+                }
+            } catch (e) {
+                console.error('Subscription check failed', e);
             }
         }
 
