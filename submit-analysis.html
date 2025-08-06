@@ -116,6 +116,7 @@
                 }
             }
 
+            email = email.trim().toLowerCase();
             userState.email = email;
             loadUserData();
 
@@ -124,18 +125,16 @@
                 activateSubscription();
             }
 
-            if (!userState.subscriptionActive) {
-                await checkSubscription();
-                if (userState.subscriptionActive) {
-                    return;
-                }
+            await checkSubscription();
+            if (userState.subscriptionActive) {
+                return;
             }
 
             updateDisplay();
         }
 
         function loadUserData() {
-            const saved = localStorage.getItem(`user_${userState.email}`);
+            const saved = localStorage.getItem(`user_${userState.email.toLowerCase()}`);
             if (saved) {
                 try {
                     const parsed = JSON.parse(saved);
@@ -149,7 +148,9 @@
         async function checkSubscription() {
             try {
                 const res = await fetch(`/.netlify/functions/check-subscription?email=${encodeURIComponent(userState.email)}`);
-                if (!res.ok) return;
+                if (!res.ok) {
+                    throw new Error('Network response was not ok');
+                }
                 const data = await res.json();
                 userState.subscriptionActive = data.active;
                 saveUserData();
@@ -158,11 +159,12 @@
                 }
             } catch (e) {
                 console.error('Subscription check failed', e);
+                alert('Unable to verify your subscription. Please try again or contact support if the issue persists.');
             }
         }
 
         function saveUserData() {
-            localStorage.setItem(`user_${userState.email}`, JSON.stringify({
+            localStorage.setItem(`user_${userState.email.toLowerCase()}`, JSON.stringify({
                 subscriptionActive: userState.subscriptionActive
             }));
         }
