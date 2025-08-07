@@ -159,7 +159,14 @@
             // Prefer stored email before query parameters
             let email = localStorage.getItem('user_email');
             if (!isValidEmail(email)) {
+                // If no valid stored email, check URL parameters
                 email = params.get('email') || params.get('customer_email');
+                
+                // Store the email if it's valid
+                const storedEmail = localStorage.getItem('user_email');
+                if (isValidEmail(storedEmail)) {
+                    email = storedEmail;
+                }
             }
 
             if (!isValidEmail(email)) {
