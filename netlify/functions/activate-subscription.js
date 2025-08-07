@@ -1,14 +1,6 @@
-exports.handler = async (event) => {
-  if (!process.env.STRIPE_SECRET_KEY) {
-    const message = 'Stripe secret key is not configured';
-    console.error(message);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: message })
-    };
-  }
+const { getActiveSubscription } = require('./stripe-utils');
 
-  const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+exports.handler = async (event) => {
   let email;
   try {
     ({ email } = JSON.parse(event.body || '{}'));
@@ -19,35 +11,25 @@ exports.handler = async (event) => {
   if (!email) {
     return {
       statusCode: 400,
-      body: JSON.stringify({ error: 'Email required' })
+      body: JSON.stringify({ error: 'Email required' }),
     };
   }
 
   try {
-    const customers = await stripe.customers.list({ email, limit: 1 });
-    if (!customers.data.length) {
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ activated: false })
-      };
-    }
-
-    const subscriptions = await stripe.subscriptions.list({
-      customer: customers.data[0].id,
-      status: 'active',
-      limit: 1
-    });
-
-    const active = subscriptions.data.length > 0;
+    const subscription = await getActiveSubscription(email);
     return {
       statusCode: 200,
-      body: JSON.stringify({ activated: active })
+      body: JSON.stringify({ active: Boolean(subscription) }),
     };
   } catch (err) {
-    console.error('Stripe activation failed', err);
+    console.error('Stripe query failed', err);
+    const message =
+      err.message === 'Stripe secret key is not configured'
+        ? err.message
+        : 'Internal error';
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Internal error' })
+      body: JSON.stringify({ error: message }),
     };
   }
 };
