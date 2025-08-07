@@ -50,8 +50,17 @@
         .access-btn.success { background: #10b981; color: var(--white); }
         .access-btn.success:hover { background: #059669; }
         .access-btn.disabled { background: #9ca3af; color: #6b7280; cursor: not-allowed; }
-        
-        
+
+        .email-input {
+            width: 100%;
+            padding: 1.25rem;
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+
         @media (max-width: 768px) {
             .container { padding: 1rem 15px; }
             .header h1 { font-size: 2rem; }
@@ -66,13 +75,22 @@
             <p>Ready to analyze your messages, bestie?</p>
         </div>
 
-        <div class="access-card" id="access-card">
+        <div class="access-card" id="email-card" style="display:none;">
+            <div class="plan-title">Enter Your Email</div>
+            <div class="plan-description">Please enter the email you used at purchase.</div>
+            <form id="email-form">
+                <input type="email" id="email-input" class="email-input" placeholder="you@example.com" required>
+                <button class="access-btn primary" type="submit">Continue</button>
+            </form>
+        </div>
+
+        <div class="access-card" id="access-card" style="display:none;">
             <div class="status-badge" id="status-badge">Loading...</div>
             <div class="plan-title" id="plan-title">Checking Your Access...</div>
             <div class="plan-description" id="plan-description">Please wait while we load your account</div>
             <div class="usage-info" id="usage-info">Loading your usage information...</div>
             <button class="access-btn primary" id="access-btn" disabled>Loading...</button>
-            
+
         </div>
 
         <div style="text-align: center; margin-top: 2rem;">
@@ -108,19 +126,54 @@
             return emailRegex.test(normalized);
         }
 
+        function renderEmailForm() {
+            document.getElementById('access-card').style.display = 'none';
+            const emailCard = document.getElementById('email-card');
+            emailCard.style.display = 'block';
+            const form = document.getElementById('email-form');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const input = document.getElementById('email-input').value;
+                if (!isValidEmail(input)) {
+                    alert('Please enter a valid email.');
+                    return;
+                }
+                const email = input.trim().toLowerCase();
+                userState.email = email;
+                localStorage.setItem('user_email', email);
+
+                const cleanUrl = `${window.location.pathname}?email=${encodeURIComponent(email)}`;
+                window.history.replaceState({}, '', cleanUrl);
+
+                loadUserData();
+                emailCard.style.display = 'none';
+                document.getElementById('access-card').style.display = 'block';
+                await checkSubscription();
+            }, { once: true });
+        }
+
         async function init() {
             const params = new URLSearchParams(window.location.search);
             const submitted = params.get('submitted') === 'true';
-            let email = params.get('email') || params.get('customer_email');
+
+            // Prefer stored email before query parameters
+            let email = localStorage.getItem('user_email');
+            if (!isValidEmail(email)) {
+                email = params.get('email') || params.get('customer_email');
+            }
 
             if (!isValidEmail(email)) {
-                alert('Invalid email. Please purchase a subscription.');
-                window.location.href = PLANS.unlimited.stripeUrl;
+                renderEmailForm();
                 return;
             }
 
             email = email.trim().toLowerCase();
             userState.email = email;
+            localStorage.setItem('user_email', email);
+
+            // Clean URL to always include ?email=
+            const cleanUrl = `${window.location.pathname}?email=${encodeURIComponent(email)}`;
+            window.history.replaceState({}, '', cleanUrl);
 
             // Load previous state, but always verify
             loadUserData();
@@ -129,6 +182,8 @@
             if (submitted) {
                 await activateSubscription();
             }
+
+            document.getElementById('access-card').style.display = 'block';
 
             // Always check subscription, never trust local storage completely
             await checkSubscription();
