@@ -1,3 +1,5 @@
+const { verifySession } = require('./token');
+
 exports.handler = async (event) => {
   if (!process.env.STRIPE_SECRET_KEY) {
     const message = 'Stripe secret key is not configured';
@@ -9,14 +11,16 @@ exports.handler = async (event) => {
   }
 
   const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-  const email =
-    (event.queryStringParameters && event.queryStringParameters.email) ||
-    (event.body && JSON.parse(event.body).email);
+  const authHeader = event.headers && event.headers.authorization;
+  const token = authHeader && authHeader.startsWith('Bearer ')
+    ? authHeader.substring(7)
+    : null;
+  const email = verifySession(token);
 
   if (!email) {
     return {
-      statusCode: 400,
-      body: JSON.stringify({ error: 'Email required' })
+      statusCode: 401,
+      body: JSON.stringify({ error: 'Unauthorized' })
     };
   }
 
