@@ -36,3 +36,75 @@ nav ul {
   max-width: 100%;
   height: auto;
 }
+
+/* ===== CTA Upsell ===== */
+.cta-upsell {
+  background-color: var(--light-red, #fee2e2);
+  border-radius: 12px;
+  padding: 18px;
+  margin: 24px auto;
+  text-align: center;
+  max-width: 720px;
+}
+
+.cta-upsell__heading {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--dark-gray, #1f2937);
+}
+
+.cta-upsell__subcopy {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--dark-gray, #1f2937);
+  margin: 0 auto 14px;
+  max-width: 42ch;
+}
+
+.cta-upsell__button {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background-color: var(--primary-red, #dc2626);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1rem;
+  line-height: 1;
+  transition: transform 0.05s ease, background-color 0.15s ease;
+  box-shadow: 0 2px 0 var(--dark-red, #991b1b);
+}
+
+.cta-upsell__button:hover,
+.cta-upsell__button:focus {
+  background-color: var(--dark-red, #991b1b);
+}
+
+.cta-upsell__button:active {
+  transform: translateY(1px);
+}
+
+.cta-upsell__perk {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--dark-gray, #1f2937);
+  opacity: 0.9;
+}
+
+/* ===== Tagline visibility & sizing ===== */
+.site-tagline {
+  display: block !important;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--dark-gray, #1f2937);
+  text-align: center;
+  margin-top: 6px;
+  line-height: 1.3;
+}
+
+@media (min-width: 768px) {
+  .cta-upsell { padding: 22px 28px; }
+  .cta-upsell__heading { font-size: 1.35rem; }
+  .site-tagline { font-size: 1rem; }
+}
