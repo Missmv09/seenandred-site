@@ -561,6 +561,80 @@
                 width: 100%;
             }
         }
+        /* Base layout */
+        #hero-cta.hero-ctas{
+          display:flex;
+          flex-wrap:wrap;
+          justify-content:center;
+          align-items:flex-start;
+          gap:16px;
+          margin-top:20px;
+          position:relative;
+          z-index:1;
+        }
+
+        /* Consistent CTA blocks */
+        #hero-cta .cta-block{
+          display:flex;
+          flex-direction:column;
+          align-items:center;
+          gap:8px;
+          min-width:220px;
+        }
+
+        /* Button normalization (override theme) */
+        #hero-cta .btn{
+          display:inline-flex;
+          align-items:center;
+          justify-content:center;
+          padding:14px 24px;
+          border-radius:12px;
+          font:700 16px/1.1 Arial, Helvetica, sans-serif;
+          text-decoration:none;
+          text-align:center;
+          min-height:48px;
+          white-space:nowrap;
+          margin:0 !important;
+          color:#fff;
+          border:2px solid transparent;
+          box-shadow:0 6px 16px rgba(0,0,0,.10);
+          transition:transform .04s ease, box-shadow .2s ease;
+        }
+        #hero-cta .btn:hover{ transform:translateY(-1px); }
+
+        /* Free (dark) */
+        #hero-cta .btn--free{
+          background:#111; 
+          border-color:#111;
+        }
+
+        /* Unlimited (red) */
+        #hero-cta .btn--unlimited{
+          background:#d71a28;
+          border-color:#d71a28;
+          box-shadow:0 6px 16px rgba(215,26,40,.22);
+        }
+
+        /* Subtext lines */
+        #hero-cta .cta-subtext{
+          font-size:.92rem;
+          color:#666;
+          text-align:center;
+          margin:0;           /* cancel theme margins */
+          line-height:1.3;
+        }
+
+        /* Mobile: stack full width */
+        @media (max-width: 767.98px){
+          #hero-cta.hero-ctas{ flex-direction:column; gap:12px; }
+          #hero-cta .btn{ width:100%; min-width:0; }
+          #hero-cta .cta-block{ width:100%; }
+        }
+
+        /* Desktop: align buttons on same baseline */
+        @media (min-width: 768px){
+          #hero-cta.hero-ctas{ align-items:flex-start; gap:18px; }
+        }
     </style>
 </head>
 <body>
@@ -593,14 +667,16 @@
             <div class="container">
                 <h1>Your AI Bestie with a PhD</h1>
                 <p class="subtitle">Stop wondering "what does this even mean??" Upload your confusing-ass messages and get brutally honest AI analysis to spot red flags, decode the BS, and finally see what's REALLY going on. Because bestie, we both know you already know.</p>
-<a href="https://form.jotform.com/252205735289057"
-   class="cta-button" target="_blank" rel="noopener">Get my free analysis</a>
-<span style="display:inline-block; text-align:center;">
-<a href="https://buy.stripe.com/3cIbJ3bpJedZ6uI82He3e00" class="cta-button" target="_blank" rel="nofollow noopener" aria-label="Go Unlimited — Reality Check: unlimited decodes, juicier insights, cancel anytime">Go Unlimited — Reality Check</a>
-<div class="cta-subtext" aria-hidden="true" style="font-size:0.85rem; color:#666; margin-top:6px; font-style:italic;">
-  Unlimited decodes • Juicier insights • Cancel anytime
-</div>
-</span>
+                <div id="hero-cta" class="hero-ctas">
+                    <div class="cta-block cta-block--free">
+                        <a href="https://form.jotform.com/252205735289057" class="btn btn--free" aria-label="Get My Free Decode">Get My Free Decode</a>
+                        <div class="cta-subtext">Quick, no-strings insight on one message</div>
+                    </div>
+                    <div class="cta-block cta-block--unlimited">
+                        <a href="https://buy.stripe.com/3cIbJ3bpJedZ6uI82He3e00" class="btn btn--unlimited" aria-label="Go Unlimited — Reality Check">Go Unlimited — Reality Check</a>
+                        <div class="cta-subtext">Ongoing deep dives to decode the whole story</div>
+                    </div>
+                </div>
 
             </div>
         </section>
