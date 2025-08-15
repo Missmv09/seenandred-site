@@ -109,28 +109,66 @@
             margin-left: auto;
             margin-right: auto;
         }
-        
-        .cta-button {
-            display: inline-block;
-            background: var(--primary-red);
-            color: var(--white);
-            padding: 1.25rem 2.5rem;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: background 0.3s;
-            margin-bottom: 1rem;
+        .hero-ctas {
+            display:flex;
+            gap:14px;
+            align-items:center;
+            justify-content:center;
+            flex-wrap:wrap;
+            margin-top:18px;
         }
-        
-        .cta-button:hover {
-            background: var(--dark-red);
+
+        .hero-ctas .btn {
+            display:inline-block;
+            padding:14px 22px;
+            border-radius:10px;
+            font-weight:700;
+            text-decoration:none;
+            line-height:1.1;
+            min-width:220px;
+            text-align:center;
+            transition: transform .04s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
         }
-        
-        .secondary-cta {
-            display: block;
-            margin-top: 1rem;
-            color: var(--medium-gray);
+
+        .btn-primary {
+            background:#111;
+            color:#fff;
+            border:2px solid #111;
+            box-shadow: 0 6px 16px rgba(0,0,0,.12);
+        }
+        .btn-primary:hover { transform: translateY(-1px); }
+
+        .btn-secondary {
+            background:#d71a28;
+            color:#fff;
+            border:2px solid #d71a28;
+            box-shadow: 0 6px 16px rgba(215,26,40,.24);
+        }
+        .btn-secondary:hover { transform: translateY(-1px); }
+
+        .cta-right {
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+        }
+
+        .cta-subtext {
+            margin-top:6px;
+            font-size:.88rem;
+            color:#666;
+            text-align:center;
+        }
+
+        /* MOBILE (<=600px): stack vertically with spacing, full-width buttons */
+        @media (max-width: 600px) {
+          .hero-ctas {
+            flex-direction:column;
+            align-items:stretch;
+            gap:10px;
+          }
+          .hero-ctas .btn { width:100%; min-width:0; }
+          .cta-right { width:100%; }
+          .cta-subtext { margin-top:8px; }
         }
         
         /* Analysis Section */
@@ -414,17 +452,6 @@
                 padding: 0 10px;
             }
             
-            .cta-button {
-                padding: 1.25rem 1.5rem;
-                font-size: 1.1rem;
-                margin: 0 15px;
-            }
-            
-            .secondary-cta {
-                margin-top: 1.5rem;
-                padding: 0 15px;
-            }
-            
             .analysis-section, .features {
                 padding: 3rem 0;
             }
@@ -544,11 +571,6 @@
             .price {
                 font-size: 2.25rem;
             }
-            
-            .cta-button {
-                margin: 0 10px;
-                padding: 1rem 1.25rem;
-            }
 
             .newsletter-form {
                 display: flex;
@@ -580,7 +602,7 @@
         Free Analysis
       </a>
     </li>
-    <li><a href="https://buy.stripe.com/3cIbJ3bpJedZ6uI82He3e00" class="nav-link" target="_blank" rel="nofollow noopener" aria-label="Go Unlimited — Reality Check: unlimited decodes, juicier insights, cancel anytime">Go Unlimited — Reality Check</a></li>
+    <li><a href="https://buy.stripe.com/3cIbJ3bpJedZ6uI82He3e00" class="nav-link" target="_blank" rel="nofollow noopener" aria-label="Go Unlimited — Reality Check">Go Unlimited — Reality Check</a></li>
   </ul>
 </nav>
 
@@ -593,14 +615,18 @@
             <div class="container">
                 <h1>Your AI Bestie with a PhD</h1>
                 <p class="subtitle">Stop wondering "what does this even mean??" Upload your confusing-ass messages and get brutally honest AI analysis to spot red flags, decode the BS, and finally see what's REALLY going on. Because bestie, we both know you already know.</p>
-<a href="https://form.jotform.com/252205735289057"
-   class="cta-button" target="_blank" rel="noopener">Get my free analysis</a>
-<span style="display:inline-block; text-align:center;">
-<a href="https://buy.stripe.com/3cIbJ3bpJedZ6uI82He3e00" class="cta-button" target="_blank" rel="nofollow noopener" aria-label="Go Unlimited — Reality Check: unlimited decodes, juicier insights, cancel anytime">Go Unlimited — Reality Check</a>
-<div class="cta-subtext" aria-hidden="true" style="font-size:0.85rem; color:#666; margin-top:6px; font-style:italic;">
-  Unlimited decodes • Juicier insights • Cancel anytime
+<div class="hero-ctas">
+  <a href="https://form.jotform.com/252205735289057" class="btn btn-primary" aria-label="Get My Free Decode" target="_blank" rel="noopener">
+    Get My Free Decode
+  </a>
+
+  <div class="cta-right">
+    <a href="https://buy.stripe.com/3cIbJ3bpJedZ6uI82He3e00" class="btn btn-secondary" aria-label="Go Unlimited — Reality Check" target="_blank" rel="nofollow noopener">
+      Go Unlimited — Reality Check
+    </a>
+    <div class="cta-subtext" aria-hidden="true">Unlimited decodes • Deeper insights • Cancel anytime</div>
+  </div>
 </div>
-</span>
 
             </div>
         </section>
