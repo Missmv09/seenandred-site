@@ -562,6 +562,69 @@
             }
         }
     </style>
+    <style>
+    /* Mobile stays unchanged; desktop fixes only */
+    @media (min-width: 768px){
+      #hero-cta.hero-ctas{
+        display:flex;
+        justify-content:center;
+        align-items:center;      /* same baseline */
+        gap:18px;
+        margin-top:22px;
+        position:relative; 
+        z-index:1;
+      }
+
+      /* normalize buttons that may inherit theme styles */
+      #hero-cta .btn{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        padding:14px 24px;
+        min-height:48px;         /* equal button height */
+        min-width:220px;
+        border-radius:12px;
+        font:700 16px/1.1 Arial, Helvetica, sans-serif;
+        text-decoration:none;
+        white-space:nowrap;
+        margin:0 !important;     /* squash stray theme margins */
+        box-shadow:0 6px 16px rgba(0,0,0,.10);
+        transition:transform .04s ease, box-shadow .2s ease;
+        color:#fff;
+        border:2px solid transparent;
+      }
+      #hero-cta .btn:hover{ transform:translateY(-1px); }
+
+      #hero-cta .btn--free{
+        background:#111; 
+        border-color:#111;
+      }
+      #hero-cta .btn--unlimited{
+        background:#d71a28; 
+        border-color:#d71a28; 
+        box-shadow:0 6px 16px rgba(215,26,40,.22);
+      }
+
+      #hero-cta .cta-right{
+        display:flex; 
+        flex-direction:column; 
+        align-items:center; 
+        gap:8px;               /* subtext spacing under the red button */
+      }
+      #hero-cta .cta-subtext{
+        margin:0; 
+        font-size:.92rem; 
+        color:#666; 
+        text-align:center;
+      }
+    }
+
+    /* Optional: ensure mobile stacks full width (leave as-is if already good) */
+    @media (max-width: 767px){
+      #hero-cta.hero-ctas{ display:flex; flex-direction:column; gap:12px; }
+      #hero-cta .btn{ width:100%; min-width:0; }
+    }
+    </style>
 </head>
 <body>
     <header>
@@ -593,14 +656,13 @@
             <div class="container">
                 <h1>Your AI Bestie with a PhD</h1>
                 <p class="subtitle">Stop wondering "what does this even mean??" Upload your confusing-ass messages and get brutally honest AI analysis to spot red flags, decode the BS, and finally see what's REALLY going on. Because bestie, we both know you already know.</p>
-<a href="https://form.jotform.com/252205735289057"
-   class="cta-button" target="_blank" rel="noopener">Get my free analysis</a>
-<span style="display:inline-block; text-align:center;">
-<a href="https://buy.stripe.com/3cIbJ3bpJedZ6uI82He3e00" class="cta-button" target="_blank" rel="nofollow noopener" aria-label="Go Unlimited — Reality Check: unlimited decodes, juicier insights, cancel anytime">Go Unlimited — Reality Check</a>
-<div class="cta-subtext" aria-hidden="true" style="font-size:0.85rem; color:#666; margin-top:6px; font-style:italic;">
-  Unlimited decodes • Juicier insights • Cancel anytime
-</div>
-</span>
+                <div id="hero-cta" class="hero-ctas">
+                    <a href="https://form.jotform.com/252205735289057" class="btn btn--free" aria-label="Get My Free Decode">Get My Free Decode</a>
+                    <div class="cta-right">
+                        <a href="https://buy.stripe.com/3cIbJ3bpJedZ6uI82He3e00" class="btn btn--unlimited" aria-label="Go Unlimited — Reality Check">Go Unlimited — Reality Check</a>
+                        <div class="cta-subtext" aria-hidden="true">Unlimited decodes • Deeper insights • Cancel anytime</div>
+                    </div>
+                </div>
 
             </div>
         </section>
