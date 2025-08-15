@@ -5,75 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Seen and Red</title>
     <meta name="description" content="Explore articles on decoding relationship patterns and trusting your intuition.">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary-red: #dc2626;
-            --dark-red: #991b1b;
-            --light-red: #fee2e2;
-            --dark-gray: #1f2937;
-            --medium-gray: #6b7280;
-            --light-gray: #f9fafb;
-            --white: #ffffff;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.7;
-            color: var(--dark-gray);
-            background: var(--white);
-        }
-        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
-        header {
-            background: var(--white);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-red);
-            text-decoration: none;
-        }
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        nav a {
-            text-decoration: none;
-            color: var(--dark-gray);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        nav a:hover { color: var(--primary-red); }
-        .blog-list { padding: 8rem 0 4rem; }
-        .blog-list h1 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--dark-gray);
-        }
-        .posts { display: flex; flex-direction: column; gap: 2rem; }
-        .post h2 { font-size: 1.8rem; margin-bottom: 0.5rem; }
-        .post p { color: var(--medium-gray); }
-        .post a { color: var(--primary-red); text-decoration: none; }
-        .post a:hover { text-decoration: underline; }
-        .cta-section { text-align: center; margin-top: 4rem; }
-        .cta-section p { color: var(--medium-gray); margin-bottom: 1rem; }
-        .cta-button { display: inline-block; background: var(--primary-red); color: var(--white); padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: background 0.3s; }
-        .cta-button:hover { background: var(--dark-red); }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
+    
 </head>
 <body>
     <header>
@@ -91,7 +24,7 @@
             </div>
         </div>
     </header>
-    <main>
+    <main class="blog-post">
         <section class="blog-list">
             <div class="container">
                 <h1>Blog</h1>

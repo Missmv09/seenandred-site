@@ -1,0 +1,26 @@
+body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  color: var(--text-color, #2c2c2c);
+  line-height: 1.6;
+}
+
+.blog-post {
+  max-width: 700px;
+  margin: auto;
+  padding: 1rem;
+}
+
+.blog-post h1,
+.blog-post h2,
+.blog-post h3,
+.blog-post h4,
+.blog-post h5,
+.blog-post h6 {
+  font-weight: 600;
+}
+
+.blog-post img {
+  max-width: 100%;
+  height: auto;
+}
