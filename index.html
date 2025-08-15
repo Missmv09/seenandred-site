@@ -203,24 +203,29 @@
             margin-bottom: 2rem;
         }
         
-        .pricing-features {
+        .feature-list {
             list-style: none;
             margin-bottom: 2rem;
+            padding: 0;
         }
-        
-        .pricing-features li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #eee;
+
+        .feature-list li {
             position: relative;
-            padding-left: 1.5rem;
+            padding: 0.5rem 0 0.5rem 1.5rem;
         }
-        
-        .pricing-features li:before {
-            content: "✓";
+
+        .feature-list li:before {
+            content: "\2713";
             position: absolute;
             left: 0;
-            color: var(--primary-red);
+            color: #22c55e;
             font-weight: bold;
+        }
+
+        .feature-list .divider {
+            border-top: 1px solid #eee;
+            margin: 0.5rem 0;
+            padding: 0;
         }
         
         .pricing-button {
@@ -454,9 +459,9 @@
                 font-size: 2.5rem;
             }
             
-            .pricing-features li {
+            .feature-list li {
                 font-size: 0.95rem;
-                padding: 0.6rem 0;
+                padding: 0.6rem 0 0.6rem 1.5rem;
             }
             
             .pricing-button {
@@ -768,7 +773,7 @@
                             <div class="price">$12</div>
                             <p class="price-period">Per month</p>
                         </div>
-                        <ul class="pricing-features">
+                        <ul class="feature-list">
                             <li>Unlimited Message Analysis (go wild, bestie)</li>
                             <li>Deep Pattern Recognition & Trauma Insights</li>
                             <li>24/7 Access to Your AI Truth-Teller</li>

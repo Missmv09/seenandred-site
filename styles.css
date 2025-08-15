@@ -108,3 +108,29 @@ nav ul {
   .cta-upsell__heading { font-size: 1.35rem; }
   .site-tagline { font-size: 1rem; }
 }
+
+/* Feature list checkmarks */
+.feature-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.feature-list li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+}
+
+.feature-list li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.feature-list .divider {
+  border-top: 1px solid #eee;
+  margin: 0.5rem 0;
+  padding: 0;
+}
