@@ -562,6 +562,76 @@
             }
         }
     </style>
+    <style>
+    /* Layout */
+    .hero-ctas{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+      gap:16px;
+      margin-top:20px;
+    }
+    .cta-right{ display:flex; flex-direction:column; align-items:center; }
+
+    /* Buttons (shared) */
+    .btn{
+      display:inline-block;
+      padding:14px 22px;
+      border-radius:12px;
+      font-weight:700;
+      font-size:16px;
+      line-height:1.1;
+      text-decoration:none;
+      text-align:center;
+      min-width:220px;
+      box-shadow:0 6px 16px rgba(0,0,0,.08);
+      transition:transform .04s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease;
+    }
+
+    /* Free (dark) */
+    .btn--free{
+      background:#111;
+      color:#fff;
+      border:2px solid #111;
+    }
+    .btn--free:hover{ transform:translateY(-1px); }
+
+    /* Unlimited (red) */
+    .btn--unlimited{
+      background:#d71a28;  /* deep berry */
+      color:#fff;
+      border:2px solid #d71a28;
+      box-shadow:0 6px 16px rgba(215,26,40,.22);
+    }
+    .btn--unlimited:hover{ transform:translateY(-1px); }
+
+    /* Subtext */
+    .cta-subtext{
+      margin-top:8px;
+      font-size:.9rem;
+      color:#666;
+      text-align:center;
+    }
+
+    /* Mobile */
+    @media (max-width: 640px){
+      .hero-ctas{ flex-direction:column; align-items:stretch; gap:12px; }
+      .btn{ width:100%; min-width:0; }
+      .cta-right{ width:100%; }
+    }
+
+    /* Guard against theme overrides causing misalignments */
+    .hero-ctas .btn{ vertical-align:middle; white-space:nowrap; }
+
+    /* Optional: tighten hero paragraph width for cleaner look */
+    .hero .subtitle, .hero p{
+      max-width:640px; margin-left:auto; margin-right:auto;
+    }
+
+    /* If an old class is fighting these styles, increase specificity slightly */
+    header .hero-ctas .btn--free, header .hero-ctas .btn--unlimited{ font-size:16px; padding:14px 22px; }
+    </style>
 </head>
 <body>
     <header>
@@ -593,14 +663,13 @@
             <div class="container">
                 <h1>Your AI Bestie with a PhD</h1>
                 <p class="subtitle">Stop wondering "what does this even mean??" Upload your confusing-ass messages and get brutally honest AI analysis to spot red flags, decode the BS, and finally see what's REALLY going on. Because bestie, we both know you already know.</p>
-<a href="https://form.jotform.com/252205735289057"
-   class="cta-button" target="_blank" rel="noopener">Get my free analysis</a>
-<span style="display:inline-block; text-align:center;">
-<a href="https://buy.stripe.com/3cIbJ3bpJedZ6uI82He3e00" class="cta-button" target="_blank" rel="nofollow noopener" aria-label="Go Unlimited — Reality Check: unlimited decodes, juicier insights, cancel anytime">Go Unlimited — Reality Check</a>
-<div class="cta-subtext" aria-hidden="true" style="font-size:0.85rem; color:#666; margin-top:6px; font-style:italic;">
-  Unlimited decodes • Juicier insights • Cancel anytime
-</div>
-</span>
+                <div class="hero-ctas">
+                    <a href="https://form.jotform.com/252205735289057" class="btn btn--free" aria-label="Get My Free Decode" target="_blank" rel="noopener">Get My Free Decode</a>
+                    <div class="cta-right">
+                        <a href="https://buy.stripe.com/3cIbJ3bpJedZ6uI82He3e00" class="btn btn--unlimited" aria-label="Go Unlimited — Reality Check" target="_blank" rel="nofollow noopener">Go Unlimited — Reality Check</a>
+                        <div class="cta-subtext" aria-hidden="true">Unlimited decodes • Deeper insights • Cancel anytime</div>
+                    </div>
+                </div>
 
             </div>
         </section>
