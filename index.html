@@ -628,8 +628,65 @@
         #hero-cta .btn * { text-transform:none !important; letter-spacing:normal !important; }
 
         /* Optional: normalize surrounding hero text width */
-        #hero-cta ~ * .subtitle, 
+        #hero-cta ~ * .subtitle,
         #hero-cta ~ p { max-width:640px; margin-left:auto; margin-right:auto; }
+
+        @media (min-width: 768px){
+          /* Normalize the container */
+          #hero-cta.hero-ctas{
+            display:flex;
+            align-items:center;          /* put buttons on same baseline */
+            justify-content:center;
+            gap:18px;
+            margin-top:22px;
+          }
+
+          /* Kill legacy type/margins that throw alignment off */
+          #hero-cta .btn{
+            display:inline-flex;         /* ensure vertical centering of text */
+            align-items:center;
+            justify-content:center;
+            padding:14px 24px;
+            line-height:1.1;
+            font-weight:700;
+            font-size:16px;
+            min-height:48px;             /* equal button height */
+            min-width:220px;
+            margin:0 !important;         /* override theme margins on <a> */
+            letter-spacing:normal;
+            white-space:nowrap;
+          }
+
+          /* Make sure old utility classes don’t squash spacing */
+          #hero-cta .btn.btn--free,
+          #hero-cta .btn.btn--unlimited{
+            margin:0 !important;
+          }
+
+          /* Keep the red button popped on desktop */
+          #hero-cta .btn--unlimited{
+            box-shadow:0 6px 16px rgba(215,26,40,.22);
+          }
+
+          /* Tie the subtext visually to the Unlimited button */
+          #hero-cta .cta-right{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:8px;                     /* space between button and subtext */
+          }
+          #hero-cta .cta-subtext{
+            margin:0;                    /* remove theme margins */
+            font-size:.92rem;
+            color:#666;
+            text-align:center;
+          }
+        }
+
+        /* Safety: if any global nav/header overlays the CTAs on desktop */
+        @media (min-width: 768px){
+          #hero-cta{ position:relative; z-index:1; }
+        }
     </style>
 </head>
 <body>
