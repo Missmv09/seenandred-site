@@ -561,6 +561,75 @@
                 width: 100%;
             }
         }
+
+        #hero-cta.hero-ctas{
+          display:flex; flex-wrap:wrap; justify-content:center; align-items:center;
+          gap:16px; margin-top:20px; position:relative; z-index:1;
+        }
+
+        /* hard reset common legacy conflicts on anchors */
+        #hero-cta .btn{
+          all: unset;                 /* wipe inherited button/link styles */
+          display:inline-block !important;
+          box-sizing:border-box !important;
+          cursor:pointer !important;
+          padding:14px 22px !important;
+          border-radius:12px !important;
+          font: 700 16px/1.1 Arial, Helvetica, sans-serif !important;
+          text-decoration:none !important;
+          text-align:center !important;
+          min-width:220px !important;
+          color:#fff !important;
+          background:#111 !important;         /* default; overridden below */
+          border:2px solid transparent !important;
+          box-shadow:0 6px 16px rgba(0,0,0,.10) !important;
+          transition:transform .04s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease !important;
+          vertical-align:middle !important;
+          white-space:nowrap !important;
+          margin:0 !important;
+        }
+
+        /* Free button (dark) */
+        #hero-cta .btn--free{
+          background:#111 !important; 
+          border-color:#111 !important;
+        }
+        #hero-cta .btn--free:hover{ transform:translateY(-1px); }
+
+        /* Unlimited button (red) */
+        #hero-cta .btn--unlimited{
+          background:#d71a28 !important;
+          border-color:#d71a28 !important;
+          box-shadow:0 6px 16px rgba(215,26,40,.22) !important;
+        }
+        #hero-cta .btn--unlimited:hover{ transform:translateY(-1px); }
+
+        /* Right column (button + subtext) */
+        #hero-cta .cta-right{ display:flex; flex-direction:column; align-items:center; }
+
+        /* Subtext */
+        #hero-cta .cta-subtext{
+          margin-top:8px !important;
+          font-size:.9rem !important;
+          color:#666 !important;
+          text-align:center !important;
+          line-height:1.3 !important;
+        }
+
+        /* Mobile stack */
+        @media (max-width: 640px){
+          #hero-cta.hero-ctas{ flex-direction:column; align-items:stretch; gap:12px; }
+          #hero-cta .btn{ width:100% !important; min-width:0 !important; }
+          #hero-cta .cta-right{ width:100%; }
+        }
+
+        /* Guard against theme utilities overriding spacing/uppercase etc. */
+        #hero-cta .btn, 
+        #hero-cta .btn * { text-transform:none !important; letter-spacing:normal !important; }
+
+        /* Optional: normalize surrounding hero text width */
+        #hero-cta ~ * .subtitle, 
+        #hero-cta ~ p { max-width:640px; margin-left:auto; margin-right:auto; }
     </style>
 </head>
 <body>
@@ -593,14 +662,13 @@
             <div class="container">
                 <h1>Your AI Bestie with a PhD</h1>
                 <p class="subtitle">Stop wondering "what does this even mean??" Upload your confusing-ass messages and get brutally honest AI analysis to spot red flags, decode the BS, and finally see what's REALLY going on. Because bestie, we both know you already know.</p>
-<a href="https://form.jotform.com/252205735289057"
-   class="cta-button" target="_blank" rel="noopener">Get my free analysis</a>
-<span style="display:inline-block; text-align:center;">
-<a href="https://buy.stripe.com/3cIbJ3bpJedZ6uI82He3e00" class="cta-button" target="_blank" rel="nofollow noopener" aria-label="Go Unlimited — Reality Check: unlimited decodes, juicier insights, cancel anytime">Go Unlimited — Reality Check</a>
-<div class="cta-subtext" aria-hidden="true" style="font-size:0.85rem; color:#666; margin-top:6px; font-style:italic;">
-  Unlimited decodes • Juicier insights • Cancel anytime
-</div>
-</span>
+                <div id="hero-cta" class="hero-ctas">
+                    <a href="https://form.jotform.com/252205735289057" class="btn btn--free" aria-label="Get My Free Decode">Get My Free Decode</a>
+                    <div class="cta-right">
+                        <a href="https://buy.stripe.com/3cIbJ3bpJedZ6uI82He3e00" class="btn btn--unlimited" aria-label="Go Unlimited — Reality Check">Go Unlimited — Reality Check</a>
+                        <div class="cta-subtext" aria-hidden="true">Unlimited decodes • Deeper insights • Cancel anytime</div>
+                    </div>
+                </div>
 
             </div>
         </section>
