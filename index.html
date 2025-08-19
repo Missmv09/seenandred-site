@@ -86,24 +86,35 @@
         .hero {
             background: linear-gradient(135deg, var(--light-red) 0%, var(--white) 100%);
             padding: 8rem 0 4rem;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
         }
-        
+
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
             color: var(--dark-gray);
         }
-        
-        .hero .subtitle {
+
+        .hero p {
             font-size: 1.25rem;
             color: var(--medium-gray);
             margin-bottom: 2rem;
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
         }
-        
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
         .cta-button {
             display: inline-block;
             background: var(--primary-red);
@@ -116,17 +127,10 @@
             transition: background 0.3s;
             margin-bottom: 1rem;
         }
-        
+
         .cta-button:hover {
             background: var(--dark-red);
         }
-        
-        .secondary-cta {
-            display: block;
-            margin-top: 1rem;
-            color: var(--medium-gray);
-        }
-        
         /* Analysis Section */
         .analysis-section {
             padding: 4rem 0;
@@ -393,32 +397,29 @@
             .hero {
                 padding: 5.5rem 0 3rem;
                 text-align: center;
+                flex-direction: column;
+                align-items: center;
             }
-            
+
             .hero h1 {
                 font-size: 2.25rem;
                 line-height: 1.2;
                 margin-bottom: 1.5rem;
             }
-            
-            .hero .subtitle {
+
+            .hero p {
                 font-size: 1.1rem;
                 line-height: 1.5;
                 margin-bottom: 2rem;
                 padding: 0 10px;
             }
-            
+
             .cta-button {
                 padding: 1.25rem 1.5rem;
                 font-size: 1.1rem;
                 margin: 0 15px;
             }
-            
-            .secondary-cta {
-                margin-top: 1.5rem;
-                padding: 0 15px;
-            }
-            
+
             .analysis-section, .features {
                 padding: 3rem 0;
             }
@@ -517,15 +518,15 @@
             .hero {
                 padding: 5rem 0 2.5rem;
             }
-            
+
             .hero h1 {
                 font-size: 1.9rem;
             }
-            
-            .hero .subtitle {
+
+            .hero p {
                 font-size: 1rem;
             }
-            
+
             .analysis-section h2, .features h2 {
                 font-size: 1.75rem;
             }
@@ -554,80 +555,6 @@
             .newsletter-form button {
                 width: 100%;
             }
-        }
-        /* Base layout */
-        #hero-cta.hero-ctas{
-          display:flex;
-          flex-wrap:wrap;
-          justify-content:center;
-          align-items:flex-start;
-          gap:16px;
-          margin-top:20px;
-          position:relative;
-          z-index:1;
-        }
-
-        /* Consistent CTA blocks */
-        #hero-cta .cta-block{
-          display:flex;
-          flex-direction:column;
-          align-items:center;
-          gap:8px;
-          min-width:220px;
-        }
-
-        /* Button normalization (override theme) */
-        #hero-cta .btn{
-          display:inline-flex;
-          align-items:center;
-          justify-content:center;
-          padding:14px 24px;
-          border-radius:12px;
-          font:700 16px/1.1 Arial, Helvetica, sans-serif;
-          text-decoration:none;
-          text-align:center;
-          min-height:48px;
-          white-space:nowrap;
-          margin:0 !important;
-          color:#fff;
-          border:2px solid transparent;
-          box-shadow:0 6px 16px rgba(0,0,0,.10);
-          transition:transform .04s ease, box-shadow .2s ease;
-        }
-        #hero-cta .btn:hover{ transform:translateY(-1px); }
-
-        /* Free (dark) */
-        #hero-cta .btn--free{
-          background:#111; 
-          border-color:#111;
-        }
-
-        /* Unlimited (red) */
-        #hero-cta .btn--unlimited{
-          background:#d71a28;
-          border-color:#d71a28;
-          box-shadow:0 6px 16px rgba(215,26,40,.22);
-        }
-
-        /* Subtext lines */
-        #hero-cta .cta-subtext{
-          font-size:.92rem;
-          color:#666;
-          text-align:center;
-          margin:0;           /* cancel theme margins */
-          line-height:1.3;
-        }
-
-        /* Mobile: stack full width */
-        @media (max-width: 767.98px){
-          #hero-cta.hero-ctas{ flex-direction:column; gap:12px; }
-          #hero-cta .btn{ width:100%; min-width:0; }
-          #hero-cta .cta-block{ width:100%; }
-        }
-
-        /* Desktop: align buttons on same baseline */
-        @media (min-width: 768px){
-          #hero-cta.hero-ctas{ align-items:flex-start; gap:18px; }
         }
         /* ===== CTA Upsell ===== */
         .cta-upsell {
@@ -733,19 +660,14 @@
     <main>
         <section id="home" class="hero">
             <div class="container">
-                <h1>Your AI Bestie with a PhD</h1>
-                <p class="subtitle">Stop wondering "what does this even mean??" Upload your confusing-ass messages and get brutally honest AI analysis to spot red flags, decode the BS, and finally see what's REALLY going on. Because bestie, we both know you already know.</p>
-                <div id="hero-cta" class="hero-ctas">
-                    <div class="cta-block cta-block--free">
-                        <a href="https://form.jotform.com/252205735289057" class="btn btn--free" aria-label="Get My Free Decode">Get My Free Decode</a>
-                        <div class="cta-subtext">Quick, no-strings insight on one message</div>
-                    </div>
-                    <div class="cta-block cta-block--unlimited">
-                        <a href="#unlimited-form" class="btn btn--unlimited" aria-label="Go Unlimited — Reality Check">Go Unlimited — Reality Check</a>
-                        <div class="cta-subtext">Ongoing deep dives to decode the whole story</div>
-                    </div>
+                <div class="hero-text">
+                    <h1>Get clarity on confusing messages—instantly.</h1>
+                    <p>Upload your texts or screenshots and get a breakdown of tone, red flags, and emotional manipulation—psych-backed, AI-powered.</p>
+                    <a class="cta-button" href="decode.html">Analyze a Message Now</a>
                 </div>
-
+                <div class="hero-image">
+                    <img src="assets/images/mujer-joven-concentrada-con-su-telefono-posando-en-casa.jpg" alt="Thoughtful woman looking at her phone on couch" />
+                </div>
             </div>
         </section>
         <section id="analysis" class="analysis-section">
