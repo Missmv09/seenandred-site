@@ -16,8 +16,9 @@ html,body{margin:0}
 .sr-container{max-width:1100px;margin:0 auto;padding:28px 18px 80px}
 .sr-page-title{font-family:"Playfair Display",Georgia,serif;font-size:clamp(28px,5vw,40px);margin:8px 0 10px}
 .sr-page-sub{font-family:"Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif;color:var(--sr-muted);margin:0 0 20px}
-.post-grid{display:grid;grid-template-columns:1fr;gap:18px}
-@media(min-width:720px){.post-grid{grid-template-columns:1fr 1fr}}
+.post-grid{display:grid;gap:18px;grid-template-columns:1fr}
+@media(min-width:700px){.post-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.post-grid{grid-template-columns:1fr 1fr 1fr}}
 .post-card{background:var(--sr-card);border:1px solid var(--sr-border);border-radius:var(--sr-radius);overflow:hidden;box-shadow:var(--sr-shadow);transition:transform .12s,box-shadow .12s}
 .post-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.12)}
 .post-link{display:grid;grid-template-rows:auto 1fr;text-decoration:none;color:inherit}
@@ -73,9 +74,9 @@ html,body{margin:0}
       </a>
     </article>
 
-    <!-- Example other posts (update href/titles/dates/excerpts to your real ones) -->
+    <!-- Are We Dating the Same Guy… Again? (fixed slug) -->
     <article class="post-card">
-      <a class="post-link" href="/blog/are-we-dating-the-same-guy-again.html" aria-label="Read: Are We Dating the Same Guy… Again?">
+      <a class="post-link" href="https://seenandred.com/blog/are-we-dating-the-same-guy-again.html?v=15" aria-label="Read: Are We Dating the Same Guy… Again?">
         <div class="post-thumb placeholder">Seen &amp; Red</div>
         <div class="post-body">
           <h3 class="post-title">Are We Dating the Same Guy… Again?</h3>
@@ -84,20 +85,67 @@ html,body{margin:0}
         </div>
       </a>
     </article>
-    <!-- Add more cards as needed -->
+
+    <!-- Healing Your Patterns -->
+    <article class="post-card">
+      <a class="post-link" href="/blog/healing-your-patterns.html" aria-label="Read: Healing Your Patterns">
+        <div class="post-thumb placeholder">Seen &amp; Red</div>
+        <div class="post-body">
+          <h3 class="post-title">Healing Your Patterns: Breaking the Cycle</h3>
+          <p class="post-meta">Jun 15, 2024 · ~8 min read</p>
+          <p class="post-excerpt">Why we repeat relationship loops — and how to break them.</p>
+        </div>
+      </a>
+    </article>
+
+    <!-- Trust Your Intuition -->
+    <article class="post-card">
+      <a class="post-link" href="/blog/trust-your-intuition.html" aria-label="Read: Trust Your Intuition">
+        <div class="post-thumb placeholder">Seen &amp; Red</div>
+        <div class="post-body">
+          <h3 class="post-title">Trust Your Intuition</h3>
+          <p class="post-meta">Jul 10, 2024 · ~7 min read</p>
+          <p class="post-excerpt">When to trust your gut — and when it’s just anxiety talking.</p>
+        </div>
+      </a>
+    </article>
+
+    <!-- Missing Green Flags -->
+    <article class="post-card">
+      <a class="post-link" href="/blog/missing-green-flags.html" aria-label="Read: Missing Green Flags">
+        <div class="post-thumb placeholder">Seen &amp; Red</div>
+        <div class="post-body">
+          <h3 class="post-title">Missing Green Flags</h3>
+          <p class="post-meta">Jul 30, 2024 · ~5 min read</p>
+          <p class="post-excerpt">Spot when someone is actually showing up for you — even if it feels “too easy.”</p>
+        </div>
+      </a>
+    </article>
+
+    <!-- Ignoring Red Flags -->
+    <article class="post-card">
+      <a class="post-link" href="/blog/ignoring-red-flags.html" aria-label="Read: Ignoring Red Flags">
+        <div class="post-thumb placeholder">Seen &amp; Red</div>
+        <div class="post-body">
+          <h3 class="post-title">Ignoring Red Flags</h3>
+          <p class="post-meta">Aug 8, 2024 · ~6 min read</p>
+          <p class="post-excerpt">How past wounds can make manipulation feel like love.</p>
+        </div>
+      </a>
+    </article>
   </section>
 
   <!-- CTA row -->
   <div class="sr-cta">
-    <p class="sr-cta-text"><strong>Want clarity on your own messages?</strong> Get a free analysis or take the quiz.</p>
+    <p class="sr-cta-text"><strong>Want clarity on your own messages?</strong></p>
     <div>
-      <a class="sr-btn" href="https://form.jotform.com/252205735289057" target="_blank" rel="noopener">Decode a Message (free)</a>
-      <a class="sr-btn" href="/#quiz">Free Clarity Quiz</a>
+      <a class="sr-btn" href="https://form.jotform.com/252205735289057" target="_blank" rel="noopener">Analyze a Message (free)</a>
+      <a class="sr-btn" href="https://buy.stripe.com/28E6oGcgZeAL4Ofb5W9Ve00" target="_blank" rel="noopener">Unlimited Analysis — $12/mo</a>
     </div>
   </div>
 </div>
 
-<div id="sr-build-badge">Seen &amp; Red • Blog Build v12</div>
+<div id="sr-build-badge" style="position:fixed;right:12px;bottom:12px;z-index:9999;background:#1A1A1A;color:#fff;border-radius:999px;padding:8px 12px;font:600 12px/1 Lato,system-ui">Seen &amp; Red • Blog Build v15</div>
 
 </body>
 </html>
