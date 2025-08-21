@@ -179,5 +179,35 @@
     </p>
     <p><em>Need receipts on a weird DM? Drop it into the <a href="https://form.jotform.com/252205735289057" target="_blank" rel="noopener">Decode form</a>—Red will translate the subtext with compassion and science.</em></p>
   </main>
+<!-- SR build: v9 (force styles + debug banner) -->
+<style id="sr-article-enforcer">
+:root{
+  --sr-red:#C8102E; --sr-red-soft:#E63946; --sr-ink:#1A1A1A; --sr-muted:#666; --sr-border:#EDEDED; --sr-bg:#FFFFFF;
+}
+html,body{margin:0 !important; background:var(--sr-bg) !important; color:var(--sr-ink) !important;}
+/* Super‑specific selectors to beat any theme overrides */
+body .sr-article{max-width:760px !important; margin:0 auto !important; padding:24px 20px 80px !important; font-family:"Lato",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif !important; line-height:1.65 !important;}
+body .sr-article h1, body .sr-article h2, body .sr-article h3{font-family:"Playfair Display",Georgia,"Times New Roman",Times,serif !important; color:var(--sr-ink) !important; line-height:1.25 !important; letter-spacing:.2px !important;}
+body .sr-article h1{font-size:clamp(30px,4.5vw,44px) !important; margin:16px 0 14px !important;}
+body .sr-article .sr-meta{color:var(--sr-muted) !important; font-size:.94rem !important; margin:0 0 18px !important;}
+body .sr-article h2{font-size:clamp(22px,3.5vw,28px) !important; margin:28px 0 10px !important;}
+body .sr-article h3{font-size:clamp(19px,3vw,22px) !important; margin:22px 0 10px !important;}
+body .sr-article p{margin:12px 0 !important; font-size:1.05rem !important;}
+body .sr-article ul, body .sr-article ol{margin:12px 0 16px 20px !important;}
+body .sr-article li{margin:6px 0 !important;}
+body .sr-article blockquote{margin:18px 0 !important; padding:14px 16px !important; border-left:3px solid var(--sr-red-soft) !important; background:#FFF6F7 !important; border-radius:8px !important; font-style:italic !important;}
+body .sr-article img, body .sr-article figure{max-width:100% !important; border-radius:10px !important;}
+body .sr-article hr{border:0 !important; border-top:1px solid var(--sr-border) !important; margin:28px 0 !important;}
+/* Buttons */
+body .sr-article .sr-btn{display:inline-block !important; background:var(--sr-red) !important; color:#fff !important; padding:12px 18px !important; border-radius:999px !important; text-decoration:none !important; font-weight:600 !important; margin-right:8px !important; transition:transform .08s ease, background .2s ease !important;}
+body .sr-article .sr-btn:hover{background:var(--sr-red-soft) !important; transform:translateY(-1px) !important;}
+/* Build tag banner (visible) */
+#sr-build-banner{
+  position:fixed; z-index:9999; bottom:12px; right:12px; background:#1A1A1A; color:#fff; 
+  font: 600 12px/1 "Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif;
+  padding:8px 12px; border-radius:999px; box-shadow:0 6px 20px rgba(0,0,0,.18); opacity:.9;
+}
+</style>
+<div id="sr-build-banner">Seen &amp; Red • Article Build v9</div>
 </body>
 </html>
