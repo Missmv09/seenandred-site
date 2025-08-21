@@ -8,60 +8,113 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=6">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=7">
 </head>
 <body>
-  <main class="sr-article">
-    <h1>Blog</h1>
 
+<div class="sr-container">
+  <!-- Optional inline nav if you want it inside the page content -->
+  <!-- <div class="blog-inline-nav">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="https://form.jotform.com/252205735289057" target="_blank" rel="noopener">Analysis</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/about.html">About</a></li>
+    </ul>
+  </div> -->
+
+  <h1 class="sr-page-title">Blog</h1>
+  <p class="sr-page-sub">Research‑backed clarity for modern dating.</p>
+
+  <section class="post-grid">
+
+    <!-- New Article (example with NO image) -->
     <article class="post-card">
       <a class="post-link" href="/blog/dating-in-the-era-of-social-media.html" aria-label="Read: Dating in the Era of Social Media">
-        <h3 class="post-title">Dating in the Era of Social Media</h3>
-        <p class="post-meta">Aug 20, 2025 · ~8 min read</p>
-        <p class="post-excerpt">Likes, DMs, &amp; group chats are rewriting the rules of love. Here’s how to set boundaries that actually work.</p>
+        <!-- Use placeholder if no image yet -->
+        <div class="post-thumb placeholder">Seen &amp; Red</div>
+        <div class="post-body">
+          <h3 class="post-title">Dating in the Era of Social Media</h3>
+          <p class="post-meta">Aug 20, 2025 · ~8 min read</p>
+          <p class="post-excerpt">Likes, DMs, &amp; group chats are rewriting the rules of love. Here’s how to set boundaries that actually work.</p>
+        </div>
       </a>
     </article>
 
+    <!-- Example WITH image (replace src with your asset path) -->
+    <!--
     <article class="post-card">
-      <a class="post-link" href="/are-we-dating-the-same-guy.html" aria-label="Read: Are We Dating the Same Guy… Again?">
-        <h3 class="post-title">Are We Dating the Same Guy… Again?</h3>
-        <p class="post-meta">May 12, 2024 · ~6 min read</p>
-        <p class="post-excerpt">Facebook forums are changing how women date — and why receipts matter.</p>
+      <a class="post-link" href="/blog/are-we-dating-the-same-guy-again.html" aria-label="Read: Are We Dating the Same Guy... Again?">
+        <img class="post-thumb" src="/assets/img/posts/are-we-dating-same-guy.jpg" alt="Facebook forum screenshots and safety notes">
+        <div class="post-body">
+          <h3 class="post-title">Are We Dating the Same Guy… Again?</h3>
+          <p class="post-meta">May 12, 2024 · ~6 min read</p>
+          <p class="post-excerpt">Facebook forums are changing how women date — and why receipts matter.</p>
+        </div>
       </a>
     </article>
+    -->
 
+    <!-- Repeat similar cards for your other posts… -->
+    <!-- Healing Your Patterns -->
     <article class="post-card">
-      <a class="post-link" href="/Healing-Your-Patterns.html" aria-label="Read: Healing Your Patterns">
-        <h3 class="post-title">Healing Your Patterns: Breaking the Cycle</h3>
-        <p class="post-meta">Jun 15, 2024 · ~8 min read</p>
-        <p class="post-excerpt">Understand why you repeat the same relationship patterns and how to break them.</p>
+      <a class="post-link" href="/blog/healing-your-patterns.html" aria-label="Read: Healing Your Patterns">
+        <div class="post-thumb placeholder">Seen &amp; Red</div>
+        <div class="post-body">
+          <h3 class="post-title">Healing Your Patterns: Breaking the Cycle</h3>
+          <p class="post-meta">Jun 15, 2024 · ~8 min read</p>
+          <p class="post-excerpt">Understand why you repeat the same relationship patterns and how to break them.</p>
+        </div>
       </a>
     </article>
 
+    <!-- Trust Your Intuition -->
     <article class="post-card">
-      <a class="post-link" href="/Trust-Your-Intuition.html" aria-label="Read: Trust Your Intuition">
-        <h3 class="post-title">Trust Your Intuition</h3>
-        <p class="post-meta">Jul 10, 2024 · ~7 min read</p>
-        <p class="post-excerpt">Learn when to listen to your gut and when it's just anxiety talking.</p>
+      <a class="post-link" href="/blog/trust-your-intuition.html" aria-label="Read: Trust Your Intuition">
+        <div class="post-thumb placeholder">Seen &amp; Red</div>
+        <div class="post-body">
+          <h3 class="post-title">Trust Your Intuition</h3>
+          <p class="post-meta">Jul 10, 2024 · ~7 min read</p>
+          <p class="post-excerpt">Learn when to listen to your gut and when it's just anxiety talking.</p>
+        </div>
       </a>
     </article>
 
+    <!-- Missing Green Flags -->
     <article class="post-card">
-      <a class="post-link" href="/missing-green-flags.html" aria-label="Read: Missing Green Flags">
-        <h3 class="post-title">Missing Green Flags</h3>
-        <p class="post-meta">Jul 30, 2024 · ~5 min read</p>
-        <p class="post-excerpt">Spot when someone is actually showing up for you, even if it feels &quot;too easy.&quot;</p>
+      <a class="post-link" href="/blog/missing-green-flags.html" aria-label="Read: Missing Green Flags">
+        <div class="post-thumb placeholder">Seen &amp; Red</div>
+        <div class="post-body">
+          <h3 class="post-title">Missing Green Flags</h3>
+          <p class="post-meta">Jul 30, 2024 · ~5 min read</p>
+          <p class="post-excerpt">Spot when someone is actually showing up for you, even if it feels “too easy.”</p>
+        </div>
       </a>
     </article>
 
+    <!-- Ignoring Red Flags -->
     <article class="post-card">
-      <a class="post-link" href="/ignoring-red-flags.html" aria-label="Read: Ignoring Red Flags">
-        <h3 class="post-title">Ignoring Red Flags</h3>
-        <p class="post-meta">Aug 8, 2024 · ~6 min read</p>
-        <p class="post-excerpt">See how past wounds make manipulation feel like love.</p>
+      <a class="post-link" href="/blog/ignoring-red-flags.html" aria-label="Read: Ignoring Red Flags">
+        <div class="post-thumb placeholder">Seen &amp; Red</div>
+        <div class="post-body">
+          <h3 class="post-title">Ignoring Red Flags</h3>
+          <p class="post-meta">Aug 8, 2024 · ~6 min read</p>
+          <p class="post-excerpt">See how past wounds make manipulation feel like love.</p>
+        </div>
       </a>
     </article>
 
-  </main>
+  </section>
+
+  <!-- CTA row -->
+  <div class="sr-cta">
+    <p class="sr-cta-text"><strong>Want clarity on your own messages?</strong> Get a free analysis or take the quiz.</p>
+    <div>
+      <a class="sr-btn" href="https://form.jotform.com/252205735289057" target="_blank" rel="noopener">Decode a Message (free)</a>
+      <a class="sr-btn" href="/#quiz">Free Clarity Quiz</a>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
