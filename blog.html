@@ -5,11 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Seen and Red</title>
     <meta name="description" content="Explore articles on decoding relationship patterns and trusting your intuition.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=6">
-        
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/styles.css?v=6">
+
+<style id="sr-blog-inline">
+:root{--sr-red:#C8102E;--sr-red-soft:#E63946;--sr-ink:#1A1A1A;--sr-muted:#666;--sr-border:#EDEDED;--sr-card:#fff;--sr-radius:16px;--sr-shadow:0 6px 20px rgba(0,0,0,.08)}
+html,body{margin:0}
+.sr-container{max-width:1100px;margin:0 auto;padding:28px 18px 80px}
+.sr-page-title{font-family:"Playfair Display",Georgia,serif;font-size:clamp(28px,5vw,40px);margin:8px 0 10px}
+.sr-page-sub{font-family:"Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif;color:var(--sr-muted);margin:0 0 20px}
+.post-grid{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:720px){.post-grid{grid-template-columns:1fr 1fr}}
+.post-card{background:var(--sr-card);border:1px solid var(--sr-border);border-radius:var(--sr-radius);overflow:hidden;box-shadow:var(--sr-shadow);transition:transform .12s,box-shadow .12s}
+.post-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.12)}
+.post-link{display:grid;grid-template-rows:auto 1fr;text-decoration:none;color:inherit}
+.post-thumb{aspect-ratio:16/9;width:100%;object-fit:cover;display:block}
+.post-thumb.placeholder{background:linear-gradient(135deg,#fff 0%,#fdecef 100%);display:grid;place-items:center;font-family:"Playfair Display",Georgia,serif;font-size:22px;color:var(--sr-red)}
+.post-body{padding:16px 16px 18px}
+.post-title{font-family:"Playfair Display",Georgia,serif;font-size:clamp(20px,2.4vw,24px);margin:0 0 6px;color:var(--sr-ink)}
+.post-meta{font-family:"Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif;color:var(--sr-muted);font-size:.92rem;margin:0 0 8px}
+.post-excerpt{font-family:"Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif;margin:0;opacity:.95}
+.sr-cta{margin-top:28px;padding:16px;border:1px solid var(--sr-border);border-radius:var(--sr-radius);background:#fff;box-shadow:var(--sr-shadow);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.sr-cta-text{font-family:"Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif;margin:0 8px 0 0;color:var(--sr-ink)}
+.sr-btn{display:inline-block;background:var(--sr-red);color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:600;transition:transform .08s,background .2s}
+.sr-btn:hover{background:var(--sr-red-soft);transform:translateY(-1px)}
+/* Build badge */
+#sr-build-badge{position:fixed;right:12px;bottom:12px;z-index:9999;background:#1A1A1A;color:#fff;border-radius:999px;padding:8px 12px;font:600 12px/1 "Lato",system-ui}
+</style>
+
 </head>
 <body>
     <header>
@@ -22,7 +47,7 @@
                 <nav>
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#analysis">Analysis</a></li>
+                        <li><a href="https://form.jotform.com/252205735289057" target="_blank" rel="noopener">Decode</a></li>
                         <li><a href="blog.html">Blog</a></li>
                         <li><a href="about.html">About</a></li>
                     </ul>
@@ -30,78 +55,49 @@
             </div>
         </div>
     </header>
-    <main class="blog-post">
-        <section class="blog-list">
-            <div class="container">
-                <h1>Blog</h1>
-                <div class="posts">
-                    <article class="post-card">
-                      <a class="post-link" href="/blog/dating-in-the-era-of-social-media.html" aria-label="Read: Dating in the Era of Social Media">
-                        <h3 class="post-title">Dating in the Era of Social Media</h3>
-                        <p class="post-meta">Aug 20, 2025 · ~8 min read</p>
-                        <p class="post-excerpt">Likes, DMs, &amp; group chats are rewriting the rules of love. Here’s how to set boundaries that actually work.</p>
-                      </a>
-                    </article>
 
-                    <article class="post-card">
-                      <a class="post-link" href="/are-we-dating-the-same-guy.html" aria-label="Read: Are We Dating the Same Guy… Again?">
-                        <h3 class="post-title">Are We Dating the Same Guy… Again?</h3>
-                        <p class="post-meta">May 12, 2024 · ~6 min read</p>
-                        <p class="post-excerpt">Facebook forums are changing how women date — and why receipts matter.</p>
-                      </a>
-                    </article>
+<div class="sr-container">
+  <h1 class="sr-page-title">Blog</h1>
+  <p class="sr-page-sub">Research‑backed clarity for modern dating.</p>
 
-                    <article class="post-card">
-                      <a class="post-link" href="/Healing-Your-Patterns.html" aria-label="Read: Healing Your Patterns">
-                        <h3 class="post-title">Healing Your Patterns: Breaking the Cycle</h3>
-                        <p class="post-meta">Jun 15, 2024 · ~8 min read</p>
-                        <p class="post-excerpt">Understand why you repeat the same relationship patterns and how to break them.</p>
-                      </a>
-                    </article>
+  <section class="post-grid">
+    <!-- Social Media article -->
+    <article class="post-card">
+      <a class="post-link" href="/blog/dating-in-the-era-of-social-media.html?v=12" aria-label="Read: Dating in the Era of Social Media">
+        <div class="post-thumb placeholder">Seen &amp; Red</div>
+        <div class="post-body">
+          <h3 class="post-title">Dating in the Era of Social Media</h3>
+          <p class="post-meta">Aug 20, 2025 · ~8 min read</p>
+          <p class="post-excerpt">Likes, DMs, &amp; group chats are rewriting the rules of love. Here’s how to set boundaries that actually work.</p>
+        </div>
+      </a>
+    </article>
 
-                    <article class="post-card">
-                      <a class="post-link" href="/Trust-Your-Intuition.html" aria-label="Read: Trust Your Intuition">
-                        <h3 class="post-title">Trust Your Intuition</h3>
-                        <p class="post-meta">Jul 10, 2024 · ~7 min read</p>
-                        <p class="post-excerpt">Learn when to listen to your gut and when it's just anxiety talking.</p>
-                      </a>
-                    </article>
+    <!-- Example other posts (update href/titles/dates/excerpts to your real ones) -->
+    <article class="post-card">
+      <a class="post-link" href="/blog/are-we-dating-the-same-guy-again.html" aria-label="Read: Are We Dating the Same Guy… Again?">
+        <div class="post-thumb placeholder">Seen &amp; Red</div>
+        <div class="post-body">
+          <h3 class="post-title">Are We Dating the Same Guy… Again?</h3>
+          <p class="post-meta">May 12, 2024 · ~6 min read</p>
+          <p class="post-excerpt">Facebook forums are changing how women date — and why receipts matter.</p>
+        </div>
+      </a>
+    </article>
+    <!-- Add more cards as needed -->
+  </section>
 
-                    <article class="post-card">
-                      <a class="post-link" href="/missing-green-flags.html" aria-label="Read: Missing Green Flags">
-                        <h3 class="post-title">Missing Green Flags</h3>
-                        <p class="post-meta">Jul 30, 2024 · ~5 min read</p>
-                        <p class="post-excerpt">Spot when someone is actually showing up for you, even if it feels &quot;too easy.&quot;</p>
-                      </a>
-                    </article>
+  <!-- CTA row -->
+  <div class="sr-cta">
+    <p class="sr-cta-text"><strong>Want clarity on your own messages?</strong> Get a free analysis or take the quiz.</p>
+    <div>
+      <a class="sr-btn" href="https://form.jotform.com/252205735289057" target="_blank" rel="noopener">Decode a Message (free)</a>
+      <a class="sr-btn" href="/#quiz">Free Clarity Quiz</a>
+    </div>
+  </div>
+</div>
 
-                    <article class="post-card">
-                      <a class="post-link" href="/ignoring-red-flags.html" aria-label="Read: Ignoring Red Flags">
-                        <h3 class="post-title">Ignoring Red Flags</h3>
-                        <p class="post-meta">Aug 8, 2024 · ~6 min read</p>
-                        <p class="post-excerpt">See how past wounds make manipulation feel like love.</p>
-                      </a>
-                    </article>
-                </div>
-                <section class="cta-upsell" role="region" aria-labelledby="cta-upsell-heading">
-                    <p id="cta-upsell-heading" class="cta-upsell__heading">Want Clarity on Your Own Messages?</p>
-                    <p class="cta-upsell__subcopy">
-                        Get unlimited message analysis for just $12/month — plus a free subscription to the Seen &amp; Red Dispatch with insider tips, real dating stories, and red-flag breakdowns.
-                    </p>
+<div id="sr-build-badge">Seen &amp; Red • Blog Build v12</div>
 
-                    <a
-                        href="#unlimited-form"
-                        class="cta-upsell__button"
-                        aria-label="Go to Unlimited Analysis form"
-                        rel="nofollow noopener"
-                    >
-                        Unlock Unlimited Analysis — $12/mo
-                    </a>
-
-                    <p class="cta-upsell__perk">Includes our weekly Seen &amp; Red Dispatch newsletter. Unsubscribe anytime.</p>
-                </section>
-            </div>
-        </section>
-    </main>
 </body>
 </html>
