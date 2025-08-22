@@ -1,1 +1,9 @@
 /blog/are-we-dating-the-same-guy-again.html /blog/crowdsourced-dating-safety-facebook-tea-app.html 301!
+/blog/* /blog/:splat 200
+/blog.html /blog/ 301!
+
+/Healing-Your-Patterns.html /blog/healing-your-patterns.html 301!
+/Trust-Your-Intuition.html /blog/trust-your-intuition.html 301!
+/ignoring-red-flags.html /blog/ignoring-red-flags.html 301!
+/missing-green-flags.html /blog/missing-green-flags.html 301!
+/are-we-dating-the-same-guy.html /blog/crowdsourced-dating-safety-facebook-tea-app.html 301!
