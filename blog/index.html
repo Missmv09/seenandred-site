@@ -10,7 +10,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/styles.css?v=7">
   <style id="sr-blog-inline">
-:root{--sr-red:#C8102E;--sr-red-soft:#E63946;--sr-ink:#1A1A1A;--sr-muted:#666;--sr-border:#EDEDED;--sr-card:#fff;--sr-radius:16px;--sr-shadow:0 6px 20px rgba(0,0,0,.08)}
+:root{
+  --sr-red:#C8102E; --sr-red-soft:#E63946; --sr-ink:#1A1A1A; --sr-muted:#666;
+  --sr-border:#EDEDED; --sr-card:#fff; --sr-radius:16px; --sr-shadow:0 6px 20px rgba(0,0,0,.08);
+  /* Category colors */
+  --cat-culture:#FF6B6B;     /* Dating Culture (coral) */
+  --cat-red:#E63946;         /* Red Flag Radar (deep red) */
+  --cat-green:#2ECC71;       /* Green Flags (green) */
+  --cat-psych:#6C63FF;       /* Patterns & Psychology (violet) */
+}
 html,body{margin:0}
 .sr-container{max-width:1200px;margin:0 auto;padding:28px 18px 80px}
 .sr-page-title{font-family:"Playfair Display",Georgia,serif;font-size:clamp(28px,5vw,40px);margin:8px 0 10px}
@@ -18,7 +26,7 @@ html,body{margin:0}
 .post-grid{display:grid;gap:18px;grid-template-columns:1fr}
 @media(min-width:700px){.post-grid{grid-template-columns:1fr 1fr}}
 @media(min-width:1000px){.post-grid{grid-template-columns:1fr 1fr 1fr}}
-.post-card{background:var(--sr-card);border:1px solid var(--sr-border);border-radius:var(--sr-radius);overflow:hidden;box-shadow:var(--sr-shadow);transition:transform .12s,box-shadow .12s}
+.post-card{background:var(--sr-card);border:1px solid var(--sr-border);border-radius:var(--sr-radius);overflow:hidden;box-shadow:var(--sr-shadow);transition:transform .12s,box-shadow .12s;height:100%}
 .post-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.12)}
 .post-link{display:grid;grid-template-rows:auto 1fr;text-decoration:none;color:inherit;height:100%}
 .post-thumb{aspect-ratio:16/9;width:100%;object-fit:cover;display:block}
@@ -27,6 +35,20 @@ html,body{margin:0}
 .post-title{font-family:"Playfair Display",Georgia,serif;font-size:clamp(18px,2.1vw,22px);margin:0 0 6px;color:var(--sr-ink)}
 .post-meta{font-family:"Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif;color:var(--sr-muted);font-size:.9rem;margin:0 0 8px}
 .post-excerpt{font-family:"Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif;margin:0;opacity:.95;font-size:.98rem}
+
+/* Category pill */
+.blog-meta{
+  font-family:"Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif;
+  font-size:.78rem; font-weight:700; text-transform:uppercase;
+  display:inline-block; padding:3px 8px; border-radius:8px; color:#fff; letter-spacing:.02em;
+  margin:8px 0 6px;
+}
+.category-culture{ background: var(--cat-culture); }
+.category-red{     background: var(--cat-red); }
+.category-green{   background: var(--cat-green); }
+.category-psych{   background: var(--cat-psych); }
+
+/* CTA row */
 .sr-cta{margin-top:22px;padding:14px;border:1px solid var(--sr-border);border-radius:var(--sr-radius);background:#fff;box-shadow:var(--sr-shadow);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
 .sr-cta-text{font-family:"Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif;margin:0 8px 0 0;color:var(--sr-ink)}
 .sr-btn{display:inline-block;background:var(--sr-red);color:#fff;padding:10px 14px;border-radius:999px;text-decoration:none;font-weight:700;font-size:.95rem;transition:transform .08s,background .2s}
@@ -41,12 +63,12 @@ html,body{margin:0}
   <p class="sr-page-sub">Research‑backed clarity for modern dating.</p>
 
   <section class="post-grid">
-    <!-- Social Media article -->
+    <!-- Social Media — Dating Culture -->
     <article class="post-card">
-      <a class="post-link" href="/blog/dating-in-the-era-of-social-media.html?v=13" aria-label="Read: Dating in the Era of Social Media">
-        <!-- Replace with <img class="post-thumb" src="/assets/img/posts/social-era.jpg" alt="…"> when you add a real image -->
+      <a class="post-link" href="/blog/dating-in-the-era-of-social-media.html?v=16" aria-label="Read: Dating in the Era of Social Media">
         <div class="post-thumb placeholder">Seen &amp; Red</div>
         <div class="post-body">
+          <div class="blog-meta category-culture">Dating Culture</div>
           <h3 class="post-title">Dating in the Era of Social Media</h3>
           <p class="post-meta">Aug 20, 2025 · ~8 min read</p>
           <p class="post-excerpt">Likes, DMs, &amp; group chats are rewriting the rules of love. Set boundaries that actually work.</p>
@@ -54,11 +76,12 @@ html,body{margin:0}
       </a>
     </article>
 
-    <!-- Facebook/Tea App article -->
+    <!-- Facebook & Tea — Dating Culture (new title if you adopted it) -->
     <article class="post-card">
       <a class="post-link" href="/blog/crowdsourced-dating-safety-facebook-tea-app.html?v=1" aria-label="Read: Crowdsourced Dating Safety: Facebook Groups &amp; Tea App">
         <div class="post-thumb placeholder">Seen &amp; Red</div>
         <div class="post-body">
+          <div class="blog-meta category-culture">Dating Culture</div>
           <h3 class="post-title">Crowdsourced Dating Safety: Facebook Groups &amp; Tea App</h3>
           <p class="post-meta">May 12, 2024 · ~6 min read</p>
           <p class="post-excerpt">Use Facebook groups and Tea wisely—what counts as evidence, how to verify claims, and when to step away.</p>
@@ -66,12 +89,12 @@ html,body{margin:0}
       </a>
     </article>
 
-
-    <!-- Healing Your Patterns -->
+    <!-- Healing Your Patterns — Patterns & Psychology -->
     <article class="post-card">
       <a class="post-link" href="/blog/healing-your-patterns.html" aria-label="Read: Healing Your Patterns">
         <div class="post-thumb placeholder">Seen &amp; Red</div>
         <div class="post-body">
+          <div class="blog-meta category-psych">Patterns &amp; Psychology</div>
           <h3 class="post-title">Healing Your Patterns: Breaking the Cycle</h3>
           <p class="post-meta">Jun 15, 2024 · ~8 min read</p>
           <p class="post-excerpt">Why we repeat relationship loops — and how to break them.</p>
@@ -79,11 +102,12 @@ html,body{margin:0}
       </a>
     </article>
 
-    <!-- Trust Your Intuition -->
+    <!-- Trust Your Intuition — Patterns & Psychology -->
     <article class="post-card">
       <a class="post-link" href="/blog/trust-your-intuition.html" aria-label="Read: Trust Your Intuition">
         <div class="post-thumb placeholder">Seen &amp; Red</div>
         <div class="post-body">
+          <div class="blog-meta category-psych">Patterns &amp; Psychology</div>
           <h3 class="post-title">Trust Your Intuition</h3>
           <p class="post-meta">Jul 10, 2024 · ~7 min read</p>
           <p class="post-excerpt">When to trust your gut — and when it’s just anxiety talking.</p>
@@ -91,11 +115,12 @@ html,body{margin:0}
       </a>
     </article>
 
-    <!-- Missing Green Flags -->
+    <!-- Missing Green Flags — Green Flags -->
     <article class="post-card">
       <a class="post-link" href="/blog/missing-green-flags.html" aria-label="Read: Missing Green Flags">
         <div class="post-thumb placeholder">Seen &amp; Red</div>
         <div class="post-body">
+          <div class="blog-meta category-green">Green Flags</div>
           <h3 class="post-title">Missing Green Flags</h3>
           <p class="post-meta">Jul 30, 2024 · ~5 min read</p>
           <p class="post-excerpt">Spot when someone is actually showing up for you — even if it feels “too easy.”</p>
@@ -103,11 +128,12 @@ html,body{margin:0}
       </a>
     </article>
 
-    <!-- Ignoring Red Flags -->
+    <!-- Ignoring Red Flags — Red Flag Radar -->
     <article class="post-card">
       <a class="post-link" href="/blog/ignoring-red-flags.html" aria-label="Read: Ignoring Red Flags">
         <div class="post-thumb placeholder">Seen &amp; Red</div>
         <div class="post-body">
+          <div class="blog-meta category-red">Red Flag Radar</div>
           <h3 class="post-title">Ignoring Red Flags</h3>
           <p class="post-meta">Aug 8, 2024 · ~6 min read</p>
           <p class="post-excerpt">How past wounds can make manipulation feel like love.</p>
@@ -126,7 +152,7 @@ html,body{margin:0}
   </div>
 </div>
 
-<div id="sr-build-badge">Seen &amp; Red • Blog Build v13</div>
+<div id="sr-build-badge">Seen &amp; Red • Blog Build v16 (Categories)</div>
 
 </body>
 </html>
