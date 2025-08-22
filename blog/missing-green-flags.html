@@ -18,6 +18,12 @@ hr{border:0;border-top:1px solid var(--sr-border);margin:26px 0}
 ul,ol{margin:10px 0 16px 20px}
 .btn{display:inline-block;background:var(--sr-red);color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:700;margin-right:10px}
 .btn:hover{background:var(--sr-red-soft)}
+# Article-level category pill styles
+.article-meta-pill{display:inline-block; margin:.25rem 0 0.5rem; padding:6px 10px; font:700 .78rem/1 "Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; text-transform:uppercase; letter-spacing:.02em; color:#fff; border-radius:999px}
+.article-meta-pill.category-psych{ background:#6C63FF; }
+.article-meta-pill.category-green{ background:#2ECC71; }
+.article-meta-pill.category-red{   background:#E63946; }
+.article-meta-pill.category-culture{ background:#FF6B6B; }
 #sr-build{position:fixed;right:12px;bottom:12px;background:#1A1A1A;color:#fff;border-radius:999px;padding:6px 10px;font:600 12px/1 Lato,system-ui}
 </style>
 <meta property="og:title" content="Missing Green Flags">
@@ -28,6 +34,7 @@ ul,ol{margin:10px 0 16px 20px}
 </head><body>
 <main class="sr-article">
 <h1>Missing Green Flags</h1>
+<div class="article-meta-pill category-green">Green Flags</div>
 <p class="meta">Published: July 30, 2024 • ~5 min read</p>
 
 <p>When chaos feels like chemistry, steady can feel “too easy.” Use this to recalibrate what healthy looks like.</p>
@@ -47,8 +54,33 @@ ul,ol{margin:10px 0 16px 20px}
 </ul>
 
 <hr>
+<section aria-labelledby="faq-green" style="margin-top:24px">
+  <h2 id="faq-green">FAQ: Noticing Green Flags</h2>
+  <details><summary>Why does healthy feel boring at first?</summary>
+    <p>Novelty bias and old wiring make drama feel exciting. Steady attention can feel unfamiliar until your nervous system recalibrates.</p>
+  </details>
+  <details><summary>What green flags matter most early on?</summary>
+    <p>Consistency, repair after misunderstandings, and reciprocity in effort.</p>
+  </details>
+  <details><summary>How can I train myself to notice greens?</summary>
+    <p>Write three daily “bids for connection” you saw and how you responded.</p>
+  </details>
+</section>
 <p><a class="btn" href="https://form.jotform.com/252205735289057" target="_blank" rel="noopener">Analyze a Message (free)</a>
 <a class="btn" href="https://buy.stripe.com/28E6oGcgZeAL4Ofb5W9Ve00" target="_blank" rel="noopener">Unlimited Analysis — $12/mo</a></p>
 </main>
-<div id="sr-build">Build: green-flags</div>
+<div id="sr-build" style="position:fixed;right:12px;bottom:12px;background:#1A1A1A;color:#fff;border-radius:999px;padding:6px 10px;font:600 12px/1 Lato,system-ui">
+  Build: article‑faq‑v19
+</div>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"Why does healthy feel boring at first?","acceptedAnswer":{"@type":"Answer","text":"Novelty bias and old wiring make drama feel exciting. Steady attention can feel unfamiliar until your nervous system recalibrates."}},
+    {"@type":"Question","name":"What green flags matter most early on?","acceptedAnswer":{"@type":"Answer","text":"Consistency, repair after misunderstandings, and reciprocity in effort matter most early on."}},
+    {"@type":"Question","name":"How can I train myself to notice greens?","acceptedAnswer":{"@type":"Answer","text":"Write three daily \"bids for connection\" you saw and how you responded."}}
+  ]
+}
+</script>
 </body></html>

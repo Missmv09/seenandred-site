@@ -18,6 +18,12 @@ hr{border:0;border-top:1px solid var(--sr-border);margin:26px 0}
 ul,ol{margin:10px 0 16px 20px}
 .btn{display:inline-block;background:var(--sr-red);color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:700;margin-right:10px}
 .btn:hover{background:var(--sr-red-soft)}
+# Article-level category pill styles
+.article-meta-pill{display:inline-block; margin:.25rem 0 0.5rem; padding:6px 10px; font:700 .78rem/1 "Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; text-transform:uppercase; letter-spacing:.02em; color:#fff; border-radius:999px}
+.article-meta-pill.category-psych{ background:#6C63FF; }
+.article-meta-pill.category-green{ background:#2ECC71; }
+.article-meta-pill.category-red{   background:#E63946; }
+.article-meta-pill.category-culture{ background:#FF6B6B; }
 #sr-build{position:fixed;right:12px;bottom:12px;background:#1A1A1A;color:#fff;border-radius:999px;padding:6px 10px;font:600 12px/1 Lato,system-ui}
 </style>
 <meta property="og:title" content="Ignoring Red Flags">
@@ -28,6 +34,7 @@ ul,ol{margin:10px 0 16px 20px}
 </head><body>
 <main class="sr-article">
 <h1>Ignoring Red Flags</h1>
+<div class="article-meta-pill category-red">Red Flag Radar</div>
 <p class="meta">Published: August 8, 2024 • ~6 min read</p>
 
 <p>Red flags don’t vanish; they compound. Here’s a quick rubric to spot, test, and decide without self‑gaslighting.</p>
@@ -54,8 +61,33 @@ ul,ol{margin:10px 0 16px 20px}
 </ul>
 
 <hr>
+<section aria-labelledby="faq-red" style="margin-top:24px">
+  <h2 id="faq-red">FAQ: Ignoring Red Flags</h2>
+  <details><summary>What’s the difference between grace and self-gaslighting?</summary>
+    <p>Grace allows a one-off mistake with repair; self-gaslighting ignores repeated behavior that violates your standards.</p>
+  </details>
+  <details><summary>How many chances are reasonable?</summary>
+    <p>One clear request + one chance to repair. If it repeats, treat it as the rule.</p>
+  </details>
+  <details><summary>How do I leave kindly but firmly?</summary>
+    <p>“This doesn’t work for me. I’m stepping back. Wishing you well.” Then block/close loops.</p>
+  </details>
+</section>
 <p><a class="btn" href="https://form.jotform.com/252205735289057" target="_blank" rel="noopener">Analyze a Message (free)</a>
 <a class="btn" href="https://buy.stripe.com/28E6oGcgZeAL4Ofb5W9Ve00" target="_blank" rel="noopener">Unlimited Analysis — $12/mo</a></p>
 </main>
-<div id="sr-build">Build: red-flags</div>
+<div id="sr-build" style="position:fixed;right:12px;bottom:12px;background:#1A1A1A;color:#fff;border-radius:999px;padding:6px 10px;font:600 12px/1 Lato,system-ui">
+  Build: article‑faq‑v19
+</div>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"What’s the difference between grace and self-gaslighting?","acceptedAnswer":{"@type":"Answer","text":"Grace allows a one-off mistake with repair; self-gaslighting ignores repeated behavior that violates your standards."}},
+    {"@type":"Question","name":"How many chances are reasonable?","acceptedAnswer":{"@type":"Answer","text":"One clear request plus one chance to repair. If it repeats, treat it as the rule."}},
+    {"@type":"Question","name":"How do I leave kindly but firmly?","acceptedAnswer":{"@type":"Answer","text":"Say, “This doesn’t work for me. I’m stepping back. Wishing you well.” Then block and close loops."}}
+  ]
+}
+</script>
 </body></html>

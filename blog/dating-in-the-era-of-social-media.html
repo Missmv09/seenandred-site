@@ -37,13 +37,19 @@
     .sr-article li{margin:6px 0}
     .sr-article blockquote{margin:18px 0;padding:14px 16px;border-left:3px solid var(--sr-red-soft);background:#FFF6F7;border-radius:8px;font-style:italic}
     .sr-article img,.sr-article figure{max-width:100%;border-radius:10px}
-    .sr-article hr{border:0;border-top:1px solid var(--sr-border);margin:28px 0}
-    /* Buttons */
-    .sr-btn{display:inline-block;background:var(--sr-red);color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:600;transition:transform .08s ease, background .2s ease;margin-right:8px}
-    .sr-btn:hover{background:var(--sr-red-soft);transform:translateY(-1px)}
-    @media (min-width:900px){.sr-article{padding:36px 24px 100px}}
-    @media (max-width:420px){.sr-article{padding:18px 14px 70px}}
-  </style>
+      .sr-article hr{border:0;border-top:1px solid var(--sr-border);margin:28px 0}
+      /* Buttons */
+      .sr-btn{display:inline-block;background:var(--sr-red);color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:600;transition:transform .08s ease, background .2s ease;margin-right:8px}
+      .sr-btn:hover{background:var(--sr-red-soft);transform:translateY(-1px)}
+      /* Article-level category pill */
+      .article-meta-pill{display:inline-block; margin:.25rem 0 0.5rem; padding:6px 10px; font:700 .78rem/1 "Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; text-transform:uppercase; letter-spacing:.02em; color:#fff; border-radius:999px;}
+      .article-meta-pill.category-psych{ background:#6C63FF; }
+      .article-meta-pill.category-green{ background:#2ECC71; }
+      .article-meta-pill.category-red{   background:#E63946; }
+      .article-meta-pill.category-culture{ background:#FF6B6B; }
+      @media (min-width:900px){.sr-article{padding:36px 24px 100px}}
+      @media (max-width:420px){.sr-article{padding:18px 14px 70px}}
+    </style>
 
   <!-- Open Graph / Twitter -->
   <meta property="og:title" content="Dating in the Era of Social Media">
@@ -66,9 +72,10 @@
   </script>
 </head>
 <body>
-  <main class="sr-article">
-    <h1>Dating in the Era of Social Media: How Likes, DMs &amp; Group Chats Are Rewriting the Rules of Love</h1>
-    <p class="sr-meta">Published: August 20, 2025 • ~8 min read</p>
+    <main class="sr-article">
+      <h1>Dating in the Era of Social Media: How Likes, DMs &amp; Group Chats Are Rewriting the Rules of Love</h1>
+      <div class="article-meta-pill category-culture">Dating Culture</div>
+      <p class="sr-meta">Published: August 20, 2025 • ~8 min read</p>
 
     <p><strong>TL;DR:</strong> Social media can help you find your person, spot red flags sooner, and feel less alone. It can also turbo‑charge jealousy, create constant distraction (hello, phubbing), and amplify gossip. Here’s the real talk on how to date like a grown‑up in the scroll era.</p>
     <hr>
@@ -168,6 +175,18 @@
     </ul>
 
     <hr>
+    <section aria-labelledby="faq-social" style="margin-top:24px">
+      <h2 id="faq-social">FAQ: Dating in the Social Media Era</h2>
+      <details><summary>Is it okay to check someone’s socials before dating?</summary>
+        <p>Yes, as a lead not a verdict. Verify privately before you escalate concerns publicly.</p>
+      </details>
+      <details><summary>How do we set phone boundaries on dates?</summary>
+        <p>Agree on “face-up mode” and time-boxed check-ins (e.g., every 30–45 minutes) so no one feels ignored.</p>
+      </details>
+      <details><summary>When should I block vs. publicly call out?</summary>
+        <p>Block for personal peace; consider public posts only with verifiable receipts and when safety requires it.</p>
+      </details>
+    </section>
     <h2>Keep Going (and Get Backup)</h2>
     <p>
       <a class="sr-btn" href="https://form.jotform.com/252205735289057" target="_blank" rel="noopener">Free Message Analysis</a>
@@ -179,7 +198,7 @@
     </p>
     <p><em>Need receipts on a weird DM? Drop it into the <a href="https://form.jotform.com/252205735289057" target="_blank" rel="noopener">Decode form</a>—Red will translate the subtext with compassion and science.</em></p>
   </main>
-<!-- SR build: v9 (force styles + debug banner) -->
+<!-- SR build: article-faq-v19 -->
 <style id="sr-article-enforcer">
 :root{
   --sr-red:#C8102E; --sr-red-soft:#E63946; --sr-ink:#1A1A1A; --sr-muted:#666; --sr-border:#EDEDED; --sr-bg:#FFFFFF;
@@ -201,13 +220,20 @@ body .sr-article hr{border:0 !important; border-top:1px solid var(--sr-border) !
 /* Buttons */
 body .sr-article .sr-btn{display:inline-block !important; background:var(--sr-red) !important; color:#fff !important; padding:12px 18px !important; border-radius:999px !important; text-decoration:none !important; font-weight:600 !important; margin-right:8px !important; transition:transform .08s ease, background .2s ease !important;}
 body .sr-article .sr-btn:hover{background:var(--sr-red-soft) !important; transform:translateY(-1px) !important;}
-/* Build tag banner (visible) */
-#sr-build-banner{
-  position:fixed; z-index:9999; bottom:12px; right:12px; background:#1A1A1A; color:#fff; 
-  font: 600 12px/1 "Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif;
-  padding:8px 12px; border-radius:999px; box-shadow:0 6px 20px rgba(0,0,0,.18); opacity:.9;
-}
 </style>
-<div id="sr-build-banner">Seen &amp; Red • Article Build v9</div>
+<div id="sr-build" style="position:fixed;right:12px;bottom:12px;background:#1A1A1A;color:#fff;border-radius:999px;padding:6px 10px;font:600 12px/1 Lato,system-ui">
+  Build: article‑faq‑v19
+</div>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"Is it okay to check someone’s socials before dating?","acceptedAnswer":{"@type":"Answer","text":"Yes—as a lead, not a verdict. Verify privately before you escalate concerns publicly."}},
+    {"@type":"Question","name":"How do we set phone boundaries on dates?","acceptedAnswer":{"@type":"Answer","text":"Agree on face-up mode and time-boxed check-ins (e.g., every 30–45 minutes) so no one feels ignored."}},
+    {"@type":"Question","name":"When should I block vs. publicly call out?","acceptedAnswer":{"@type":"Answer","text":"Block for personal peace; go public only with verifiable receipts and when safety requires it."}}
+  ]
+}
+</script>
 </body>
 </html>
