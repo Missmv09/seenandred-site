@@ -234,8 +234,6 @@ html,body{margin:0}
   </div>
 </div>
 
-  <div id="sr-build-badge">Seen &amp; Red • Blog Build v27</div>
-
 <script>
 (function(){
   const params = new URLSearchParams(location.search);
@@ -261,5 +259,12 @@ html,body{margin:0}
 })();
 </script>
 
+  <div id="sr-build-badge">Seen & Red • Blog Build v27</div>
+<script>
+  (function(){
+    var b=document.getElementById('sr-build-badge');
+    if(b) b.textContent='Seen & Red • Blog Build v27';
+  })();
+</script>
 </body>
 </html>
