@@ -13,40 +13,40 @@ body{font-family:"Lato",system-ui,Segoe UI,Roboto,Arial,sans-serif;line-height:1
 a{color:var(--sr-red)}a:hover{color:var(--sr-red-soft)}
 main.sr-article{max-width:780px;margin:0 auto;padding:28px 20px 96px}
 h1,h2,h3{font-family:"Playfair Display",Georgia,serif;line-height:1.25}
+h1{font-size:clamp(30px,4.5vw,44px);margin:.4rem 0 .4rem}
 .meta{color:var(--sr-muted);font-size:.95rem;margin-bottom:1.1rem}
 hr{border:0;border-top:1px solid var(--sr-border);margin:28px 0}
 .codebox{background:#fafafa;border:1px solid var(--sr-border);border-radius:10px;padding:12px}
+.ref li{margin-bottom:.45rem}
 .btn{display:inline-block;background:var(--sr-red);color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:700;margin-right:10px}
 .btn:hover{background:var(--sr-red-soft)}
-.ref li{margin-bottom:.45rem}
+/* Article-level category pill */
+.article-meta-pill{
+  display:inline-block;margin:.25rem 0 .8rem;padding:6px 10px;
+  font:700 .78rem/1 "Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  text-transform:uppercase;letter-spacing:.02em;color:#fff;border-radius:999px
+}
+.article-meta-pill.category-red{background:#E63946}
 #sr-build{position:fixed;right:12px;bottom:12px;background:#1A1A1A;color:#fff;border-radius:999px;padding:6px 10px;font:600 12px/1 Lato,system-ui}
 </style>
 <meta property="og:title" content="Ignoring Red Flags">
 <meta property="og:description" content="From excuses to standards — spot patterns early and act sooner.">
 <meta property="og:type" content="article"><meta property="og:url" content="https://seenandred.com/blog/ignoring-red-flags.html">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{
-"@context":"https://schema.org","@type":"BlogPosting",
-"headline":"Ignoring Red Flags","datePublished":"2024-08-08",
-"author":{"@type":"Organization","name":"Seen & Red"},
-"publisher":{"@type":"Organization","name":"Seen & Red"},
-"description":"Why we rationalize and how to act sooner with clear standards."
-}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ignoring Red Flags","datePublished":"2024-08-08","author":{"@type":"Organization","name":"Seen & Red"},"publisher":{"@type":"Organization","name":"Seen & Red"},"description":"Why we rationalize and how to act sooner with clear standards."}</script>
 </head><body>
 <main class="sr-article">
 <h1>Ignoring Red Flags</h1>
+<div class="article-meta-pill category-red">Red Flag Radar</div>
 <p class="meta">Published: August 8, 2024 • ~8–10 min read</p>
 
 <p>Cognitive dissonance (Festinger) and sunk‑cost bias keep us attached to what we’ve already invested in. Hope can be beautiful — but in dating, hope without data becomes self‑gaslighting. Let’s face reality kindly and early.</p>
 
 <h2>Common Red Flag Scripts (and Healthier Alternatives)</h2>
 <div class="codebox">
-<p><strong>Excuse:</strong> “Stop being crazy, I was just out.” → <em>no details</em><br>
-<strong>Green:</strong> “I’m out with John tonight — I’ll text when I’m home.”</p>
-<p><strong>Deflect:</strong> “Relax, you’re overreacting.”<br>
-<strong>Green:</strong> “I can’t talk now; can we set a time tomorrow?”</p>
-<p><strong>Future fake:</strong> “I’ll change, just one more chance.”<br>
-<strong>Green:</strong> “Here’s what I’ll do differently — and by when.”</p>
+<p><strong>Excuse:</strong> “Stop being crazy, I was just out.” → <em>no details</em><br><strong>Green:</strong> “I’m out with John tonight — I’ll text when I’m home.”</p>
+<p><strong>Deflect:</strong> “Relax, you’re overreacting.”<br><strong>Green:</strong> “I can’t talk now; can we set a time tomorrow?”</p>
+<p><strong>Future fake:</strong> “I’ll change, just one more chance.”<br><strong>Green:</strong> “Here’s what I’ll change and by when.”</p>
 </div>
 
 <h2>3‑Step Reality Check</h2>
@@ -70,10 +70,33 @@ hr{border:0;border-top:1px solid var(--sr-border);margin:28px 0}
 <li>Gottman Institute — Repair vs. defensiveness (gottman.com)</li>
 </ul>
 
+<section aria-labelledby="faq-red" style="margin-top:24px">
+  <h2 id="faq-red">FAQ: Ignoring Red Flags</h2>
+  <details><summary>What’s the difference between grace and self-gaslighting?</summary>
+    <p>Grace allows a one-off mistake with repair; self-gaslighting ignores repeated behavior that violates your standards.</p>
+  </details>
+  <details><summary>How many chances are reasonable?</summary>
+    <p>One clear request + one chance to repair. If it repeats, treat it as the rule.</p>
+  </details>
+  <details><summary>How do I leave kindly but firmly?</summary>
+    <p>“This doesn’t work for me. I’m stepping back. Wishing you well.” Then block/close loops.</p>
+  </details>
+</section>
+
 <hr>
 <p><a class="btn" href="https://form.jotform.com/252205735289057" target="_blank" rel="noopener">Analyze a Message (free)</a>
 <a class="btn" href="https://buy.stripe.com/28E6oGcgZeAL4Ofb5W9Ve00" target="_blank" rel="noopener">Unlimited Analysis — $12/mo</a></p>
 <p><em>Red flags hide in repetition. Unlimited lets you decode not just “one weird text,” but the trend.</em></p>
 </main>
-<div id="sr-build">Build: red‑flags‑expanded</div>
+
+<script type="application/ld+json">{
+  "@context":"https://schema.org","@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"What’s the difference between grace and self-gaslighting?","acceptedAnswer":{"@type":"Answer","text":"Grace allows a one-off mistake with repair; self-gaslighting ignores repeated behavior that violates your standards."}},
+    {"@type":"Question","name":"How many chances are reasonable?","acceptedAnswer":{"@type":"Answer","text":"One clear request + one chance to repair. If it repeats, treat it as the rule."}},
+    {"@type":"Question","name":"How do I leave kindly but firmly?","acceptedAnswer":{"@type":"Answer","text":"“This doesn’t work for me. I’m stepping back. Wishing you well.” Then block/close loops."}}
+  ]
+}</script>
+
+<div id="sr-build">Build: article-faq-v20</div>
 </body></html>

@@ -10,40 +10,39 @@
 :root{--sr-red:#C8102E;--sr-red-soft:#E63946;--sr-ink:#1A1A1A;--sr-muted:#666;--sr-border:#EDEDED}
 html,body{margin:0;background:#fff;color:var(--sr-ink)}
 body{font-family:"Lato",system-ui,Segoe UI,Roboto,Arial,sans-serif;line-height:1.7}
-a{color:var(--sr-red);text-underline-offset:3px}a:hover{color:var(--sr-red-soft)}
+a{color:var(--sr-red);text-underline-offset:3px;text-decoration-thickness:1.5px}a:hover{color:var(--sr-red-soft)}
 main.sr-article{max-width:780px;margin:0 auto;padding:28px 20px 96px}
 h1,h2,h3{font-family:"Playfair Display",Georgia,serif;line-height:1.25}
-h1{font-size:clamp(30px,4.5vw,44px);margin:.4rem 0 .7rem}
+h1{font-size:clamp(30px,4.5vw,44px);margin:.4rem 0 .4rem}
 .meta{color:var(--sr-muted);font-size:.95rem;margin-bottom:1.1rem}
 hr{border:0;border-top:1px solid var(--sr-border);margin:28px 0}
 blockquote{border-left:3px solid var(--sr-red-soft);background:#FFF6F7;margin:18px 0;padding:14px 16px;border-radius:8px;font-style:italic}
 ul,ol{margin:10px 0 18px 22px}
 .kit{display:grid;gap:10px;background:#fff;border:1px solid var(--sr-border);border-radius:12px;padding:14px;margin:14px 0}
 .kit h3{margin:.2rem 0 .2rem;font-size:1.05rem}
-.pill{display:inline-block;background:#111;color:#fff;border-radius:999px;padding:6px 12px;font-weight:700;text-decoration:none}
-.btn{display:inline-block;background:var(--sr-red);color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:700;margin-right:10px}
-.btn:hover{background:var(--sr-red-soft)}
-.ref li{margin-bottom:.45rem}
-#sr-build{position:fixed;right:12px;bottom:12px;background:#1A1A1A;color:#fff;border-radius:999px;padding:6px 10px;font:600 12px/1 Lato,system-ui}
 .codebox{background:#fafafa;border:1px solid var(--sr-border);border-radius:10px;padding:12px}
 .codebox p{margin:.3rem 0}
-.sublabel{color:var(--sr-muted);font-size:.9rem;margin-top:-4px}
+.ref li{margin-bottom:.45rem}
+.btn{display:inline-block;background:var(--sr-red);color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:700;margin-right:10px}
+.btn:hover{background:var(--sr-red-soft)}
+/* Article-level category pill */
+.article-meta-pill{
+  display:inline-block;margin:.25rem 0 .8rem;padding:6px 10px;
+  font:700 .78rem/1 "Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  text-transform:uppercase;letter-spacing:.02em;color:#fff;border-radius:999px
+}
+.article-meta-pill.category-psych{background:#6C63FF}
+#sr-build{position:fixed;right:12px;bottom:12px;background:#1A1A1A;color:#fff;border-radius:999px;padding:6px 10px;font:600 12px/1 Lato,system-ui}
 </style>
 <meta property="og:title" content="Healing Your Patterns: Breaking the Cycle">
 <meta property="og:description" content="Attachment, trauma bonds, and practical steps to change repeated relationship choices.">
 <meta property="og:type" content="article"><meta property="og:url" content="https://seenandred.com/blog/healing-your-patterns.html">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{
-"@context":"https://schema.org","@type":"BlogPosting",
-"headline":"Healing Your Patterns: Breaking the Cycle",
-"datePublished":"2024-06-15",
-"author":{"@type":"Organization","name":"Seen & Red"},
-"publisher":{"@type":"Organization","name":"Seen & Red"},
-"description":"Attachment, trauma bonds, and practical steps to change repeated relationship choices."
-}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Healing Your Patterns: Breaking the Cycle","datePublished":"2024-06-15","author":{"@type":"Organization","name":"Seen & Red"},"publisher":{"@type":"Organization","name":"Seen & Red"},"description":"Attachment, trauma bonds, and practical steps to change repeated relationship choices."}</script>
 </head><body>
 <main class="sr-article">
 <h1>Healing Your Patterns: Breaking the Cycle</h1>
+<div class="article-meta-pill category-psych">Patterns &amp; Psychology</div>
 <p class="meta">Published: June 15, 2024 • ~10–12 min read</p>
 
 <p>We don’t only date with logic—we date with our nervous system. Attachment styles and trauma bonds can make chaos feel like chemistry. The goal isn’t to shame your past; it’s to understand the wiring so you can pick partners who match your <em>needs</em>, not your wounds.</p>
@@ -55,11 +54,8 @@ ul,ol{margin:10px 0 18px 22px}
 
 <h2>The Pattern Triangle</h2>
 <ol>
-<li><strong>Trigger</strong> — loneliness, attraction, anxiety.<br>
-<span class="sublabel">What you might send:</span> “Hey… did I do something? You didn’t reply 😞.”</li>
-<li><strong>Story</strong> — “If I try harder, I’ll be chosen.”<br>
-<span class="sublabel">Red flag reply:</span> “If you really loved me, you’d answer faster.”<br>
-<span class="sublabel">Green flag reply:</span> “I know you’re busy — text me when you can.”</li>
+<li><strong>Trigger</strong> — loneliness, attraction, anxiety.<br><em>Text you might send:</em> “Hey… did I do something? You didn’t reply 😞.”</li>
+<li><strong>Story</strong> — “If I try harder, I’ll be chosen.”<br><em>Red flag reply:</em> “If you really loved me, you’d answer faster.”<br><em>Green flag reply:</em> “I know you’re busy — text me when you can.”</li>
 <li><strong>Behavior</strong> — over‑investing, ignoring flags, shrinking needs.</li>
 </ol>
 
@@ -109,10 +105,33 @@ ul,ol{margin:10px 0 18px 22px}
 <li>Journal of Social and Personal Relationships — Studies on conflict/repair</li>
 </ul>
 
+<section aria-labelledby="faq-hyp" style="margin-top:24px">
+  <h2 id="faq-hyp">FAQ: Healing Patterns</h2>
+  <details><summary>How do I know if it’s a trauma bond or just chemistry?</summary>
+    <p>Check the cycle: extreme highs/lows, fear of withdrawal, and relief after chaos point to trauma bonds. Calm consistency feels less dramatic but is healthier long-term.</p>
+  </details>
+  <details><summary>Can anxious and avoidant partners work out?</summary>
+    <p>Yes, with awareness and repair. Look for predictable plans, open check-ins, and boundaries both partners honor.</p>
+  </details>
+  <details><summary>What first step breaks the pattern fastest?</summary>
+    <p>Replace pursuit with clarity: make one clean request, then watch behavior over words.</p>
+  </details>
+</section>
+
 <hr>
 <p><a class="btn" href="https://form.jotform.com/252205735289057" target="_blank" rel="noopener">Analyze a Message (free)</a>
 <a class="btn" href="https://buy.stripe.com/28E6oGcgZeAL4Ofb5W9Ve00" target="_blank" rel="noopener">Unlimited Analysis — $12/mo</a></p>
 <p><em>One text is a moment. A thread is a pattern. Unlimited helps you see the truth over time.</em></p>
 </main>
-<div id="sr-build">Build: patterns‑expanded</div>
+
+<script type="application/ld+json">{
+  "@context":"https://schema.org","@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"How do I know if it’s a trauma bond or just chemistry?","acceptedAnswer":{"@type":"Answer","text":"Check for extreme highs/lows, fear of withdrawal, and relief after chaos — hallmarks of trauma bonds. Calm consistency is healthier long-term."}},
+    {"@type":"Question","name":"Can anxious and avoidant partners work out?","acceptedAnswer":{"@type":"Answer","text":"Yes, with awareness and repair — predictable plans, open check-ins, and clear boundaries honored by both."}},
+    {"@type":"Question","name":"What first step breaks the pattern fastest?","acceptedAnswer":{"@type":"Answer","text":"Replace pursuit with clarity: make one clean request, then evaluate behavior, not apologies."}}
+  ]
+}</script>
+
+<div id="sr-build">Build: article-faq-v20</div>
 </body></html>
