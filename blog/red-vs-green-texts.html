@@ -13,6 +13,7 @@ body{font-family:"Lato",system-ui,Segoe UI,Roboto,Arial,sans-serif;line-height:1
 a{color:var(--sr-red)}a:hover{color:var(--sr-red-soft)}
 main.sr-article{max-width:840px;margin:0 auto;padding:28px 20px 96px}
 h1,h2,h3{font-family:"Playfair Display",Georgia,serif;line-height:1.25}
+h1{font-size:clamp(30px,4.5vw,44px);margin:.4rem 0 .4rem}
 .meta{color:var(--sr-muted);font-size:.95rem;margin-bottom:1.1rem}
 hr{border:0;border-top:1px solid var(--sr-border);margin:28px 0}
 .grid{display:grid;gap:12px}
@@ -27,23 +28,24 @@ hr{border:0;border-top:1px solid var(--sr-border);margin:28px 0}
 .btn{display:inline-block;background:var(--sr-red);color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:700;margin-right:10px}
 .btn:hover{background:var(--sr-red-soft)}
 .ref li{margin-bottom:.45rem}
+/* Article-level category pill */
+.article-meta-pill{
+  display:inline-block;margin:.25rem 0 .8rem;padding:6px 10px;
+  font:700 .78rem/1 "Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  text-transform:uppercase;letter-spacing:.02em;color:#fff;border-radius:999px
+}
+.article-meta-pill.category-psych{background:#6C63FF}
 #sr-build{position:fixed;right:12px;bottom:12px;background:#1A1A1A;color:#fff;border-radius:999px;padding:6px 10px;font:600 12px/1 Lato,system-ui}
 </style>
 <meta property="og:title" content="Red Flag Texts vs. Green Flag Texts">
 <meta property="og:description" content="15 texting examples that separate manipulation from maturity — with the psychology behind each.">
 <meta property="og:type" content="article"><meta property="og:url" content="https://seenandred.com/blog/red-vs-green-texts.html">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{
-"@context":"https://schema.org","@type":"BlogPosting",
-"headline":"Red Flag Texts vs. Green Flag Texts: How to Spot the Difference in Your DMs",
-"datePublished":"2025-08-22",
-"author":{"@type":"Organization","name":"Seen & Red"},
-"publisher":{"@type":"Organization","name":"Seen & Red"},
-"description":"15 texting examples with psychological explanations."
-}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Red Flag Texts vs. Green Flag Texts: How to Spot the Difference in Your DMs","datePublished":"2025-08-22","author":{"@type":"Organization","name":"Seen & Red"},"publisher":{"@type":"Organization","name":"Seen & Red"},"description":"15 texting examples with psychological explanations."}</script>
 </head><body>
 <main class="sr-article">
 <h1>Red Flag Texts vs. Green Flag Texts: How to Spot the Difference in Your DMs</h1>
+<div class="article-meta-pill category-psych">Patterns &amp; Psychology</div>
 <p class="meta">Published: August 22, 2025 • ~10–12 min read</p>
 
 <p>Receipts matter — but context matters more. Use these side‑by‑side examples to train your eye, then look for <em>patterns</em>, not one‑offs.</p>
@@ -88,10 +90,33 @@ hr{border:0;border-top:1px solid var(--sr-border);margin:28px 0}
 <li>Psychology Today — Negativity bias, trauma bonds</li>
 </ul>
 
+<section aria-labelledby="faq-rvg" style="margin-top:24px">
+  <h2 id="faq-rvg">FAQ: Red vs. Green Texts</h2>
+  <details><summary>Can a red flag text come from a healthy person?</summary>
+    <p>Yes. Anyone can fumble. The difference is in repair — healthy people take feedback and adjust.</p>
+  </details>
+  <details><summary>How many examples make a pattern?</summary>
+    <p>Three similar moments across two weeks is a helpful rule of thumb. Look for consistency, not perfection.</p>
+  </details>
+  <details><summary>Do GIFs/emojis change the meaning?</summary>
+    <p>Tone helps, but behavior wins. Judge actions, not just vibes.</p>
+  </details>
+</section>
+
 <hr>
 <p><a class="btn" href="https://form.jotform.com/252205735289057" target="_blank" rel="noopener">Analyze a Message (free)</a>
 <a class="btn" href="https://buy.stripe.com/28E6oGcgZeAL4Ofb5W9Ve00" target="_blank" rel="noopener">Unlimited Analysis — $12/mo</a></p>
 <p><em>Unlimited helps you decode <strong>patterns</strong> — not just one line.</em></p>
 </main>
-<div id="sr-build">Build: red‑vs‑green‑anchor</div>
+
+<script type="application/ld+json">{
+  "@context":"https://schema.org","@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"Can a red flag text come from a healthy person?","acceptedAnswer":{"@type":"Answer","text":"Yes. Anyone can fumble. The difference is in repair — healthy people take feedback and adjust."}},
+    {"@type":"Question","name":"How many examples make a pattern?","acceptedAnswer":{"@type":"Answer","text":"Three similar moments across two weeks is a helpful rule of thumb. Look for consistency, not perfection."}},
+    {"@type":"Question","name":"Do GIFs/emojis change the meaning?","acceptedAnswer":{"@type":"Answer","text":"Tone helps, but behavior wins. Judge actions, not just vibes."}}
+  ]
+}</script>
+
+<div id="sr-build">Build: article-faq-v20</div>
 </body></html>

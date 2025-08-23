@@ -13,28 +13,31 @@ body{font-family:"Lato",system-ui,Segoe UI,Roboto,Arial,sans-serif;line-height:1
 a{color:var(--sr-red)}a:hover{color:var(--sr-red-soft)}
 main.sr-article{max-width:780px;margin:0 auto;padding:28px 20px 96px}
 h1,h2,h3{font-family:"Playfair Display",Georgia,serif;line-height:1.25}
+h1{font-size:clamp(30px,4.5vw,44px);margin:.4rem 0 .4rem}
 .meta{color:var(--sr-muted);font-size:.95rem;margin-bottom:1.1rem}
 hr{border:0;border-top:1px solid var(--sr-border);margin:28px 0}
 .codebox{background:#fafafa;border:1px solid var(--sr-border);border-radius:10px;padding:12px}
+.ref li{margin-bottom:.45rem}
 .btn{display:inline-block;background:var(--sr-red);color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:700;margin-right:10px}
 .btn:hover{background:var(--sr-red-soft)}
-.ref li{margin-bottom:.45rem}
+/* Article-level category pill */
+.article-meta-pill{
+  display:inline-block;margin:.25rem 0 .8rem;padding:6px 10px;
+  font:700 .78rem/1 "Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  text-transform:uppercase;letter-spacing:.02em;color:#fff;border-radius:999px
+}
+.article-meta-pill.category-green{background:#2ECC71}
 #sr-build{position:fixed;right:12px;bottom:12px;background:#1A1A1A;color:#fff;border-radius:999px;padding:6px 10px;font:600 12px/1 Lato,system-ui}
 </style>
 <meta property="og:title" content="Missing Green Flags">
 <meta property="og:description" content="A checklist for recognizing healthy effort, emotional safety, and reciprocity.">
 <meta property="og:type" content="article"><meta property="og:url" content="https://seenandred.com/blog/missing-green-flags.html">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{
-"@context":"https://schema.org","@type":"BlogPosting",
-"headline":"Missing Green Flags","datePublished":"2024-07-30",
-"author":{"@type":"Organization","name":"Seen & Red"},
-"publisher":{"@type":"Organization","name":"Seen & Red"},
-"description":"Why negativity bias hides green flags and how to notice steady, reciprocal love."
-}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Missing Green Flags","datePublished":"2024-07-30","author":{"@type":"Organization","name":"Seen & Red"},"publisher":{"@type":"Organization","name":"Seen & Red"},"description":"Why negativity bias hides green flags and how to notice steady, reciprocal love."}</script>
 </head><body>
 <main class="sr-article">
 <h1>Missing Green Flags</h1>
+<div class="article-meta-pill category-green">Green Flags</div>
 <p class="meta">Published: July 30, 2024 • ~8–10 min read</p>
 
 <p>When chaos feels like chemistry, steady can feel “too easy.” That’s negativity bias at work—your brain is wired to scan for threats, not tenderness. Let’s train your attention to notice what’s actually good for you.</p>
@@ -71,13 +74,36 @@ hr{border:0;border-top:1px solid var(--sr-border);margin:28px 0}
 <ul class="ref">
 <li>Gottman Institute — Bids for connection research (gottman.com)</li>
 <li>Psychology Today — Negativity bias in relationships</li>
-<li>APA — Articles on attachment & secure functioning</li>
+<li>APA — Articles on attachment & secure functioning (apa.org)</li>
 </ul>
+
+<section aria-labelledby="faq-green" style="margin-top:24px">
+  <h2 id="faq-green">FAQ: Noticing Green Flags</h2>
+  <details><summary>Why does healthy feel boring at first?</summary>
+    <p>Novelty bias and old wiring make drama feel exciting. Steady attention can feel unfamiliar until your nervous system recalibrates.</p>
+  </details>
+  <details><summary>What green flags matter most early on?</summary>
+    <p>Consistency, repair after misunderstandings, and reciprocity in effort.</p>
+  </details>
+  <details><summary>How can I train myself to notice greens?</summary>
+    <p>Write three daily “bids for connection” you saw and how you responded.</p>
+  </details>
+</section>
 
 <hr>
 <p><a class="btn" href="https://form.jotform.com/252205735289057" target="_blank" rel="noopener">Analyze a Message (free)</a>
 <a class="btn" href="https://buy.stripe.com/28E6oGcgZeAL4Ofb5W9Ve00" target="_blank" rel="noopener">Unlimited Analysis — $12/mo</a></p>
 <p><em>Red flags scream. Green flags whisper. Unlimited helps you hear both across the whole thread.</em></p>
 </main>
-<div id="sr-build">Build: green‑flags‑expanded</div>
+
+<script type="application/ld+json">{
+  "@context":"https://schema.org","@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"Why does healthy feel boring at first?","acceptedAnswer":{"@type":"Answer","text":"Novelty bias and old wiring make drama feel exciting. Steady attention can feel unfamiliar until your nervous system recalibrates."}},
+    {"@type":"Question","name":"What green flags matter most early on?","acceptedAnswer":{"@type":"Answer","text":"Consistency, repair after misunderstandings, and reciprocity in effort."}},
+    {"@type":"Question","name":"How can I train myself to notice greens?","acceptedAnswer":{"@type":"Answer","text":"Write three daily 'bids for connection' you saw and how you responded."}}
+  ]
+}</script>
+
+<div id="sr-build">Build: article-faq-v20</div>
 </body></html>
