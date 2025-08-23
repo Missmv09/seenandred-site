@@ -60,7 +60,8 @@ html,body{margin:0}
   margin: 8px 0 16px;
 }
 .category-legend .pill{
-  cursor:pointer; border:0; border-radius:999px; padding:6px 12px;
+  display:inline-block; text-decoration:none; cursor:pointer;
+  border-radius:999px; padding:6px 12px;
   font:700 .78rem/1 "Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   text-transform:uppercase; letter-spacing:.02em; color:#fff; opacity:.9;
   transition:transform .08s ease, opacity .08s ease;
@@ -73,7 +74,7 @@ html,body{margin:0}
 .category-legend .pill.coral{ background:#FF6B6B; }
 .category-legend .pill.violet{ background:#6C63FF; }
 
-/* Smooth hide/show for filtered cards */
+/* Filter animation */
 .post-card{ transition:opacity .12s ease, transform .12s ease; }
 .post-card.is-hidden{ opacity:0; transform:scale(.98); pointer-events:none; position:relative; }
 
@@ -86,11 +87,11 @@ html,body{margin:0}
 
   <!-- Category Legend / Filters -->
   <div class="category-legend" aria-label="Filter articles by category">
-    <button class="pill all active" data-filter="all">All</button>
-    <button class="pill red" data-filter="red">Red Flag Radar</button>
-    <button class="pill green" data-filter="green">Green Flags</button>
-    <button class="pill coral" data-filter="culture">Dating Culture</button>
-    <button class="pill violet" data-filter="psych">Patterns &amp; Psychology</button>
+    <a class="pill all active" href="?cat=all" data-filter="all">All</a>
+    <a class="pill red" href="?cat=red" data-filter="red">Red Flag Radar</a>
+    <a class="pill green" href="?cat=green" data-filter="green">Green Flags</a>
+    <a class="pill coral" href="?cat=culture" data-filter="culture">Dating Culture</a>
+    <a class="pill violet" href="?cat=psych" data-filter="psych">Patterns &amp; Psychology</a>
   </div>
 
   <section class="post-grid">
@@ -197,47 +198,31 @@ html,body{margin:0}
 </div>
 
 <div id="sr-build-badge" style="position:fixed;right:12px;bottom:12px;z-index:9999;background:#1A1A1A;color:#fff;border-radius:999px;padding:8px 12px;font:600 12px/1 Lato,system-ui">
-  Seen &amp; Red • Blog Build v21
+  Seen &amp; Red • Blog Build v22
 </div>
 
 <script>
 (function(){
-  const params = new URLSearchParams(window.location.search);
-  const hash = window.location.hash;
-  const initial = (params.get('cat') || (hash.startsWith('#cat=') ? hash.replace('#cat=','') : 'all')).toLowerCase();
-
-  const legend = document.querySelector('.category-legend');
-  const pills = legend ? Array.from(legend.querySelectorAll('.pill')) : [];
+  const params = new URLSearchParams(location.search);
+  const initial = (params.get('cat') || 'all').toLowerCase();
+  const pills = Array.from(document.querySelectorAll('.category-legend .pill'));
   const cards = Array.from(document.querySelectorAll('.post-card[data-category]'));
-
-  function setActive(filter){
-    pills.forEach(p => p.classList.toggle('active', p.dataset.filter === filter));
-  }
-
-  function applyFilter(filter){
-    cards.forEach(card => {
-      const cat = (card.getAttribute('data-category') || '').toLowerCase();
-      const show = (filter === 'all') || (cat === filter);
-      card.classList.toggle('is-hidden', !show);
-    });
-    setActive(filter);
-    // Keep URL shareable without reloading
-    const url = new URL(window.location);
-    if (filter === 'all') {
-      url.searchParams.delete('cat');
-      history.replaceState(null, '', url.pathname + (window.location.hash || ''));
-    } else {
-      url.searchParams.set('cat', filter);
-      history.replaceState(null, '', url.toString());
-    }
-  }
-
-  // Click handlers
-  pills.forEach(p => p.addEventListener('click', () => applyFilter(p.dataset.filter)));
-
-  // Initialize from URL
   const valid = new Set(['all','red','green','culture','psych']);
-  applyFilter(valid.has(initial) ? initial : 'all');
+
+  function apply(filter){
+    cards.forEach(c=>{
+      const show = filter==='all' || c.dataset.category===filter;
+      c.classList.toggle('is-hidden', !show);
+    });
+    pills.forEach(a=>a.classList.toggle('active', a.dataset.filter===filter));
+    history.replaceState(null,'', filter==='all' ? location.pathname : `?cat=${filter}`);
+  }
+
+  pills.forEach(a=>a.addEventListener('click', e=>{
+    e.preventDefault(); apply(a.dataset.filter);
+  }));
+
+  apply(valid.has(initial)?initial:'all');
 })();
 </script>
 
