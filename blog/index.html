@@ -53,6 +53,30 @@ html,body{margin:0}
 .sr-cta-text{font-family:"Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif;margin:0 8px 0 0;color:var(--sr-ink)}
 .sr-btn{display:inline-block;background:var(--sr-red);color:#fff;padding:10px 14px;border-radius:999px;text-decoration:none;font-weight:700;font-size:.95rem;transition:transform .08s,background .2s}
 .sr-btn:hover{background:var(--sr-red-soft);transform:translateY(-1px)}
+
+/* Legend / Filters */
+.category-legend{
+  display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+  margin: 8px 0 16px;
+}
+.category-legend .pill{
+  cursor:pointer; border:0; border-radius:999px; padding:6px 12px;
+  font:700 .78rem/1 "Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  text-transform:uppercase; letter-spacing:.02em; color:#fff; opacity:.9;
+  transition:transform .08s ease, opacity .08s ease;
+}
+.category-legend .pill:hover{ transform:translateY(-1px); opacity:1; }
+.category-legend .pill.active{ box-shadow:0 0 0 2px rgba(0,0,0,.06) inset; opacity:1; }
+.category-legend .pill.all{ background:#111; }
+.category-legend .pill.red{ background:#E63946; }
+.category-legend .pill.green{ background:#2ECC71; }
+.category-legend .pill.coral{ background:#FF6B6B; }
+.category-legend .pill.violet{ background:#6C63FF; }
+
+/* Smooth hide/show for filtered cards */
+.post-card{ transition:opacity .12s ease, transform .12s ease; }
+.post-card.is-hidden{ opacity:0; transform:scale(.98); pointer-events:none; position:relative; }
+
   </style>
 </head>
 <body>
@@ -60,9 +84,18 @@ html,body{margin:0}
   <h1 class="sr-page-title">Blog</h1>
   <p class="sr-page-sub">Research‑backed clarity for modern dating.</p>
 
+  <!-- Category Legend / Filters -->
+  <div class="category-legend" aria-label="Filter articles by category">
+    <button class="pill all active" data-filter="all">All</button>
+    <button class="pill red" data-filter="red">Red Flag Radar</button>
+    <button class="pill green" data-filter="green">Green Flags</button>
+    <button class="pill coral" data-filter="culture">Dating Culture</button>
+    <button class="pill violet" data-filter="psych">Patterns &amp; Psychology</button>
+  </div>
+
   <section class="post-grid">
     <!-- Social Media — Dating Culture -->
-    <article class="post-card">
+    <article class="post-card" data-category="culture">
       <a class="post-link" href="/blog/dating-in-the-era-of-social-media.html?v=18" aria-label="Read: Dating in the Era of Social Media">
         <div class="post-thumb placeholder">Seen &amp; Red</div>
         <div class="post-body">
@@ -75,7 +108,7 @@ html,body{margin:0}
     </article>
 
     <!-- Red vs. Green Texts — Patterns & Psychology -->
-    <article class="post-card">
+    <article class="post-card" data-category="psych">
       <a class="post-link" href="/blog/red-vs-green-texts.html?v=18" aria-label="Read: Red Flag Texts vs. Green Flag Texts">
         <div class="post-thumb placeholder">Seen &amp; Red</div>
         <div class="post-body">
@@ -88,7 +121,7 @@ html,body{margin:0}
     </article>
 
     <!-- Facebook & Tea — Dating Culture (new title if you adopted it) -->
-    <article class="post-card">
+    <article class="post-card" data-category="culture">
       <a class="post-link" href="/blog/crowdsourced-dating-safety-facebook-tea-app.html?v=18" aria-label="Read: Crowdsourced Dating Safety: Facebook Groups &amp; Tea App">
         <div class="post-thumb placeholder">Seen &amp; Red</div>
         <div class="post-body">
@@ -101,7 +134,7 @@ html,body{margin:0}
     </article>
 
     <!-- Healing Your Patterns — Patterns & Psychology -->
-    <article class="post-card">
+    <article class="post-card" data-category="psych">
       <a class="post-link" href="/blog/healing-your-patterns.html?v=18" aria-label="Read: Healing Your Patterns">
         <div class="post-thumb placeholder">Seen &amp; Red</div>
         <div class="post-body">
@@ -114,7 +147,7 @@ html,body{margin:0}
     </article>
 
     <!-- Trust Your Intuition — Patterns & Psychology -->
-    <article class="post-card">
+    <article class="post-card" data-category="psych">
       <a class="post-link" href="/blog/trust-your-intuition.html?v=18" aria-label="Read: Trust Your Intuition">
         <div class="post-thumb placeholder">Seen &amp; Red</div>
         <div class="post-body">
@@ -127,7 +160,7 @@ html,body{margin:0}
     </article>
 
     <!-- Missing Green Flags — Green Flags -->
-    <article class="post-card">
+    <article class="post-card" data-category="green">
       <a class="post-link" href="/blog/missing-green-flags.html?v=18" aria-label="Read: Missing Green Flags">
         <div class="post-thumb placeholder">Seen &amp; Red</div>
         <div class="post-body">
@@ -140,7 +173,7 @@ html,body{margin:0}
     </article>
 
     <!-- Ignoring Red Flags — Red Flag Radar -->
-    <article class="post-card">
+    <article class="post-card" data-category="red">
       <a class="post-link" href="/blog/ignoring-red-flags.html?v=18" aria-label="Read: Ignoring Red Flags">
         <div class="post-thumb placeholder">Seen &amp; Red</div>
         <div class="post-body">
@@ -164,8 +197,49 @@ html,body{margin:0}
 </div>
 
 <div id="sr-build-badge" style="position:fixed;right:12px;bottom:12px;z-index:9999;background:#1A1A1A;color:#fff;border-radius:999px;padding:8px 12px;font:600 12px/1 Lato,system-ui">
-  Seen &amp; Red • Blog Build v18
+  Seen &amp; Red • Blog Build v21
 </div>
+
+<script>
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const hash = window.location.hash;
+  const initial = (params.get('cat') || (hash.startsWith('#cat=') ? hash.replace('#cat=','') : 'all')).toLowerCase();
+
+  const legend = document.querySelector('.category-legend');
+  const pills = legend ? Array.from(legend.querySelectorAll('.pill')) : [];
+  const cards = Array.from(document.querySelectorAll('.post-card[data-category]'));
+
+  function setActive(filter){
+    pills.forEach(p => p.classList.toggle('active', p.dataset.filter === filter));
+  }
+
+  function applyFilter(filter){
+    cards.forEach(card => {
+      const cat = (card.getAttribute('data-category') || '').toLowerCase();
+      const show = (filter === 'all') || (cat === filter);
+      card.classList.toggle('is-hidden', !show);
+    });
+    setActive(filter);
+    // Keep URL shareable without reloading
+    const url = new URL(window.location);
+    if (filter === 'all') {
+      url.searchParams.delete('cat');
+      history.replaceState(null, '', url.pathname + (window.location.hash || ''));
+    } else {
+      url.searchParams.set('cat', filter);
+      history.replaceState(null, '', url.toString());
+    }
+  }
+
+  // Click handlers
+  pills.forEach(p => p.addEventListener('click', () => applyFilter(p.dataset.filter)));
+
+  // Initialize from URL
+  const valid = new Set(['all','red','green','culture','psych']);
+  applyFilter(valid.has(initial) ? initial : 'all');
+})();
+</script>
 
 </body>
 </html>
