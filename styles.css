@@ -180,3 +180,165 @@ nav ul {
   border-radius: 12px;
   margin-top: 0;
 }
+/* -------------------------------
+   Seen & Red • Blog Prose Theme
+   Build v29
+----------------------------------*/
+
+/* Base scale & container */
+:root{
+  --sr-red:#E63946;
+  --sr-green:#2ECC71;
+  --sr-text:#1F2937;       /* slate-800 */
+  --sr-muted:#6B7280;      /* gray-500 */
+  --sr-bg:#ffffff;
+  --sr-card:#ffffff;
+  --sr-shadow:0 8px 24px rgba(17,24,39,.08);
+  --sr-radius:16px;
+}
+
+.prose-wrap{
+  display:block;
+  margin:0 auto;
+  background:var(--sr-bg);
+  /* desktop max width with comfortable line length */
+  max-width: 860px;
+  padding: 24px 24px 72px;
+}
+
+@media (max-width: 980px){
+  .prose-wrap{ max-width: 720px; padding:20px 18px 64px; }
+}
+@media (max-width: 640px){
+  .prose-wrap{ max-width: 100%; padding:16px 14px 56px; }
+}
+
+/* Typography */
+.prose{
+  color:var(--sr-text);
+  font-family: Lato, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  letter-spacing: .005em;
+}
+
+.prose h1{
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: 2.1rem;
+  line-height:1.2;
+  margin: .25rem 0 1rem;
+}
+@media (max-width:640px){
+  .prose h1{ font-size:1.7rem; }
+}
+
+.prose h2{
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: 1.45rem;
+  margin: 1.4rem 0 .5rem;
+}
+
+.prose h3{
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 1rem 0 .4rem;
+}
+
+.prose p{ margin:.6rem 0; }
+.prose .muted{ color:var(--sr-muted); font-size:.95rem; }
+
+.prose a{
+  color:var(--sr-red);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(230,57,70,.25);
+}
+.prose a:hover{ border-color: var(--sr-red); }
+
+/* Lists */
+.prose ul, .prose ol{ margin:.5rem 0 .9rem 1.2rem; }
+.prose li{ margin:.25rem 0; }
+
+/* Blockquotes */
+.prose blockquote{
+  margin: .8rem 0;
+  padding: .8rem .9rem;
+  border-left: 3px solid var(--sr-red);
+  background: #fff6f7;
+  border-radius: 8px;
+  font-style: italic;
+}
+
+/* Horizontal rule */
+.prose hr{
+  border: none;
+  height: 1px;
+  background: #e5e7eb;
+  margin: 1rem 0;
+}
+
+/* Buttons (unified with site CTAs) */
+.btn{
+  display:inline-block;
+  background: var(--sr-red);
+  color:#fff !important;
+  font-weight:700;
+  border-radius: 999px;
+  padding: 10px 16px;
+  box-shadow: var(--sr-shadow);
+  border: none;
+}
+.btn:hover{ filter: brightness(.95); transform: translateY(-1px); transition: all .12s ease; }
+.btn + .btn{ margin-left: 8px; }
+@media (max-width:520px){
+  .btn{ display:block; text-align:center; width:100%; }
+  .btn + .btn{ margin-left:0; margin-top:10px; }
+}
+
+/* Article hero */
+.article-hero{
+  margin: 0 0 14px;
+  border-radius: var(--sr-radius);
+  overflow:hidden;
+  box-shadow: var(--sr-shadow);
+}
+.article-hero img{
+  display:block;
+  width:100%;
+  height: clamp(180px, 38vw, 420px);
+  object-fit: cover;
+}
+
+/* Thumbnails in cards */
+.post-card .thumb{
+  display:block;
+  width:100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  box-shadow: var(--sr-shadow);
+}
+@media (max-width:980px){
+  .post-card .thumb{ height: 140px; }
+}
+@media (max-width:640px){
+  .post-card .thumb{ height: 120px; }
+}
+
+/* Utility readability tweaks */
+.prose-wrap, .prose{
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-wrap: anywhere;
+}
+
+/* Build badge normalization (in case older text lingers) */
+#sr-build-badge{
+  position:fixed; right:12px; bottom:12px;
+  background:#111; color:#fff; padding:8px 12px; border-radius:999px;
+  font:600 12px/1 Lato, sans-serif; box-shadow: var(--sr-shadow);
+  z-index: 50;
+}
