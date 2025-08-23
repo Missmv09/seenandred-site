@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Index -->
+  <url><loc>https://seenandred.com/blog/</loc></url>
+
+  <!-- Categories -->
+  <url><loc>https://seenandred.com/blog/red-flags/</loc></url>
+  <url><loc>https://seenandred.com/blog/green-flags/</loc></url>
+  <url><loc>https://seenandred.com/blog/dating-culture/</loc></url>
+  <url><loc>https://seenandred.com/blog/patterns-psychology/</loc></url>
+
+  <!-- Articles -->
+  <url><loc>https://seenandred.com/blog/dating-in-the-era-of-social-media.html</loc></url>
+  <url><loc>https://seenandred.com/blog/healing-your-patterns.html</loc></url>
+  <url><loc>https://seenandred.com/blog/trust-your-intuition.html</loc></url>
+  <url><loc>https://seenandred.com/blog/missing-green-flags.html</loc></url>
+  <url><loc>https://seenandred.com/blog/ignoring-red-flags.html</loc></url>
+  <url><loc>https://seenandred.com/blog/red-vs-green-texts.html</loc></url>
+</urlset>

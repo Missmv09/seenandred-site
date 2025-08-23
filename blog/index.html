@@ -74,6 +74,17 @@ html,body{margin:0}
 .category-legend .pill.coral{ background:#FF6B6B; }
 .category-legend .pill.violet{ background:#6C63FF; }
 
+.browse-categories{margin:12px 0 20px}
+.browse-title{font-family:"Playfair Display",Georgia,serif;font-size:1.4rem;margin:.3rem 0 .6rem}
+.browse-grid{display:grid;gap:12px}
+@media(min-width:840px){.browse-grid{grid-template-columns:repeat(4,1fr)}}
+.browse-card{display:flex;flex-direction:column;gap:6px;border-radius:14px;padding:14px 12px;text-decoration:none;color:#fff;min-height:96px}
+.browse-card .kicker{font:700 .75rem/1 Lato,sans-serif;text-transform:uppercase;opacity:.95}
+.browse-card strong{font:700 1rem/1.2 Lato,sans-serif}
+.browse-card.red{background:#E63946}.browse-card.green{background:#2ECC71}
+.browse-card.coral{background:#FF6B6B}.browse-card.violet{background:#6C63FF}
+.browse-card:hover{filter:brightness(.96);transform:translateY(-1px);transition:all .12s ease}
+
 /* Filter animation */
 .post-card{ transition:opacity .12s ease, transform .12s ease; }
 .post-card.is-hidden{ opacity:0; transform:scale(.98); pointer-events:none; position:relative; }
@@ -93,6 +104,24 @@ html,body{margin:0}
     <a class="pill coral" href="?cat=culture" data-filter="culture">Dating Culture</a>
     <a class="pill violet" href="?cat=psych" data-filter="psych">Patterns &amp; Psychology</a>
   </div>
+
+  <section class="browse-categories" aria-label="Browse by Category">
+    <h2 class="browse-title">Browse by Category</h2>
+    <div class="browse-grid">
+      <a class="browse-card red" href="/blog/red-flags/">
+        <span class="kicker">Red Flag Radar</span><strong>Spot &amp; Act Early</strong>
+      </a>
+      <a class="browse-card green" href="/blog/green-flags/">
+        <span class="kicker">Green Flags</span><strong>What Healthy Looks Like</strong>
+      </a>
+      <a class="browse-card coral" href="/blog/dating-culture/">
+        <span class="kicker">Dating Culture</span><strong>Social Media &amp; Trends</strong>
+      </a>
+      <a class="browse-card violet" href="/blog/patterns-psychology/">
+        <span class="kicker">Patterns &amp; Psychology</span><strong>Attachment, Intuition &amp; Receipts</strong>
+      </a>
+    </div>
+  </section>
 
   <section class="post-grid">
     <!-- Social Media — Dating Culture -->
@@ -198,7 +227,7 @@ html,body{margin:0}
 </div>
 
 <div id="sr-build-badge" style="position:fixed;right:12px;bottom:12px;z-index:9999;background:#1A1A1A;color:#fff;border-radius:999px;padding:8px 12px;font:600 12px/1 Lato,system-ui">
-  Seen &amp; Red • Blog Build v22
+  Seen &amp; Red • Blog Build v26
 </div>
 
 <script>
