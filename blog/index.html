@@ -90,10 +90,26 @@ html,body{margin:0}
 
   </style>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Seen & Red Blog","description":"Seen & Red blog covering modern dating, boundaries, and relationship clarity.","author":{"@type":"Organization","name":"Seen & Red"},"publisher":{"@type":"Organization","name":"Seen & Red"},"mainEntityOfPage":"https://seenandred.com/blog/"}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog","item":"https://seenandred.com/blog/"}]}</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://seenandred.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://seenandred.com/blog/" }
+    ]
+  }
+  </script>
 </head>
 <body>
 <div class="sr-container">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a class="back-link" href="/" aria-label="Back to Home">← Back to Home</a>
+    <span class="sep">·</span>
+    <a href="/">Home</a>
+    <span class="chev">›</span>
+    <span class="current" aria-current="page">Blog</span>
+  </nav>
   <h1 class="sr-page-title">Blog</h1>
   <p class="sr-page-sub">Research‑backed clarity for modern dating.</p>
 
