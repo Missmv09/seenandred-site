@@ -16,9 +16,9 @@ html,body{margin:0}
 .sr-container{max-width:1100px;margin:0 auto;padding:28px 18px 80px}
 .sr-page-title{font-family:"Playfair Display",Georgia,serif;font-size:clamp(28px,5vw,40px);margin:8px 0 10px}
 .sr-page-sub{font-family:"Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif;color:var(--sr-muted);margin:0 0 20px}
-.post-grid{display:grid;gap:18px;grid-template-columns:1fr}
-@media(min-width:700px){.post-grid{grid-template-columns:1fr 1fr}}
-@media(min-width:1000px){.post-grid{grid-template-columns:1fr 1fr 1fr}}
+.blog-grid{display:grid;gap:18px;grid-template-columns:1fr}
+@media(min-width:700px){.blog-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.blog-grid{grid-template-columns:1fr 1fr 1fr}}
 .post-card{background:var(--sr-card);border:1px solid var(--sr-border);border-radius:var(--sr-radius);overflow:hidden;box-shadow:var(--sr-shadow);transition:transform .12s,box-shadow .12s}
 .post-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.12)}
 .post-link{display:grid;grid-template-rows:auto 1fr;text-decoration:none;color:inherit}
@@ -61,21 +61,16 @@ html,body{margin:0}
   <h1 class="sr-page-title">Blog</h1>
   <p class="sr-page-sub">Research‑backed clarity for modern dating.</p>
 
-  <section class="post-grid">
-    <article class="post-card" data-category="culture" id="post-swipe-decade">
-      <img class="thumb" src="/assets/images/20s-hero.png" alt="Two smartphones glowing on a café table with a cappuccino, symbolizing modern dating." loading="lazy" />
-      <div class="blog-meta category-culture">Dating Culture</div>
-      <h2 class="blog-title"><a href="/blog/dating-in-your-20s-the-swipe-decade.html">Dating in Your 20s: The Swipe Decade</a></h2>
-      <p class="blog-date">Oct 1, 2025 • ~5 min read</p>
-      <p class="blog-snippet">Situationships, rosters, and clarity in the swipe era.</p>
-    </article>
-
+  <section class="blog-grid">
     <!-- BEGIN: Dating in Your 20s card -->
     <article class="blog-card">
-      <a href="/blog/dating-in-your-20s.html">
-        <img src="/assets/images/20s-hero.jpg" alt="Two smartphones glowing on a café table with a cappuccino.">
-        <h2>Dating in Your 20s: The Swipe Decade</h2>
-        <p>Situationships, rosters, and finding clarity in the swipe era.</p>
+      <a href="/blog/dating-in-your-20s.html" class="card-link">
+        <img class="card-img" src="/assets/images/20s-hero.jpg"
+             alt="Two smartphones glowing on a café table with a cappuccino.">
+        <div class="card-body">
+          <h2>Dating in Your 20s: The Swipe Decade</h2>
+          <p>Situationships, rosters, and finding clarity in the swipe era.</p>
+        </div>
       </a>
     </article>
     <!-- END: Dating in Your 20s card -->
