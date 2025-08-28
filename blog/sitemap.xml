@@ -5,14 +5,9 @@
     <changefreq>weekly</changefreq>
     <priority>0.70</priority>
   </url>
-  <url>
-    <loc>https://www.seenandred.com/blog/dating-in-your-20s-the-swipe-decade.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.70</priority>
-  </url>
   <!-- BEGIN: Dating in Your 20s URL -->
   <url>
-    <loc>https://www.seenandred.com/blog/dating-in-your-20s.html</loc>
+    <loc>https://www.seenandred.com/blog/dating-in-your-20s-the-swipe-decade.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.70</priority>
   </url>
