@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://seenandred.com/blog/ghosted-in-the-city.html</loc></url>
-  <url><loc>https://seenandred.com/blog/dating-in-your-20s-the-swipe-decade.html</loc></url>
+  <url>
+    <loc>https://www.seenandred.com/blog/dating-in-your-20s-the-swipe-decade.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
   <!-- BEGIN: Dating in Your 20s URL -->
   <url>
     <loc>https://www.seenandred.com/blog/dating-in-your-20s.html</loc>
