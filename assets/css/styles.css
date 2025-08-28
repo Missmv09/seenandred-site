@@ -83,6 +83,47 @@ a:hover, a:focus { color: var(--sr-red-soft); }
 }
 .sr-btn:hover { background: var(--sr-red-soft); transform: translateY(-1px); }
 
+/* Hero buttons */
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: var(--sr-shadow);
+  transition: transform .08s ease, background .2s ease, color .2s ease;
+}
+
+.btn-primary {
+  background: var(--sr-red);
+  color: #fff;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--sr-red);
+  border: 2px solid var(--sr-red);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary:hover {
+  background: var(--sr-red-soft);
+}
+
+.btn-secondary:hover {
+  background: var(--sr-red-soft);
+  color: #fff;
+}
+
 /* === Blog Index Card === */
 .post-card {
   background: #fff;
