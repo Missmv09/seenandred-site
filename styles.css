@@ -371,12 +371,6 @@ nav ul {
   color: inherit;
   text-decoration: none;
 }
-.blog-card .card-img {
-  width: 100%;
-  height: 180px;           /* adjust to 200–240px if you want taller thumbs */
-  object-fit: cover;       /* crop instead of stretch */
-  display: block;
-}
 .blog-card .card-body {
   padding: 14px 16px 18px;
 }
@@ -393,9 +387,25 @@ nav ul {
 @media (min-width: 1200px) {
   .blog-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
 }
-.blog-card a:link,
-.blog-card a:visited { text-decoration: none; color: inherit; }
-.blog-card a:hover { text-decoration: none; }
+
+/* === Normalize blog card thumbnails & link styling === */
+.post-card .post-card-media img,
+.blog-card .card-img,
+.post-item img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+.post-card a, .post-card a:visited,
+.blog-card a, .blog-card a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+.post-card a:hover,
+.blog-card a:hover {
+  text-decoration: none;
+}
 
 /* ===== Article hero image ===== */
 .hero-image img {
