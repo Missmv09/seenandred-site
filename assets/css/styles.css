@@ -83,46 +83,93 @@ a:hover, a:focus { color: var(--sr-red-soft); }
 }
 .sr-btn:hover { background: var(--sr-red-soft); transform: translateY(-1px); }
 
-/* Hero buttons */
+/* --- Button Base (mobile-first, accessible) --- */
+.btn {
+  --brand-red: #c00;              /* brand primary */
+  --brand-red-dark: #a00;         /* hover/active */
+  --ring: 3px solid rgba(0,0,0,0.35);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 700;
+  font-size: 1rem;                /* >=16px for legibility */
+  line-height: 1.2;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 14px 20px;             /* 44px+ tap target with line-height */
+  min-height: 48px;               /* WCAG/Apple tap target */
+  cursor: pointer;
+
+  transition: background-color .18s ease, color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .06s ease-in-out;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Primary: solid brand red */
+.btn-primary {
+  background-color: var(--brand-red);
+  color: #fff;
+  border: 2px solid var(--brand-red);
+  box-shadow: 0 6px 18px rgba(204,0,0,0.25);
+}
+.btn-primary:hover { background-color: var(--brand-red-dark); border-color: var(--brand-red-dark); }
+.btn-primary:active { transform: translateY(1px); }
+
+/* Secondary: white with red border */
+.btn-secondary {
+  background-color: #fff;
+  color: var(--brand-red);
+  border: 2px solid var(--brand-red);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.btn-secondary:hover { background-color: var(--brand-red); color: #fff; border-color: var(--brand-red); }
+.btn-secondary:active { transform: translateY(1px); }
+
+/* Keyboard focus visibility */
+.btn:focus-visible {
+  outline: var(--ring);
+  outline-offset: 2px;
+}
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: none; }
+}
+
+/* --- Hero Buttons Layout --- */
 .hero-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  align-items: center;
 }
 
-.btn {
-  display: inline-block;
-  padding: 12px 18px;
-  border-radius: 999px;
-  font-weight: 600;
-  text-decoration: none;
-  box-shadow: var(--sr-shadow);
-  transition: transform .08s ease, background .2s ease, color .2s ease;
+/* Mobile-first: stack and full-width on small screens */
+@media (max-width: 640px) {
+  .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-buttons .btn {
+    width: 100%;
+  }
 }
 
-.btn-primary {
-  background: var(--sr-red);
-  color: #fff;
+/* Larger screens: inline with spacing */
+@media (min-width: 641px) {
+  .hero-buttons .btn + .btn { margin-left: 8px; }
 }
 
-.btn-secondary {
-  background: transparent;
-  color: var(--sr-red);
-  border: 2px solid var(--sr-red);
+/* --- Optional nav polish for consistency --- */
+.site-nav .nav-list {
+  display: flex; gap: 20px; align-items: center; list-style: none; margin: 0; padding: 0;
 }
-
-.btn:hover {
-  transform: translateY(-1px);
+.site-nav .nav-list a {
+  text-decoration: none; color: inherit; padding: 8px 6px; border-radius: 6px;
 }
-
-.btn-primary:hover {
-  background: var(--sr-red-soft);
-}
-
-.btn-secondary:hover {
-  background: var(--sr-red-soft);
-  color: #fff;
-}
+.site-nav .nav-list a:focus-visible { outline: 3px solid rgba(0,0,0,0.35); outline-offset: 2px; }
 
 /* === Blog Index Card === */
 .post-card {

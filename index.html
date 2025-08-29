@@ -575,16 +575,13 @@
                     <a href="#home" class="logo">Seen and Red</a>
                     <p class="site-tagline">Research-backed clarity for modern dating.</p>
                 </div>
-<nav class="main-nav">
-  <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#analysis">Analysis</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="about.html">About</a></li>
-    <li>
-      <a href="https://form.jotform.com/252205735289057" class="nav-link" target="_blank" rel="noopener">Analyze</a>
-    </li>
-    <li><a href="https://buy.stripe.com/28E6oGcgZeAL4Ofb5W9Ve00" class="nav-link" aria-label="Go Unlimited — Reality Check: unlimited decodes, juicier insights, cancel anytime" target="_blank" rel="noopener">Go Unlimited — Reality Check</a></li>
+<nav class="site-nav" aria-label="Main">
+  <ul class="nav-list">
+    <li><a href="/">Home</a></li>
+    <li><a href="/analyze">Analyze</a></li>
+    <li><a href="/blog">Blog</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/unlimited">Go Unlimited — Reality Check</a></li>
   </ul>
 </nav>
 
@@ -598,9 +595,20 @@
   <div class="sr-hero-content">
     <h1 class="sr-hero-title">Seen &amp; Red</h1>
     <p class="sr-hero-sub">Research-backed clarity for modern dating.</p>
-    <div class="hero-buttons">
-      <a href="/analyze" class="btn btn-primary">Get Your Free Analysis</a>
-      <a href="/blog" class="btn btn-secondary">Read the Blog</a>
+    <div class="hero-buttons" role="group" aria-label="Primary actions">
+      <!-- Primary CTA -->
+      <a href="/analyze"
+         class="btn btn-primary"
+         aria-label="Get your free analysis">
+        Get Your Free Analysis
+      </a>
+
+      <!-- Secondary CTA -->
+      <a href="/blog"
+         class="btn btn-secondary"
+         aria-label="Read the blog">
+        Read the Blog
+      </a>
     </div>
   </div>
 </section>
