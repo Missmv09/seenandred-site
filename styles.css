@@ -421,3 +421,30 @@ nav ul {
   margin-top: 8px;
 }
 
+/* Card thumbnails: consistent crop */
+.blog-card-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;   /* prevents layout shift; requires modern browsers */
+  object-fit: cover;
+  display: block;
+  border-radius: 10px 10px 0 0;
+  background: #f6f6f6;
+}
+
+/* Article hero: full content width, capped height */
+.post-hero-img {
+  width: 100%;
+  height: auto;
+  max-height: 520px;      /* adjust to taste */
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  margin: 0 0 1rem 0;
+  background: #f6f6f6;
+}
+
+@supports not (aspect-ratio: 1) {
+  /* fallback for very old browsers */
+  .blog-card-img { height: 220px; }
+}
+
