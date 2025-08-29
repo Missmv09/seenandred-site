@@ -448,3 +448,43 @@ nav ul {
   .blog-card-img { height: 220px; }
 }
 
+
+/* CTA buttons */
+.sr-cta {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: #fafafa;
+  border-radius: 12px;
+  text-align: center;
+}
+.sr-cta h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.3rem;
+}
+.sr-cta .cta-sub {
+  margin: 0 0 1rem 0;
+  color: #555;
+}
+.sr-cta .cta-group {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+}
+.btn-primary {
+  background: #c62828;
+  color: #fff;
+}
+.btn-primary:hover { background: #b71c1c; }
+.btn-accent {
+  background: #333;
+  color: #fff;
+}
+.btn-accent:hover { background: #000; }
