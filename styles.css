@@ -448,7 +448,7 @@ nav ul {
   .blog-card-img { height: 220px; }
 }
 
-/* (append safe CTA styles if not present) */
+/* === Seen & Red: CTA block (namespaced) === */
 .sr-cta {
   margin-top: 3rem;
   padding: 2rem;
@@ -477,14 +477,8 @@ nav ul {
   text-decoration: none;
   font-weight: 600;
 }
-.btn-primary {
-  background: #c62828;
-  color: #fff;
-}
+.btn-primary { background: #c62828; color: #fff; }
 .btn-primary:hover { background: #b71c1c; }
-.btn-accent {
-  background: #333;
-  color: #fff;
-}
+.btn-accent { background: #333; color: #fff; }
 .btn-accent:hover { background: #000; }
 
