@@ -457,3 +457,21 @@ main,.article-container,.content{padding-top:16px;margin-top:0}
   color: #555;
   font-size: 1rem;
 }
+
+/* === Mobile Header Navigation === */
+@media (max-width: 640px) {
+  header .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  header nav {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  header nav ul {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
